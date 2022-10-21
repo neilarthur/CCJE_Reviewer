@@ -168,14 +168,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
             </form>
 		</div>
 		<!-- Main Content-->
-		<div class="container-fluid">
-			<!-- Page Heading -->
-			<div class="d-sm-flex align-items-center justify-content-between mb-4">
-				<h1 class="h3 mb-0 text-gray-800"></h1>
-			</div>
+		<div class="container-fluid py-3">
 			<div class="row">
 				<!-- Accounts Card Example -->
-				<div class="col-xl-3 col-md-6 mb-5">
+				<div class="col-xl-3 col-md-6 mb-5 mt">
 					<div class="card border-left-dark shadow p-3 py-1 ms-1" style="background-color: rgb(243, 156, 18 );">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">

@@ -71,11 +71,11 @@
 	</div>
 	<!--College Profile -->
 	<div class="container bg-white" style="padding-bottom: 5px; padding-left: 30px; padding-right: 30px;" >
-		<div class="faculty-profile mb-4 mt-3">
+		<div class="faculty-profile mb-4 mt-3 pt-3">
 			<h2 class="text-uppercase text-center fw-bold text-dark " style="font-family: 'Source Sans Pro', sans-serif;">Faculty Profile</h2>
 		</div>
 		<div class="dean">
-			<img src="../assets/pics/tempo.png" alt="" width="100" height="100" class="rounded mx-auto d-block mt-2 mb-5" >
+			<img src="../assets/pics/dean.jpg" alt="" class="img-fluid img-thumbnail rounded-circle mx-auto d-block mt-2 mb-5 shadow" style=" object-fit: cover; "width="150" height="150" >
 			<h4 class="text-uppercase text-center fw-bold">Mark Lito L. Refugia</h4>
 			<p class="text-uppercase text-center fw-bold">Associate Dean</p>
 		</div>

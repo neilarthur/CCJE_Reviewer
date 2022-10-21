@@ -21,7 +21,7 @@
 <body style="background-color: #f5f5f5;">
    <div class="header text-uppercase hd " >
     <div class="container-fluid py-3">
-       <img src="assets/pics/logo.png" alt="" width="75" height="75" class="d-inline-block align-top mt-2 ms-4" >
+       <img src="assets/pics/logo.png" alt="" width="90" height="90" class="d-inline-block align-top ms-4" >
        <h3 class="text-white mt-3 ms-4" >Automated Licensure Examination Reviewer </h3>
        <span class="text-white dep">College of Criminal Justice and Education</span>
     </div>
@@ -55,14 +55,14 @@
 		</div>
 	</nav>
 	<!-- Carousel -->
-  <section>
+
     <div id="carouselExampleInterval" class="carousel slide " data-bs-ride="carousel">
       <div class="carousel-inner ">
         <div class="carousel-item active" data-bs-interval="3000">
           <img src="assets/pics/1.jpg" class="d-block w-100  " alt="...">
         </div>
         <div class="carousel-item" data-bs-interval="3000">
-          <img src="assets/pics/1.jpg" class="d-block w-100" alt="...">
+          <img src="assets/pics/depart.jpg" class="d-flex w-100" alt="...">
         </div>
         <div class="carousel-item" data-bs-interval="3000">
           <img src="assets/pics/1.jpg" class="d-block w-100" alt="...">
@@ -75,7 +75,7 @@
         <span caria-hidden="true"><i class="fas fa-chevron-circle-right fa-3x"></i></span>
       </button>
     </div>
-  </section>
+
 	
 
 	<!-- LSPU Policy-->
