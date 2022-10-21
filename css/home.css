@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Albert+Sans&family=Cinzel&family=Fira+Sans&family=Inter:wght@200&family=Libre+Baskerville&family=Mingzat&family=Montserrat:ital,wght@0,400;0,500;1,400&family=Mukta+Malar:wght@600&family=Nunito&family=Open+Sans&family=PT+Sans+Caption&family=Roboto+Condensed:ital,wght@0,700;1,400&family=Russo+One&family=Source+Code+Pro:wght@600&family=Source+Sans+Pro&family=Ubuntu:wght@700&display=swap');
+
+*{
+	font-family: 'Source Sans Pro', sans-serif;
+
+}
+@media all and (min-width: 992px) {
+	.navbar .nav-item:hover .nav-link{ color: #8C0000;  }
+
+	
+}
+
+.hd{
+	background-color: #8C0000;
+}
+.header img {
+  float: left;
+
+}
+.navbar{
+	background-color: rgb(204, 204, 204);
+}
+.dep{
+	font-family: 'Aboreto', cursive;
+	font-weight: bold;
+}
+h3{
+	font-family: 'Aboreto', cursive;
+	font-weight: bold;
+}
+
+.con h2{
+	color: #8C0000;
+}
+.con p{
+	font-family: 'Nunito', sans-serif;
+	text-align: justify;
+
+}
+.dropdown a:hover {
+    color: #8C0000;
+    font-weight: bold;
+    
+}
+
+.navbar {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+.navbar-collapse .navbar-nav li{
+	text-align: center;
+}
+li {
+	padding-left:10px;
+	padding-right:10px;
+	
+}
+img{
+	margin-right: 20px;
+}
+.pic{
+	width: 100%;
+}
+.carousel-inner{
+  width:100%;
+  max-height: 500px !important;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  transition: opacity 0s 2.6s;
+}
+
+
+h5{
+	color: white;
+	font-weight: bold;
+}
+
+.co .cd p{
+	font-family: 'Nunito', sans-serif;
+	margin: 0;
+	text-align: justify;
+}
+.co h2{
+	 color: #8C0000;
+	 text-align: center;
+}
+footer{
+	background-color: rgb(21, 22, 27);
+}
+.latest-blog-posts {
+	position: relative;
+	.container-fluid {
+		padding: 60px;
+		position: relative;
+		max-width: 1230px;
+	}
+	.thumbnail {
+		margin: 0 15px;
+	}
+	.customNavigation {
+		transform: translateY(-50%);
+		top: calc(50% - 37px);
+		position: absolute;
+		width: 100%;
+		left: 0;
+	}
+	.customNavigation>span {
+		transform: translateY(-50%);
+		top: 50%;
+		position: absolute;
+	}
+	.pager-left {
+		left: calc(0% + 15px);
+	}
+	.pager-right {
+		right: calc(0% + 15px);
+	}
+	.next, .prev {
+		font-size: 28px;
+		color: #ccc;
+	}
+}
+.home-demo .item {
+    background: #ff3f4d;
+}
+.home-demo h2 {
+    color: #FFF;
+    text-align: center;
+    padding: 2rem 0;
+    margin: 0;
+    font-style: italic;
+    font-weight: 300;
+}

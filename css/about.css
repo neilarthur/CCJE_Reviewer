@@ -1,0 +1,32 @@
+
+
+#masthead {
+	min-height:270px;
+	background-image: url(../assets/pics/campus.jpg);
+  	color:#aaaacc;
+}
+
+#masthead h1 {
+	font-size: 55px;
+	line-height: 1;
+}
+
+#masthead .well {
+	margin-top:13%;
+	background-color:#111155;
+  	border-color:#000033;
+}
+
+
+
+@media screen and (min-width: 768px) {
+	#masthead h1 {
+		font-size: 100px;
+	}
+}
+
+.navbar-bright {
+	background-color:#111155;
+    color:#fff;
+}
+  
