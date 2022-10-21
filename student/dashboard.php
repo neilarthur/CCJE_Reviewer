@@ -274,7 +274,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                            
                             $ave [] = $cows['num'] / $percent;
 
-                            $ave1 [] = $cows1['num'] / $percent1;
+                            
                             
 
                         }
@@ -300,7 +300,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                     }, {
                                         label: "Crime Detection and Investigation",
                                         backgroundColor: 'rgba(255, 159, 64, 0.8)',
-                                        data: <?php echo json_encode($ave1) ?>
+                                        data: []
                                     }, {
                                         label: "Criminal Sociology",
                                         backgroundColor: "orange",

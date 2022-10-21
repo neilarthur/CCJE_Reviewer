@@ -49,7 +49,7 @@
 					</li>
 				</ul>
 				<div class="d-grid gap-2 d-md-auto justify-content-md-end me-4 ">
-					<a class="btn text-white text-capitalize" href="index.php" style="background-color: #8C0000;">Log In</a>
+					<a class="btn text-white text-capitalize" href="index.php" style="background-color: #8C0000;">Log In<i class="fas fa-sign-in-alt ms-1"></i></a>
 				</div>
 			</div>
 		</div>

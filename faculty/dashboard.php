@@ -25,6 +25,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
+	<!-- JS Chart-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<style>
        .dp .dropdown-toggle::after {
             content: none;
@@ -265,6 +267,68 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                        </div>
 	                    </div>
 	                </div>
+	                 <div class="col-lg-4">
+	                 	<div class="card shadow shadow h-100 ">
+                           <div class="card-body card-body rounded-2">
+                           	<h5 class="card-title fw-bold">Question Count</h5>
+                            <?php
+                            $query = "SELECT * FROM test_question WHERE subject_name ='Criminal Jurisprudence '";
+                            $count = $sqlcon->query($query);
+
+                            $rows_count_value = mysqli_num_rows($count);
+
+                            $query1 = "SELECT * FROM test_question WHERE subject_name ='Law Enforcement '";
+                            $count1 = $sqlcon->query($query1);
+
+                            $rows_count_value1 = mysqli_num_rows($count1);
+
+                            $query2 = "SELECT * FROM test_question WHERE subject_name ='Criminalistics '";
+                            $count2 = $sqlcon->query($query2);
+
+                            $rows_count_value2 = mysqli_num_rows($count2);
+
+                            $query3 = "SELECT * FROM test_question WHERE subject_name ='Crime Detection and Investigation'";
+                            $count3 = $sqlcon->query($query3);
+
+                            $rows_count_value3 = mysqli_num_rows($count3);
+
+                            $query4 = "SELECT * FROM test_question WHERE subject_name ='Criminal Sociology'";
+                            $count4 = $sqlcon->query($query4);
+
+                            $rows_count_value4 = mysqli_num_rows($count4);
+
+                            $query5 = "SELECT * FROM test_question WHERE subject_name ='Correctional Administration'";
+                            $count5 = $sqlcon->query($query5);
+
+                            $rows_count_value5 = mysqli_num_rows($count5);
+
+
+                             ?>
+                            <!-- Pie Chart-->
+                            <canvas id="pie-chart" style="position: relative; height:40px; width:80px"></canvas>
+
+                            <script >
+                                new Chart(document.getElementById("pie-chart"), {
+                                    type: 'pie',
+                                     data: {
+                                        labels: ["Criminal Jurisprudence ", "Law Enforcement", "Criminalistics ","Crime Detection and Investigation "," Criminal Sociology "," Correctional Administration"],
+                                        datasets: [{
+                                            
+                                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#775FEC","#FF6666","#FFAA00"],
+                                            data: [<?php echo $rows_count_value ?>,<?php echo $rows_count_value1 ?>,<?php echo $rows_count_value2 ?>,<?php echo $rows_count_value3 ?>,<?php echo $rows_count_value4 ?>,<?php echo $rows_count_value5 ?>]
+                                        }]
+                                    },
+                                    options: {
+                                     title: {
+                                        display: true,
+                                        text: 'Percentage of Each Section of Examination'
+                                    }
+                                }
+                            });
+                            </script>
+                         </div>
+                      </div>
+                   </div>
 				</div>
 			</div>
 		</section>

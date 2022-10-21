@@ -176,7 +176,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 			<div class="row">
 				<!-- Accounts Card Example -->
 				<div class="col-xl-3 col-md-6 mb-5">
-					<div class="card border-left-dark shadow p-3 py-1" style="background-color: rgb(243, 156, 18 );">
+					<div class="card border-left-dark shadow p-3 py-1 ms-1" style="background-color: rgb(243, 156, 18 );">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">

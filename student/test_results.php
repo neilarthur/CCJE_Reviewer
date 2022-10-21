@@ -122,7 +122,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
     							<th class="fs-5">Difficulty</th>
     							<th class="fs-5">Total of Items</th>
     							<th class="fs-5">Score</th>
-    							<th class="fs-5">Status</th>
+    							<th class="fs-5">Remarks</th>
     						</tr>
     					</thead>
     					<tbody>

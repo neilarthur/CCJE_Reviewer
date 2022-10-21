@@ -18,12 +18,12 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
 
 </head>
-<body>
+<body style="background-color: #f5f5f5;">
    <div class="header text-uppercase hd " >
     <div class="container-fluid py-3">
        <img src="assets/pics/logo.png" alt="" width="75" height="75" class="d-inline-block align-top mt-2 ms-4" >
        <h3 class="text-white mt-3 ms-4" >Automated Licensure Examination Reviewer </h3>
-       <span class="text-white text-center dep">College of Criminal Justice and Education</span>
+       <span class="text-white dep">College of Criminal Justice and Education</span>
     </div>
   </div>
 	<nav id="navbar-top" class="navbar navbar-expand-lg navbar-light fw-bold text-uppercase">
@@ -49,55 +49,68 @@
 					</li>
 				</ul>
 				<div class="d-grid gap-2 d-md-auto justify-content-md-end me-4 ">
-					<a class="btn text-white text-capitalize" href="php/index.php" style="background-color: #8C0000;">Log In</a>
+					<a class="btn text-white text-capitalize" href="php/index.php" style="background-color: #8C0000;">Log In<i class="fas fa-sign-in-alt ms-1"></i></a>
 				</div>
 			</div>
 		</div>
 	</nav>
 	<!-- Carousel -->
-	<div id="carouselExampleInterval" class="carousel slide shadow h-100 " data-bs-ride="carousel">
-    <div class="carousel-inner ">
-      <div class="carousel-item active" data-bs-interval="1500">
-        <img src="assets/pics/1.jpg" class=" pic d-block w-100  " alt="...">
+  <section>
+    <div id="carouselExampleInterval" class="carousel slide " data-bs-ride="carousel">
+      <div class="carousel-inner ">
+        <div class="carousel-item active" data-bs-interval="3000">
+          <img src="assets/pics/1.jpg" class="d-block w-100  " alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+          <img src="assets/pics/1.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+          <img src="assets/pics/1.jpg" class="d-block w-100" alt="...">
+        </div>
       </div>
-      <div class="carousel-item" data-bs-interval="1500">
-        <img src="assets/pics/1.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item" data-bs-interval="1500">
-        <img src="assets/pics/1.jpg" class="d-block w-100" alt="...">
-      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span aria-hidden="true"><i class="fas fa-chevron-circle-left fa-3x"></i></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span caria-hidden="true"><i class="fas fa-chevron-circle-right fa-3x"></i></span>
+      </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+  </section>
+	
 
 	<!-- LSPU Policy-->
 	<div class="con container-fluid mt-5 mb-5 ">
-		<div class="row ms-4 me-4 ">
+		<div class="row">
 			<div class="col-md-4 ">
-				<h2 class=" title text-center fw-bold text-uppercase">Mission</h2>
-				<p class="mt-3 lh-base">LSPU provides quality education through responsive instruction,
-        distinctive research, and sustainable extension and production services for improved 
-        quality of life towards nation building.</p>
+        <div class="card shadow">
+          <div class="card-body mb-5">
+            <h2 class=" title text-center fw-bold text-uppercase">Mission</h2>
+            <p class="mt-3 lh-base">LSPU provides quality education through responsive instruction,
+            distinctive research, and sustainable extension and production services for improved 
+            quality of life towards nation building.</p>
+          </div>
+        </div>
 			</div>
 			<div class="col-md-4">
-				<h2 class=" title text-center fw-bold text-uppercase">Quality Policy</h2>
-				<p class="mt-3 lh-base">LSPU delivers quality education through responsive 
-        instruction, distinctive research,sustainable extension, and production services. Thus,
-        we are committed with continual improvement to meet applicable requirements to provide 
-        quality, efficient, and effective services to the university stakeholders&#39; highest 
-        level of satisfaction through an excellent management system imbued with utmost integrity,
-        professionalism and innovation.</p>
+        <div class="card shadow">
+          <div class="card-body">
+            <h2 class=" title text-center fw-bold text-uppercase">Quality Policy</h2>
+            <p class="mt-3 lh-base">LSPU delivers quality education through responsive 
+            instruction, distinctive research,sustainable extension, and production services. Thus,
+            we are committed with continual improvement to meet applicable requirements to provide 
+            quality, efficient, and effective services to the university stakeholders&#39; highest 
+            level of satisfaction through an excellent management system imbued with utmost integrity,
+            professionalism and innovation.</p>
+          </div>
+        </div>
 			</div>
 			<div class="col-md-4">
-				<h2 class=" title text-center fw-bold text-uppercase">Vision</h2>
-				<p class="mt-3 lh-base ">The Laguna State Polytechnic University is a center of sustainable development transforming lives and communities.</p>
+        <div class="card shadow">
+          <div class="card-body ">
+            <h2 class=" title text-center fw-bold text-uppercase">Vision</h2>
+            <p class="mt-3 lh-base ">The Laguna State Polytechnic University is a center of sustainable development transforming lives and communities.</p>
+          </div>
+        </div>
 			</div>
 		</div>
 	</div>

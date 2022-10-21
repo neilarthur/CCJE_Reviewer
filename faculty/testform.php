@@ -209,13 +209,19 @@ $suppd .= "</select>";
 							<div class="card">
 								<div class="card-body m-3">
 									<h4 class="fw-bold mb-3 text-uppercase" >Test Information</h4>
-									<div class="mb-3">
-										<label  class="form-label">Title</label>
-										<textarea type="text" class="form-control" name="title" placeholder="Untitled form" rows="2" required></textarea>
-									</div>
-									<div class="mb-3">
-										<label  class="form-label">Description</label>
-										<textarea type="text" class="form-control" name="description" placeholder="Answer the following" rows="2" required></textarea>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="mb-3">
+												<label  class="form-label">Title</label>
+												<textarea type="text" class="form-control" name="title" placeholder="Untitled form" rows="1" required></textarea>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="mb-3">
+												<label  class="form-label">Description</label>
+												<textarea type="text" class="form-control" name="description" placeholder="Answer the following" rows="1" required></textarea>
+											</div>
+										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-4 mb-3">
