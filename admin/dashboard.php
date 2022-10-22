@@ -397,8 +397,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                     <div class="icon-box mt-2 mb-2">
                         <i class="fas fa-exclamation-circle fa-5x text-white"></i>
                     </div>
-                    <h5 class="modal-title"></h5>
-                    
                 </div>
                 <div class="modal-body text-center mt-2">
                     <h4 class="fw-bold">Do you really wish to leave or log out?</h4>

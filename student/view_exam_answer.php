@@ -30,7 +30,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 <body style="background-color: rgb(229, 229, 229);">
   <div class="header text-uppercase hd " >
     <div class="container-fluid py-3">
-      <img src="../assets/pics/logo.png" alt="" width="75" height="75" class="d-inline-block align-top mt-2 ms-4" >
+      <img src="../assets/pics/logo.png" alt="" width="80" height="80" class="d-inline-block align-top mt-2 ms-2" >
       <h3 class="text-white mt-3 ms-4" >Automated Licensure Examination Reviewer </h3>
       <span class="text-white text-center dep">College of Criminal Justice and Education</span>
     </div>

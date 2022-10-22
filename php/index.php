@@ -36,7 +36,7 @@ elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='faculty') {
 <body>
 	<div class="header text-uppercase hd " >
 		<div class="container-fluid py-3">
-			<img src="../assets/pics/logo.png" alt="" width="90" height="90" class="d-inline-block align-top ms-4" >
+			<img src="../assets/pics/logo.png" alt="" width="80" height="80" class="d-inline-block align-top mt-2 ms-2" >
 			<h3 class="text-white mt-3 ms-4" >Automated Licensure Examination Reviewer </h3>
 			<span class="text-white text-center dep">College of Criminal Justice and Education</span>
 		</div>
@@ -66,31 +66,28 @@ elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='faculty') {
 			</div>
 		</div>
 	</nav>
-  <section>
-    
-  </section>
 	<!-- Log In form -->
 	<div class="login-form mt-3">    
 		<form action="login.php" method="post">
 			<div class="avatar">
-				<i class='bx bxs-user'></i>
+				<img src="../assets/pics/CCJE.png" alt="">
 			</div>
-			<h4 class="modal-title">Login Account</h4>
+			<h4 class="modal-title mt-3 fw-bold">User Account</h4>
 			<div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-				<input type="text" name="userID" class="form-control" placeholder="Username" required="required">
+				<input type="text" name="userID" class="form-control" placeholder="Account ID" required="required">
 			</div>
 			<div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+        <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
 				<input type="password" name="password" class="form-control" placeholder="Password" required="required">
 			</div>
-			<div class="form-group small clearfix">
-				<label class="form-check-label"><input type="checkbox"> Remember me</label>
-				<a href="#" class="forgot-link">Forgot Password?</a>
-			</div> 
-			<div class="d-grid gap-2">
-				<input type="submit" class="btn btn-primary btn-lg" value="Login">
+			<div class="d-grid gap-2 mt-2 ">
+				<input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Login">
 			</div>
+      <div class="form-group small clearfix fs-6 mt-3">
+        <a href="#" class="register">Don't have an account? </a>
+        <a href="#" class="forgot-link">Forgot Password?</a>
+      </div> 
 		</form>
 	</div>
 

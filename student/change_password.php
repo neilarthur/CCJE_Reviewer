@@ -24,12 +24,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<!-- Box Icons-->
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body  style="background-color: rgb(229, 229, 229);">
 	<div class="header text-uppercase hd " >
 		<div class="container-fluid py-3">
-			<img src="../assets/pics/logo.png" alt="" width="75" height="75" class="d-inline-block align-top mt-2 ms-4" >
+			<img src="../assets/pics/logo.png" alt="" width="80" height="80" class="d-inline-block align-top mt-2 ms-2" >
 			<h3 class="text-white mt-3 ms-4" >Automated Licensure Examination Reviewer </h3>
 			<span class="text-white text-center dep">College of Criminal Justice and Education</span>
 		</div>
@@ -82,20 +82,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header border-0">
-					<h5 class="modal-title"></h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body align-items-center">
-					<h4 class="fw-bold"><i class="fas fa-exclamation-triangle alert alert-danger me-2"></i>Do you really wish to leave or log out?</h4>
+                 <div class="icon-box mt-2 mb-2 d-flex justify-content-center">
+                    <i class="fa-solid fa-circle-question fa-5x text-danger"></i>
+                </div>
+				<div class="modal-body d-flex justify-content-center">
+					<p class="h4 text-dark fw-bold">Do you really wish to leave</p>
 				</div>
-				<div class="modal-footer border-0">
-					<form action="../php/logout_faculty.php" class="hide" method="POST">
+				<div class="modal-footer d-flex justify-content-center border-0">
+					<form action="../php/logout_faculty.php" class="hide" method="POST" class="text-center">
 						<input type="hidden" name="id" value="<?php echo $_SESSION['acc_id']  ?>">
 						<input type="hidden" name="times" value="<?php echo $_SESSION['login_id']  ?>">
-						<div class="signout">
-							<button type="submit" class="btn btn-success">YES</button>
-							<button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">NO</button>
-						</div>
+                        <button type="submit" class="btn btn-primary mx-2 px-5 pb-2">YES</button>
+                        <button type="button" class="btn btn-danger mx-2 px-5 pb-2" data-bs-dismiss="modal">NO</button>
 					</form>
 				</div>
 			</div>

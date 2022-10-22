@@ -32,7 +32,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 <body style="background-color: rgb(229, 229, 229);"> 
 	<div class="header text-uppercase hd " >
 		<div class="container-fluid py-3">
-			<img src="../assets/pics/logo.png" alt="" width="75" height="75" class="d-inline-block align-top mt-2 ms-4" >
+			<img src="../assets/pics/logo.png" alt="" width="80" height="80" class="d-inline-block align-top mt-2 ms-2" >
 			<h3 class="text-white mt-3 ms-4" >Automated Licensure Examination Reviewer </h3>
 			<span class="text-white text-center dep">College of Criminal Justice and Education</span>
 		</div>
@@ -84,20 +84,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header border-0">
-					<h5 class="modal-title"></h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body align-items-center">
-					<h4 class="fw-bold"><i class="fas fa-exclamation-triangle alert alert-danger me-2"></i>Do you really wish to leave or log out?</h4>
+                 <div class="icon-box mt-2 mb-2 d-flex justify-content-center">
+                    <i class="fa-solid fa-circle-question fa-5x text-danger"></i>
+                </div>
+				<div class="modal-body d-flex justify-content-center">
+					<p class="h4 text-dark fw-bold">Do you really wish to leave</p>
 				</div>
-				<div class="modal-footer border-0">
-					<form action="../php/logout_faculty.php" class="hide" method="POST">
+				<div class="modal-footer d-flex justify-content-center border-0">
+					<form action="../php/logout_faculty.php" class="hide" method="POST" class="text-center">
 						<input type="hidden" name="id" value="<?php echo $_SESSION['acc_id']  ?>">
 						<input type="hidden" name="times" value="<?php echo $_SESSION['login_id']  ?>">
-						<div class="signout">
-							<button type="submit" class="btn btn-success">YES</button>
-							<button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">NO</button>
-						</div>
+                        <button type="submit" class="btn btn-primary mx-2 px-5 pb-2">YES</button>
+                        <button type="button" class="btn btn-danger mx-2 px-5 pb-2" data-bs-dismiss="modal">NO</button>
 					</form>
 				</div>
 			</div>
@@ -107,7 +107,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
     <div class="container-fluid py-5">
         <div class="row mx-4 ">
         	<div class="col-lg-3 col-xs-6 mb-5">
-        		<div class="card border-0" style="background-color: rgb(254, 193, 7);" >
+        		<div class="card border-0" style="background-color: #FFA701;" >
         			<div class="card-body">
         				<div class="row">
         					<div class="col mr-2">
@@ -120,7 +120,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                         ?> Quiz
         						</div>
         					</div>
-        					<div class="col-auto mt-2" style="color: rgb(243, 156, 18);">
+        					<div class="col-auto mt-2" style="color: #FFD300;">
         						<i class="fa-solid fa-note-sticky fa-4x"></i>
         					</div>
         				</div>
@@ -128,7 +128,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         		</div>
         	</div>
         	<div class="col-lg-3 col-xs-6 mb-5">
-        		<div class="card border-0" style="background-color: rgb(0, 122, 255);" >
+        		<div class="card border-0 bg-primary" >
         			<div class="card-body">
         				<div class="row no-gutters align-items-center">
         					<div class="col mr-2">
@@ -150,7 +150,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         		</div>
         	</div>
         	<div class="col-lg-3 col-xs-6 mb-5">
-        		<div class="card border-0" style="background-color: #8C0000;" >
+        		<div class="card border-0 bg-danger"  >
         			<div class="card-body">
         				<div class="row no-gutters align-items-center">
         					<div class="col mr-2">
@@ -172,7 +172,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         		</div>
         	</div>
         	<div class="col-lg-3 col-xs-6 mb-5">
-        		<div class="card border-0" style="background-color: rgb(0, 110, 60);" >
+        		<div class="card border-0" style="background-color: rgb(0, 166, 90);" >
         			<div class="card-body">
         				<div class="row no-gutters align-items-center">
         					<div class="col mr-2">
@@ -186,7 +186,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         							Quiz Results
         						</div>
         					</div>
-        					<div class="col-auto mt-2" style="color: rgb(0, 36, 20));">
+        					<div class="col-auto mt-2" style="color: #4dc656;);">
         						<i class="fa-solid fa-chart-column fa-4x"></i>
         					</div>
         				</div>
@@ -287,27 +287,27 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                     labels: ["Score Percentage"],
                                     datasets: [{
                                         label: <?php echo json_encode($quiz) ?>,
-                                        backgroundColor: "blue",
+                                        backgroundColor: "#0052cc",
                                         data: <?php echo json_encode($ave) ?>
                                     }, {
                                         label: "Law Enforcement",
-                                        backgroundColor: "red",
+                                        backgroundColor: "#ff5630",
                                         data: []
                                     }, {
                                         label: "Criminalitics",
-                                        backgroundColor: "green",
-                                        data: []
+                                        backgroundColor: "#ffab00",
+                                        data:[]
                                     }, {
                                         label: "Crime Detection and Investigation",
-                                        backgroundColor: 'rgba(255, 159, 64, 0.8)',
+                                        backgroundColor: ' #23AE22',
                                         data: []
                                     }, {
                                         label: "Criminal Sociology",
-                                        backgroundColor: "orange",
-                                        data: []
+                                        backgroundColor: "#e81705",
+                                        data:[]
                                     },{
                                         label: "Correctional Administration",
-                                        backgroundColor: 'rgba(0, 115, 183, 0.8)',
+                                        backgroundColor: '#13169B',
                                         data: []
                                     }]
 

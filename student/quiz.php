@@ -29,7 +29,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<!-- Box Icons-->
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="../TimeCircles-master/inc/TimeCircles.css">
 	<style type="text/css">
 		.base-timer {
@@ -87,15 +87,85 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	</style>
 </head>
 <body style="background-color: rgb(229, 229, 229);" onload="timeout()">
+  <div class="header text-uppercase hd " >
+    <div class="container-fluid py-3">
+      <img src="../assets/pics/logo.png" alt="" width="80" height="80" class="d-inline-block align-top mt-2 ms-2" >
+      <h3 class="text-white mt-3 ms-4" >Automated Licensure Examination Reviewer </h3>
+      <span class="text-white text-center dep">College of Criminal Justice and Education</span>
+    </div>
+  </div>
+  <!-- Top navbar-->
+  <nav id="navbar-top" class="navbar navbar-expand-lg navbar-light fw-bold">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse ms-4" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 pe-2">
+          <li class="nav-item text-uppercase">
+            <a class="nav-link disabled" aria-current="page" href="dashboard.php">Home</a>
+          </li>
+          <li class="nav-item text-uppercase">
+            <a class="nav-link disabled " href="take_quiz.php">Take Quiz</a>
+          </li>
+          <li class="nav-item text-uppercase">
+            <a class="nav-link disabled" href="take_preboard.php">Pre-boad Exam</a>
+          </li>
+          <li class="nav-item text-uppercase">
+          <a class="nav-link disabled " href="#">Results</a> 
+          </li>
+        </ul>
+        <div class="flex-shrink-0 dropdown px-4 text-center">
+          <button class="btn  dropdown-toggle border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <?php
+
+                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
+                     while ($rows = mysqli_fetch_assoc($query_row)) {
+                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"> '.$_SESSION["first_name"].'</span>';
+                  ?>
+               <?php }
+
+                ?>
+                  
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item disabled" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
+                  <li><a class="dropdown-item disabled" href="change_password.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+                  <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
+              </ul>
+          </div>
+      </div>
+    </div>
+  </nav>
+ <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="icon-box mt-2 mb-2 d-flex justify-content-center">
+          <i class="fa-solid fa-circle-question fa-5x text-danger"></i>
+        </div>
+        <div class="modal-body d-flex justify-content-center">
+          <p class="h4 text-dark fw-bold">Do you really wish to leave</p>
+        </div>
+        <div class="modal-footer d-flex justify-content-center border-0">
+          <form action="../php/logout_faculty.php" class="hide" method="POST" class="text-center">
+            <input type="hidden" name="id" value="<?php echo $_SESSION['acc_id']  ?>">
+            <input type="hidden" name="times" value="<?php echo $_SESSION['login_id']  ?>">
+            <button type="submit" class="btn btn-primary mx-2 px-5 pb-2">YES</button>
+            <button type="button" class="btn btn-danger mx-2 px-5 pb-2" data-bs-dismiss="modal">NO</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!--Main Content-->
   <div class="container py-4">
      <div class="col-lg-12">
         <div class="card mb-3">
-          <div class="card-header" style="background-color: rgb(43, 43, 43);">
-          </div>
-           <div class="card-body m-2 ">
-              <?php
+          <?php
 
               $ids = $_GET['id'];
 
@@ -103,12 +173,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
               while ($show = mysqli_fetch_assoc($row)) { ?>
 
-                <p class="h1 fw-bold text-uppercase text-dark"><?php echo $show['quiz_title']; ?></p>
-                <p class="h5  text-uppercase text-dark"><?php echo $show['subject_name']; ?></p>
-                <p class=" h5  text-dark" > <?php echo $show['description']; ?> </p>
-              <?php }  ?>
-            </div>
+
+          <div class="card-header" style="background-color: rgb(43, 43, 43);">
+            <p class="h1 fw-bold text-uppercase text-white"> <?php echo $show['quiz_title']; ?></p>
+            <p class="h4  text-uppercase text-white"><?php echo $show['subject_name']; ?></p>
+          </div>
+          <div class="card-body m-2 ">
+            <p class=" h5  text-dark" > <?php echo $show['description']; ?> </p>
+          </div>
         </div>
+        <?php }  ?>
     </div>
     <form action="check.php" id="form1" method="POST">
       <div class="row">
