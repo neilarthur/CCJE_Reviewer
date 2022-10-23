@@ -214,7 +214,7 @@ $supps .= "</select>";
 								                }
 								             ?>
 											<button type="submit"  data-bs-toggle="modal" data-bs-target="#import" class="btn px-3 mx-2 pb-2 text-white btn-primary"><b><i class="fas fa-file-import me-2"></i></b>Import</button>
-											<button type="button" class="btn px-3 pb-2 text-white mx-2" data-bs-toggle="modal" data-bs-target="#AddQuestion" style="background-color: #8C0000;"><b><i class="fas fa-plus"></i></b> ADD</button>
+											<a href="question-form.php" class="btn px-3 pb-2 text-white mx-2" style="background-color: #8C0000;"><i class="fas fa-plus"></i>Add</a>
 										</div>
 										<table class="table table-hover align-middle bg-light" width="100%" id="questTab">
 											<thead>
@@ -309,82 +309,7 @@ $supps .= "</select>";
 			</div>
 		</section>
 
-		<!-- ADD Question-->
-		<div class="modal fade" id="AddQuestion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h3 class="modal-title fw-bold">Add Question</h3>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<form class="form" action="../php/test_question.php" method="Post">
-						<div class="modal-body m-3">
-							<label for="name" class="d-flex justify-content-start ps-1">Subject Exam</label>
-	                        <div class="input-group mb-3">
-	                        	<select class="form-select" name="subjects" required>
-									<option selected value="">Select Category</option>
-									<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
-									<option value="Law Enforcement">Law Enforcement</option>
-									<option value="Criminalistics">Criminalistics</option>
-									<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
-									<option value="Criminal Sociology">Criminal Sociology</option>
-									<option value="Correctional Administration">Correctional Administration</option>
-								</select>	
-	                        </div>
-
-	                        <label for="user-year" class="d-flex justify-content-start ps-1">Level of Difficulty</label>
-	                        <div class="input-group mb-3">
-	                        	<select class="form-select" name="level_difficulty" required>
-									<option selected value="">Select Difficulty</option>
-									<option value="Easy">Easy</option>
-									<option value="Moderate">Moderate</option>
-									<option value="Hard">Hard</option>
-								</select>
-							</div>
-	                        <div class="form-group mb-3">
-	                            <label for="name">Question</label>
-	                            <textarea type="text" class="form-control" name="questions_title" rows="3" required></textarea>
-	                        </div>
-	                        <div class="form-group mb-3">
-	                            <label for="name">Option A</label>
-	                            <input type="text" class="form-control" name="option_a" id="txt2" required="">
-	                        </div>
-	                        <div class="form-group mb-3">
-	                            <label for="name">Option B</label>
-	                            <input type="text" class="form-control" name="option_b" id="txt1" required="">
-	                        </div>
-	                        <div class="form-group mb-3">
-	                            <label for="name">Option C</label>
-	                            <input type="text" class="form-control" name="option_c" id="txt3" required="">
-	                        </div>
-	                        <div class="form-group mb-3">
-	                            <label for="name">Option D</label>
-	                            <input type="text" class="form-control" name="option_d" required="">
-	                        </div>
-
-	                        <div class="form-group mb-3">
-	                            <label for="name">Correct Answer</label>
-	                            <select class="form-select" name="correct_ans" required="">
-									<option selected></option>
-									<option value="A">A</option>
-									<option value="B">B</option>
-									<option value="C">C</option>
-									<option value="D">D</option>
-								</select>
-	                        </div>
-	                        <div class="form-group mb-3">
-	                             <label for="name" hidden="">Faculty</label>
-	                             <input type="hidden" name="acc" value="<?php echo $_SESSION['acc_id'] ?>">
-	                        </div>
-	                        <div class="modal-footer border-0">
-	                        	<button type="submit" name="create" class="btn btn-success"><i class="fas fa-plus-circle me-2"></i>ADD</button>
-	                            <a type="button" class=" btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-times-circle me-2"></i>Cancel</a>
-	                        </div>
-	                    </div>
-	                </form>
-	            </div>
-	        </div>
-	    </div>
+		
 	    
 	    <!-- View Question-->
 		<div class="modal fade" id="ViewQuestion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

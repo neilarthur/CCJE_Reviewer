@@ -60,8 +60,57 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 					</div>
 				</div>
 			</div>
+			<?php
+			
+			$number = 1;
 
-			<div id="get_data"></div>
+			$query_limit = "SELECT * FROM tbl_pre_question,tbl_pre_choose_quest,test_question WHERE (tbl_pre_question.pre_exam_id=tbl_pre_choose_quest.pre_exam_id) AND (tbl_pre_question.access_code = '$code') AND (tbl_pre_choose_quest.question_id = test_question.question_id)";
+
+			$result_limit = mysqli_query($sqlcon,$query_limit);
+
+
+
+			while ($rows = mysqli_fetch_array($result_limit)) { ?>
+
+			<div class="col-lg-12">
+				<div class="card mt-3">
+					<div class="card-body table-reponsive" >
+						<table class="table table-borderless">
+							<thead class="mb-4">
+							</thead>
+							<tbody class="fs-5">
+								 <tr>
+								 	<th>
+								 		<b><span class="fs-5"><?php echo $number.". &nbsp;". $rows['questions_title']; ?></span></b>
+								 	</th>
+								 </tr>
+								 <tr>
+								 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox " type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd1" value="A"> A. <?php echo $rows['option_a']; ?></span></td>
+								 </tr>
+								 <tr>
+								 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox" type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd2" value="B"> B.<?php echo $rows['option_b']; ?></span></td>
+								 </tr>
+								 <tr>
+								 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox" type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd3" value="C"> C. <?php echo $rows['option_c']; ?></span></td>
+								 </tr>
+								 <tr>
+								 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox" type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd4" value="D"> D. <?php echo $rows['option_d']; ?></span></td>
+								 </tr>
+
+							</tbody>
+									<input type="hidden" name="pre_exam_id" value="<?php echo $rows['pre_exam_id']; ?>">
+									<input type="hidden" name="update_pre_question" value="<?php echo $code; ?>">
+									<input type="hidden" name="sub_acc_id" value="<?php echo $_SESSION['acc_id']; ?>">
+									<input type="hidden" name="total_quest" value="<?php echo $rows['total_question']; ?>">
+						</table>
+					</div>
+				</div>
+			</div>
+			<?php
+				$number++;
+				}
+			?>
+
 		</div>
 		
 
@@ -115,28 +164,5 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   },2000);
 
 
-</script>
-
-<script type="text/javascript">
-	function fetch_data(page){
-		$.ajax({
-			url: "pagination.php?code=<?php echo $_GET['code']; ?>&acc_id=<?php echo $_GET['acc_id']; ?>",
-			method: "POST",
-			data:{
-				page:page
-			},
-			success:function(data){
-				$("#get_data").html(data);
-
-			}
-		});
-	}
-
-	fetch_data();
-
-	$(document).on("click",".page-item",function(){
-		var page = $(this).attr("id");
-		fetch_data(page);
-	})
 </script>
 </html>

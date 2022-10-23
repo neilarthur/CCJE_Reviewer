@@ -180,7 +180,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 			<!-- Main Content-->
 			<div class="col p-3 overflow-auto">
 				<div class="container-fluid ">
-					<form action="#" method="POST">
+					<form action="../php/test_question.php" method="POST" id="add_form">
 						<div class="col-lg-8 mx-auto mt-2">
 							<table class="table-responsive">
 								<thead>
@@ -222,30 +222,29 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 												<div class="form-group mb-3">
 													<div class="d-flex justify-content-between">
 														<label for="name" class="fw-bold mb-1">Question</label>
-														<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
 													</div>
-						                            <textarea type="text" class="form-control mt-2" name="questions_title" rows="3" required></textarea>
+						                            <textarea type="text" class="form-control mt-2" name="questions_title[]" rows="3" required></textarea>
 						                        </div>
 						                        <div class="input-group mb-3">
 						                            <label for="name"class="input-group-text bg-white fw-bold">Option A</label>
-						                            <input type="text" class="form-control" name="option_a" id="txt2" required="">
+						                            <input type="text" class="form-control" name="option_a[]" id="txt2" required="">
 						                        </div>
 						                        <div class="input-group mb-3">
 						                            <label for="name"class="input-group-text bg-white fw-bold">Option B</label>
-						                            <input type="text" class="form-control" name="option_b" id="txt1" required="">
+						                            <input type="text" class="form-control" name="option_b[]" id="txt1" required="">
 						                        </div>
 						                        <div class="input-group mb-3">
 						                            <label for="name"class="input-group-text bg-white fw-bold">Option C</label>
-						                            <input type="text" class="form-control" name="option_c" id="txt3" required="">
+						                            <input type="text" class="form-control" name="option_c[]" id="txt3" required="">
 						                        </div>
 						                        <div class="input-group mb-3">
 						                            <label for="name"class="input-group-text bg-white fw-bold">Option D</label>
-						                            <input type="text" class="form-control" name="option_d" required="">
+						                            <input type="text" class="form-control" name="option_d[]" required="">
 						                        </div>
 						                        <div class="col-sm-6">
 						                        	 <div class="input-group mb-3">
 							                            <label for="name"class="input-group-text bg-white fw-bold">Correct Answer</label>
-							                            <select class="form-select" name="correct_ans" required="">
+							                            <select class="form-select" name="correct_ans[]" required="">
 															<option selected></option>
 															<option value="A">A</option>
 															<option value="B">B</option>
@@ -256,20 +255,25 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 						                        </div>
 						                        <div class="form-group">
 						                             <label for="name" hidden="">Faculty</label>
-						                             <input type="hidden" name="acc" value="<?php echo $_SESSION['acc_id'] ?>">
+						                             <input type="hidden" name="acc[]" value="<?php echo $_SESSION['acc_id'] ?>">
 						                        </div>
 											</div>
 										</div>
 									</tr>
 								</tbody>
 							</table>
+
+							<div id="show_item">
+								
+							</div>
 							<div class="card mt-3">
 								<div class="card-body">
 									<div class="card-footer bg-white border-0 d-flex justify-content-center mb-1">
-										<button type="submit" name="create" class="btn btn-primary mx-2"><i class="fas fa-plus-circle me-2"></i>Add</button>
-										<button type="submit" name="create" class="btn btn-secondary mx-2"><i class="fas fa-trash me-2"></i>Delete</button>
-										<button type="submit" name="create" class="btn btn-success mx-2"><i class="fas fa-check-circle me-2"></i>Submit</button>
-										<a type="button" class=" btn btn-danger mx-2"><i class="fas fa-times-circle me-2"></i>Cancel</a>
+										<button type="submit" class="btn btn-primary mx-2 add_item_btn"><i class="fas fa-plus-circle me-2"></i>Add</button>
+										
+										<button type="submit" name="create" class="btn btn-success mx-2" id="create_btn"><i class="fas fa-check-circle me-2"></i>Submit</button>
+
+										<a href="testbank.php" class=" btn btn-danger mx-2"><i class="fas fa-times-circle me-2"></i>Cancel</a>
 									</div>
 								</div>
 							</div>
@@ -324,5 +328,21 @@ let arrow = document.querySelectorAll(".arrow");
   sidebarBtn.addEventListener("click", ()=>{
     sidebar.classList.toggle("close");
   });
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".add_item_btn").click(function(e){
+			e.preventDefault();
+			$("#show_item").append('<div class="card mt-3 append_item"> <div class="card-body py-3"> <div class="form-group mb-3"> <div class="d-flex justify-content-between"> <label for="name" class="fw-bold mb-1">Question</label> <!---sssss ---> <button class=" btn btn-secondary remove_item_btn"><i class="fas fa-trash me-2 justify-content-center"></i></button>   </div> <textarea type="text" class="form-control mt-2" name="questions_title[]" rows="3" required></textarea> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option A</label> <input type="text" class="form-control" name="option_a[]" id="txt2" required=""> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option B</label> <input type="text" class="form-control" name="option_b[]" id="txt1" required=""> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option C</label> <input type="text" class="form-control" name="option_c[]" id="txt3" required=""> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option D</label> <input type="text" class="form-control" name="option_d[]" required=""> </div> <div class="col-sm-6"> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Correct Answer</label> <select class="form-select" name="correct_ans[]" required=""> <option selected></option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option> </select> </div> </div> <div class="form-group"> <label for="name" hidden="">Faculty</label> <input type="hidden" name="acc[]" value="<?php echo $_SESSION['acc_id'] ?>"> </div> </div> </div>');
+		});
+
+		$(document).on('click','.remove_item_btn', function(e) {
+			e.preventDefault();
+
+			let row_item = $(this).parent().parent().parent();
+			$(row_item).remove();
+		});
+	});
 </script>
 </html>
