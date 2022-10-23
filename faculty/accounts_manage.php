@@ -199,8 +199,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 												<tr>
 													<th scope="col">Student ID</th>
 													<th scope="col">Fullname</th>
-													<th scope="col">Year</th>
-													<th scope="col">Section</th>
+													<th scope="col">Year & Section</th>
+													<th scope="col">Email Address</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -213,8 +213,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 												<tr>
 													<td><?php echo $rows['user_id'];  ?></td>
 													<td><?php echo $rows['last_name'];  ?>, &nbsp;<?php echo $rows['first_name'];  ?>&nbsp; <?php echo $rows['middle_name'];  ?></td>
-													<td><?php echo $rows['year'];  ?></td>
 													<td><?php echo $rows['section'];  ?></td>
+													<td><?php echo $rows['email_address']?></td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -265,7 +265,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
     									<label for="user-first" class="d-flex justify-content-center ps-1">First Name</label>
     									<input type="text" name="first_name" class="form-control text-center" required>
     									<label for="user-middle" class="d-flex justify-content-center ps-1">Middle Name</label>
-    									<input type="text" name="mid_name"  class="form-control text-center" required>
+    									<input type="text" name="middle_name"  class="form-control text-center" required>
     								</div>
     							</div>
     							<div class="row">
@@ -274,7 +274,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 										<input type="text" name="role" value="Student" class="form-control" readonly="">
 									</div>
     								<div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 py-2">
-										<label for="user-bday" class="d-flex justify-content-start ps-1">Birth Date</label>
+										<label for="user-bday" class="d-flex justify-content-start ps-1">Birthdate</label>
 										<input type="date" name="birth_date" class="form-control" required="">
 									</div>
 									<div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 py-2">
@@ -298,16 +298,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 										<input type="number" name="user_id" class="form-control" required="">
 									</div>
 									<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 py-2">
-										<label for="user-year" class="d-flex justify-content-start ps-1">Year</label>
-										<div class="input-group">
-											<select class="form-select" required="" name="year">
-												<option selected></option>
-												<option value="4th year">4th year</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 py-2">
-										<label for="user-section" class="d-flex justify-content-start ps-1">Section</label>
+										<label for="user-section" class="d-flex justify-content-start ps-1">Year & Section</label>
 										<div class="input-group">
 											<select class="form-select" required="" name="section">
 												<option selected></option>
@@ -317,15 +308,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 											</select>
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 py-2">
-										<label for="user-email" class="d-flex justify-content-start ps-1">Email Address</label>
-										<input type="text" name="email_address" class="form-control" required="">
-									</div>
-									<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 py-2">
+									<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 py-2">
 										<label for="user-mobile" class="d-flex justify-content-start ps-1">Mobile Number</label>
 										<input type="number" name="mobile_no" class="form-control" required="">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 py-2">
+										<label for="user-email" class="d-flex justify-content-start ps-1">Email Address</label>
+										<input type="text" name="email_address" class="form-control" required="">
 									</div>
 								</div>
 								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 py-2">

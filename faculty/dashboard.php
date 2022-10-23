@@ -268,8 +268,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                    </div>
 	                </div>
 	                 <div class="col-lg-4">
-	                 	<div class="card shadow shadow h-100 ">
-                           <div class="card-body card-body rounded-2">
+	                 	<div class="card ">
+                           <div class="card-body">
                            	<h5 class="card-title fw-bold">Question Count</h5>
                             <?php
                             $query = "SELECT * FROM test_question WHERE subject_name ='Criminal Jurisprudence '";
@@ -328,6 +328,56 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
                             </script>
                          </div>
                       </div>
+                   </div>
+                   <div class="col-lg-8">
+                   	 <div class="card">
+                   	  	<div class="card-body ,">
+                   			<canvas id="myChart" style="position: relative; height:40px; width:80px"></canvas>
+                   			<script type="text/javascript">
+                   				const ctx = document.getElementById('myChart').getContext('2d');
+								const myChart = new Chart(ctx, {
+								    type: 'bar',
+								    data: {
+								        labels: ["Class Preboard Exam Percentage"],
+								        datasets: [{
+								             label: "Criminal Jurisprudence ",
+									         backgroundColor: "#3e95cd",
+									         data: [80],
+									      },{
+									         label: "Law Enforcement",
+									         backgroundColor: "#8e5ea2",
+									         data: [100],
+									      },{
+									         label: "Criminalistics",
+									         backgroundColor: "#3cba9f",
+									         data: [90],
+									      },{
+									         label: "Crime Detection and Investigation",
+									         backgroundColor: "#775FEC",
+									         data: [85],
+									      },{
+									         label: "Criminal Sociology",
+									         backgroundColor: "#FF6666",
+									         data: [95],
+									      },{
+									         label: "Correctional Administration",
+									         backgroundColor: "#FFAA00",
+									         data: [82],
+
+								        }]
+								    },
+								    options: {
+								        scales: {
+								            y: {
+								                beginAtZero: true
+								            }
+								        }
+								    }
+								});
+
+                   			</script>
+                   		</div>
+                   	 </div>
                    </div>
 				</div>
 			</div>

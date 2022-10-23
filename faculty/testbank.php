@@ -214,7 +214,7 @@ $supps .= "</select>";
 								                }
 								             ?>
 											<button type="submit"  data-bs-toggle="modal" data-bs-target="#import" class="btn px-3 mx-2 pb-2 text-white btn-primary"><b><i class="fas fa-file-import me-2"></i></b>Import</button>
-											<a href="question-form.php" class="btn px-3 pb-2 text-white mx-2" style="background-color: #8C0000;"><i class="fas fa-plus"></i>Add</a>
+											<a href="question-form.php" class="btn px-3 pb-2 text-white mx-2" style="background-color: #8C0000;"><i class="fas fa-plus me-1"></i>ADD</a>
 										</div>
 										<table class="table table-hover align-middle bg-light" width="100%" id="questTab">
 											<thead>

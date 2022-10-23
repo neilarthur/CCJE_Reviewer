@@ -126,9 +126,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
      </div>
      <div class="row">
       <div class="col-lg-8">
-        <div class="card mt-3">
+        <div class="card mt-3 shadow">
           <div class="card-body  table-responsive-lg m-3">
-            <p class="h2 fw-bold mb-5">Quiz Results </p>
+            <p class="h2 fw-bold mb-5">Examination Results </p>
                
               <table class="align-middle mb-0 table table-borderless table-hover" id="quesTab">
                 <thead class="mb-4">
@@ -138,7 +138,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                     <th class="fs-5">Total of Question</th>
                     <th class="fs-5">Score</th>
                     <th hidden class="fs-5">Attempt</th>
-                    <th class="fs-5">Status</th>
+                    <th class="fs-5">Remarks</th>
                     <th class="fs-5">Action</th>
                   </tr>
                 </thead>

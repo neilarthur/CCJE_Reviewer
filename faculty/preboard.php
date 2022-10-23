@@ -366,7 +366,7 @@ function getName($n) {
 	        </div>
 	    </div>
 
-	    		<!-- Archive Account -->
+	    <!-- Archive Account -->
 		<div class="modal fade" id="ArchiveAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 			<div class="modal-dialog">
 	    		<div class="modal-content">

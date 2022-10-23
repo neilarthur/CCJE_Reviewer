@@ -12,7 +12,6 @@ if (isset($_POST["save"])) {
 	$age = $_POST['age'];
 	$gender = $_POST['gender'];
 	$user_id = $_POST['user_id'];
-	$year = $_POST['year'];
 	$section = $_POST['section'];
 	$email_address = $_POST['email_address'];
 	$mobile_no = $_POST['mobile_no'];
@@ -27,8 +26,7 @@ if (isset($_POST["save"])) {
 
 
   if (substr($image_type,0,5)=="image") {
-	$sql_run = "INSERT INTO accounts (first_name,middle_name,last_name,role,birth_date,age,gender,user_id,year,section,email_address,mobile_no,address,image,image_size,password) VALUES ('$first_name','$middle_name','$last_name','$role','$birth_date','$age','$gender','$user_id','$year','$section','$email_address','$mobile_no','$address','$image_name','$image_Data','$password')";
-
+	$sql_run = "INSERT INTO accounts (first_name,middle_name,last_name,role,birth_date,age,gender,user_id,section,email_address,mobile_no,address,image,image_size,password) VALUES ('$first_name','$middle_name','$last_name','$role','$birth_date','$age','$gender','$user_id','$section','$email_address','$mobile_no','$address','$image','$image_Data','$password')";
 
 	$sql_rows = mysqli_query($sqlcon, $sql_run);
 
@@ -38,7 +36,7 @@ if (isset($_POST["save"])) {
 	}
 	else{
 
-    header("Location: ../faculty/accounts_manage.php?adderror");
+    header("location:../faculty/accounts_manage.php?adderror");
   }
 
   }

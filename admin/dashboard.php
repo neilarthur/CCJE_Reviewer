@@ -275,58 +275,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row d-flex flex-row-justify-content-between">
-            	 <div class="col-lg-7">
-            	 	<div class="card shadow shadow h-100 py-1 ms-4">
-            	 		 <div class="card-body card-body rounded-2 ">
-            	 		 	<canvas id="myChart"></canvas>
-            	 		 	<script>
-            	 		 		const ctx = document.getElementById('myChart').getContext('2d');
-            	 		 		const myChart = new Chart(ctx, {
-            	 		 			type: 'bar',
-            	 		 			data: {
-            	 		 				labels: ['4A', '4B', '4C'],
-            	 		 				datasets: [{
-            	 		 					label: 'Class Section Pre-board Exam Performance Percentage',
-            	 		 					data: [95, 90, 85],
-            	 		 					backgroundColor: [
-            	 		 					'rgba(221, 75, 57, 0.8)',
-            	 		 					'rgba(0, 115, 183, 0.8)',
-            	 		 					'rgba(243, 156, 18, 0.8)',
-            	 		 					'rgba(75, 192, 192, 0.8)',
-            	 		 					'rgba(153, 102, 255, 0.8)',
-            	 		 					'rgba(255, 159, 64, 0.8)'
-            	 		 					],
-            	 		 					borderColor: [
-            	 		 					'rgba(255, 99, 132, 1)',
-            	 		 					'rgba(54, 162, 235, 1)',
-            	 		 					'rgba(255, 206, 86, 1)',
-            	 		 					'rgba(75, 192, 192, 1)',
-            	 		 					'rgba(153, 102, 255, 1)',
-            	 		 					'rgba(255, 159, 64, 1)'
-            	 		 					],
-            	 		 					borderWidth: 1
-            	 		 				}]
-            	 		 			},
-            	 		 			options: {
-            	 		 				scales: {
-            	 		 					y: {
-            	 		 						beginAtZero: true
-            	 		 					}
-            	 		 				}
-            	 		 			}
-            	 		 		});
-            	 		 	</script>
-            	 		 </div>
-            	 	</div>
-            	 </div>
                  <div class="col-lg-4">
-                     <div class="card shadow shadow h-100 ms-4">
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" >
-                            <label class="text-dark fs-5">Question Count</label>
-                        </div>
+                     <div class="card h-100 ms-4">
                         <div class="card-body card-body rounded-2">
+                            <h5 class="card-title fw-bold">Question Count</h5>
                             <?php
                             $query = "SELECT * FROM test_question WHERE subject_name ='Criminal Jurisprudence '";
                             $count = $sqlcon->query($query);
@@ -385,7 +337,48 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                         </div>
                      </div>
                  </div>
+                  <div class="col-lg-8">
+                    <div class="card  ms-2">
+                         <div class="card-body card-body rounded-2 ">
+                            <canvas id="myChart"></canvas>
+                            <script type="text/javascript">
+                                const ctx = document.getElementById('myChart').getContext('2d');
+                                const myChart = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ["Class Preboard Exam Percentage"],
+                                        datasets: [{
+                                             label: "4A ",
+                                             backgroundColor: 'rgba(221, 75, 57, 0.8)',
+                                             data: [80],
+                                          },{
+                                             label: "4B",
+                                             backgroundColor: 'rgba(0, 115, 183, 0.8)',
+                                             data: [100],
+                                          },{
+                                             label: "4C",
+                                             backgroundColor: 'rgba(243, 156, 18, 0.8)',
+                                             data: [90],
+
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    }
+                                });
+
+                            </script>
+                         </div>
+                    </div>
+                 </div>
             </div>
+            	
+                
+           
         </div>
     </section>
     <!-- Logout Modal-->

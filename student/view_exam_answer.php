@@ -114,7 +114,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
               while ($show = mysqli_fetch_assoc($row)) { ?>
 
-                <p class="h3 fw-bold text-white text-uppercase">Quiz: <?php echo $show['subjects']; ?></p>
+                <p class="h3 fw-bold text-white text-uppercase">Area of Examination: <?php echo $show['subjects']; ?></p>
               <?php }  ?>
               
               </div>

@@ -21,7 +21,7 @@ while ($row = mysqli_fetch_array($results)) {
 					
 
 					<img src="data:image;base64,'.base64_encode($row["image_size"]).'" id="imgs"  class="img-fluid img-thumbnail rounded-circle flex justify-content-start"  style=" object-fit: cover;"> 
-					<input type="file" name="image" class="form-control mt-2" id="file_name" required="" accept=".jpg, .jpeg, .png">
+					<input type="file" name="image" class="form-control mt-2" id="file_name" accept=".jpg, .jpeg, .png">
 					<label for="image_browser" class="d-flex justify-content-center ps-1 mt-2">Attach Picture</label>'
 
 					?>
@@ -46,7 +46,7 @@ while ($row = mysqli_fetch_array($results)) {
 					<input type="number" name="user_id" value="<?php echo $row['user_id']; ?>" class="form-control">
 				</div>
 				<div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 py-2">
-					<label for="user-bday" class="d-flex ps-1">Birth Date</label>
+					<label for="user-bday" class="d-flex ps-1">Birthdate</label>
 					<input type="date" name="birth_date" class="form-control" value="<?php echo $row['birth_date']; ?>" >
 
 				</div>
@@ -61,16 +61,16 @@ while ($row = mysqli_fetch_array($results)) {
 					</div>
 				</div>
 				<div class="col-xl-3 col-lg-5 col-md-12 col-sm-12 py-2">
-					<label for="user-age" class="d-flex justify-content-center ps-1">Age</label>
-					<input type="number" name="age" class="form-control text-center" value="<?php echo $row['age']; ?>">
-				</div>
-				<div class="col-xl-3 col-lg-5 col-md-12 col-sm-12 py-2">
-					<label for="user-year" class="d-flex ps-1">Year</label>
-					<input type="text" name="year" class="form-control" value="<?php echo $row['year']; ?>">
+					<label for="user-age" class="d-flex ps-5">Age</label>
+					<input type="number" name="age" class="form-control ps-5" value="<?php echo $row['age']; ?>">
 				</div>
 				<div class="col-xl-3 col-lg-5 col-md-12 col-sm-12 py-2">
 					<label for="user-section" class="d-flex ps-1">Assign Section</label>
 					<input type="text" name="section" class="form-control" value="<?php echo $row['section']; ?>">
+				</div>
+				<div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 py-2">
+					<label for="user-mobile" class="d-flex  ps-1">Mobile Number</label>
+					<input type="number" name="mobile_no" value="<?php echo $row['mobile_no']; ?>" class="form-control">
 				</div>
 			</div>
 			<div class="row">
@@ -80,18 +80,13 @@ while ($row = mysqli_fetch_array($results)) {
 					<input type="text" name="email_address" value="<?php echo $row['email_address']; ?>" class="form-control">
 				</div>
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 py-2">
-					<label for="user-mobile" class="d-flex  ps-1">Mobile Number</label>
-					<input type="number" name="mobile_no" value="<?php echo $row['mobile_no']; ?>" class="form-control">
-				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 py-2">
-					<label for="user-add" class="d-flex ps-1">Address</label>
-					<input class="form-control" name="address" value="<?php echo $row['address']; ?>">
-				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 py-2">
 					<label for="user-password" class="d-flex ps-1">Password</label>
 					<input type="password" name="password" class="form-control" value="<?php echo $row['password']; ?>">
-					
 				</div>
+			</div>
+			<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 py-2">
+				<label for="user-add" class="d-flex ps-1">Address</label>
+				<textarea class="form-control" name="address" rows="2"><?php echo $row['address']; ?></textarea>
 			</div>
 		</div>
 		<div class="modal-footer border-0 d-flex justify-content-center mt-4">

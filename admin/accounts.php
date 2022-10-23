@@ -204,9 +204,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<tr>
 													<th scope="col">Student ID</th>
 													<th scope="col">Fullname</th>
-													<th scope="col">Year</th>
-													<th scope="col">Section</th>
+													<th scope="col">Year & Section</th>
 													<th scope="col">Role</th>
+													<th scope="col">Email Address</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -218,9 +218,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<tr>
 													<td><?php echo $rows['user_id'];  ?></td>
 													<td><?php echo $rows['last_name'];  ?>,&nbsp;<?php echo $rows['first_name'];  ?>&nbsp;<?php echo $rows['middle_name'];  ?></td>
-													<td><?php echo $rows['year'];  ?></td>
 													<td><?php echo $rows['section'];  ?></td>
 													<td><?php echo $rows['role'];  ?></td>
+													<td><?php echo $rows['email_address']; ?></td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -253,8 +253,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<tr>
 													<th scope="col">Teacher ID</th>
 													<th scope="col">Fullname</th>
-													<th scope="col">Assign Section</th>
+													<th scope="col">Class Section</th>
 													<th scope="col">Role</th>
+													<th scope="col">Email Address</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -269,6 +270,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $raws['last_name'];  ?>,&nbsp;<?php echo $raws['first_name'];  ?>&nbsp;<?php echo $raws['middle_name'];  ?></td>
 													<td><?php echo $raws['section'];  ?></td>
 													<td><?php echo $raws['role'];  ?></td>
+													<td><?php echo $raws['email_address']; ?></td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -314,9 +316,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<tr>
 													<th scope="col">Student ID</th>
 													<th scope="col">Fullname</th>
-													<th scope="col">Year</th>
-													<th scope="col">Section</th>
+													<th scope="col">Year & Section</th>
 													<th scope="col">Role</th>
+													<th scope="col">Email Address</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -330,6 +332,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $rows['year'];  ?></td>
 													<td><?php echo $rows['section'];  ?></td>
 													<td><?php echo $rows['role'];  ?></td>
+													<td><?php echo $rows['email_address'];  ?></td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -362,8 +365,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<tr>
 													<th scope="col">Teacher ID</th>
 													<th scope="col">Fullname</th>
-													<th scope="col">Assign Section</th>
+													<th scope="col">Class Section</th>
 													<th scope="col">Role</th>
+													<th scope="col">Email Address</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -378,6 +382,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $raws['last_name'];  ?>,&nbsp;<?php echo $raws['first_name'];  ?>&nbsp;<?php echo $raws['middle_name'];  ?></td>
 													<td><?php echo $raws['section'];  ?></td>
 													<td><?php echo $raws['role'];  ?></td>
+													<td><?php echo $raws['email_address'];  ?></td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -466,16 +471,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 											<input type="number" name="user_id" class="form-control" required="">
 										</div>
 										<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 py-2">
-											<label for="user-year" class="d-flex justify-content-start ps-1">Year</label>
-											<div class="input-group">
-												<select class="form-select" required="" name="year">
-													<option selected></option>
-													<option value="4th year">4th year</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 py-2">
-											<label for="user-section" class="d-flex justify-content-start ps-1">Section</label>
+											<label for="user-section" class="d-flex justify-content-start ps-1">Year & Section</label>
 											<div class="input-group">
 												<select class="form-select" required="" name="section">
 													<option selected></option>
@@ -485,17 +481,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												</select>
 											</div>
 										</div>
+										<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 py-2">
+											<label for="user-mobile" class="d-flex justify-content-start ps-1">Mobile Number</label>
+											<input type="number" name="mobile_no" class="form-control" required="">
+										</div>
 									</div>
 									<div class="row">
-										<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 py-2">
+										<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 py-2">
 											<label for="user-email" class="d-flex justify-content-start ps-1">Email Address</label>
 											<input type="Email" name="email_address" class="form-control check_email" required="">
 											<small class="error_email text-danger"></small>
 
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 py-2">
-											<label for="user-mobile" class="d-flex justify-content-start ps-1">Mobile Number</label>
-											<input type="number" name="mobile_no" class="form-control" required="">
 										</div>
 									</div>
 									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 py-2">
@@ -578,16 +574,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 											<input type="number" name="user_id" class="form-control" required="">
 										</div>
 										<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 py-2">
-											<label for="user-year" class="d-flex justify-content-start ps-1">Year</label>
-											<div class="input-group">
-												<select class="form-select" required="" name="year">
-													<option selected></option>
-													<option value="4th year">4th year</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 py-2">
-											<label for="user-section" class="d-flex justify-content-start ps-1">Assign Section</label>
+											<label for="user-section" class="d-flex justify-content-start ps-1">Class Section</label>
 											<div class="input-group">
 												<select class="form-select" required="" name="section">
 													<option selected></option>
@@ -597,16 +584,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												</select>
 											</div>
 										</div>
+										<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 py-2">
+											<label for="user-mobile" class="d-flex justify-content-start ps-1">Mobile Number</label>
+											<input type="number" name="mobile_no" class="form-control" required="">
+										</div>
 									</div>
 									<div class="row">
-										<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 py-2">
+										<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 py-2">
 											<label for="user-email" class="d-flex justify-content-start ps-1">Email Address</label>
 											<input type="Email" name="email_address" class="form-control check_emails" required="">
 											<small class="error_emails" style="color: red;"></small>
-										</div>
-										<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 py-2">
-											<label for="user-mobile" class="d-flex justify-content-start ps-1">Mobile Number</label>
-											<input type="number" name="mobile_no" class="form-control" required="">
 										</div>
 									</div>
 									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 py-2">

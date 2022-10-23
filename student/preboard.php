@@ -112,10 +112,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 			?>
 
 		</div>
+		<div class="d-flex justify-content-center mt-3">
+			<!-- submit button -->
+		   <input type="submit" value="submit" class="btn btn-success mx-5 d-flex text-uppercase btn-lg">
+		</div>
 		
-
-		<!-- submit button -->
-		<input type="submit" value="submit" class="btn btn-success mx-5 d-flex text-uppercase btn-lg">
 	</form>
 </div>
 </body>

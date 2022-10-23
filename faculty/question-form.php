@@ -217,11 +217,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								<!-- Question -->
 								<tbody>
 									<tr>
-										<div class="card mt-3">
+										<div class="card mt-2">
 											<div class="card-body py-3">
 												<div class="form-group mb-3">
 													<div class="d-flex justify-content-between">
 														<label for="name" class="fw-bold mb-1">Question</label>
+														<button class=" btn btn-secondary remove_item_btn"><i class="fas fa-trash justify-content-center"></i></button>
 													</div>
 						                            <textarea type="text" class="form-control mt-2" name="questions_title[]" rows="3" required></textarea>
 						                        </div>
@@ -245,7 +246,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 						                        	 <div class="input-group mb-3">
 							                            <label for="name"class="input-group-text bg-white fw-bold">Correct Answer</label>
 							                            <select class="form-select" name="correct_ans[]" required="">
-															<option selected></option>
+															<option selected value=""></option>
 															<option value="A">A</option>
 															<option value="B">B</option>
 															<option value="C">C</option>
@@ -266,7 +267,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 							<div id="show_item">
 								
 							</div>
-							<div class="card mt-3">
+							<div class="card mt-2">
 								<div class="card-body">
 									<div class="card-footer bg-white border-0 d-flex justify-content-center mb-1">
 										<button type="submit" class="btn btn-primary mx-2 add_item_btn"><i class="fas fa-plus-circle me-2"></i>Add</button>
@@ -334,7 +335,7 @@ let arrow = document.querySelectorAll(".arrow");
 	$(document).ready(function(){
 		$(".add_item_btn").click(function(e){
 			e.preventDefault();
-			$("#show_item").append('<div class="card mt-3 append_item"> <div class="card-body py-3"> <div class="form-group mb-3"> <div class="d-flex justify-content-between"> <label for="name" class="fw-bold mb-1">Question</label> <!---sssss ---> <button class=" btn btn-secondary remove_item_btn"><i class="fas fa-trash me-2 justify-content-center"></i></button>   </div> <textarea type="text" class="form-control mt-2" name="questions_title[]" rows="3" required></textarea> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option A</label> <input type="text" class="form-control" name="option_a[]" id="txt2" required=""> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option B</label> <input type="text" class="form-control" name="option_b[]" id="txt1" required=""> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option C</label> <input type="text" class="form-control" name="option_c[]" id="txt3" required=""> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option D</label> <input type="text" class="form-control" name="option_d[]" required=""> </div> <div class="col-sm-6"> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Correct Answer</label> <select class="form-select" name="correct_ans[]" required=""> <option selected></option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option> </select> </div> </div> <div class="form-group"> <label for="name" hidden="">Faculty</label> <input type="hidden" name="acc[]" value="<?php echo $_SESSION['acc_id'] ?>"> </div> </div> </div>');
+			$("#show_item").append('<div class="card mt-2 append_item"> <div class="card-body py-3"> <div class="form-group mb-3"> <div class="d-flex justify-content-between"> <label for="name" class="fw-bold mb-1">Question</label> <!---sssss ---> <button class=" btn btn-secondary remove_item_btn"><i class="fas fa-trash justify-content-center"></i></button>   </div> <textarea type="text" class="form-control mt-2" name="questions_title[]" rows="3" required></textarea> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option A</label> <input type="text" class="form-control" name="option_a[]" id="txt2" required=""> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option B</label> <input type="text" class="form-control" name="option_b[]" id="txt1" required=""> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option C</label> <input type="text" class="form-control" name="option_c[]" id="txt3" required=""> </div> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Option D</label> <input type="text" class="form-control" name="option_d[]" required=""> </div> <div class="col-sm-6"> <div class="input-group mb-3"> <label for="name"class="input-group-text bg-white fw-bold">Correct Answer</label> <select class="form-select" name="correct_ans[]" required=""> <option selected></option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option> </select> </div> </div> <div class="form-group"> <label for="name" hidden="">Faculty</label> <input type="hidden" name="acc[]" value="<?php echo $_SESSION['acc_id'] ?>"> </div> </div> </div>');
 		});
 
 		$(document).on('click','.remove_item_btn', function(e) {
