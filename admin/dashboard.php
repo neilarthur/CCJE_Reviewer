@@ -28,6 +28,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
 	<!-- JS Chart-->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <!-- System Logo -->
+    <link rel="icon" href="../assets/pics/system-ico.ico">
     <style>
        .dp .dropdown-toggle::after {
             content: none;
@@ -37,8 +39,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 </head>
 <body>
 	<div class="sidebar close">
-		<div class="logo-details">
-			<i class="fas fa-fingerprint mt-2"></i><span class="logo_name">CCJE Reviewer</span>
+		<div class="logo-details mt-2">
+			<img src="../assets/pics/CCJE.png" alt="" width="50" height="50" class="d-inline-block align-top ms-3 bg-white rounded-circle" ><span class="logo_name ms-2">CCJE Reviewer</span>
 		</div>
 		<hr style="color:rgb(255, 255, 255);">
 		<ul class="nav-links fw-bold">

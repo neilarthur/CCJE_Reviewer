@@ -40,6 +40,8 @@ $supps .= "</select>";
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
+	<!-- System Logo -->
+    <link rel="icon" href="../assets/pics/system-ico.ico">
 	<!-- Bootstrap CSS -->
 	<link href="../css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
@@ -52,7 +54,7 @@ $supps .= "</select>";
 <body style="background-color: rgb(229, 229, 229);">
 	<div class="sidebar close">
 		<div class="logo-details mt-2">
-			<i class="fas fa-fingerprint"></i><span class="logo_name">CCJE Reviewer</span>
+			<img src="../assets/pics/CCJE.png" alt="" width="50" height="50" class="d-inline-block align-top ms-3 bg-white rounded-circle" ><span class="logo_name ms-2">CCJE Reviewer</span>
 		</div>
 		<hr style="color:rgb(255, 255, 255);">
 		<ul class="nav-links fw-bolder">

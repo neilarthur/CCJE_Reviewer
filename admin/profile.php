@@ -29,6 +29,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	 <!-- Bootstrap CSS -->
 	<link href="../css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
+	<!-- System Logo -->
+    <link rel="icon" href="../assets/pics/system-ico.ico">
 	<style>
        .dp .dropdown-toggle::after {
             content: none;
@@ -39,7 +41,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 <body style="background: rgb(230, 230, 230);">
 	<div class="sidebar close">
 		<div class="logo-details mt-2">
-			<i class="fas fa-fingerprint"></i><span class="logo_name">CCJE Reviewer</span>
+			<img src="../assets/pics/CCJE.png" alt="" width="50" height="50" class="d-inline-block align-top ms-3 bg-white rounded-circle" ><span class="logo_name ms-2">CCJE Reviewer</span>
 		</div>
 		<hr style="color:rgb(255, 255, 255);">
 		<ul class="nav-links fw-bolder">
@@ -284,20 +286,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 											</div>
 											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
 												<div class="form-group">
-													<label for="user-email">Email Address</label>
-													<input type="email" class="form-control" name="email_address" value="<?php  echo $rows['email_address'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
 													<label for="uder-id">ID No.</label>
 													<input type="number" class="form-control" name="user_id" value="<?php  echo $rows['user_id'] ?>" >
 												</div>
 											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+											<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
 												<div class="form-group">
-													<label for="user-year">Year</label>
-													<input type="text" class="form-control"  name="year" value="<?php  echo $rows['year'] ?>">
+													<label for="user-email">Email Address</label>
+													<input type="email" class="form-control" name="email_address" value="<?php  echo $rows['email_address'] ?>">
 												</div>
 											</div>
 											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">

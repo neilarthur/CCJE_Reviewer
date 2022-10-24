@@ -27,6 +27,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<!-- JS Chart-->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- System Logo -->
+    <link rel="icon" href="../assets/pics/system-ico.ico">
 
 </head>
 <body style="background-color: rgb(229, 229, 229);"> 

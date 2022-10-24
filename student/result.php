@@ -123,10 +123,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
             <a class="nav-link " href="take_quiz.php">Take Quiz</a>
           </li>
           <li class="nav-item text-uppercase">
-            <a class="nav-link " href="#">Pre-boad Exam</a>
+            <a class="nav-link " href="take_preboard.php">Pre-boad Exam</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" href="#">Results</a>
+            <a class="nav-link text-uppercase" href="test_results.php">Results</a>
           </li>
         </ul>
         <div class="flex-shrink-0 dropdown px-4 text-center">
@@ -143,7 +143,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
-            <li><a class="dropdown-item" href="#"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+            <li><a class="dropdown-item" href="change_password.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
             <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
           </ul>
         </div>
@@ -246,7 +246,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         </div>
 
         <div class="col-lg-4 mt-3">
-          <div class="bg-white rounded-lg p-5 shadow">
+          <div class="bg-white rounded-lg p-5">
             <h2 class="text-center fw-bold mb-4 text-uppercase">Overall Results</h2>
               <!-- Progress bar 1 -->
                                     <?php

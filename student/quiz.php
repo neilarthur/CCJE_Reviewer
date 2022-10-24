@@ -31,6 +31,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<!-- Font Awesome-->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="../TimeCircles-master/inc/TimeCircles.css">
+  <!-- System Logo -->
+  <link rel="icon" href="../assets/pics/system-ico.ico">
 	<style type="text/css">
 		.base-timer {
   position: relative;
@@ -179,7 +181,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
             <p class="h4  text-uppercase text-white"><?php echo $show['subject_name']; ?></p>
           </div>
           <div class="card-body m-2 ">
-            <p class=" h5  text-dark" > <?php echo $show['description']; ?> </p>
+            <p class=" h4 text-dark fw-bold" > <?php echo $show['description']; ?> </p>
           </div>
         </div>
         <?php }  ?>

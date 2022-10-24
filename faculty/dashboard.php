@@ -25,6 +25,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
+	 <!-- System Logo -->
+    <link rel="icon" href="../assets/pics/system-ico.ico">
 	<!-- JS Chart-->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<style>
@@ -36,7 +38,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 <body>
 	<div class="sidebar close">
 		<div class="logo-details mt-2">
-			<i class="fas fa-fingerprint"></i><span class="logo_name">CCJE Reviewer</span>
+			<img src="../assets/pics/CCJE.png" alt="" width="50" height="50" class="d-inline-block align-top ms-3 bg-white rounded-circle" ><span class="logo_name ms-2">CCJE Reviewer</span>
 		</div>
 		<hr style="color:rgb(255, 255, 255);">
 		<ul class="nav-links fw-bolder">

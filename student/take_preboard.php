@@ -25,6 +25,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+	<!-- System Logo -->
+    <link rel="icon" href="../assets/pics/system-ico.ico">
 </head>
 <body style="background-color: rgb(229, 229, 229);">
 	<div class="header text-uppercase hd " >

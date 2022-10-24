@@ -16,7 +16,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Quiz</title>
+  <title>View answer</title>
   <!-- Boostrap 5.2 -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <!-- CSS -->
@@ -25,6 +25,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
   <!-- Font Awesome-->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <!-- System Logo -->
+  <link rel="icon" href="../assets/pics/system-ico.ico">
 
 </head>
 <body style="background-color: rgb(229, 229, 229);">

@@ -31,7 +31,7 @@ elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='faculty') {
   <!-- Font Awesome-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
 	<!-- System Logo -->
-	<link rel="icon" href="../assets/pics/ico.ico">
+  <link rel="icon" href="../assets/pics/system-ico.ico">
 </head>
 <body>
 	<div class="header text-uppercase hd " >

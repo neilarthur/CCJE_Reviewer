@@ -24,9 +24,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<!-- Box Icons-->
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<!-- JS Chart-->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<!-- System Logo -->
+    <link rel="icon" href="../assets/pics/system-ico.ico">
 </head>
 <body style="background-color: rgb(229, 229, 229);">
 	<div class="header text-uppercase hd " >
@@ -124,7 +126,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 									         	?>
 
 											
-												<input type="file" name="image" class="form-control" id="file_case" accept=".jpg, .jpeg, .png">
+												<input type="file" name="image" class="form-control mt-2 mb-2" id="file_case" accept=".jpg, .jpeg, .png">
 
 												<span class="fw-bold"><?php  echo $rows['first_name'] ?> <?php  echo $rows['last_name'] ?></span>
 												<span class="text-black-30"><?php  echo $rows['email_address'] ?></span>
@@ -150,38 +152,38 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 									      while ($rows = mysqli_fetch_assoc($query_row)) { ?>
 
 									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
+										<div class="form-group mb-2">
 											<label for="user-last">Lastname</label>
 											<input type="hidden" name="acc_id" value="<?php echo $info?>">
 											<input type="text" class="form-control" name="lastname" value="<?php  echo $rows['last_name'] ?>">
 										</div>
 									</div>
 									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
+										<div class="form-group mb-2">
 											<label for="user-first">Firstname</label>
 											<input type="text" class="form-control" name="firstname" value="<?php  echo $rows['first_name'] ?>">
 										</div>
 									</div>
 									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
+										<div class="form-group mb-2">
 											<label for="user-middle">Middlename</label>
 											<input type="text" class="form-control" name="middlename"value="<?php  echo $rows['middle_name'] ?>">
 										</div>
 									</div>
 									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
+										<div class="form-group mb-2">
 											<label for="user-role">Role</label>
 											<input type="text" class="form-control" name="role" value="<?php  echo $rows['role'] ?>">
 										</div>
 									</div>
 									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
+										<div class="form-group mb-2">
 											<label for="user-bday">Birtdate</label>
 											<input type="date" class="form-control" name="bday" value="<?php  echo $rows['birth_date'] ?>">
 										</div>
 									</div>
 									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
+										<div class="form-group mb-2">
 											<label for="user-gender">Gender</label>
 											<div class="input-group">
 												<select class="form-select" required="" name="gender" value="">
@@ -201,18 +203,24 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 										</div>
 									</div>
 									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
+										<div class="form-group mb-2">
 											<label for="phone">Age</label>
 											<input type="number" class="form-control" name="age" value="<?php  echo $rows['age'] ?>" >
 										</div>
 									</div>
 									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
+										<div class="form-group mb-2">
 											<label for="phone">Mobile Number</label>
 											<input type="number" class="form-control" name="mobile" value="<?php  echo $rows['mobile_no'] ?>" >
 										</div>
 									</div>
 									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
+										<div class="form-group mb-2">
+											<label for="uder-id">ID No.</label>
+											<input type="number" class="form-control" name="id" value="<?php  echo $rows['user_id'] ?>" >
+										</div>
+									</div>
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 										<div class="form-group">
 											<label for="user-email">Email Address</label>
 											<input type="email" class="form-control" name="email" value="<?php  echo $rows['email_address'] ?>">
@@ -220,19 +228,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 									</div>
 									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
 										<div class="form-group">
-											<label for="uder-id">ID No.</label>
-											<input type="number" class="form-control" name="id" value="<?php  echo $rows['user_id'] ?>" >
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
-											<label for="user-year">Year</label>
-											<input type="text" class="form-control"  name="year" value="<?php  echo $rows['year'] ?>">
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
-											<label for="user-section">Section</label>
+											<label for="user-section">Year & Section</label>
 											<input type="text" class="form-control" name="section" value="<?php  echo $rows['section'] ?>">
 										</div>
 									</div>
@@ -249,7 +245,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 								<div class="row gutters">
 									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center">
 										<div class="text-right ">
-											<button type="submit" id="submit" name="submit" class="btn btn-success btn-lg me-4 text-uppercase mx-5">Submit</button>
+											<button type="submit" id="submit" name="submit" class="btn btn-success btn-lg me-4 text-uppercase mx-2 px-5 pb-2">Submit</button>
 										</div>
 									</div>
 								</div>

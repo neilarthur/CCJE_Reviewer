@@ -19,21 +19,26 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	<title>Profile</title>
 	<!-- Boostrap 5.2 -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<!-- Password Requirements CSS -->
+    <link rel="stylesheet" href="../css/jquery.passwordRequirements.css" />
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="../css/dash.css">
+	<link rel="stylesheet" href="../css/demo.css" />
 	<!-- Box Icons-->
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
 	<!-- System Logo -->
     <link rel="icon" href="../assets/pics/system-ico.ico">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>	
+    <script src="../js/jquery.passwordRequirements.min.js"></script>
 	<style>
        .dp .dropdown-toggle::after {
             content: none;
         }
     </style>
 </head>
-<body>
+<body style="background: rgb(230, 230, 230);">
 	<div class="sidebar close">
 		<div class="logo-details mt-2">
 			<img src="../assets/pics/CCJE.png" alt="" width="50" height="50" class="d-inline-block align-top ms-3 bg-white rounded-circle" ><span class="logo_name ms-2">CCJE Reviewer</span>
@@ -126,7 +131,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 		</div>
 		<section class="home-section float-start" >
 			<div class="home-content d-flex justify-content-between" style="background: white;">
-				<button style="border-style: none; background: white;">
+				<button class ="btn"style="border-style: none; background: white;">
 					<i class='bx bx-menu' ></i>
 				</button>
 				<form class="d-flex">
@@ -172,158 +177,40 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 		        </form>
 			</div>
 			<!-- Main Content-->
-			<div class="container-fluid">
-				<form action="../php/update_profile_fac.php" method="POST" enctype="multiart/form-data">
-					<div class="container py-5">
-						<div class="row gutters">
-							<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-								<!-- Profile -->
-								<div class="card h-100 mb-4">
-									<div class="card-body">
-										<div class="account-settings">
-											<div class="user-profile">
-												<div class="user-avatar">
-													<?php
-													$info = $_GET['acc_id'];
-											        $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= $info ");
-											         while ($rows = mysqli_fetch_assoc($query_row)) { 
-
-											         	echo '<div class="d-flex flex-column align-items-center text-center p-3 py-5">
-
-											         	<img class="img-fluid img-thumbnail rounded-circle flex justify-content-start w-100 h-100 mb-2"  style=" object-fit: cover;" " width="150px" height="150px" name="profile" id="imgss" src="data:image;base64,'.base64_encode($rows["image_size"]).'">'; 
-											         	?>
-														
-														<input type="file" name="image" id="file_script" class="form-control mb-2" accept=".jpg, .jpeg, .png">
-														<span class="fw-bold"><?php  echo $rows['first_name'] ?> <?php  echo $rows['last_name'] ?></span>
-														<span class="text-black-30"><?php  echo $rows['email_address'] ?></span>
-													</div>
-													<?php }
-
-										             ?>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+			<div class="container-fluid py-5 px-5">
+				<div class="card h-100">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-lg-5">
+								<img class="img-fluid center" alt="" id="picture" src="../assets/pics/change.jpg "width="800" height="800"/>
 							</div>
-								<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 t">
-								<div class="card h-100">
-									<div class="card-body">
-										<div class="row gutters m-3">
-											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-												<h3 class="mb-2 text-primary fw-bold text-uppercase mb-4">Personal Information</h3>
+							<div class="col-lg-7 pe-5">
+								<form>
+									<div class="card h-100 mt-4 shadow">
+										<div class="card-body m-2">
+											<h4 class=" fw-bolder mb-3 text-uppercase text-center text-primary" style="font-family: 'Nunito', sans-serif;">Change Password</h4>
+											<div class="mb-3">
+												<label for="password" class="fw-bold mb-2">Enter New Password:</label>
+												<input type="password" class="pr-password form-control" id="Password" placeholder="Enter New Password" name="password">
 											</div>
-											<?php
-											 $info = $_GET['acc_id'];
-											 $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= $info ");
-											      while ($rows = mysqli_fetch_assoc($query_row)) { ?>
-
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-last">Lastname</label>
-													<input type="hidden" name="update_id" value="<?php echo $info?>">
-													<input type="text" class="form-control" name="last_name" value="<?php  echo $rows['last_name'] ?>">
-												</div>
+											<div class="mb-3">
+												<label for="user" class="fw-bold mb-2">Confirm New Password:</label>
+												<input type="password" class="form-control" id="ConfirmPassword" placeholder="Enter Confirm Password" name="confpassword">
 											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-first">Firstname</label>
-													<input type="text" class="form-control" name="first_name" value="<?php  echo $rows['first_name'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 mb-2">
-												<div class="form-group">
-													<label for="user-middle">Middlename</label>
-													<input type="text" class="form-control" name="mid_name"value="<?php  echo $rows['middle_name'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-role">Role</label>
-													<input type="text" class="form-control" name="role" value="<?php  echo $rows['role'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-bday">Birtdate</label>
-													<input type="date" class="form-control" name="birth_date" value="<?php  echo $rows['birth_date'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-gender">Gender</label>
-													<div class="input-group">
-														<select class="form-select" required="" name="gender" value="">
-															
-															<option ><?php  echo $rows['gender'] ?></option>
-															<?php 
-															if ($rows['gender']== 'Male') {
-																echo "<option value='Female'>Female</option>";
-															}
-															elseif ($rows['gender']== 'Female') {
-																echo "<option value='Male'>Male</option>";
-															}
-															?>
-															
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="phone">Age</label>
-													<input type="number" class="form-control" name="age" value="<?php  echo $rows['age'] ?>" >
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="phone">Mobile Number</label>
-													<input type="number" class="form-control" name="mobile_no" value="<?php  echo $rows['mobile_no'] ?>" >
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="uder-id">ID No.</label>
-													<input type="number" class="form-control" name="user_id" value="<?php  echo $rows['user_id'] ?>" >
-												</div>
-											</div>
-											<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-email">Email Address</label>
-													<input type="email" class="form-control" name="email_address" value="<?php  echo $rows['email_address'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-section">Assign Section</label>
-													<input type="text" class="form-control" name="section" value="<?php  echo $rows['section'] ?>">
-												</div>
-											</div>
-										</div>
-										<div class="row gutters m-3">
-											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
-												<label for="user-add">Address</label>
-												<textarea class="form-control" name="address" rows="2" ><?php  echo $rows['address'] ?></textarea>
-											</div>
-										</div>
-										<?php }
-
-										 ?>
-										<div class="row gutters mt-5">
-											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center">
-												<div class="text-right">
-													<button type="submit" id="submit" name="submit" class="btn btn-success mx-2 me-4"><i class="fas fa-save me-2"></i> Save changes</button>
-												</div>
+											<div style="margin-top: 7px;" id="CheckPasswordMatch" class="fw-bold mb-2 ms-3"></div>
+											<div class="d-flex justify-content-center ">
+												<button class="btn btn-success  text-uppercase px-5 pb-2">Submit</button>
 											</div>
 										</div>
 									</div>
-								</div>
+								</form>
 							</div>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</section>
+		<!--  -->
 		<!-- Logout Modal-->
 	    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	        <div class="modal-dialog">
@@ -355,7 +242,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
@@ -371,16 +258,37 @@ let arrow = document.querySelectorAll(".arrow");
     sidebar.classList.toggle("close");
   });
 </script>
+<script>
+/* trigger when page is ready */
+    $(document).ready(function (){
+        $(".pr-password").passwordRequirements({
 
- <script type="text/javascript">
- 	file_script.onchange = evt => {
- 		const [file] = file_script.files;
- 		if (file) {
- 			file_imgsw.src = URL.createObjectURL(file);
-
- 		}
- 	}
- </script>
+        });
+    });
+</script>
+<script>
+$(document).ready(function () {
+	$("#ConfirmPassword").on('keyup', function(){
+		var password = $("#Password").val();
+		var confirmPassword = $("#ConfirmPassword").val();
+		if (password == confirmPassword) {
+			$("#CheckPasswordMatch").html("Password match!").css("color","green");
+		}
+		else if (password != confirmPassword){
+			$("#CheckPasswordMatch").html("Password does not match!").css("color","red");
+		}
+		else if (  confirmPassword == " "){
+			$("#CheckPasswordMatch").html("!").css("color","red");
+		}
+		else if ( password == "") {
+			$("#CheckPasswordMatch").html("!").css("color","red");
+		}
+		else {
+			return false;
+		}
+	});
+});
+</script>
 
  <?php
 
