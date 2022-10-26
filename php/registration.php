@@ -85,7 +85,7 @@
 	                            </div> 
 	                            <label class="fieldlabels ms-2">Emai Address:</label> 
 	                            <input type="email" name="email" placeholder="Email address" />
-	                            <label class="fieldlabels ms-2">Student ID:</label>
+	                            <label class="fieldlabels ms-2">ID No:</label>
 	                            <input type="number" name="uname" placeholder="019***" />
 	                            <label class="fieldlabels ms-2">Password:</label> 
 	                            <input type="password" name="pwd" placeholder="Password" />
@@ -119,19 +119,30 @@
 	                            	</div>
 	                            </div>
 	                            <div class="row">
-	                            	 <div class="col-sm-3">
-	                            	 	<label class="fieldlabels ms-2">Age</label>
+	                            	<div class="col-sm-5">
+	                            		<label class="fieldlabels ms-2">Age</label>
 	                            	 	<div class="input-group">
 	                            	 		 <input type="number" class="form-control" placeholder="Age" >
 	                            	 	</div>
-		                            </div>
-		                            <div class="col-sm-3">
-		                            	<label class="fieldlabels ms-2">Date of Birth</label>
+	                            	</div>
+	                            	<div class="col-sm-5">
+	                            		<label class="fieldlabels ms-2">Date of Birth</label>
 	                            	 	<div class="input-group">
 	                            	 		 <input type="date" class="form-control" placeholder="Birthdate" >
 	                            	 	</div>
+	                            	</div>
+	                            </div>
+	                            <div class="row">
+		                            <div class="col-sm-4">
+	                            	 	<label class="fieldlabels ms-2">Role</label>
+		                            	 <div class="form-group">
+			                            	<select class="form-select" required="" name="gender" value="">
+			                            		<option selected value="studnet">Student</option>
+			                            		<option value="faculty">Faculty</option>
+			                            	</select>
+										</div>
 		                            </div>
-		                            <div class="col-sm-3">
+		                            <div class="col-sm-4">
 		                            	<label class="fieldlabels ms-2">Year & Section:</label>
 		                            	<div class="input-group">
 		                            		<select class="form-select  custom-select" required="" name="section" value="">
@@ -142,7 +153,7 @@
 			                            	</select>
 										</div>
 		                            </div>
-		                            <div class="col-sm-3">
+		                            <div class="col-sm-4">
 		                            	 <label class="fieldlabels ms-2">Gender</label>
 		                            	 <div class="form-group">
 			                            	<select class="form-select" required="" name="gender" value="">
@@ -153,11 +164,10 @@
 										</div>
 		                            </div>
 	                            </div>
+	                            <label class="fieldlabels ms-2 mt-3">Contact No:</label>
+	                            <input type="number" name="phno" placeholder="09***********" />
 	                            <label class="fieldlabels ms-2" >Address</label>
 	                            <textarea type="text" rows="2" class="form-control"></textarea>
-	                            <label class="fieldlabels ms-2">Contact No:</label>
-	                            <input type="number" name="phno" placeholder="09***********" />
-	                           
 	                        </div> 
 	                        <input type="button" name="next" class="next action-button btn-btn rounded" value="Next" /> <input type="button" name="previous" class="previous action-button-previous rounded" value="Previous" />
 	                    </fieldset>
