@@ -173,7 +173,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 		                </button>
 		                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 		                    <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
-		                    <li><a class="dropdown-item" href="#"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+		                    <li><a class="dropdown-item" href="change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
 		                    <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
 		                </ul>
 		            </div>
@@ -191,7 +191,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 										<div class="card">
 											<div class="card-body">
 												<h3 class="card-title fw-bold mb-4">Add Questions</h3>
-												<label for="name" class="d-flex justify-content-start ps-1 fw-bold mb-1">Subject Exam</label>
+												<label for="name" class="d-flex justify-content-start ps-1 fw-bold mb-1">Area of Exam</label>
 						                        <div class="input-group mb-3">
 						                        	<select class="form-select" name="subjects" required>
 														<option selected value="">Select Category</option>

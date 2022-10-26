@@ -188,9 +188,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">Area of Exam</th>
 													<th scope="col">Number of items</th>
 													<th scope="col">Created By</th>
-													<th scope="col">Section of</th>
 													<th scope="col">Time Limit</th>
 													<th scope="col">Date</th>
+													<th scope="col">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -199,14 +199,13 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td>Criminal Jurisprudence</td>
 	                                                <td>100</td>
 	                                                <td>Sir Refugia</td>
-	                                                <td>4A</td>
 	                                                <td>60 mins</td>
 	                                                <td>09-12-2022</td>
+	                                                <td class="badge bg-warning text-dark mt-2" style="font-size:15px;">Pending</td>
 	                                                <td>
 	                                                	<div class="d-flex flex-row justify-content-center">
-	                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal" type="button"><i class="fas fa-eye"></i></button>
-	                                                		<button class="btn btn-warning mx-2" data-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-	                                                		<button class="btn btn-secondary  mx-2" data-bs-toggle="modal" data-bs-target="#Delete" type="button"><i class="fas fa-trash"></i></button>
+	                                                		<button class="btn btn-success mx-2" data-toggle="modal" type="button"><i class="fas fa-check"></i></button>
+	                                                		<button class="btn btn-danger  mx-2" data-bs-toggle="modal" type="button"><i class="fas fa-times"></i></button>
 	                                                	</div>
 	                                                </td>
 	                                            </tr>
@@ -220,36 +219,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 				</div>
 			</div>
 		</section>
-		<!-- ViewModal-->
-		<div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-md">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title"></h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body">
-		      	<div class="card" style="border-style: none;">
-		      		<div class="card-body">
-						<label class="d-flex ps-1 mt-2 justify-content-start" >Area of Exam</label>
-						<input type="text" name="last_name" class="form-control" value="Criminal Jurisprudence " readonly="">
-						<label class="d-flex ps-1 mt-2 justify-content-start">Number of Items</label>
-						<input type="text" name="last_name" class="form-control" value="100" readonly="">
-						<label  class="d-flex ps-1 mt-2 justify-content-start">Created By</label>
-						<input type="text" name="last_name" class="form-control" value="Sir Mark Refugia" readonly="">
-						<label  class="d-flex ps-1 mt-2 justify-content-start">Sectiom</label>
-						<input type="text" name="last_name" class="form-control" value="4A" readonly="">
-						<label  class="d-flex ps-1 mt-2 justify-content-start">Date</label>
-						<input type="text" name="last_name" class="form-control" value="09-12-2022" readonly="">
-		      		</div>
-		      	</div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
 		<!-- Logout Modal-->
 	    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	       <div class="modal-dialog">
@@ -272,32 +241,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	            </div>
 	        </div>
 	    </div>
-	    <!-- Delete Exam -->
-		<div class="modal fade" id="Delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-			<div class="modal-dialog">
-	    		<div class="modal-content">
-	    			<div class="modal-header flex-column border-0">
-	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        				<div class="icon-box mt-3">
-        					<i class="far fa-times-circle fa-5x text-danger"></i>
-        				</div>
-        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h4>
-	    			</div>
-	    			<form class="form" action="#" method="POST">
-	    				<div class="modal-body">
-	    					<div class="container d-flex justify-content-center">
-	    						<input type="hidden" name="update_id" id="delete_id">
-	    						<p>Do you really want to delete these record?</p>
-	    					</div>
-	    					<div class="modal-footer d-flex justify-content-center border-0">
-	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">
-	        					<button type="button" class="btn btn-danger  px-5 pb-2 text-white" data-bs-dismiss="modal">NO</button>
-							</div>
-	    				</div>
-	    			</form>
-	    		</div>
-	    	</div>
-	    </div>
+	    
 
 </body>
 <script>

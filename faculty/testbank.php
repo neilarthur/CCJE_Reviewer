@@ -187,7 +187,7 @@ $supps .= "</select>";
 		                </button>
 		                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 		                    <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
-		                    <li><a class="dropdown-item" href="#"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+		                    <li><a class="dropdown-item" href="change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
 		                    <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
 		                </ul>
 		            </div>
@@ -205,36 +205,44 @@ $supps .= "</select>";
 						<div class="row">
 							<div class="col">
 								<div class="card">
-									
 									<div class="card-body rounded-3 table-responsive-xl">
-
-										<select class="form-select w-25 mx-3 d-inline-block" name="subjects" id="subjects" required>
-											<option selected value="">Select Category</option>
-											<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
-											<option value="Law Enforcement">Law Enforcement</option>
-											<option value="Criminalistics">Criminalistics</option>
-											<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
-											<option value="Criminal Sociology">Criminal Sociology</option>
-											<option value="Correctional Administration">Correctional Administration</option>
-										</select>
-
-										<select class="form-select custom-select mx-3 w-25 d-inline-block  difficult" name="difficult" id="difficult" required>
-											<option selected value="">Select Difficulty</option>
-											<option value="Easy">Easy</option>
-											<option  value="Moderate">Moderate</option>
-											<option value="Hard">Hard</option>
-										</select>
-										<div class="d-flex justify-content-end mb-3">
-											<?php
-								                if(isset($_SESSION['message']))
-								                {
-								                    echo "<h4>".$_SESSION['message']."</h4>";
-								                    unset($_SESSION['message']);
-								                }
-								             ?>
-											<button type="submit"  data-bs-toggle="modal" data-bs-target="#import" class="btn px-3 mx-2 pb-2 text-white btn-primary"><b><i class="fas fa-file-import me-2"></i></b>Import</button>
-											<a href="question-form.php" class="btn px-3 pb-2 text-white mx-2" style="background-color: #8C0000;"><i class="fas fa-plus me-1"></i>ADD</a>
+										<div class="d-flex justify-content-between mb-3">
+											<div class="col-lg-5">
+												<div class="input-group mt-2">
+													<span class="input-group-text custom-select mb-3 bg-white">Sort By</span>
+													<select class="form-select custom-select mb-3" name="subjects" id="subjects" required>
+														<option selected value="">Select Category</option>
+														<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+														<option value="Law Enforcement">Law Enforcement</option>
+														<option value="Criminalistics">Criminalistics</option>
+														<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+														<option value="Criminal Sociology">Criminal Sociology</option>
+														<option value="Correctional Administration">Correctional Administration</option>
+													</select>
+													<span class="input-group-text custom-select mb-3 bg-white">In</span>
+													<div class="col-lg-4">
+														<select class="form-select custom-select mb-3  difficult" name="difficult" id="difficult">
+															<option selected value="">Select Difficulty</option>
+															<option value="Easy">Easy</option>
+															<option  value="Moderate">Moderate</option>
+															<option value="Hard">Hard</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="fw-bold">
+												<?php
+									                if(isset($_SESSION['message']))
+									                {
+									                    echo "<h4>".$_SESSION['message']."</h4>";
+									                    unset($_SESSION['message']);
+									                }
+									             ?>
+												<button type="submit"  data-bs-toggle="modal" data-bs-target="#import" class="btn px-3 mx-2 pb-2 text-white btn-primary"><b><i class="fas fa-file-import me-2"></i></b>Import</button>
+												<a href="question-form.php" class="btn px-3 pb-2 text-white mx-2" style="background-color: #8C0000;"><i class="fas fa-plus me-1"></i>ADD</a>
+										   </div>
 										</div>
+										
 										<table class="table table-hover align-middle bg-light" width="100%" id="questTab">
 											<thead>
 												<tr>

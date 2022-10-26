@@ -75,7 +75,7 @@ elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='faculty') {
 			<h4 class="modal-title mt-3 fw-bold">User Account</h4>
 			<div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-				<input type="text" name="userID" class="form-control" placeholder="Account ID" required="required">
+				<input type="text" name="userID" class="form-control" placeholder="User ID" required="required">
 			</div>
 			<div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
@@ -85,7 +85,7 @@ elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='faculty') {
 				<input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Login">
 			</div>
       <div class="form-group small clearfix fs-6 mt-3">
-        <a href="#" class="register">Don't have an account? </a>
+        <a href="registration.php" class="register">Don't have an account? </a>
         <a href="#" class="forgot-link">Forgot Password?</a>
       </div> 
 		</form>

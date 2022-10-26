@@ -191,8 +191,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                                 </div>
                                 <div class="col-auto mt-2">
                                      <span class="fa-stack fa-2x">
-                                      <i class="fa fa-circle fa-stack-2x  text-white ms-2"></i>
-                                      <i class="fas fa-user fa-stack-1x ms-2" style="color: rgb(243, 156, 18 );"></i>
+                                      <i class="fa fa-circle fa-stack-2x  text-white ms-3"></i>
+                                      <i class="fas fa-user fa-stack-1x ms-3" style="color: rgb(243, 156, 18 );"></i>
                                     </span>                                        
                                 </div>
                             </div>

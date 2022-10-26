@@ -186,11 +186,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 											<thead>
 												<tr>
 													<th scope="col">#</th>
-													<th scope="col">Faculty Name</th>
-													<th scope="col">Assign Class Section</th>
+													<th scope="col">Student Name</th>
+													<th scope="col">Year & Section</th>
 													<th scope="col">Total Questions</th>
 													<th scope="col">Time Limit</th>
-													<th scope="col">Date Created</th>
+													<th scope="col">Answered In</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -201,7 +201,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                <td>4C</td>
 	                                                <td>600</td>
 	                                                <td>360 mins</td>
-	                                                <td >09-13-2022</td>
+	                                                <td >300 mins</td>
 	                                                <td>
 	                                                	<div class="d-flex flex-row">
 	                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
