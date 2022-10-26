@@ -190,10 +190,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 											         	echo '<div class="d-flex flex-column align-items-center text-center p-3 py-5">
 
-											         	<img class="img-fluid img-thumbnail rounded-circle flex justify-content-start w-100 h-100 mb-2"  style=" object-fit: cover;" " width="150px" height="150px" name="profile" id="imgss" src="data:image;base64,'.base64_encode($rows["image_size"]).'">'; 
+											         	<img class="img-fluid img-thumbnail rounded-circle flex justify-content-start w-100 h-100 mb-2"  style=" object-fit: cover;" " width="150px" height="150px" name="profile" id="file_imgssed" src="data:image;base64,'.base64_encode($rows["image_size"]).'">'; 
 											         	?>
 														
-														<input type="file" name="image" id="file_script" class="form-control mb-2" accept=".jpg, .jpeg, .png">
+														<input type="file" name="image" id="file_scripted" class="form-control mb-2" accept=".jpg, .jpeg, .png">
 														<span class="fw-bold"><?php  echo $rows['first_name'] ?> <?php  echo $rows['last_name'] ?></span>
 														<span class="text-black-30"><?php  echo $rows['email_address'] ?></span>
 													</div>
@@ -354,6 +354,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	    
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
 <script>
@@ -373,10 +374,10 @@ let arrow = document.querySelectorAll(".arrow");
 </script>
 
  <script type="text/javascript">
- 	file_script.onchange = evt => {
- 		const [file] = file_script.files;
+ 	file_scripted.onchange = evt => {
+ 		const [file] = file_scripted.files;
  		if (file) {
- 			file_imgsw.src = URL.createObjectURL(file);
+ 			file_imgssed.src = URL.createObjectURL(file);
 
  		}
  	}

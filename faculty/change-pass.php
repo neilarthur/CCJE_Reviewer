@@ -185,21 +185,26 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								<img class="img-fluid center" alt="" id="picture" src="../assets/pics/change.jpg "width="800" height="800"/>
 							</div>
 							<div class="col-lg-7 pe-5">
-								<form>
+								<form method="POST" action="change_password.php">
 									<div class="card h-100 mt-4 shadow">
 										<div class="card-body m-2">
 											<h4 class=" fw-bolder mb-3 text-uppercase text-center text-primary" style="font-family: 'Nunito', sans-serif;">Change Password</h4>
 											<div class="mb-3">
+												<input type="hidden" name="acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
+												<label for="password" class="fw-bold mb-2">Enter Current Password:</label>
+												<input type="password" class=" form-control" placeholder="Enter Current Password" name="c_password">
+											</div>
+											<div class="mb-3">
 												<label for="password" class="fw-bold mb-2">Enter New Password:</label>
-												<input type="password" class="pr-password form-control" id="Password" placeholder="Enter New Password" name="password">
+												<input type="password" class="pr-password form-control" id="Password" placeholder="Enter New Password" name="new_password">
 											</div>
 											<div class="mb-3">
 												<label for="user" class="fw-bold mb-2">Confirm New Password:</label>
-												<input type="password" class="form-control" id="ConfirmPassword" placeholder="Enter Confirm Password" name="confpassword">
+												<input type="password" class="form-control" id="ConfirmPassword" placeholder="Enter Confirm Password" name="conf_password">
 											</div>
 											<div style="margin-top: 7px;" id="CheckPasswordMatch" class="fw-bold mb-2 ms-3"></div>
 											<div class="d-flex justify-content-center ">
-												<button class="btn btn-success  text-uppercase px-5 pb-2">Submit</button>
+												<button class="btn btn-success text-uppercase px-5 pb-2" name="submit">Submit</button>
 											</div>
 										</div>
 									</div>

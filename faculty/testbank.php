@@ -207,6 +207,23 @@ $supps .= "</select>";
 								<div class="card">
 									
 									<div class="card-body rounded-3 table-responsive-xl">
+
+										<select class="form-select w-25 mx-3 d-inline-block" name="subjects" id="subjects" required>
+											<option selected value="">Select Category</option>
+											<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+											<option value="Law Enforcement">Law Enforcement</option>
+											<option value="Criminalistics">Criminalistics</option>
+											<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+											<option value="Criminal Sociology">Criminal Sociology</option>
+											<option value="Correctional Administration">Correctional Administration</option>
+										</select>
+
+										<select class="form-select custom-select mx-3 w-25 d-inline-block  difficult" name="difficult" id="difficult" required>
+											<option selected value="">Select Difficulty</option>
+											<option value="Easy">Easy</option>
+											<option  value="Moderate">Moderate</option>
+											<option value="Hard">Hard</option>
+										</select>
 										<div class="d-flex justify-content-end mb-3">
 											<?php
 								                if(isset($_SESSION['message']))
@@ -497,6 +514,56 @@ let arrow = document.querySelectorAll(".arrow");
         })
  	});
  </script>
+
+
+ <script type="text/javascript">
+
+  // var of select input difficult
+
+  // var of select input subject
+
+
+ 
+  $('select').on('change', function() {
+    var name = this.name;
+    var difficult;
+    var subjects;
+
+       // alert(  name);
+
+
+
+       if (name=="difficult") {
+          difficult = this.value;
+          subjects = $("#subjects").val();
+       }else if (name=="subjects") {
+          difficult =$("#difficult").val();
+          subjects =  this.value;
+
+       }else{
+        return false;
+       }
+      
+
+      $.ajax({    //create an ajax request to load_page.php
+      type:"POST",
+      url: "../php/question_bank.php?acc_id=<?php echo $_SESSION["acc_id"] ?>",             
+      dataType: "text",   //expect html to be returned  
+      data:{difficult:difficult,subjects:subjects},               
+      success: function(data){     
+      $("#questTab").hide();    
+      $("#questTab").fadeIn();             
+      $("#questTab").html(data); 
+        // alert(data);
+
+      }
+
+      });
+
+
+  });
+
+</script>
 
 <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
