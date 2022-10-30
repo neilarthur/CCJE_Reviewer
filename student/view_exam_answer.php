@@ -16,7 +16,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Quiz</title>
+  <title>Prenoard Exam</title>
   <!-- Boostrap 5.2 -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <!-- CSS -->
@@ -25,6 +25,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
   <!-- Font Awesome-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
+  <!-- System Logo -->
+  <link rel="icon" href="../assets/pics/system-ico.ico">
 
 </head>
 <body style="background-color: rgb(229, 229, 229);">
@@ -123,7 +125,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
     </div>
     <div class="row mx-5">
       <div class="col">
-        <div class="card mt-2">
+        <div class="card mt-2 mb-2">
           <div class="card-body">
             <?php
                         $exam_id =$_GET['sec'];
@@ -131,7 +133,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                         $score = mysqli_query($sqlcon,"SELECT score FROM tbl_exam_result WHERE exam_result_id='$exam_id'");
                         while ($result= mysqli_fetch_array($score)) { ?>
                           <tr>
-                          <th class="text-left pl-1 fs-5"><p class="fs-4 pl-1 fw-bold">Total points:<b class="badge bg-success ms-2"><?php echo $result['score']; ?> /<?php echo $_GET['total']; ?></b>
+                          <th class="text-left pl-1 fs-5"><p class="fs-4 pl-1 fw-bold">Total points:<b class="badge bg-success ms-2"><?php echo $result['score']; ?> / <?php echo $_GET['total']; ?></b>
                         </tr> 
                         <?php 
                         }
@@ -162,62 +164,76 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                   ?>
 
                <div class="col-lg-12">
-                  <div class="card mt-2">
-                     <div class="card-body">
-                       <div class="table-reponsive">
-                          <table class="align-middle mb-0 table table-borderless " id="quesTab">
-                              <thead class="mb-4">
-                                  <th class="text-left pl-1 fs-5">Question:</th>
-                              </thead>
-                              <tbody class="fs-5">
+                <div class="card mb-2">
+                  <div class="card-body m-2">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <div class="card h-100" style="background-color: rgb(237, 237, 241);">
+                          <div class="card-body">
+                            <p class="fw-bold fs-5">Question: <?php echo $number ?></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-8">
+                        <div class="card" style="background-color: rgb(219, 235, 247);">
+                          <div class="card-body">
+                            <div class="table-reponsive">
+                              <table class="align-middle mb-0 table table-borderless " id="quesTab">
+                                <thead class="mb-4"></thead>
+                                <tbody style="font-size: 17px;">
                          
                             
-                            <?php
-                            if ($coat['exam_check']== $cane['correct_ans']) { ?>
-                              <tr>
-                                <th>
-                                 <b><span class="fs-5 text-success"><?php echo $number.". &nbsp;". $cane['questions_title']; ?> <i class="fas fa-check ms-2"></i></span></b>
-                                </th>
-                              </tr>
-                              <?php 
+                                        <?php
+                                        if ($coat['exam_check']== $cane['correct_ans']) { ?>
+                                          <tr>
+                                            <th>
+                                             <b><span class="text-success"><?php echo $cane['questions_title']; ?> <i class="fas fa-check ms-2 fa-lg"></i></span></b>
+                                            </th>
+                                          </tr>
+                                          <?php 
 
-                            }
-                            elseif ($coat['exam_check']!= $cane['correct_ans']) { ?>
-                              <tr>
-                                <th>
-                                 <b><span class="fs-5 text-danger"><?php echo $number.". &nbsp;". $cane['questions_title']; ?> <i class="fas fa-times text-danger"></i></span></b>
-                                </th>
-                              </tr>
-                              <?php
-                            }
+                                        }
+                                        elseif ($coat['exam_check']!= $cane['correct_ans']) { ?>
+                                          <tr>
+                                            <th>
+                                             <b><span class="text-danger"><?php echo $cane['questions_title']; ?> <i class="fas fa-times text-danger ms-2 fa-lg"></i></span></b>
+                                            </th>
+                                          </tr>
+                                          <?php
+                                        }
 
-                            ?>
-                          <tr>
-                            <td><span><input   class="form-check-input pl-4 ms-5" type="radio" name="examcheck[<?php echo $cane['question_id']; ?>]" id="exampleRadios1" value="A" <?php if($coat['exam_check'] =='A' ){ echo "checked=checked";}  ?> disabled > A. <?php echo $cane['option_a']; ?></span></td>
-                          </tr>
-                                 
-                          <tr>
-                            <td><span><input  class="form-check-input pl-4 ms-5" type="radio"  name="examcheck[<?php echo $cane['question_id']; ?>]" id="exampleRadios1" value="B" <?php if($coat['exam_check'] =='B'){ echo "checked=checked";}  ?> disabled > B. <?php echo  $cane['option_b']; ?></span></td>
-                          </tr>
-                        
-                          <tr>
-                            <td><span><input  class="form-check-input pl-4 ms-5" type="radio"  name="examcheck[<?php echo $cane['question_id']; ?>]" id="exampleRadios1" value="c"<?php if($coat['exam_check'] =='C'){ echo "checked=checked";}  ?> disabled > C. <?php echo  $cane['option_c']; ?></span></td>
-                          </tr>
-                        
-                          <tr>
-                            <td><span><input  class="form-check-input pl-4 ms-5" type="radio" name="examcheck[<?php echo $cane['question_id']; ?>]" id="exampleRadios1" value="D"<?php if($coat['exam_check'] =='D'){ echo "checked=checked";}  ?> disabled> D. <?php echo  $cane['option_d']; ?></span></td>
-                          </tr>
+                                        ?>
+                                      <tr>
+                                        <td><span><input   class="form-check-input pl-4 ms-5" type="radio" name="examcheck[<?php echo $cane['question_id']; ?>]" id="exampleRadios1" value="A" <?php if($coat['exam_check'] =='A' ){ echo "checked=checked";}  ?> disabled > A. <?php echo $cane['option_a']; ?></span></td>
+                                      </tr>
+                                             
+                                      <tr>
+                                        <td><span><input  class="form-check-input pl-4 ms-5" type="radio"  name="examcheck[<?php echo $cane['question_id']; ?>]" id="exampleRadios1" value="B" <?php if($coat['exam_check'] =='B'){ echo "checked=checked";}  ?> disabled > B. <?php echo  $cane['option_b']; ?></span></td>
+                                      </tr>
+                                    
+                                      <tr>
+                                        <td><span><input  class="form-check-input pl-4 ms-5" type="radio"  name="examcheck[<?php echo $cane['question_id']; ?>]" id="exampleRadios1" value="c"<?php if($coat['exam_check'] =='C'){ echo "checked=checked";}  ?> disabled > C. <?php echo  $cane['option_c']; ?></span></td>
+                                      </tr>
+                                    
+                                      <tr>
+                                        <td><span><input  class="form-check-input pl-4 ms-5" type="radio" name="examcheck[<?php echo $cane['question_id']; ?>]" id="exampleRadios1" value="D"<?php if($coat['exam_check'] =='D'){ echo "checked=checked";}  ?> disabled> D. <?php echo  $cane['option_d']; ?></span></td>
+                                      </tr>
 
-                          <tr>
-                            <td>&emsp;<span><b>Correct Answer:</b>&emsp;<b>&emsp;<?php echo  $cane['correct_ans']; ?>.&emsp;<?php if ($core =='A') { echo  $cane['option_a'];}elseif ($core =='B') { echo  $cane['option_b']; }elseif ($core =='C') { echo  $cane['option_c']; }elseif ($core =='D') { echo  $cane['option_d'];} ?></b></span></td>
-                          </tr>
-                        
-                    
-                      </tbody>
-                  </table>
+                                      <tr>
+                                        <td><span class="text-success ms-4"><b>Correct Answer:</b><b class="ms-2"><?php echo  $cane['correct_ans']; ?>. <?php if ($core =='A') { echo  $cane['option_a'];}elseif ($core =='B') { echo  $cane['option_b']; }elseif ($core =='C') { echo  $cane['option_c']; }elseif ($core =='D') { echo  $cane['option_d'];} ?></b></span></td>
+                                      </tr>
+                                    
+                                
+                                  </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+                
           </div>
                <?php $number++; } ?>
         </div>

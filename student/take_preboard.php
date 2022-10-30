@@ -147,16 +147,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 		</div>
 	</div>
 
-
+	<!-- Access code Modal-->
 	<div class="modal fade" id="access" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div class="modal-dialog modal-confirm">
             <div class="modal-content">
-                <div class="modal-header flex-column border-0">
+                <div class="modal-header flex-column ">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <h4 class="modal-title mx-3">Access Code</h4>
-
                 <form action="student_access.php" method="POST">
+                	 <h4 class="modal-title mx-3 mt-3 fw-bold">Access code</h4>
                     <div class="modal-body">
                                <?php if (isset($_GET['error'])) { ?>
                   <p class="error"><center><b style="color: red;"><?php echo $_GET['error'];  ?></b></center></p>

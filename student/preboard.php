@@ -28,15 +28,27 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
 	<!-- Exam timer-->
 	<link rel="stylesheet" type="text/css" href="../TimeCircles-master/inc/TimeCircles.css">
+	<!-- System Logo -->
+    <link rel="icon" href="../assets/pics/system-ico.ico">
 </head>
 <body style="background-color: rgb(229, 229, 229);">
 <!-- Main Content -->
 <div class="container py-4">
 	<div class="row">
 		<div class="col-lg-12 align-self-center">
-			<div class="card mt-3" style="background-color: #8C0000;">
-				<div class="card-body">
-					<h2 class="text-white fw-bold text-uppercase">Area of Examination: Criminal Jurisprudence</h2>
+			<div class="card mt-2">
+				<?php
+
+				$area = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question");
+
+				$title = mysqli_fetch_assoc($area);
+
+				 ?>
+				 <div class="card-header" style="background-color: #8C0000;">
+				 	<p class=" h1 text-white fw-bold text-uppercase">Area of Examination: <?php echo $title['subjects']; ?></hp>
+				 </div>
+				<div class="card-body" >
+					<p class=" h4 text-dark fw-bold" > <?php echo $title['description']; ?> </p>
 				</div>
 			</div>
 		</div>
@@ -44,8 +56,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<form action="check_exam.php" id="form2" method="POST">
 		<div class="row">
 			<div class="row-justify-content-end">
-				<div class="col-lg-12">
-					<div class="card mt-3">
+				<div class="col-lg-12 mt-2">
+					<div class="card mb-2" id="timer">
 						<div class="card-body mx-auto">
 							<?php
 
@@ -55,7 +67,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 							$bench = mysqli_fetch_assoc($said);
 							?>
-							<div id="exam_timer" data-timer="<?php echo $bench['time_limit']; ?>" style="width: 100%; height :150px; "></div>
+							<div id="exam_timer" data-timer="<?php echo $bench['time_limit']; ?>" style="width: 100%; height :110px; "></div>
 						</div>
 					</div>
 				</div>
@@ -73,36 +85,53 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 			while ($rows = mysqli_fetch_array($result_limit)) { ?>
 
 			<div class="col-lg-12">
-				<div class="card mt-3">
-					<div class="card-body table-reponsive" >
-						<table class="table table-borderless">
-							<thead class="mb-4">
-							</thead>
-							<tbody class="fs-5">
-								 <tr>
-								 	<th>
-								 		<b><span class="fs-5"><?php echo $number.". &nbsp;". $rows['questions_title']; ?></span></b>
-								 	</th>
-								 </tr>
-								 <tr>
-								 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox " type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd1" value="A"> A. <?php echo $rows['option_a']; ?></span></td>
-								 </tr>
-								 <tr>
-								 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox" type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd2" value="B"> B.<?php echo $rows['option_b']; ?></span></td>
-								 </tr>
-								 <tr>
-								 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox" type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd3" value="C"> C. <?php echo $rows['option_c']; ?></span></td>
-								 </tr>
-								 <tr>
-								 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox" type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd4" value="D"> D. <?php echo $rows['option_d']; ?></span></td>
-								 </tr>
+				<div class="card mb-2">
+					<div class="card-body m-2">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="card h-100" style="background-color: rgb(237, 237, 241);">
+									<div class="card-body">
+										<p class="fw-bold fs-5 "> Question <?php echo $number ?></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-8">
+								<div class="card">
+									<div class="card-body table-reponsive" style="background-color: rgb(219, 235, 247);" >
+										<table class="table table-borderless">
+											<thead class="mb-4">
+											</thead>
+											<tbody style="font-size: 17px;">
+												 <tr>
+												 	<th>
+												 		<b><span><?php echo $rows['questions_title']; ?></span></b>
+												 	</th>
+												 </tr>
+												 <tr>
+												 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox " type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd1" value="A"> A. <?php echo $rows['option_a']; ?></span></td>
+												 </tr>
+												 <tr>
+												 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox" type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd2" value="B"> B.<?php echo $rows['option_b']; ?></span></td>
+												 </tr>
+												 <tr>
+												 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox" type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd3" value="C"> C. <?php echo $rows['option_c']; ?></span></td>
+												 </tr>
+												 <tr>
+												 	<td><span><input class="form-check-input pl-4 ms-5 my.checkbox" type="radio" name="examcheck[<?php echo $rows['question_id'] ?>]" id="rd4" value="D"> D. <?php echo $rows['option_d']; ?></span></td>
+												 </tr>
 
-							</tbody>
-									<input type="hidden" name="pre_exam_id" value="<?php echo $rows['pre_exam_id']; ?>">
-									<input type="hidden" name="update_pre_question" value="<?php echo $code; ?>">
-									<input type="hidden" name="sub_acc_id" value="<?php echo $_SESSION['acc_id']; ?>">
-									<input type="hidden" name="total_quest" value="<?php echo $rows['total_question']; ?>">
-						</table>
+											</tbody>
+													<input type="hidden" name="pre_exam_id" value="<?php echo $rows['pre_exam_id']; ?>">
+													<input type="hidden" name="update_pre_question" value="<?php echo $code; ?>">
+													<input type="hidden" name="sub_acc_id" value="<?php echo $_SESSION['acc_id']; ?>">
+													<input type="hidden" name="total_quest" value="<?php echo $rows['total_question']; ?>">
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
 					</div>
 				</div>
 			</div>
@@ -114,7 +143,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 		</div>
 		<div class="d-flex justify-content-center mt-3">
 			<!-- submit button -->
-		   <input type="submit" value="submit" class="btn btn-success mx-5 d-flex text-uppercase btn-lg">
+		   <input type="submit" value="submit" class="btn btn-success rounded  mx-2 px-5 pb-2 d-flex text-uppercase btn-lg">
 		</div>
 		
 	</form>
@@ -130,12 +159,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   document.addEventListener("DOMContentLoaded", function(){
   window.addEventListener('scroll', function() {
       if (window.scrollY > 50) {
-        document.getElementById('navbar-top').classList.add('fixed-top');
+        document.getElementById('timer').classList.add('fixed-top');
         // add padding top to show content behind navbar
-        navbar_height = document.querySelector('.navbar').offsetHeight;
+        navbar_height = document.querySelector('.card').offsetHeight;
         document.body.style.paddingTop = navbar_height + 'px';
       } else {
-        document.getElementById('navbar-top').classList.remove('fixed-top');
+        document.getElementById('timer').classList.remove('fixed-top');
          // remove padding top from body
         document.body.style.paddingTop = '0';
       } 
