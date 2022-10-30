@@ -166,7 +166,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   <!--Main Content-->
   <div class="container py-4">
      <div class="col-lg-12">
-        <div class="card mb-3">
+        <div class="card mb-2">
           <?php
 
               $ids = $_GET['id'];
@@ -189,9 +189,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
     <form action="check.php" id="form1" method="POST">
       <div class="row">
        <div class="col-lg-12">
-          <div class="card" id="timer">
+          <div class="card mb-2" id="timer">
              <div class="card-body mx-auto">
-              <div class="justify-content-center" id="exam_timer" data-timer="<?php echo $_GET['limit']; ?>" style="height: 120px; width: 100%;" >
+              <div class="justify-content-center" id="exam_timer" data-timer="<?php echo $_GET['limit']; ?>" style="height: 100px; width: 100%;" >
                 
                </div> 
              </div>
@@ -212,46 +212,53 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
           while ($shows = mysqli_fetch_assoc($display)) {  ?>
 
                 <div class="col-lg-12">
-                   <div class="card mt-3">
-                      <div class="card-body">
-                         <div class="table-reponsive">
-                             <table class="align-middle mb-0 table table-borderless" id="quesTab">
-                                <thead class="mb-4">
-                                   <tr>
-                                      
-                                   </tr>
-                                 </thead>
-                                 <tbody class="fs-5">
-                                    <tr>
-                                       <th>
-                                          <b><span class="fs-5"><?php echo $number.". &nbsp;". $shows['questions_title']; ?></span></b>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="A"> A. <?php echo $shows['option_a']; ?></span></td>
-                                    </tr>
-                                    <tr>
-                                      <td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="B"> B. <?php echo $shows['option_b']; ?></span></td>
-                                    </tr>
-                                    <tr>
-                                      <td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="C"> C. <?php echo $shows['option_c']; ?></span></td>
-                                    </tr>
-                                    <tr>
-                                      <td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="D"> D. <?php echo $shows['option_d']; ?></span></td>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                     <tr>
-                                        <input type="hidden" name="update_id" value="<?php echo $ids; ?>">
-                                        <input type="hidden" name="update_acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
-                                        <input type="hidden" name="total_quest" value="<?php echo $sad; ?>">
-                                    </tr>
-                                 </tbody>
-                              </table>
+                  <div class="card mb-2">
+                    <div class="card-body m-2">
+                       <div class="card">
+                          <div class="card-body" style="background-color: rgb(219, 235, 247);">
+                             <div class="table-reponsive">
+                                 <table class="align-middle mb-0 table table-borderless" id="quesTab">
+                                    <thead class="mb-4">
+                                       <tr>
+                                          
+                                       </tr>
+                                     </thead>
+                                     <tbody style="font-size: 17px;">
+                                        <tr>
+                                           <th>
+                                              <b><span><?php echo $number.". &nbsp;". $shows['questions_title']; ?></span></b>
+                                            </th>
+                                            <th>
+                                              <span><p class="d-flex justify-content-end"><span><i class="fas fa-asterisk fa-xs text-danger me-1"></i></span> 1 point</p></span>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="A"> A. <?php echo $shows['option_a']; ?></span></td>
+                                        </tr>
+                                        <tr>
+                                          <td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="B"> B. <?php echo $shows['option_b']; ?></span></td>
+                                        </tr>
+                                        <tr>
+                                          <td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="C"> C. <?php echo $shows['option_c']; ?></span></td>
+                                        </tr>
+                                        <tr>
+                                          <td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="D"> D. <?php echo $shows['option_d']; ?></span></td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                         <tr>
+                                            <input type="hidden" name="update_id" value="<?php echo $ids; ?>">
+                                            <input type="hidden" name="update_acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
+                                            <input type="hidden" name="total_quest" value="<?php echo $sad; ?>">
+                                        </tr>
+                                     </tbody>
+                                  </table>
+                             </div>
                          </div>
-                     </div>
-                 </div>
-             </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <?php $number++; } ?>
           </div>
           <div class="d-flex justify-content-center mt-3">
@@ -266,7 +273,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
               <?php
             }
             ?>
-            <input type="submit" value="submit" class="btn btn-success mx-2 text-uppercase btn-lg">
+            <input type="submit" value="submit" class="btn btn-success rounded  mx-2 px-5 pb-2 text-uppercase btn-lg">
           </div>
     </form>
 </div>
