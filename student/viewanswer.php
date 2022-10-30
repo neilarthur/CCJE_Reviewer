@@ -183,7 +183,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                 if ($low['quiz_check']== $shows['correct_ans']) { ?>
                                   <tr>
                                     <th>
-                                     <b><span class="text-success"><?php echo $shows['questions_title']; ?> <i class="fas fa-check ms-2"></i></span></b>
+                                     <b><span class="text-success"><?php echo $shows['questions_title']; ?> <i class="fas fa-check ms-2 fa-lg"></i></span></b>
                                     </th>
                                   </tr>
                                   <?php 
@@ -192,7 +192,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                 elseif ($low['quiz_check']!= $shows['correct_ans']) { ?>
                                   <tr>
                                     <th>
-                                     <b><span class="fs-5 text-danger"><?php echo $number.". &nbsp;". $shows['questions_title']; ?> <i class="fas fa-times text-danger"></i></span></b>
+                                     <b><span class="text-danger"><?php echo $number.". &nbsp;". $shows['questions_title']; ?> <i class="fas fa-times text-danger ms-2 fa-lg"></i></span></b>
                                     </th>
                                   </tr>
                                   <?php
@@ -216,7 +216,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                               </tr>
 
                               <tr>
-                                <td>&emsp;<span class="text-success"><b>Correct Answer:</b>&emsp;<b>&emsp;<?php echo $shows['correct_ans']; ?>.&emsp;<?php if ($core =='A') { echo $shows['option_a'];}elseif ($core =='B') { echo $shows['option_b']; }elseif ($core =='C') { echo $shows['option_c']; }elseif ($core =='D') { echo $shows['option_d'];} ?></b></span></td>
+                                <td>&emsp;<span class="text-success"><b class="me-2">Correct Answer:</b><b class="ms-1"><?php echo $shows['correct_ans']; ?>. <?php if ($core =='A') { echo $shows['option_a'];}elseif ($core =='B') { echo $shows['option_b']; }elseif ($core =='C') { echo $shows['option_c']; }elseif ($core =='D') { echo $shows['option_d'];} ?></b></span></td>
                               </tr>
                             
                         
