@@ -115,8 +115,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 					<table class="table table-striped align text-center">
 						<thead class="fs-5">
 							<tr>
-								<th scope="col">Area of Exam</th>
-								<th scope="col">Number of Items</th>
+								<th scope="col">Area of Examination</th>
+								<th scope="col">Total of Items</th>
 								<th scope="col">Time Limit</th>
 								<th scope="col">Action</th>
 							</tr>
@@ -151,11 +151,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<div class="modal fade" id="access" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div class="modal-dialog modal-confirm">
             <div class="modal-content">
-                <div class="modal-header flex-column ">
+                <div class="modal-header flex-column border-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="student_access.php" method="POST">
-                	 <h4 class="modal-title mx-3 mt-3 fw-bold">Access code</h4>
+                	 <h4 class="modal-title mx-3 mt-3 fw-bold">Enter the access code</h4>
                     <div class="modal-body">
                                <?php if (isset($_GET['error'])) { ?>
                   <p class="error"><center><b style="color: red;"><?php echo $_GET['error'];  ?></b></center></p>
@@ -163,11 +163,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 ?>
                         <div class="form-group d-flex justify-content-center">
                         	<input type="hidden" name="acc_id" value="<?php echo $_SESSION['acc_id']; ?>">
-                            <input type="text" class="form-control" name="access_code" placeholder="Enter Access Code">
+                            <input type="text" class="form-control" name="access_code" placeholder="Access code">
                             
                         </div>
-                        <div class="modal-footer d-flex justify-content-center border-0">
-                            <input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="Enter">
+                        <div class="modal-footer d-flex justify-content-center border-0 mt-2">
+                            <input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="Submit">
                         </div>
                     </div>
                 </form>

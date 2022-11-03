@@ -220,7 +220,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                  <table class="align-middle mb-0 table table-borderless" id="quesTab">
                                     <thead class="mb-4">
                                        <tr>
-                                          
+                                          <th class="text-left pl-1 fs-5">Question:</th>
                                        </tr>
                                      </thead>
                                      <tbody style="font-size: 17px;">
