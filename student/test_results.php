@@ -106,67 +106,114 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 		</div>
 	</div>
 	<!-- Main content-->
-    <div class="container py-4">
-    	<div class="row">
-    		<div class="card mb-3" style="background-color: #8C0000;;">
-    			<div class="card-body">
-    				<h2 class="text-white fw-bold text-uppercase">Results</h2>
-    			</div>
-    		</div>
-    		<div class="card">
-    			<div class="card-body m-3 table-responsive-lg">
-    				<table class="table bg-light">
-    					<thead>
-    						<tr class="text-center">
-    							<th class="fs-5">Name</th>
-    							<th class="fs-5">Section</th>
-    							<th class="fs-5">Area of Examination</th>
-    							<th class="fs-5">Difficulty</th>
-    							<th class="fs-5">Total of Items</th>
-    							<th class="fs-5">Score</th>
-    							<th class="fs-5">Remarks</th>
-    						</tr>
-    					</thead>
-    					<tbody>
-    						<?php
+    <div class="container-fluid py-4">
+        <div class="col-lg-11 mx-auto">
+            <div class="card mb-3" style="background-color: #8C0000;;">
+                <div class="card-body">
+                    <h2 class="text-white fw-bold text-uppercase">Results</h2>
+                </div>
+            </div>
+            <div class="tab-content" id="nav-tabContent">
+                <style type="text/css">
+                    .tab-content .nav-pills .nav-link.active{
+                        background-color: #8C0000;
+                    }
+                </style>
+                <nav>
+                    <div class="nav nav-pills" id="nav-tab" role="tablist">
+                        <button class="nav-link active w-50" id="nav-quizzes-tab" data-bs-toggle="pill" data-bs-target="#nav-quizzes" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Quizzes</button>
+                        <button class="nav-link w-50" id="nav-preboard-tab" data-bs-toggle="pill" data-bs-target="#nav-preboard" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Preboard</button>
+                    </div>
+                </nav>
+                <div class="tab-pane fade show active" id="nav-quizzes" role="tabpanel" aria-labelledby="nav-quizzes-tab">
+                    <div class="card">
+                        <div class="card-body m-3 table-responsive-lg">
+                            <table class="table bg-light">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th class="fs-5">Name</th>
+                                        <th class="fs-5">Section</th>
+                                        <th class="fs-5">Area of Examination</th>
+                                        <th class="fs-5">Difficulty</th>
+                                        <th class="fs-5">Total of Items</th>
+                                        <th class="fs-5">Score</th>
+                                        <th class="fs-5">Remarks</th>
+                                    </tr>
+                                </thead>
+                               <tbody>
+                            <?php
 
-    						$quiz_query = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,choose_question,accounts WHERE (tbl_quiz_result.test_id =choose_question.test_id) AND (tbl_quiz_result.acc_id = accounts.acc_id) AND tbl_quiz_result.acc_id = '{$_SESSION['acc_id']}' ORDER BY ans_id DESC");
+                            $quiz_query = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,choose_question,accounts WHERE (tbl_quiz_result.test_id =choose_question.test_id) AND (tbl_quiz_result.acc_id = accounts.acc_id) AND tbl_quiz_result.acc_id = '{$_SESSION['acc_id']}' ORDER BY ans_id DESC");
 
-    						if (mysqli_num_rows($quiz_query) ==0) { ?>
+                            if (mysqli_num_rows($quiz_query) ==0) { ?>
 
-    							<tr>
-    								<td class="text-center">No Records.... </td>
-    							</tr>
+                                <tr class="table-danger">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-center">No records has been added </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
 
-    						<?php 
-    						}elseif (mysqli_num_rows($quiz_query)>0) {
+                            <?php 
+                            }elseif (mysqli_num_rows($quiz_query)>0) {
 
-    							while ($rows = mysqli_fetch_assoc($quiz_query)) { ?>
+                                while ($rows = mysqli_fetch_assoc($quiz_query)) { ?>
 
-    								<tr class="text-center">
-    									<th><?php echo $rows['first_name']." ".$rows['last_name']; ?></th>
-    									<td><?php echo $rows['section']; ?></td>
-    									<td><?php echo $rows['subject_name']; ?></td>
-    									<td><?php echo $rows['question_difficulty']; ?></td>
-    									<td><?php echo $rows['total_quest']; ?></td>
-    									<td><?php echo $rows['score']; ?></td>
+                                    <tr class="text-center">
+                                        <th><?php echo $rows['first_name']." ".$rows['last_name']; ?></th>
+                                        <td><?php echo $rows['section']; ?></td>
+                                        <td><?php echo $rows['subject_name']; ?></td>
+                                        <td><?php echo $rows['question_difficulty']; ?></td>
+                                        <td><?php echo $rows['total_quest']; ?></td>
+                                        <td><?php echo $rows['score']; ?></td>
 
-    									<?php if ($rows['result']=='passed') { ?>
-    										 <td class="text-success text-uppercase fw-bold"><?php echo $rows['result'] ?></td>
-    									<?php
-    									}elseif ($rows['result']=='failed') { ?>
-    										<td class="text-danger text-uppercase fw-bold"><?php echo $rows['result'] ?></td>
-    									<?php
-    									} 
-    									?>
-    								</tr>
-    							</tbody>
-    						<?php } } ?>
-						</table>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
+                                        <?php if ($rows['result']=='passed') { ?>
+                                             <td class="text-success text-uppercase fw-bold"><?php echo $rows['result'] ?></td>
+                                        <?php
+                                        }elseif ($rows['result']=='failed') { ?>
+                                            <td class="text-danger text-uppercase fw-bold"><?php echo $rows['result'] ?></td>
+                                        <?php
+                                        } 
+                                        ?>
+                                    </tr>
+                                </tbody>
+                            <?php } } ?>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-preboard" role="tabpanel" aria-labelledby="nav-preboard-tab">
+                    <div class="card">
+                        <div class="card-body m-3 table-responsive-lg">
+                            <table class="table bg-light">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th scope="col" class="fs-5">Name</th>
+                                        <th scope="col" class="fs-5">Area of Examination</th>
+                                        <th scope="col" class="fs-5">Total of Items</th>
+                                        <th scope="col" class="fs-5">Score</th>
+                                        <th scope="col" class="fs-5">Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <td>Mark Otto</td>
+                                        <td>Criminal Jurisprudence</td>
+                                        <td>100</td>
+                                        <td>80</td>
+                                        <td class="fw-bold text-success">PASSED</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
