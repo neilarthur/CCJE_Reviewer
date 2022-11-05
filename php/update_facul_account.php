@@ -16,6 +16,9 @@ if (isset($_POST['save'])) {
   $mobile_no = $_POST['mobile_no'];
   $address = $_POST['address'];
   $password = $_POST['password'];
+  $log_id = $_POST['log_id'];
+
+  $action_update = "Account has been update";
 
   if (!empty($_FILES['image']['name'])) {
     
@@ -26,12 +29,22 @@ if (isset($_POST['save'])) {
 
       if (substr($image_type,0,5)=="image") {
 
-        $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', year='$year', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', password='$password', image='$image_name',image_size='$image_Data' WHERE acc_id = '$update_id' ";
+        $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', password='$password', image='$image_name',image_size='$image_Data' WHERE acc_id = '$update_id' ";
 
         $query_run = mysqli_query($sqlcon, $query);
 
         if ($query_run) {
-          header("Location: ../faculty/accounts_manage.php?upsuc");
+
+          $log_activity = "INSERT INTO logs (acc_id,login_time,action) VALUES ('$log_id',now(),'$action_update')";
+          $log_run = mysqli_query($sqlcon,$log_activity);
+
+          if ($log_run) {
+            header("Location: ../faculty/accounts_manage.php?upsuc");
+          }
+          else {
+            header("Location: ../faculty/accounts_manage.php?adderror");
+          }
+         
         }
         elseif ($filesize > 1000000) {
           echo "<script> alert('Image size is too large'); </script>";
@@ -45,12 +58,21 @@ if (isset($_POST['save'])) {
       }
   }
   else {
-    $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', year='$year', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address' WHERE acc_id = '$update_id' ";
+    $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', year='$year', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', password='$password' WHERE acc_id = '$update_id' ";
 
     $query_run = mysqli_query($sqlcon, $query);
 
     if ($query_run) {
-       header("Location: ../faculty/accounts_manage.php?upsuc");
+
+      $log_activity = "INSERT INTO logs (acc_id,login_time,action) VALUES ('$log_id',now(),'$action_update')";
+      $log_run = mysqli_query($sqlcon,$log_activity);
+
+      if ($log_run) {
+        header("Location: ../faculty/accounts_manage.php?upsuc");
+      }
+      else {
+        header("Location: ../faculty/accounts_manage.php?adderror");
+      }
     }
     else{
        header("Location: ../faculty/accounts_manage.php?adderror");

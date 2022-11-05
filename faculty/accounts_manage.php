@@ -343,6 +343,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 py-2">
 									<label for="user-password" class="d-flex justify-content-start ps-1">Password</label>
 									<input type="password" name="password" class="form-control" minlength="8" required="">
+									<input type="hidden" name="login_id" value="<?php echo $_SESSION['acc_id']; ?>">
 								</div>
 							</div>
 							<div class="modal-footer border-0 d-flex justify-content-center mt-2">
@@ -469,7 +470,7 @@ let arrow = document.querySelectorAll(".arrow");
       var userid = $(this).data('id');
 
       $.ajax({
-        url: '../php/edit_facul_account.php',
+        url: '../php/edit_facul_account.php?$edit=<?php echo $_SESSION['login_id']; ?>',
         type: 'post',
         data: {userid: userid},
         success: function(response){

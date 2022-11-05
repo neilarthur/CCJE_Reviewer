@@ -17,6 +17,8 @@ if (isset($_POST["save"])) {
 	$mobile_no = $_POST['mobile_no'];
 	$address =$_POST['address'];
 	$password = $_POST['password'];
+	$login_id = $_POST['login_id'];
+	$action_insert = "accounts has been insert";
 
 
 	$image = $_FILES['image']['name'];
@@ -31,8 +33,18 @@ if (isset($_POST["save"])) {
 	$sql_rows = mysqli_query($sqlcon, $sql_run);
 
 	if ($sql_rows) {
-		
-		header("location:../faculty/accounts_manage.php?addsuccess");
+
+		$log_activity = "INSERT INTO logs (acc_id,login_time,action) VALUES ('$login_id',now(),'$action_insert')";
+		$log_run = mysqli_query($sqlcon,$log_activity);
+
+		if ($log_run) {
+			
+			header("location:../faculty/accounts_manage.php?addsuccess");
+
+		}
+		else{
+			header("location:../faculty/accounts_manage.php?adderror");
+		}
 	}
 	else{
 

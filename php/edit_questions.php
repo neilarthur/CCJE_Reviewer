@@ -77,7 +77,7 @@ while ($row = mysqli_fetch_assoc($results) AND $bows = mysqli_fetch_assoc($resul
       </div>
       <div class="form-group mb-3">
           <label for="name" hidden="">Faculty</label>
-          <input type="text" class="form-control" name="acc" value="<?php echo $_GET['acc_id'];  ?>" hidden required="">
+          <input type="hidden" class="form-control" name="acc" value="<?php echo $_GET['acc'];  ?>" required="">
       </div>
       <div class="modal-footer border-0 d-flex justify-content-center">
           <button name="update" class="btn btn-success mx-2" value="Add"><i class="fas fa-save me-2"></i>Save Changes</button>

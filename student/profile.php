@@ -104,158 +104,160 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 			</div>
 		</div>
 	</div>
-	<!-- Main  Content-->
+	<!-- Main  Content  -->
 	<div class="container-fluid">
-		<form action="../php/update_student_profile.php" method="POST">
-			<div class="container py-4">
-				<div class="row gutters">
-					<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-						<!-- Profile -->
-						<div class="card h-100 mb-4">
-							<div class="card-body">
-								<div class="account-settings">
-									<div class="user-profile">
-										<?php
-											$info = $_GET['acc_id'];
-									        $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '$info' ");
-									         while ($rows = mysqli_fetch_assoc($query_row)) { 
+				<form action="../php/update_student_profile.php" method="POST" enctype="multipart/form-data">
+					<div class="container py-5">
+						<div class="row gutters">
+							<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+								<!-- Profile -->
+								<div class="card h-100 mb-4">
+									<div class="card-body">
+										<div class="account-settings">
+											<div class="user-profile">
+												<div class="user-avatar">
+													<?php
+													$info = $_GET['acc_id'];
+											        $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '$info' ");
+											         while ($rows = mysqli_fetch_assoc($query_row)) { 
 
-									         	echo '<div class="d-flex flex-column align-items-center text-center p-3 py-5">
-									         	<img src="data:image;base64,'.base64_encode($rows["image_size"]).'" id="imgss"  class="img-fluid img-thumbnail rounded-circle flex justify-content-start w-100 h-100"  style=" object-fit: cover;">
-									         	';
-									         	?>
+											         	echo '<div class="d-flex flex-column align-items-center text-center p-3 py-5">
+											         	<img src="data:image;base64,'.base64_encode($rows["image_size"]).'" id="imgss"  class="img-fluid img-thumbnail rounded-circle flex justify-content-start w-100 h-100 mb-2"  style=" object-fit: cover;">
+											         	';
+											         	?>
 
-											
-												<input type="file" name="image" class="form-control mt-2 mb-2" id="file_case" accept=".jpg, .jpeg, .png">
-
-												<span class="fw-bold"><?php  echo $rows['first_name'] ?> <?php  echo $rows['last_name'] ?></span>
-												<span class="text-black-30"><?php  echo $rows['email_address'] ?></span>
-											</div>
-											<?php }
-
-								             ?>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-						<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 t">
-						<div class="card h-100">
-							<div class="card-body">
-								<div class="row gutters m-3">
-									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-										<h3 class="mb-2 text-primary fw-bolder text-uppercase mb-4">Personal Information</h3>
-									</div>
-									<?php
-									 $info = $_GET['acc_id'];
-									 $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= $info ");
-									      while ($rows = mysqli_fetch_assoc($query_row)) { ?>
-
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group mb-2">
-											<label for="user-last">Lastname</label>
-											<input type="hidden" name="acc_id" value="<?php echo $info?>">
-											<input type="text" class="form-control" name="lastname" value="<?php  echo $rows['last_name'] ?>">
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group mb-2">
-											<label for="user-first">Firstname</label>
-											<input type="text" class="form-control" name="firstname" value="<?php  echo $rows['first_name'] ?>">
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group mb-2">
-											<label for="user-middle">Middlename</label>
-											<input type="text" class="form-control" name="middlename"value="<?php  echo $rows['middle_name'] ?>">
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group mb-2">
-											<label for="user-role">Role</label>
-											<input type="text" class="form-control" name="role" value="<?php  echo $rows['role'] ?>">
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group mb-2">
-											<label for="user-bday">Birtdate</label>
-											<input type="date" class="form-control" name="bday" value="<?php  echo $rows['birth_date'] ?>">
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group mb-2">
-											<label for="user-gender">Gender</label>
-											<div class="input-group">
-												<select class="form-select" required="" name="gender" value="">
 													
-													<option ><?php  echo $rows['gender'] ?></option>
-													<?php 
-													if ($rows['gender']== 'Male') {
-														echo "<option >Female</option>";
-													}
-													elseif ($rows['gender']== 'Female') {
-														echo "<option >Male</option>";
-													}
-													?>
-													
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group mb-2">
-											<label for="phone">Age</label>
-											<input type="number" class="form-control" name="age" value="<?php  echo $rows['age'] ?>" >
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group mb-2">
-											<label for="phone">Mobile Number</label>
-											<input type="number" class="form-control" name="mobile" value="<?php  echo $rows['mobile_no'] ?>" >
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group mb-2">
-											<label for="uder-id">ID No.</label>
-											<input type="number" class="form-control" name="id" value="<?php  echo $rows['user_id'] ?>" >
-										</div>
-									</div>
-									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
-											<label for="user-email">Email Address</label>
-											<input type="email" class="form-control" name="email" value="<?php  echo $rows['email_address'] ?>">
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-										<div class="form-group">
-											<label for="user-section">Year & Section</label>
-											<input type="text" class="form-control" name="section" value="<?php  echo $rows['section'] ?>">
-										</div>
-									</div>
-								</div>
-								<div class="row gutters m-3">
-									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-										<label for="user-add">Address</label>
-										<textarea class="form-control" name="address" rows="2" ><?php  echo $rows['address'] ?></textarea>
-									</div>
-								</div>
-								<?php }
+														<input type="file" name="image" class="form-control mb-2" id="file_case" accept=".jpg, .jpeg, .png">
 
-								 ?>
-								<div class="row gutters">
-									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center">
-										<div class="text-right ">
-											<button type="submit" id="submit" name="submit" class="btn btn-success btn-lg me-4 text-uppercase mx-2 px-5 pb-2">Submit</button>
+														<span class="fw-bold"><?php  echo $rows['first_name'] ?> <?php  echo $rows['last_name'] ?></span>
+														<span class="text-black-30"><?php  echo $rows['email_address'] ?></span>
+													</div>
+													<?php }
+
+										             ?>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+								<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 t">
+								<div class="card h-100">
+									<div class="card-body">
+										<div class="row gutters m-3">
+											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+												<h3 class="mb-2 text-primary fw-bold text-uppercase mb-4">Personal Information</h3>
+											</div>
+											<?php
+											 $info = $_GET['acc_id'];
+											 $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '$info' ");
+											      while ($rows = mysqli_fetch_assoc($query_row)) { ?>
+
+											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="user-last">Lastname</label>
+													<input type="hidden" name="update_id" value="<?php echo $info?>">
+													<input type="text" class="form-control" name="last_name" value="<?php  echo $rows['last_name'] ?>">
+												</div>
+											</div>
+											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="user-first">Firstname</label>
+													<input type="text" class="form-control" name="first_name" value="<?php  echo $rows['first_name'] ?>">
+												</div>
+											</div>
+											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="user-middle">Middlename</label>
+													<input type="text" class="form-control" name="mid_name"value="<?php  echo $rows['middle_name'] ?>">
+												</div>
+											</div>
+											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="user-role">Role</label>
+													<input type="text" class="form-control" name="role" value="<?php  echo $rows['role'] ?>">
+												</div>
+											</div>
+											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="user-bday">Birtdate</label>
+													<input type="date" class="form-control" name="birth_date" value="<?php  echo $rows['birth_date'] ?>">
+												</div>
+											</div>
+											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="user-gender">Gender</label>
+													<div class="input-group">
+														<select class="form-select" required="" name="gender" value="">
+															
+															<option ><?php  echo $rows['gender'] ?></option>
+															<?php 
+															if ($rows['gender']== 'Male') {
+																echo "<option value='Female'>Female</option>";
+															}
+															elseif ($rows['gender']== 'Female') {
+																echo "<option value='Male'>Male</option>";
+															}
+															?>
+															
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="phone">Age</label>
+													<input type="number" class="form-control" name="age" value="<?php  echo $rows['age'] ?>" >
+												</div>
+											</div>
+											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="phone">Mobile Number</label>
+													<input type="number" class="form-control" name="mobile_no" value="<?php  echo $rows['mobile_no'] ?>" >
+												</div>
+											</div>
+											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="uder-id">ID No.</label>
+													<input type="number" class="form-control" name="user_id" value="<?php  echo $rows['user_id'] ?>" >
+												</div>
+											</div>
+											<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="user-email">Email Address</label>
+													<input type="email" class="form-control" name="email_address" value="<?php  echo $rows['email_address'] ?>">
+												</div>
+											</div>
+											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+												<div class="form-group">
+													<label for="user-section">Section</label>
+													<input type="text" class="form-control" name="section" value="<?php  echo $rows['section'] ?>">
+												</div>
+											</div>
+										</div>
+										<div class="row gutters m-3">
+											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+												<label for="user-add">Address</label>
+												<textarea class="form-control" name="address" rows="2" ><?php  echo $rows['address'] ?></textarea>
+											</div>
+										</div>
+										<?php }
+
+										 ?>
+										<div class="row gutters mt-5">
+											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center">
+												<div class="text-right">
+													<button type="submit" id="submit" name="submit" class="btn btn-success mx-2 me-4"><i class="fas fa-save me-2"></i>Save changes</button>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
-			</div>
-		</form>
-	</div>
 
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
@@ -274,5 +276,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
       } 
   });
 }); 
+</script>
+
+<script type="text/javascript">
+	file_case.onchange = evt => {
+		const [file] = file_case.files;
+		if (file) {
+			imgss.src = URL.createObjectURL(file);
+
+		}
+	}
 </script>
 </html>

@@ -185,6 +185,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 										<table class="table table-hover align-middle" id="examTab">
 											<thead>
 												<tr>
+													<th scope="col">#</th>
 													<th scope="col">Area of Exam</th>
 													<th scope="col">Number of items</th>
 													<th scope="col">Created By</th>
@@ -195,20 +196,28 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												</tr>
 											</thead>
 											<tbody>
+												<?php
+
+												$manage = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='pending')");
+
+												while ($rows = mysqli_fetch_assoc($manage)) {
+												?>
 												<tr>
-													<td>Criminal Jurisprudence</td>
-	                                                <td>100</td>
-	                                                <td>Sir Refugia</td>
-	                                                <td>60 mins</td>
+													<td><?php echo $rows['pre_exam_id']; ?></td>
+													<td><?php echo $rows['subjects']; ?></td>
+	                                                <td><?php echo $rows['total_question']; ?></td>
+	                                                <td><?php echo $rows['first_name'] ."".$rows['last_name']; ?></td>
+	                                                <td><?php echo $rows['time_limit']; ?></td>
 	                                                <td>09-12-2022</td>
-	                                                <td class="badge bg-warning text-dark mt-2" style="font-size:15px;">Pending</td>
+	                                                <td class="badge bg-warning text-dark mt-2" style="font-size:15px;"><?php echo $rows['pre_board_status']; ?></td>
 	                                                <td>
 	                                                	<div class="d-flex flex-row justify-content-center">
-	                                                		<button class="btn btn-success mx-2" data-toggle="modal" type="button"><i class="fas fa-check"></i></button>
-	                                                		<button class="btn btn-danger  mx-2" data-bs-toggle="modal" type="button"><i class="fas fa-times"></i></button>
+	                                                		<button class="btn btn-success mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-check"></i></button>
+	                                                		<button class="btn btn-danger  mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-times"></i></button>
 	                                                	</div>
 	                                                </td>
 	                                            </tr>
+	                                        <?php } ?>
 	                                        </tbody>
 	                                    </table>
 	                                </div>
@@ -242,6 +251,60 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	        </div>
 	    </div>
 	    
+	    <!-- EDIT Account -->
+		<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+			<div class="modal-dialog">
+	    		<div class="modal-content">
+	    			<div class="modal-header flex-column border-0">
+	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        				<div class="icon-box mt-3">
+        					<i class="far fa-times-circle fa-5x text-danger"></i>
+        				</div>
+        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h4>
+	    			</div>
+	    			<form class="form" action="exam_approve.php" method="POST">
+	    				<div class="modal-body">
+	    					<div class="container d-flex justify-content-center">
+	    						<input type="hidden" name="update_id" id="pre_exam_id">
+	    						<p>Do you really want to delete these record?</p>
+	    					</div>
+	    					<div class="modal-footer d-flex justify-content-center border-0">
+	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">
+	        					<button type="button" class="btn btn-danger  px-5 pb-2 text-white" data-bs-dismiss="modal">NO</button>
+							</div>
+	    				</div>
+	    			</form>
+	    		</div>
+	    	</div>
+	    </div>
+
+
+	    	    <!-- Archive Account -->
+		<div class="modal fade" id="ArchiveAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+			<div class="modal-dialog">
+	    		<div class="modal-content">
+	    			<div class="modal-header flex-column border-0">
+	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        				<div class="icon-box mt-3">
+        					<i class="far fa-times-circle fa-5x text-danger"></i>
+        				</div>
+        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h4>
+	    			</div>
+	    			<form class="form" action="exam_manage_reject.php" method="POST">
+	    				<div class="modal-body">
+	    					<div class="container d-flex justify-content-center">
+	    						<input type="hidden" name="update_id" id="delete_id">
+	    						<p>Do you really want to delete these record?</p>
+	    					</div>
+	    					<div class="modal-footer d-flex justify-content-center border-0">
+	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">
+	        					<button type="button" class="btn btn-danger  px-5 pb-2 text-white" data-bs-dismiss="modal">NO</button>
+							</div>
+	    				</div>
+	    			</form>
+	    		</div>
+	    	</div>
+	    </div>
 
 </body>
 <script>
@@ -268,5 +331,41 @@ let arrow = document.querySelectorAll(".arrow");
   	 	paging: true
   	 });
   });
+</script>
+
+<script type="text/javascript">
+ 	$(document).ready(function() {
+ 		$('.editbtn').on('click', function() {
+
+ 			$('#edit').modal('show');
+
+            $tr = $(this).closest('tr');
+
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+            console.log(data);
+            $('#pre_exam_id').val(data[0]);
+        })
+ 	});
+</script>
+
+
+
+ <script type="text/javascript">
+ 	$(document).ready(function() {
+ 		$('.deletebtn').on('click', function() {
+
+ 			$('#ArchiveAccount').modal('show');
+
+            $tr = $(this).closest('tr');
+
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+            console.log(data);
+            $('#delete_id').val(data[0]);
+        })
+ 	});
 </script>
 </html>

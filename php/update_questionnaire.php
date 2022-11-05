@@ -13,9 +13,8 @@ if (isset($_POST['update'])) {
   $option_c = $_POST['option_c'];
   $option_d = $_POST['option_d'];
   $correct_ans = $_POST['correct_ans'];
-  $acc_id = $_POST['acc'];
 
-  $query= "UPDATE test_question SET subject_name = '$subject_id', level_difficulty = '$level_difficulty', questions_title = '$questions_title', option_a = '$option_a', option_b = '$option_b', option_c = '$option_c', option_d = '$option_d', correct_ans = '$correct_ans', acc_id = '$acc_id' WHERE question_id = '$update_id' ";
+  $query= "UPDATE test_question SET subject_name = '$subject_id', level_difficulty = '$level_difficulty', questions_title = '$questions_title', option_a = '$option_a', option_b = '$option_b', option_c = '$option_c', option_d = '$option_d', correct_ans = '$correct_ans' WHERE question_id = '$update_id' ";
 
   $query_run = mysqli_query($sqlcon, $query);
 
@@ -25,7 +24,7 @@ if (isset($_POST['update'])) {
   }
   else{
 
-    header("Location:../faculty/testbank.php?uptestsucer");
+    echo mysqli_error($sqlcon);
   }
 }  
 ?>

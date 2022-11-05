@@ -75,11 +75,11 @@ elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='faculty') {
 			<h4 class="modal-title mt-3 fw-bold">User Account</h4>
 			<div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-				<input type="text" name="userID" class="form-control" placeholder="User ID" required="required">
+				<input type="text" name="userID" class="form-control" placeholder="User ID" required="required" autocomplete="off">
 			</div>
 			<div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
-				<input type="password" name="password" class="form-control" placeholder="Password" required="required">
+				<input type="password" name="password" class="form-control" placeholder="Password" required="required" autocomplete="off">
 			</div>
 			<div class="d-grid gap-2 mt-2 ">
 				<input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Login">

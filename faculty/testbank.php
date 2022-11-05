@@ -292,7 +292,7 @@ $supps .= "</select>";
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-																		<button class="btn btn-secondary mx-2 deletebtn" data-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
+																		<button data-id='<?php echo $rows['question_id'] ?>' class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
 																	</div>
 																</td>
 															</tr>
@@ -312,7 +312,7 @@ $supps .= "</select>";
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-																		<button class="btn btn-secondary mx-2 deletebtn" data-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
+																		<button data-id='<?php echo $rows['question_id'] ?>' class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
 																	</div>
 																</td>
 															</tr>
@@ -332,7 +332,7 @@ $supps .= "</select>";
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-																		<button class="btn btn-secondary mx-2 deletebtn" data-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
+																		<button data-id='<?php echo $rows['question_id'] ?>' class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
 																	</div>
 																</td>
 															</tr>
@@ -386,7 +386,7 @@ $supps .= "</select>";
         	</div>
         </div>
 
-        <!-- Delete question -->
+       	<!-- Archived info-->
         <div class="modal fade" id="ArchiveAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         	<div class="modal-dialog modal-confirm">
         		<div class="modal-content">
@@ -397,20 +397,16 @@ $supps .= "</select>";
         				</div>
         				<h4 class="modal-title text-align-center mt-3 fw-bold">Delete these question?</h4>
         			</div>
-        			<form class="form" action="../php/archive_question.php" method="POST">
-        				<div class="modal-body">
-        					<div class="container">
-        						<input type="hidden" name="update_id" id="delete_id">
-        					</div>
-        					<div class="modal-footer d-flex justify-content-center  border-0">
-	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">
-	        					<button type="button" class="btn btn-danger btn  px-5 pb-2 text-white" data-bs-dismiss="modal">NO</button>
-							</div>
+        			<div class="modal-body">
+        				<div class="arch">
+
         				</div>
-        			</form>
+        			</div>
         		</div>
         	</div>
         </div>
+
+
         <!-- Logout Modal-->
 	    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	        <div class="modal-dialog">
@@ -490,7 +486,7 @@ let arrow = document.querySelectorAll(".arrow");
       var userid = $(this).data('id');
 
       $.ajax({
-        url: '../php/edit_questions.php?acc_id=<?php echo $_SESSION["acc_id"] ?>',
+        url: '../php/edit_questions.php?acc=<?php echo $_SESSION["acc_id"] ?>',
         type: 'post',
         data: {userid: userid},
         success: function(response){
@@ -521,23 +517,26 @@ let arrow = document.querySelectorAll(".arrow");
    });
  </script>
 
-<!--Archive -->
+
+
+
 <script type="text/javascript">
- 	$(document).ready(function() {
- 		$('.deletebtn').on('click', function() {
+	$(document).ready(function(){
+ 		$('.deletebtn').click(function(){
+ 			var userid = $(this).data('id');
 
- 			$('#ArchiveAccount').modal('show');
-
-            $tr = $(this).closest('tr');
-
-            var data = $tr.children("td").map(function() {
-                return $(this).text();
-            }).get();
-            console.log(data);
-            $('#delete_id').val(data[0]);
-        })
- 	});
- </script>
+ 			$.ajax({
+ 				url: '../php/Arch_acc.php',
+        		type: 'post',
+        		data: {userid: userid},
+        		success: function(response){
+        			$('.arch').html(response);
+          			$('#ArchiveAccount').modal('show');
+          		}
+       		});
+    	});
+   	});
+</script>
 
 
  <script type="text/javascript">

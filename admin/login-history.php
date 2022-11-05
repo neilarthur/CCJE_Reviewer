@@ -186,14 +186,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 										<table class="table table-hover align-middle" id="logTab">
 											<thead>
 												<tr>
-													<th scope="col">Lastname</th>
-													<th scope="col">Firstname</th>
-													<th scope="col">Middlename</th>
-													<th scope="col">Email Address</th>
+													<th scope="col">Name</th>
 													<th scope="col">Position</th>
 													<th scope="col">Assign Section</th>
 													<th scope="col">Log In</th>
 													<th scope="col">Log Out</th>
+													<th scope="col">Action</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -202,14 +200,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												$base = mysqli_query($sqlcon, "SELECT * FROM logs,accounts WHERE (accounts.acc_id=logs.acc_id) AND role='faculty'");
 												while ($rows = mysqli_fetch_array($base)) { ?>
 												<tr>
-													<td><?php echo $rows['last_name'] ; ?></td>
-													<td><?php echo $rows['first_name'] ; ?></td>
-													<td><?php echo $rows['middle_name'] ; ?></td>
-	                                                <td><?php echo $rows['email_address'] ; ?></td>
+													<td><?php echo $rows['first_name']."". $rows['last_name']; ?></td>
 	                                                <td><?php echo $rows['role'] ; ?></td>
 	                                                <td style="padding-left: 30px;"><?php echo $rows['section'] ; ?></td>
 	                                                <td><?php echo $rows['login_time'] ; ?></td>
 	                                                <td><?php echo $rows['logout_time'] ; ?></td>
+	                                                <td><?php echo $rows['action']; ?></td>
 	                                            </tr>
 	                                            <?php } ?>
 	                                        </tbody>

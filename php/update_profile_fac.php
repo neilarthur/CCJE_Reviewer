@@ -11,7 +11,6 @@ if (isset($_POST['submit'])) {
   $user_id=$_POST['user_id'];
   $gender=$_POST['gender'];
   $age=$_POST['age'];
-  $year=$_POST['year'];
   $section = $_POST['section'];
   $email_address = $_POST['email_address'];
   $mobile_no = $_POST['mobile_no'];
@@ -29,7 +28,7 @@ if (isset($_POST['submit'])) {
 
       if (substr($image_type,0,5)=="image") {
 
-        $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', year='$year', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', image='$image_name',image_size='$image_Data' WHERE acc_id = '$update_id' ";
+        $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', image='$image_name',image_size='$image_Data' WHERE acc_id = '$update_id' ";
 
         $query_run = mysqli_query($sqlcon, $query);
 
@@ -49,15 +48,15 @@ if (isset($_POST['submit'])) {
     }
     else{
 
-      $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', year='$year', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address' WHERE acc_id = '$update_id' ";
+      $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address' WHERE acc_id = '$update_id' ";
 
       $query_run = mysqli_query($sqlcon, $query);
 
       if ($query_run) {
-        header("Location: ../faculty/profile.php?profsuccess&acc_id=$update_id");
+        header("Location: ../faculty/profile.php?acc_id=$update_id");
       }
       else{
-        header("Location: ../faculty/profile.php?addproferror&acc_id=$update_id");
+        echo mysqli_error($sqlcon);
       }
     }
   }  

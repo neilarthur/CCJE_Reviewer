@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 
 	$user_id = $_POST['userID'];
 	$password = $_POST['password'];
+	$user_action = "user has been log in";
 
 	$sql_run = "SELECT * FROM accounts WHERE user_id='$user_id' AND password='$password'";
 	$results = mysqli_query($sqlcon,$sql_run);
@@ -32,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 
 		$valid = $_SESSION['acc_id'];
 
-		$data = "INSERT INTO logs(acc_id,login_time)VALUES('$valid', now())";
+		$data = "INSERT INTO logs(acc_id,login_time,action)VALUES('$valid', now(),'$user_action')";
 		$log_data = mysqli_query($sqlcon,$data);
 
 		$_SESSION["login_id"] = mysqli_insert_id($sqlcon);
@@ -56,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 
 		$validate = $_SESSION['acc_id'];
 
-		$auth = "INSERT INTO logs(acc_id,login_time)VALUES('$validate', now())";
+		$auth = "INSERT INTO logs(acc_id,login_time,action)VALUES('$validate', now(),'$user_action')";
 		$log_data = mysqli_query($sqlcon,$auth);
 
 		$_SESSION["login_id"] = mysqli_insert_id($sqlcon);

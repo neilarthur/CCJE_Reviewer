@@ -10,7 +10,7 @@ $id = $_SESSION['acc_id'];
 $difficult = $_POST['difficult'];
 $subjects = $_POST['subjects'];
 
-$sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AND  level_difficulty LIKE '%$difficult%' AND `subject_name` LIKE '%$subjects%' ");
+$sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE status='active' AND `acc_id`='$id' AND  level_difficulty LIKE '%$difficult%' AND `subject_name` LIKE '%$subjects%' ");
 
 
  ?>
@@ -31,7 +31,6 @@ $sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AN
 
         ?>
       <tr>
-        <td><?php echo $rows['question_id']; ?></td>
         <td><?php echo $rows['subject_name']; ?></td>
         <td><?php echo $rows['level_difficulty']; ?></td>
         <td><?php echo $rows['questions_title']; ?></td>
@@ -39,7 +38,7 @@ $sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AN
           <div class="d-flex flex-row justify-content-center">
             <button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" data-bs-target="#ViewQuestion" type="button"><i class="fas fa-eye"></i></button>
             <button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" data-bs-target="#EditAccount" type="button"><i class="fas fa-edit"></i></button>
-            <button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" data-bs-target="#ArchiveAccount" type="button"><i class="fas fa-trash"></i></button>
+            <button data-id='<?php echo $rows['question_id']; ?>' class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" data-bs-target="#ArchiveAccount" type="button"><i class="fas fa-trash"></i></button>
           </div>
         </td>
      </tr>
@@ -103,21 +102,22 @@ $sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AN
 
  <!--Archive -->
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('.deletebtn').on('click', function() {
+  $(document).ready(function(){
+    $('.deletebtn').click(function(){
+      var userid = $(this).data('id');
 
-      $('#ArchiveAccount').modal('show');
-
-            $tr = $(this).closest('tr');
-
-            var data = $tr.children("td").map(function() {
-                return $(this).text();
-            }).get();
-            console.log(data);
-            $('#delete_id').val(data[0]);
-        })
-  });
- </script>
+      $.ajax({
+        url: '../php/Arch_acc.php',
+            type: 'post',
+            data: {userid: userid},
+            success: function(response){
+              $('.arch').html(response);
+                $('#ArchiveAccount').modal('show');
+              }
+          });
+      });
+    });
+</script>
 
 
 

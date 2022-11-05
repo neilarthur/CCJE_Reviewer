@@ -18,6 +18,7 @@ if (isset($_POST['create'])) {
 	$access = $_POST['access_code'];
 	$checkbox1 = $_POST['chkl'];
 	$prepared_by = $_POST['prepared_by'];
+	$status = "pending";
 
 	
 
@@ -102,7 +103,7 @@ if (isset($_POST['create'])) {
 	} 
 	else {
 
-		$sql = "INSERT INTO tbl_pre_question (description,subjects,levels_name,time_limit,total_question,sum_question,access_code,prepared_by) VALUES ('$descript','$subjects_name','$levels','$limit','$question_no','$question_no','$access','$prepared_by')";
+		$sql = "INSERT INTO tbl_pre_question (description,subjects,levels_name,time_limit,total_question,sum_question,access_code,prepared_by,pre_board_status) VALUES ('$descript','$subjects_name','$levels','$limit','$question_no','$question_no','$access','$prepared_by','$status')";
 		$sql_runs=mysqli_query($sqlcon, $sql);
 		$lastid = mysqli_insert_id($sqlcon);
 
