@@ -140,6 +140,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                         <th class="fs-5">Remarks</th>
                                     </tr>
                                 </thead>
+
                                <tbody>
                             <?php
 
