@@ -45,6 +45,8 @@ function getName($n) {
 	<link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
 	<!-- System Logo -->
     <link rel="icon" href="../assets/pics/system-ico.ico">
+    <!-- Time duration -->
+    <link rel="stylesheet" href="../css/jquery.durationpicker.css">
 	<style>
        .dp .dropdown-toggle::after {
             content: none;
@@ -220,18 +222,19 @@ function getName($n) {
 						<div class="row">
 							<div class="col ">
 								<div class="card">
-									<div class="card-body rounded-3 m-4 table-responsive-lg">
+									<div class="card-body rounded-3  table-responsive-xl">
 										<div class="d-flex justify-content-end mb-3">
-											<a href="exam_form.php" type="submit" class="btn px-3 pb-2 text-white"  style="margin-left: 55%; background-color: #8C0000; border-style: none;"><b><i class="fas fa-plus"></i></b> ADD</a>
+											<button type="button" class="btn px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #8C0000;"><i class="fas fa-plus me-1"></i>ADD</button>
 										</div>
-										<table class="table table-striped align-middle bg-light" width="100%" id="preboardTab">
+										<table class="table align-middle bg-light m-2" width="100%" id="preboardTab">
 											<thead>
 												<tr>
-													<th>No.</th>
-													<th scope="col">Areas of Exam</th>
+													<th hidden>ID</th>
+													<th scope="col">Areas of Examination</th>
 													<th scope="col">Total of Question</th>
 													<th scope="col">Time Limit</th>
 													<th scope="col">Access Code</th>
+													<th scope="col">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -244,7 +247,7 @@ function getName($n) {
 												 	
 												 	if ($bows['section']=='4A') {
 												 		
-												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4A')  AND (tbl_pre_question.pre_board_status='active')");
+												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4A')");
 
 												 		while ($rows = mysqli_fetch_assoc($locks)) {
 												 			
@@ -255,17 +258,28 @@ function getName($n) {
 												 			?>
 
 												 			<tr>
-												 				<th><?php echo $rows['pre_exam_id']; ?></th>
+												 				<th hidden=""><?php echo $rows['pre_exam_id']; ?></th>
 												 				<th scope="row"><?php echo $rows['subjects']; ?></th>
-																<td><?php echo $rows['total_question']; ?></td>
+																<td class="ps-5"><?php echo $rows['total_question']; ?></td>
 																<td><?php echo $totals; ?> mins</td>
 																<td><?php echo $rows['access_code']; ?></td>
+																<?php 
+	                                                
+				                                                if ($rows['pre_board_status'] =='active') {
+				                                                	echo'<td class="badge bg-success text-white mt-2" style="font-size:15px;">Approve</td>';
+				                                                }elseif ($rows['pre_board_status'] =='pending') {
+				                                                	echo'<td class="badge bg-warning text-dark mt-2" style="font-size:15px;">Pending</td>';
+				                                                }elseif ($rows['pre_board_status']=='archive') {
+				                                                	echo'<td class="badge bg-danger text-white mt-2" style="font-size:15px;">Rejected</td>';
+				                                                } 
+				                                                ?>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
-																		<a href="view_exam_form.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&pass=<?php echo $rows['pass_rate']; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>
-																		<button data-id='<?php echo $rows['pre_exam_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
+																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
 
-																		<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
+																		<a href="../php/editing-preboard.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen pt-1"></i></a>
+																		
+																		<button class="btn btn-secondary mx-2  deletebtn" data-bs-toggle="modal" type="button" style="padding-bottom: 10px; padding-top: 10px; padding-left: 12px; padding-right: 12px;"><i class="fas fa-trash"></i></button>
 																	</div>
 																</td>
 															</tr>
@@ -273,7 +287,7 @@ function getName($n) {
 												 		}
 												 	}elseif ($bows['section']=='4B') {
 												 		
-												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4B')  AND (tbl_pre_question.pre_board_status='active')");
+												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4B')");
 
 												 		while ($rows = mysqli_fetch_assoc($locks)) {
 												 			$socs = $rows['time_limit'];
@@ -281,17 +295,28 @@ function getName($n) {
 												 			$totals = $socs / 60; ?>
 
 												 			<tr>
-												 				<th><?php echo $rows['pre_exam_id']; ?></th>
+												 				<th hidden=""><?php echo $rows['pre_exam_id']; ?></th>
 												 				<th scope="row"><?php echo $rows['subjects']; ?></th>
-																<td><?php echo $rows['total_question']; ?></td>
+																<td class="ps-5"><?php echo $rows['total_question']; ?></td>
 																<td><?php echo $totals; ?> mins</td>
 																<td><?php echo $rows['access_code']; ?></td>
+																<?php 
+	                                                
+				                                                if ($rows['pre_board_status'] =='active') {
+				                                                	echo'<td class="badge bg-success text-white mt-2" style="font-size:15px;">Approve</td>';
+				                                                }elseif ($rows['pre_board_status'] =='pending') {
+				                                                	echo'<td class="badge bg-warning text-dark mt-2" style="font-size:15px;">Pending</td>';
+				                                                }elseif ($rows['pre_board_status']=='archive') {
+				                                                	echo'<td class="badge bg-danger text-white mt-2" style="font-size:15px;">Rejected</td>';
+				                                                } 
+				                                                ?>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
-																		<a href="view_exam_form.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&pass=<?php echo $rows['pass_rate']; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>
-																		<button data-id='<?php echo $rows['pre_exam_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
+																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
 
-																		<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
+																		<a href="../php/editing-preboard.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen pt-1"></i></a>
+																		
+																		<button class="btn btn-secondary mx-2  deletebtn" data-bs-toggle="modal" type="button" style="padding-bottom: 10px; padding-top: 10px; padding-left: 12px; padding-right: 12px;"><i class="fas fa-trash"></i></button>
 																	</div>
 																</td>
 															</tr>
@@ -299,7 +324,7 @@ function getName($n) {
 												 		}
 												 	}elseif ($bows['section']=='4C') {
 
-												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4C') AND (tbl_pre_question.pre_board_status='active')");
+												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4C')");
 
 												 		while ($rows = mysqli_fetch_assoc($locks)) {
 												 			$socs = $rows['time_limit'];
@@ -308,20 +333,28 @@ function getName($n) {
 
 
 												 			<tr>
-												 				<td><?php echo $rows['pre_exam_id']; ?></td>
+												 				<td hidden=""><?php echo $rows['pre_exam_id']; ?></td>
 												 				<th scope="row"><?php echo $rows['subjects']; ?></th>
-																<td><?php echo $rows['total_question']; ?></td>
+																<td class="ps-5"><?php echo $rows['total_question']; ?></td>
 																<td><?php echo $totals; ?> mins</td>
 																<td><?php echo $rows['access_code']; ?></td>
+																 <?php 
+	                                                
+				                                                if ($rows['pre_board_status'] =='active') {
+				                                                	echo'<td class="badge bg-success text-white mt-2" style="font-size:15px;">Approve</td>';
+				                                                }elseif ($rows['pre_board_status'] =='pending') {
+				                                                	echo'<td class="badge bg-warning text-dark mt-2" style="font-size:15px;">Pending</td>';
+				                                                }elseif ($rows['pre_board_status']=='archive') {
+				                                                	echo'<td class="badge bg-danger text-white mt-2" style="font-size:15px;">Rejected</td>';
+				                                                } 
+				                                                ?>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
-																	
+																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
 
-																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>
-
-																		<button data-id='<?php echo $rows['pre_exam_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
+																		<a href="../php/editing-preboard.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen pt-1"></i></a>
 																		
-																		<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
+																		<button class="btn btn-secondary mx-2  deletebtn" data-bs-toggle="modal" type="button" style="padding-bottom: 10px; padding-top: 10px; padding-left: 12px; padding-right: 12px;"><i class="fas fa-trash"></i></button>
 																	</div>
 																</td>
 															</tr>
@@ -340,6 +373,87 @@ function getName($n) {
 				</div>
 			</div>
 		</section>
+		<!--ADD Modal -->
+	    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	    	<div class="modal-dialog modal-xl">
+	    		<form action="#" id="form1" method="POST" >
+				    <div class="modal-content">
+				    	<div class="modal-header border-0">
+				    		<h4 class="modal-title fw-bold text-uppercase" id="exampleModalLabel">Exam Information</h4>
+				    		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				    	</div>
+				    	<div class="modal-body">
+				    		<div class="row">
+					      		<div class="col-lg-6">
+					      			<div class="card h-100">
+					      				<div class="card-body">
+					      					<label  class="form-label fw-bold">Description</label>
+					      					<textarea type="text" class="form-control " name="description" placeholder="Answer the following" rows="7" required></textarea>
+					      				</div>
+					      			</div>
+					      		</div>
+					      		<div class="col-lg-6">
+					      			<div class="card h-100">
+					      				<div class="card-body">
+											<div class="input-group mt-2">
+												<span class="input-group-text border-0 bg-white fw-bold">Area of Exam</span>
+												<select class="form-select" name="subjects" id="subjects" required>
+													<option selected value="">Select Category</option>
+													<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+													<option value="Law Enforcement">Law Enforcement</option>
+													<option value="Criminalistics">Criminalistics</option>
+													<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+													<option value="Criminal Sociology">Criminal Sociology</option>
+													<option value="Correctional Administration">Correctional Administration</option>
+												</select>
+											</div>
+											<div class="input-group mt-2">
+												<span class="input-group-text border-0 bg-white fw-bold">Total of questions</span>
+												<select class="form-control" name="t_question" id="total_questions" required>
+												<?php
+		          								for($i = 100; $i >= 20; $i-=20){
+
+		          									echo ' <option>'.$i.'</option>';
+		          								}
+		          								?>
+
+											   </select>
+											</div>
+											<div class="mt-2">
+												<div class="input-group ">
+													<span class="input-group-text border-0 bg-white fw-bold me-3">Time limit</span>
+													<label id="btn-example4"  type="text" hidden  style="font-size: 13px;"></label>
+													<input name="time_limit" class="form-control" required/>
+							                    </div>
+					      					</div>
+					      					<div class="input-group mt-2">
+					      						<span class="input-group-text border-0 bg-white fw-bold">Open the quiz</span>
+					      					    <input type="date" class="form-control" >
+					      					</div>
+					      					<div class="input-group mt-2">
+					      						<span class="input-group-text border-0 bg-white fw-bold">Close the quiz</span>
+					      					    <input type="date" class="form-control" >
+					      					</div>
+					      					<div class="mt-2">
+					      						<div class="input-group">
+					      							<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
+					      							<span class="input-group-text border-0 bg-white fw-bold me-3">Access code</span> 
+													<input type="text" class="form-control" name="access_code" value="<?php echo getName($n); ?>" readonly>
+					      						</div>
+					      					</div>
+					      				</div>
+					      			</div>
+					      		</div>
+					      	</div>
+					   </div>
+					   <div class="modal-footer d-flex justify-content-center border-0 mt-3 mb-2">
+					   	<button type="submit" name="create" onclick="getInputValue();"  class="btn btn-success" ><i class="fas fa-save me-2"></i>Save and Display</button>
+					   	<button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-times me-2"></i>Cancel</button>
+				      </div>
+				  </div>
+				</form>
+			</div>
+		</div>
 	    <!-- Edit question -->
 	     <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         	<div class="modal-dialog modal-lg">
@@ -429,6 +543,7 @@ let arrow = document.querySelectorAll(".arrow");
 </script>
 <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="../js/jquery.durationpicker.js"></script>
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -457,7 +572,21 @@ let arrow = document.querySelectorAll(".arrow");
     });
    });
  </script>
+ <script>
+$(document).ready(function() {
 
+	function getInputValue() {  // A method is used to get input value
+     let value = document.getElementById("btn-example4").value;
+     alert(value);     // Display the value
+   }
+   
+    $('input[name=time_limit]').durationpicker({showDays: false})
+    .on("change", function(){
+        $('#btn-example4').text( $(this).val() +"(secs)");
+    });
+
+});
+</script>
  <script type="text/javascript">
  	$(document).ready(function() {
  		$('.deletebtn').on('click', function() {

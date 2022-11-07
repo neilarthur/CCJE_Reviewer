@@ -198,7 +198,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 											<tbody>
 												<?php
 
-												$manage = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='pending')");
+												$manage = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by)");
 
 												while ($rows = mysqli_fetch_assoc($manage)) {
 												?>
@@ -209,7 +209,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                <td><?php echo $rows['first_name'] ."".$rows['last_name']; ?></td>
 	                                                <td><?php echo $rows['time_limit']; ?></td>
 	                                                <td>09-12-2022</td>
-	                                                <td class="badge bg-warning text-dark mt-2" style="font-size:15px;"><?php echo $rows['pre_board_status']; ?></td>
+	                                                <?php 
+	                                                
+	                                                if ($rows['pre_board_status'] =='active') {
+	                                                	echo'<td class="badge bg-success text-white mt-2" style="font-size:15px;">Approve</td>';
+	                                                }elseif ($rows['pre_board_status'] =='pending') {
+	                                                	echo'<td class="badge bg-warning text-dark mt-2" style="font-size:15px;">Pending</td>';
+	                                                }elseif ($rows['pre_board_status']=='archive') {
+	                                                	echo'<td class="badge bg-danger text-white mt-2" style="font-size:15px;">Rejected</td>';
+	                                                } 
+	                                                ?>
+	                                                
 	                                                <td>
 	                                                	<div class="d-flex flex-row justify-content-center">
 	                                                		<button class="btn btn-success mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-check"></i></button>
@@ -251,7 +261,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	        </div>
 	    </div>
 	    
-	    <!-- EDIT Account -->
+	    <!-- Approve Modal -->
 		<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 			<div class="modal-dialog">
 	    		<div class="modal-content">
@@ -279,7 +289,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	    </div>
 
 
-	    	    <!-- Archive Account -->
+	    <!--Reject modal -->
 		<div class="modal fade" id="ArchiveAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 			<div class="modal-dialog">
 	    		<div class="modal-content">

@@ -46,6 +46,8 @@ $suppd .= "</select>";
 	<link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
 	<!-- System Logo -->
     <link rel="icon" href="../assets/pics/system-ico.ico">
+    <!-- Time duration -->
+    <link rel="stylesheet" href="../css/jquery.durationpicker.css">
 	<style>
        .dp .dropdown-toggle::after {
             content: none;
@@ -223,17 +225,18 @@ $suppd .= "</select>";
 								<div class="card">
 									<div class="card-body rounded-3 table-responsive-xl">
 										<div class="d-flex justify-content-end mb-3">
-											<a href="testform.php?difficulty=easy" type="submit" class="btn px-3 pb-2 text-white" style="background-color: #8C0000; border-style: none;"><b><i class="fas fa-plus me-1"></i></b>ADD</a>
+											<button type="button" class="btn px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #8C0000;"><i class="fas fa-plus me-1"></i>ADD</button>
 										</div>
 										<table class="table table-hover align-items-middle bg-light m-2" width="100%" id="examTab">
 												<thead>
 												<tr>
 													<th hidden=""></th>
+													<th scope="col">Title</th>
 													<th scope="col">Area of Examination</th>
-													<th scope="col">Level of Difficulty</th>
-													<th scope="col">Total of Questions</th>
 													<th scope="col">Class Section</th>
+													<th scope="col">Total Questions</th>
 													<th scope="col">Time Limit</th>
+													<th scope="col" style="padding-left: 30px;">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -257,19 +260,34 @@ $suppd .= "</select>";
 
 															<tr>
 																<td hidden=""><?php echo $rows['test_id']; ?></td>
+																<td><?php echo $rows['quiz_title'];?></td>
 																<td scope="row"><?php echo $rows['subject_name'];?></td>
-																<td><?php echo $rows['question_difficulty']?></td>
-																<td><?php echo $rows['total_quest']?></td>
-																<td><?php echo $rows['section']; ?></td>
+																<td class="ps-5"><?php echo $rows['section']; ?></td>
+																<td class="ps-5"><?php echo $rows['total_quest']?></td>
 																<td><?php echo $mins; ?> mins</td>
+
+																<?php 
+
+																$id= $rows['test_id'];
+
+													            $quiz = mysqli_query($sqlcon,"SELECT * FROM test_question,choose_question, student_choice WHERE (test_question.question_id=student_choice.question_id) AND (choose_question.test_id=student_choice.test_id) AND student_choice.test_id='$id' AND question_stat='active'");
+
+																if (mysqli_num_rows($quiz) ==0) { ?>
+																	<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>
+																<?php	
+
+																}
+																elseif (mysqli_num_rows($quiz) >0) { ?>
+																	<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>
+
+																
+																<?php } ?>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
 
-																		<a href="view_question.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>
+																		<a href="view_question.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus"></i></a>
 
-																		<button data-id='<?php echo $rows['test_id']?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-
-																		
+																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
 
 																		<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
 																	</div>
@@ -289,17 +307,34 @@ $suppd .= "</select>";
 
 															<tr>
 																<td hidden=""><?php echo $rows['test_id']; ?></td>
+																<td><?php echo $rows['quiz_title'];?></td>
 																<td scope="row"><?php echo $rows['subject_name'];?></td>
-																<td><?php echo $rows['question_difficulty']?></td>
-																<td><?php echo $rows['total_quest']?></td>
-																<td><?php echo $rows['section']; ?></td>
+																<td class="ps-5"><?php echo $rows['section']; ?></td>
+																<td class="ps-5"><?php echo $rows['total_quest']?></td>
 																<td><?php echo $mins; ?> mins</td>
+
+																<?php 
+
+																$id= $rows['test_id'];
+
+													            $quiz = mysqli_query($sqlcon,"SELECT * FROM test_question,choose_question, student_choice WHERE (test_question.question_id=student_choice.question_id) AND (choose_question.test_id=student_choice.test_id) AND student_choice.test_id='$id' AND question_stat='active'");
+
+																if (mysqli_num_rows($quiz) ==0) { ?>
+																	<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>
+																<?php	
+
+																}
+																elseif (mysqli_num_rows($quiz) >0) { ?>
+																	<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>
+
+																
+																<?php } ?>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
 
-																		<a href="view_question.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>
+																		<a href="view_question.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus"></i></a>
 
-																		<a href="../php/edit_test_yourself.php?id=<?php echo $rows['test_id']?>" type="button" class="btn btn-warning  mx-2 "><i class="fas fa-edit"></i></a>
+																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
 
 																		<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
 																	</div>
@@ -321,17 +356,34 @@ $suppd .= "</select>";
 
 															<tr>
 																<td hidden=""><?php echo $rows['test_id']; ?></td>
+																<td><?php echo $rows['quiz_title'];?></td>
 																<td scope="row"><?php echo $rows['subject_name'];?></td>
-																<td><?php echo $rows['question_difficulty']?></td>
-																<td><?php echo $rows['total_quest']?></td>
-																<td><?php echo $rows['section']; ?></td>
+																<td class="ps-5"><?php echo $rows['section']; ?></td>
+																<td class="ps-5"><?php echo $rows['total_quest']?></td>
 																<td><?php echo $mins; ?> mins</td>
+
+																<?php 
+
+																$id= $rows['test_id'];
+
+													            $quiz = mysqli_query($sqlcon,"SELECT * FROM test_question,choose_question, student_choice WHERE (test_question.question_id=student_choice.question_id) AND (choose_question.test_id=student_choice.test_id) AND student_choice.test_id='$id' AND question_stat='active'");
+
+																if (mysqli_num_rows($quiz) ==0) { ?>
+																	<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>
+																<?php	
+
+																}
+																elseif (mysqli_num_rows($quiz) >0) { ?>
+																	<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>
+
+																
+																<?php } ?>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
 
-																		<a href="view_question.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>
+																		<a href="view_question.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus"></i></a>
 
-																		<button data-id='<?php echo $rows['test_id']?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
+																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
 
 																		<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
 																	</div>
@@ -378,6 +430,109 @@ $suppd .= "</select>";
 	    		</div>
 	    	</div>
 	    </div>
+	     <!--ADD Modal -->
+	    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	    	<div class="modal-dialog modal-xl">
+	    		<form action="../php/test_yourself.php" id="form1" method="POST" >
+			    <div class="modal-content">
+			      <div class="modal-header border-0">
+			        <h4 class="modal-title fw-bold text-uppercase" id="exampleModalLabel">Test Information</h4>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+
+			      	<div class="row">
+			      		<div class="col-lg-6">
+			      			<div class="card h-100">
+			      				<div class="card-body">
+			      					<label  class="form-label fw-bold">Title</label>
+			      					<input type="text" class="form-control mb-3" name="title" placeholder="Untitled form" required>
+			      					<label  class="form-label fw-bold">Description</label>
+			      					<textarea type="text" class="form-control " name="description" placeholder="Answer the following" rows="7" required></textarea>
+			      				</div>
+			      			</div>
+			      		</div>
+			      		<div class="col-lg-6">
+			      			<div class="card">
+			      				<div class="card-body">
+			      					<div class="input-group">
+			      						<span class="input-group-text  border-0 bg-white fw-bold">Section</span>
+										<select class="form-select " name="class_section" required>
+											<option selected value="4A">4A</option>
+											<option value="4B">4B</option>
+											<option value="4C">4C</option>
+										</select>
+									</div>
+									<div class="input-group mt-2">
+										<span class="input-group-text border-0 bg-white fw-bold">Type of Test</span>
+										<select class="form-select" name="type_exam" required>
+											<option selected alue="Quiz">Quiz</option>
+											<option value="LongQuiz">Long Quiz</option>
+										</select>
+									</div>
+									<div class="input-group mt-2">
+										<span class="input-group-text border-0 bg-white fw-bold">Area of Exam</span>
+										<select class="form-select" name="subjects" id="subjects" required>
+											<option selected value="">Select Category</option>
+											<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+											<option value="Law Enforcement">Law Enforcement</option>
+											<option value="Criminalistics">Criminalistics</option>
+											<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+											<option value="Criminal Sociology">Criminal Sociology</option>
+											<option value="Correctional Administration">Correctional Administration</option>
+										</select>
+									</div>
+									<div class="input-group mt-2">
+										<span class="input-group-text border-0 bg-white fw-bold">Level of difficulty</span>
+										<select class="form-select custom-select difficult" name="difficult" id="difficult" required>
+											<option selected value="">Select Difficulty</option>
+											<option value="Easy">Easy</option>
+											<option  value="Moderate">Moderate</option>
+											<option value="Hard">Hard</option>
+										</select>
+										<input type="hidden" name="hidden_exam" id="hidden_exam" />
+									</div>
+									<div class="input-group mt-2">
+										<span class="input-group-text border-0 bg-white fw-bold">Total of questions</span>
+										<select class="form-control" name="t_question" id="total_questions" required>
+											<?php
+              								for($i = 5; $i <= 50; $i+=5){
+
+              									echo ' <option>'.$i.'</option>';
+              								}
+              								?>
+
+										</select>
+									</div>
+									<div class="mt-2">
+										<div class="input-group ">
+											<span class="input-group-text border-0 bg-white fw-bold me-3">Time limit</span>
+											<label id="btn-example4"  type="text" hidden  style="font-size: 13px;"></label>
+											<input name="time_limit" class="form-control" required/>
+					                    </div>
+			      					</div>
+			      					<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
+			      					<div class="input-group mt-2">
+			      						<span class="input-group-text border-0 bg-white fw-bold">Open the quiz</span>
+			      					    <input type="date" class="form-control" >
+			      					</div>
+			      					<div class="input-group mt-2">
+			      						<span class="input-group-text border-0 bg-white fw-bold">Close the quiz</span>
+			      					    <input type="date" class="form-control" >
+			      					</div>
+			      				</div>
+			      			</div>
+			      		</div>
+			      	</div>
+			      </div>
+			      <div class="modal-footer d-flex justify-content-center border-0 mt-3 mb-2">
+			      	<button type="submit" name="create" onclick="getInputValue();"  class="btn btn-success" ><i class="fas fa-save me-2"></i>Save and Display</button>
+			        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-times me-2"></i>Cancel</button>
+			      </div>
+			    </div>
+			</form>
+		    </div>
+		</div>
 	     <!-- Edit question -->
 	     <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         	<div class="modal-dialog modal-lg">
@@ -478,8 +633,24 @@ let arrow = document.querySelectorAll(".arrow");
     });
    });
  </script>
+ <script>
+$(document).ready(function() {
+
+	function getInputValue() {  // A method is used to get input value
+     let value = document.getElementById("btn-example4").value;
+     alert(value);     // Display the value
+   }
+   
+    $('input[name=time_limit]').durationpicker({showDays: false})
+    .on("change", function(){
+        $('#btn-example4').text( $(this).val() +"(secs)");
+    });
+
+});
+</script>
 <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="../js/jquery.durationpicker.js"></script>
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {

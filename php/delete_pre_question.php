@@ -19,7 +19,7 @@ if (isset($_POST['save'])) {
 
     if ($query_run) {
 
-  		header("Location:../faculty/preboard.php");
+  		header("Location:../php/editing-preboard.php?id=$ids");
   	}
   	else {
 

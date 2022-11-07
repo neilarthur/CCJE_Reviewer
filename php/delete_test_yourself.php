@@ -13,7 +13,7 @@ if (isset($_POST['save'])) {
 
     if ($query_run) {
 
-  		header("Location:../faculty/view_question.php?id=$ids");
+  		header("Location:../php/editing-quiz.php?id=$ids");
   	}
   	else {
 
