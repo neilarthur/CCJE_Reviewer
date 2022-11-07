@@ -174,7 +174,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                            <div class="table-reponsive">
                               <table class="align-middle mb-0 table table-borderless " id="quesTab" style="font-size: 17px;">
                                   <thead class="mb-4">
-                                      <th class="text-left pl-1 fs-5">Question:</th>
+                                      <th class="text-left pl-1 fs-5">Question: <?php echo $number ?></th>
                                   </thead>
                                   <tbody>
                              
@@ -183,7 +183,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                 if ($low['quiz_check']== $shows['correct_ans']) { ?>
                                   <tr>
                                     <th>
-                                     <b><span class="text-success"><?php echo $number.". &nbsp;". $shows['questions_title']; ?> <i class="fas fa-check ms-2 fa-lg"></i></span></b>
+                                     <b><span class="text-success"><?php echo $shows['questions_title']; ?> <i class="fas fa-check ms-2 fa-lg"></i></span></b>
                                     </th>
                                   </tr>
                                   <?php 

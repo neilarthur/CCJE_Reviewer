@@ -137,14 +137,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
-  						 			<tr class="table-danger">
-  						 				<td></td>
-  						 				<td></td>
-  						 				<td></td>
+  						 			<tr>
 	  									<td class="text-center">No Records ....</td>
-	  									<td></td>
-	  									<td></td>
-	  									<td></td>
 	  								</tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {
@@ -207,14 +201,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
 
-  						 			<tr class="table-danger">
-  						 				<td></td>
-  						 				<td></td>
-  						 				<td></td>
+  						 			<tr>
 	  									<td class="text-center">No Records ....</td>
-	  									<td></td>
-	  									<td></td>
-	  									<td></td>
 	  								</tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {
@@ -274,14 +262,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
 
-  						 			<tr class="table-danger">
-  						 				<td></td>
-  						 				<td></td>
-  						 				<td></td>
+  						 			<tr>
 	  									<td class="text-center">No Records ....</td>
-	  									<td></td>
-	  									<td></td>
-	  									<td></td>
 	  								</tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {

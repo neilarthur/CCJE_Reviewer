@@ -207,7 +207,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
           $c = 0;
           $number = 1;
-          $display = mysqli_query($sqlcon,"SELECT * FROM test_question,student_choice WHERE (test_question.question_id=student_choice.question_id) AND test_id = '$ids'");
+          $display = mysqli_query($sqlcon,"SELECT * FROM choose_question,test_question,student_choice WHERE (test_question.question_id=student_choice.question_id) AND (choose_question.test_id = student_choice.test_id) AND (student_choice.test_id = '$ids')");
 
           while ($shows = mysqli_fetch_assoc($display)) {  ?>
 
@@ -220,7 +220,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                  <table class="align-middle mb-0 table table-borderless" id="quesTab">
                                     <thead class="mb-4">
                                        <tr>
-                                          <th class="text-left pl-1 fs-5">Question:</th>
+                                          
                                        </tr>
                                      </thead>
                                      <tbody style="font-size: 17px;">
@@ -247,9 +247,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                     </tbody>
                                     <tbody>
                                          <tr>
-                                            <input type="hidden" name="update_id" value="<?php echo $ids; ?>">
+                                            <input type="text" name="update_id" value="<?php echo $ids; ?>">
                                             <input type="hidden" name="update_acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
                                             <input type="hidden" name="total_quest" value="<?php echo $sad; ?>">
+                                            <input type="text" name="correct" value="<?php echo $shows['correct_ans']; ?>">
                                         </tr>
                                      </tbody>
                                   </table>

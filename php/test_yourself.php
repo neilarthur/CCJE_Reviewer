@@ -26,17 +26,16 @@ if (isset($_POST["create"])) {
 
 	if ($sql_rows) {
 
-
-		for ($i=0; $i <sizeof($checkbox1); $i++) {
-			$query = "INSERT INTO student_choice(question_id,test_id)  VALUES ('".$checkbox1[$i]."','$lastid')";
+		foreach ($checkbox1 as $key => $value) {
+			
+			$query = "INSERT INTO student_choice(question_id,test_id) VALUES ('".$value."','$lastid')";
 			mysqli_query($sqlcon,$query) or die (mysqli_error($sqlcon));
 		}
-
 		header("location:../faculty/testyourself.php?testsuccess");
 	}
 	else {
 		
-		header("location:../faculty/testyourself.php?testerror");
+		echo mysqli_error($sqlcon);
 	}
 }
 
