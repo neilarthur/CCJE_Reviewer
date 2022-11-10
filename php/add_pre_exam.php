@@ -4,25 +4,22 @@ require("../PHPMailer-master/src/Exception.php");
 require("../PHPMailer-master/src/PHPMailer.php");
 require("../PHPMailer-master/src/SMTP.php");
 
-
-
 require_once 'conn.php';
+
 
 if (isset($_POST['create'])) {
 
-	$descript = $_POST['description'];
-	$subjects_name = $_POST['subjects'];
-	$levels = $_POST['difficult'];
-	$limit = $_POST['time_limit'];
-	$question_no = $_POST['t_question'];
-	$access = $_POST['access_code'];
-	$checkbox1 = $_POST['chkl'];
+	$description = $_POST['description'];
+	$area_exam = $_POST['subjects'];
+	$total_quest = $_POST['t_question'];
+	$time_limit = $_POST['time_limit'];
+	$start_d = $_POST['start_d'];
+	$end_d = $_POST['end_d'];
 	$prepared_by = $_POST['prepared_by'];
+	$access_code = $_POST['access_code'];
 	$status = "pending";
 
-	
-
-	$sacs = mysqli_query($sqlcon,"SELECT email_address FROM accounts WHERE role = 'student'");
+	$sacs = mysqli_query($sqlcon,"SELECT email_address FROM accounts WHERE role ='student'");
 
 	$mail = new PHPMailer\PHPMailer\PHPMailer();
 
@@ -97,26 +94,25 @@ if (isset($_POST['create'])) {
 	//Replace the plain text body with one created manually
 	$mail->AltBody = 'This is a plain-text message body';
 
-	//send the message, check for errors
-	if (!$mail->send()) {
-	    echo 'Mailer Error: ' . $mail->ErrorInfo;
-	} 
+	if (!$mail ->send()) {
+		
+		echo 'Mailer Error:' .$mail->ErrorInfo;
+
+	}
 	else {
 
-		$sql = "INSERT INTO tbl_pre_question (description,subjects,levels_name,time_limit,total_question,sum_question,access_code,prepared_by,pre_board_status) VALUES ('$descript','$subjects_name','$levels','$limit','$question_no','$question_no','$access','$prepared_by','$status')";
-		$sql_runs=mysqli_query($sqlcon, $sql);
-		$lastid = mysqli_insert_id($sqlcon);
+		$pre_exam_insert = "INSERT INTO tbl_pre_question(description,subjects,time_limit,total_question,sum_question,access_code,start_date,end_date,prepared_by,pre_board_status)VALUES('$description','$area_exam','$time_limit','$total_quest','$total_quest','$access_code','$start_d','$end_d','$prepared_by','$status')";
 
-		if($sql_runs) {
-			for ($i=0; $i <sizeof($checkbox1); $i++) {
-				$query = "INSERT INTO tbl_pre_choose_quest(question_id,pre_exam_id)  VALUES ('".$checkbox1[$i]."','$lastid')";
-				mysqli_query($sqlcon,$query) or die (mysqli_error($sqlcon));
-			}
-			header("location:../faculty/preboard.php?examsuccess");
+		$query_pre_exam = mysqli_query($sqlcon,$pre_exam_insert);
+
+		if ($query_pre_exam) {
+			
+			header("location: ../faculty/preboard.php");
 		}
-		else {
-			header("location:../faculty/preboard.php?examerror");
-		}   
-	}	
+		else{
+
+			echo mysqli_error($sqlcon);	
+		}
+	}
 }
 ?>

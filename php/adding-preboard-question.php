@@ -204,7 +204,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 			<!-- Main Content-->
 			<div class="col p-3 overflow-auto">
 				<div class="container-fluid ">
-					<form action="../php/test_question.php" method="POST" id="add_form">
+					<form action="test_preboard.php" method="POST" id="add_form">
 						<div class="col-lg-8 mx-auto mt-2">
 							<table class="table-responsive">
 								<thead>
@@ -283,6 +283,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 						                        </div>
 						                        <div class="form-group">
 						                             <label for="name" hidden="">Faculty</label>
+						                             <input type="text" name="update_id" value="<?php echo $_GET['id']; ?>">
 						                             <input type="hidden" name="acc[]" value="<?php echo $_SESSION['acc_id'] ?>">
 						                        </div>
 											</div>

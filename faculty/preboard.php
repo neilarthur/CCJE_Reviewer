@@ -247,7 +247,7 @@ function getName($n) {
 												 	
 												 	if ($bows['section']=='4A') {
 												 		
-												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4A')");
+												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4A') AND tbl_pre_question.pre_board_status='active'");
 
 												 		while ($rows = mysqli_fetch_assoc($locks)) {
 												 			
@@ -287,7 +287,7 @@ function getName($n) {
 												 		}
 												 	}elseif ($bows['section']=='4B') {
 												 		
-												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4B')");
+												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4B') AND tbl_pre_question.pre_board_status='active'");
 
 												 		while ($rows = mysqli_fetch_assoc($locks)) {
 												 			$socs = $rows['time_limit'];
@@ -324,7 +324,7 @@ function getName($n) {
 												 		}
 												 	}elseif ($bows['section']=='4C') {
 
-												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4C')");
+												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4C') AND tbl_pre_question.pre_board_status='active'");
 
 												 		while ($rows = mysqli_fetch_assoc($locks)) {
 												 			$socs = $rows['time_limit'];
@@ -352,7 +352,7 @@ function getName($n) {
 																	<div class="d-flex flex-row justify-content-center">
 																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
 
-																		<a href="../php/editing-preboard.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen pt-1"></i></a>
+																		<a href="../php/editing-preboard.php?id=<?php echo $rows['pre_exam_id'];?>" class="btn btn-warning mx-2" ><i class="fas fa-pen pt-1"></i></a>
 																		
 																		<button class="btn btn-secondary mx-2  deletebtn" data-bs-toggle="modal" type="button" style="padding-bottom: 10px; padding-top: 10px; padding-left: 12px; padding-right: 12px;"><i class="fas fa-trash"></i></button>
 																	</div>
@@ -376,7 +376,7 @@ function getName($n) {
 		<!--ADD Modal -->
 	    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	    	<div class="modal-dialog modal-xl">
-	    		<form action="#" id="form1" method="POST" >
+	    		<form action="../php/add_pre_exam.php" id="form1" method="POST" >
 				    <div class="modal-content">
 				    	<div class="modal-header border-0">
 				    		<h4 class="modal-title fw-bold text-uppercase" id="exampleModalLabel">Exam Information</h4>
@@ -428,11 +428,11 @@ function getName($n) {
 					      					</div>
 					      					<div class="input-group mt-2">
 					      						<span class="input-group-text border-0 bg-white fw-bold">Open the quiz</span>
-					      					    <input type="date" class="form-control" >
+					      					    <input type="date" name="start_d" class="form-control" >
 					      					</div>
 					      					<div class="input-group mt-2">
 					      						<span class="input-group-text border-0 bg-white fw-bold">Close the quiz</span>
-					      					    <input type="date" class="form-control" >
+					      					    <input type="date" name="end_d" class="form-control" >
 					      					</div>
 					      					<div class="mt-2">
 					      						<div class="input-group">

@@ -6,29 +6,23 @@ require_once 'conn.php';
 if (isset($_POST['create'])) {
 
 	$id = $_POST['id'];
-	$subjects_name = $_POST['subjects'];
-	$levels = $_POST['difficult'];
-	$shock = $_POST['game'];
 	$checkbox1 = $_POST['chkl'];
+	$pre_status = "active";
 
-	$nam = "UPDATE tbl_pre_question SET subjects ='$subjects_name', levels_name='$levels', sum_question='$shock' WHERE pre_exam_id ='$id'";
 
-	$san=mysqli_query($sqlcon,$nam);
+	foreach ($checkbox1 as $key => $value) {
 
-	if ($san) {
+		$pre_board_insert = "INSERT INTO tbl_pre_choose_quest (question_id,pre_exam_id,pre_choose_status) VALUES ('".$value."','$id','$pre_status')";
 
-		for ($i=0; $i <sizeof($checkbox1); $i++) {
-			$query = "INSERT INTO tbl_pre_choose_quest(question_id,pre_exam_id)  VALUES ('".$checkbox1[$i]."','$id')";
-			$ss = mysqli_query($sqlcon,$query);
+		$pre_query_exam = mysqli_query($sqlcon,$pre_board_insert);
+
+		if ($pre_query_exam) {
+
+			header("location: editing-preboard.php?id=$id");
 		}
-		header("location:../faculty/preboard.php");
+		else {
+			echo mysqli_error($sqlcon);
+		}
 	}
-	else{
-		mysqli_error($sqlcon);
-	}
-
-
-
-
 }
 ?>

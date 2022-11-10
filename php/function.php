@@ -7,16 +7,22 @@ if (isset($_POST["create"])) {
 	$let = $_POST['test'];
 	$checkbox1 = $_POST['chkl'];
 
+	$status = "active";
 
 
-	for ($i=0; $i <sizeof($checkbox1); $i++) {
-		$query = "INSERT INTO student_choice(question_id,test_id)  VALUES ('".$checkbox1[$i]."','$let')";
+	foreach ($checkbox1 as $key => $value) {
+		
+		$query = "INSERT INTO student_choice(question_id,test_id,question_stat) VALUES ('".$value."','$let','$status')";
 		$ss = mysqli_query($sqlcon,$query);
+
 		if ($ss) {
-			header("location:../faculty/testyourself.php?id=$let");
+			
+			header("location:editing-quiz.php?id=$let");
+
 		}
-		else{
-			mysqli_error($sqlcon);
+		else {
+
+			echo mysqli_error($sqlcon);
 		}
 	}
 }

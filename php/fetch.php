@@ -13,50 +13,54 @@ $sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AN
 
 
  ?>
+<link href="../css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
  <div class="table-responsive">
-   <table id="students" class="align-middle mb-0 table table-borderless table-hover">
+
+  <table class="table table-hover bg-light" style="font-size: 15px;" id="pre_board">
     <thead>
       <tr>
-        <th scope="col"><input type="checkbox" name="adsad" id="select-all"> Select</th>
-        <th scope="col">Subjects</th>
+        <th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>  
         <th scope="col">Question</th>
-        <th scope="col">Difficulty</th>
-        <th scope="col" class="text-center">Correct Answer</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
-      <?php while ($now = mysqli_fetch_assoc($sql)) {
+      <?php
 
-        $_SESSION['exam'] = $now['question_id']; ?>
-      <tr>
+      if (mysqli_num_rows($sql) ==0) { ?>
 
-       <td><input type="checkbox" class="checkbox" name="chkl[]" id="question_id<?php echo $now['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $now['question_id']; ?>"></td>
-       <td hidden=""><?php echo $now['question_id']; ?></td>
-       <td><?php echo $now['subject_name']; ?> </td>
-       <td><?php echo $now['level_difficulty']; ?></td>
-       <td>
-          <b><?php echo $now['questions_title']; ?></b><br>
-          <span class="pl-4 text-success ms-4">A. <?php echo $now['option_a']; ?></span><br>
-          <span class="pl-4 text-success ms-4">B. <?php echo $now["option_b"]; ?></span><br>
-          <span class="pl-4 text-success ms-4">C. <?php echo $now["option_c"]; ?></span><br>
-          <span class="pl-4 text-success ms-4">D. <?php echo $now["option_d"]; ?></span><br>
-       </td>
-       <td class="text-success fw-bold text-center"><?php echo $now["correct_ans"]; ?></td>
-     </tr>
+        <tr class="table-danger">
+          <td></td>
+          <td class="text-center">No Record of Question yet.</td>
+          <td></td>
+        </tr>
 
-   <?php } ?>
+      <?php } elseif (mysqli_num_rows($sql) >0) { ?>
+
+        <?php 
+        while ($now = mysqli_fetch_assoc($sql)) { $_SESSION['exam'] = $now['question_id'];  ?>
+
+          <tr>
+            <td><input type="checkbox" class="checkbox" name="chkl[]" id="question_id<?php echo $now['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $now['question_id']; ?>"></td>
+            <td><?php echo $now['questions_title']; ?></td>
+            
+              <td><button data-id="<?php echo $now['question_id']; ?>"  type="button" class="btn btn-primary popover-test view_btn" data-bs-toggle="modal" data-bs-target="#exampleModalToggle2" data-bs-dismiss="modal"><i class="fas fa-eye"></i></button></td>
+          </tr>
+        <?php } ?>
+
+      <?php } ?>
     </tbody>
   </table>
  </div>
   
-
-  <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-  <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
-
+<script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#example1').DataTable({
+    $('#student').DataTable({
       paging: true
     });
   });
@@ -70,7 +74,7 @@ $sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AN
 
   $(document).ready(function(){
 
-    var $checkboxes = $('#students td input[type="checkbox"]');
+    var $checkboxes = $('#example_test td input[type="checkbox"]');
         
     $checkboxes.change(function(){
         var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
@@ -92,7 +96,7 @@ $sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AN
 });
 
   function validate_question(){
-      var $checkboxes = $('#students td input[type="checkbox"]');
+      var $checkboxes = $('#example_test td input[type="checkbox"]');
          
         var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
         var total_question = $("#total_questions").val();
@@ -101,29 +105,31 @@ $sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AN
         if (countCheckedCheckboxes < total_question) { 
              alert("The selected questions is less than the total questions in the test." ); 
              return false;
-         }
+         } 
+
          return true;
     } 
 </script>
 
+<!-- preview modal --->
+ <script type="text/javascript">
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $("#form1 #select-all").click(function(){
-      $("#form1 input[type='checkbox']").prop('checked',this.checked);
+   $(document).ready(function(){
+    $('.view_btn').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: '../php/view_modal_pre_editing.php',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.logs').html(response);
+          $('#exampleModalToggle2').modal('show');
+        }
+      });
     });
-  }); 
-</script>
-
-
-
-
-  
-
-
-
-
-
+   });
+ </script>
 
 
   

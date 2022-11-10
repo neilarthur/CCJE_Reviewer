@@ -312,7 +312,7 @@ function getName($n) {
 												    	<td><?php echo $rows['questions_title'];?></td>
 												    	<td>
 												    		<div class="d-flex flex-row">
-													      		<button type="button"class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#Viewmodal"><i class="fas fa-search-plus"></i></button>
+													      		<button data-id="<?php echo $rows['question_id']; ?>" type="button" class="btn btn-primary  mx-2 prev_btn" data-bs-toggle="modal"><i class="fas fa-search-plus"></i></button>
 		                                                		<button type="button" class="btn btn-secondary deletebtn  mx-2" data-bs-toggle="modal" ><i class="fas fa-trash-alt"></i></button>
 		                                                	</div>
 		                                                </td>
@@ -393,7 +393,7 @@ function getName($n) {
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form action="../php/update_pre_board_question.php" method="POST">
+						<form action="update_pre_board_question.php" method="POST">
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="input-group mt-2">
@@ -424,42 +424,43 @@ function getName($n) {
 							</div>
 							<div class="card mt-2">
 								<div class="card-body">
-									<table class="table bg-light table-hover" style="font-size: 15px;">
-										<thead>
-											<tr>
-												<th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>	
-												<th hidden>ID</th>
-												<th scope="col">Question</th>
-												<th scope="col">Action</th>
-											</tr>
-										</thead>
-										<tbody>
+									<div class="table-responsive-xl" id="test">
+										<table class="table bg-light table-hover" style="font-size: 15px;" id="pre_board">
+											<thead>
+												<tr>
+													<th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>	
+													<th hidden>ID</th>
+													<th scope="col">Question</th>
+													<th scope="col">Action</th>
+												</tr>
+											</thead>
+											<tbody>
 											 <?php 
 
 												     
 										      $Slow = mysqli_query($sqlcon,"SELECT * FROM test_question");
-										      while ($row = mysqli_fetch_assoc($Slow)) {
+										      while ($now = mysqli_fetch_assoc($Slow)) {
 
-										        $_SESSION['exam'] = $row['question_id']; ?>
+										        $_SESSION['exam'] = $now['question_id']; ?>
 											<tr>
-												<td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-												<td hidden><?php echo $row['question_id']?></td>
-												<td><?php echo $row['questions_title'] ?></td>
-												<td><a href="#" role="button" class="btn btn-primary popover-test"  data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-eye"></i></a>
-												</td>
+												<td><input type="checkbox" class="checkbox" name="chkl[]" id="question_id<?php echo $now['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $now['question_id']; ?>"></td>
+												<td hidden><?php echo $now['question_id']?></td>
+												<td><?php echo $now['questions_title'] ?></td>
+												<td><button data-id="<?php echo $now['question_id']; ?>" type="button" class="btn btn-primary popover-test view_btn" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-eye"></i></button></td>
 											</tr>
 
 										 <?php } ?>
 										</tbody>
 									</table>
+									</div>
 								</div>
 							</div>
+							<div class="modal-footer">
+								<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+								<button type="submit" name="create" class="btn btn-success">Add selected questions</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+							</div>
 						</form>
-					</div>
-					<div class="modal-footer">
-						<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
-						<button type="button" name="create" class="btn btn-success">Add selected questions</button>
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 					</div>
 				</div>
 			</div>
@@ -474,30 +475,8 @@ function getName($n) {
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<div class="table-responsive">
-							<table class="align-middle mb-0 table table-borderless table-striped table-hover" id="quesTab">
-								<thead class="mb-4">
-									<tr>
-										<th class="col">Area of Exam</th>
-										<th class="col">Level of Difficulty</th>
-										<th class="text-left pl-1">Question</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Criminal jurisprudence</td>
-										<td>Moderate</td>
-										<td>
-											<b>Berto, with evident premeditation and treachery killed his father. What was the crime committed?</b><br>
-											<span class="pl-4 text-success ms-4">A. Oo</span><br>
-											<span class="pl-4 text-success ms-4">B. Hinde</span><br>
-											<span class="pl-4 text-success ms-4">C. baka naman</span><br>
-											<span class="pl-4 text-success ms-4">D. talaga lng ah.</span><br>
-											<b class="text-success fw-bold">Correct answer: A. Oo</b><br>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+						<div class="logs">
+							
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -515,45 +494,8 @@ function getName($n) {
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<div class="card">
-							<div class="card-body bg-white">
-								<div class="card m-2">
-									<div class="card-body" style="background-color: rgb(219, 235, 247);">
-										<table class="align-middle mb-0 table table-borderless " >
-											<thead class="mb-4">
-												<th class="text-left pl-1 fs-5">Question:</th>
-											</thead>
-											<tbody style="font-size: 17px;">
-												<tr>
-													<th>
-														<b><span>1. Berto, with evident premeditation and treachery killed his father. What was the crime committed?</span></b>
-													</th>
-												</tr>
-				      					   		<tr>
-				      					   			<td>
-				      					   				<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="A" disabled > A. 5</span>
-				      					   			</td>
-						                        </tr>
-						                        <tr>
-				      					   			<td>
-				      					   				<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="A" disabled > B. 5</span>
-				      					   			</td>
-						                        </tr>
-						                        <tr>
-				      					   			<td>
-				      					   				<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="A" disabled > C. 5</span>
-				      					   			</td>
-						                        </tr>
-						                        <tr>
-				      					   			<td>
-				      					   				<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="A" disabled > D. 5</span>
-				      					   			</td>
-						                        </tr>
-						                    </tbody>
-						                </table>
-						            </div>
-						        </div>
-						    </div>
+						<div class="base">
+							
 						</div>
 					</div>
 					<div class="modal-footer border-0">
@@ -592,6 +534,97 @@ function getName($n) {
         })
  	});
 </script>
+
+
+ 
+ <script type="text/javascript">
+
+  // var of select input difficult
+
+  // var of select input subject
+
+
+ 
+  $('select').on('change', function() {
+    var name = this.name;
+    var difficult;
+    var subjects;
+
+       // alert(  name);
+
+
+
+       if (name=="difficult") {
+          difficult = this.value;
+          subjects = $("#subjects").val();
+       }else if (name=="subjects") {
+          difficult =$("#difficult").val();
+          subjects =  this.value;
+
+       }else{
+        return false;
+       }
+      
+
+      $.ajax({    //create an ajax request to load_page.php
+      type:"POST",
+      url: "fetch.php",             
+      dataType: "text",   //expect html to be returned  
+      data:{difficult:difficult,subjects:subjects},               
+      success: function(data){     
+      $("#test").hide();    
+      $("#test").fadeIn();             
+      $("#test").html(data); 
+        // alert(data);
+
+      }
+
+      });
+
+
+  });
+
+</script>
+
+ <!-- preview modal --->
+ <script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.view_btn').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: '../php/view_modal_pre_editing.php',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.logs').html(response);
+          $('#exampleModalToggle2').modal('show');
+        }
+      });
+    });
+   });
+ </script>
+
+  <!-- preview modal --->
+ <script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.prev_btn').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: '../php/prev_modal_pre_board.php',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.base').html(response);
+          $('#Viewmodal').modal('show');
+        }
+      });
+    });
+   });
+ </script>
 <script>
 let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {

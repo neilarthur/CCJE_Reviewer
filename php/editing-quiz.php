@@ -227,7 +227,7 @@ $suppd .= "</select>";
 		        <!-- Main Content-->
 				<div class="col py-3 overflow-auto">
 					<div class="container-fluid ">
-						<form action="#" method="POST">
+						<form action="save_quiz.php" method="POST">
 							<div class="col-lg-12">
 								<div class="card">
 									<div class="card-body">
@@ -283,7 +283,9 @@ $suppd .= "</select>";
 												</span>
 												 <?php }  ?>
 											</div>
-											<input class="btn btn-success px-4 pb-2" type="submit" value="Save">
+											<input type="hidden" name="update" value="<?php echo $_GET['id']; ?>">
+											<input class="btn btn-success px-4 pb-2" type="submit" name="save" value="Save">
+											
 										</div>
 										
 									</div>
@@ -357,7 +359,7 @@ $suppd .= "</select>";
 												    	<td><?php echo $rows['questions_title'];?></td>
 												    	<td>
 												    		<div class="d-flex flex-row">
-													      		<button type="button"class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#Viewmodal"><i class="fas fa-search-plus"></i></button>
+													      		<button data-id="<?php echo $rows['question_id']; ?>" type="button"class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-search-plus"></i></button>
 		                                                		<button type="button" class="btn btn-secondary deletebtn  mx-2" data-bs-toggle="modal" ><i class="fas fa-trash-alt"></i></button>
 		                                                	</div>
 		                                                </td>
@@ -374,7 +376,7 @@ $suppd .= "</select>";
 					</div>
 				</div>
 		 </section>
-		<!-- Logout Modal-->
+		<!-- Logout Modal data-bs-toggle="modal" data-bs-target="#Viewmodal"-->
 	    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	        <div class="modal-dialog">
 	            <div class="modal-content">
@@ -439,7 +441,7 @@ $suppd .= "</select>";
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form action="function.php" method="POST" onsubmit="return validate_question()">
+						<form action="function.php" id="form1" method="POST" onsubmit="return validate_question()">
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="input-group mt-2">
@@ -466,11 +468,12 @@ $suppd .= "</select>";
 									</div>
 								</div>
 								<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
+								<input type="hidden" name="t_question" id="total_questions" value="<?php echo $_GET['total']; ?>">
 							</div>
 							<div class="card mt-2">
 								<div class="card-body">
-									<div class="table-responsive-xl">
-										<table class="table table-hover bg-light" style="font-size: 15px;" id="example">
+									<div class="table-responsive-xl" id="flex">
+										<table class="table table-hover bg-light" style="font-size: 15px;" id="example_test">
 											<thead>
 												<tr>
 													<th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>	
@@ -483,14 +486,15 @@ $suppd .= "</select>";
 
 														     
 											      $test = mysqli_query($sqlcon,"SELECT * FROM test_question");
-											      while ($row = mysqli_fetch_assoc($test)) {
-											      	 $_SESSION['exam'] = $row['question_id']; ?>
+											      while ($now = mysqli_fetch_assoc($test)) {
+											      	 $_SESSION['exam'] = $now['question_id']; ?>
 
 												<tr>
-													<td><input type="checkbox" class="form-check-input" name="chkl[]" id="question_id<?php echo $row['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $row['question_id']; ?>"></td>
-													<td><?php echo $row['questions_title'] ?></td>
-													<td><a href="#" role="button" class="btn btn-primary popover-test"  data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-eye"></i></a>
-													</td>
+													<td><input type="checkbox" class="form-check-input" name="chkl[]" id="question_id<?php echo $now['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $now['question_id']; ?>"></td>
+													<td><?php echo $now['questions_title'] ?></td>
+
+													<td><button data-id="<?php echo $now['question_id']; ?>" type="button" class="btn btn-primary popover-test prev_btn"  data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-eye"></i></button></td>
+													
 												</tr>
 												   <?php } ?>
 											</tbody>
@@ -498,51 +502,30 @@ $suppd .= "</select>";
 									</div>
 								</div>
 							</div>
+							<div class="modal-footer">
+								<input type="hidden" name="test" value="<?php echo $_GET['id']; ?>">
+								<button type="submit" name="create" class="btn btn-success">Add selected questions</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+							</div>	
 						</form>
 					</div>
-					<div class="modal-footer">
-						<input type="hidden" name="test" value="<?php echo $_GET['id']; ?>">
-						<button type="button" name="create" class="btn btn-success">Add selected questions</button>
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-					</div>	
 				</div>
 			</div>
 		</div>
 
 		<!-- View Action Modal -->
-		<div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="true"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+		<div class="modal fade" id="question_bank_prev" data-bs-backdrop="true"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
 			<div class="modal-dialog modal-xl">
+
+
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title fw-bold" id="exampleModalToggleLabel2">View question</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<div class="table-responsive">
-							<table class="align-middle mb-0 table table-borderless table-striped table-hover" id="quesTab">
-								<thead class="mb-4">
-									<tr>
-
-										<th class="col">Area of Exam</th>
-										<th class="col">Level of Difficulty</th>
-										<th class="text-left pl-1">Question</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Criminal jurisprudence</td>
-										<td>Moderate</td>
-										<td>
-											<b>Berto, with evident premeditation and treachery killed his father. What was the crime committed?</b><br>
-											<span class="pl-4 text-success ms-4">A. Oo</span><br>
-											<span class="pl-4 text-success ms-4">B. Hinde</span><br>
-											<span class="pl-4 text-success ms-4">C. baka naman</span><br>
-											<span class="pl-4 text-success ms-4">D. talaga lng ah.</span><br>
-											<b class="text-success fw-bold">Correct answer: A. Oo</b><br>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+						<div class="loggin">
+							
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -553,7 +536,7 @@ $suppd .= "</select>";
 		</div>
 		
 		<!--Preview Question Modal -->
-		<div class="modal fade" id="Viewmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="viewToggle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header border-0">
@@ -564,38 +547,9 @@ $suppd .= "</select>";
 							<div class="card-body bg-white">
 								<div class="card m-2">
 									<div class="card-body" style="background-color: rgb(219, 235, 247);">
-										<table class="align-middle mb-0 table table-borderless " >
-											<thead class="mb-4">
-												<th class="text-left pl-1 fs-5">Question:</th>
-											</thead>
-											<tbody style="font-size: 17px;">
-												<tr>
-													<th>
-														<b><span>1. Berto, with evident premeditation and treachery killed his father. What was the crime committed?</span></b>
-													</th>
-												</tr>
-				      					   		<tr>
-				      					   			<td>
-				      					   				<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="A" disabled > A. 5</span>
-				      					   			</td>
-						                        </tr>
-						                        <tr>
-				      					   			<td>
-				      					   				<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="A" disabled > B. 5</span>
-				      					   			</td>
-						                        </tr>
-						                        <tr>
-				      					   			<td>
-				      					   				<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="A" disabled > C. 5</span>
-				      					   			</td>
-						                        </tr>
-						                        <tr>
-				      					   			<td>
-				      					   				<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="A" disabled > D. 5</span>
-				      					   			</td>
-						                        </tr>
-						                    </tbody>
-						                </table>
+										<div class="mugs">
+											
+										</div>					
 						            </div>
 						        </div>
 						    </div>
@@ -665,9 +619,9 @@ $suppd .= "</select>";
       dataType: "text",   //expect html to be returned  
       data:{difficult:difficult,subjects:subjects},               
       success: function(data){     
-      $("#fetchs").hide();    
-      $("#fetchs").fadeIn();             
-      $("#fetchs").html(data); 
+      $("#flex").hide();    
+      $("#flex").fadeIn();             
+      $("#flex").html(data); 
         // alert(data);
 
       }
@@ -678,6 +632,48 @@ $suppd .= "</select>";
   });
 
 </script>
+
+ <!-- preview modal --->
+ <script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.view_btn').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: '../php/view_quiz_test.php',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.mugs').html(response);
+          $('#viewToggle').modal('show');
+        }
+      });
+    });
+   });
+ </script>
+
+
+ <!-- learnss modal -->
+
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+ 		$('.prev_btn').click(function(){
+ 			var userid = $(this).data('id');
+
+ 			$.ajax({
+ 				url: '../php/prev_quiz_bank.php',
+        		type: 'post',
+        		data: {userid: userid},
+        		success: function(response){
+          		$('.loggin').html(response);
+          		$('#question_bank_prev').modal('show');
+          	}
+          });
+    	});
+   	});
+</script>
+
 <script>
 let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
@@ -692,5 +688,50 @@ let arrow = document.querySelectorAll(".arrow");
   sidebarBtn.addEventListener("click", ()=>{
     sidebar.classList.toggle("close");
   });
+</script>
+
+
+<script type="text/javascript">
+  // $(".checkbox").on("click" ,function(){
+    
+  // })
+
+  $(document).ready(function(){
+
+    var $checkboxes = $('#example_test td input[type="checkbox"]');
+        
+    $checkboxes.change(function(){
+        var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
+        var total_question = $("#total_questions").val();
+        var id = $(this).data("id");
+        var check_box = $("question_id"+id)
+        // alert(countCheckedCheckboxes);
+        // alert(total_question);
+        
+        if (countCheckedCheckboxes>total_question) {
+           if($(this).prop("checked") == true){
+              alert("Questions already rich the limit of the test." );
+             $(this).prop('checked', false);
+            }
+        }
+    
+    });
+
+});
+
+  function validate_question(){
+      var $checkboxes = $('#example_test td input[type="checkbox"]');
+         
+        var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
+        var total_question = $("#total_questions").val();
+       
+        
+        if (countCheckedCheckboxes < total_question) { 
+             alert("The selected questions is less than the total questions in the test." ); 
+             return false;
+         } 
+
+         return true;
+    } 
 </script>
 </html>
