@@ -13,10 +13,20 @@ $sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AN
 
 
  ?>
+ <style type="text/css">
+    .my-custom-scrollbar {
+    position: relative;
+    height: 450px;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }
+ </style>
 <link href="../css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
  <div class="table-responsive">
-
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
   <table class="table table-hover bg-light" style="font-size: 15px;" id="example_test">
     <thead>
       <tr>
@@ -52,6 +62,7 @@ $sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AN
       <?php } ?>
     </tbody>
   </table>
+</div>
  </div>
   
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

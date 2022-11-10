@@ -133,12 +133,18 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   						 	
   						 	if ($course['section'] == '4A') {
   						 		
-  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A')");
+  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A')AND (choose_question.stat_question='Ready')");
 
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
-  						 			<tr>
+  						 			<tr class="table-danger">
+  						 				<td></td>
+  						 				<td></td>
+  						 				<td></td>
 	  									<td class="text-center">No Records ....</td>
+	  									<td></td>
+	  									<td></td>
+	  									<td></td>
 	  								</tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {
@@ -197,12 +203,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   						 		}
   						 	}elseif ($course['section'] == '4B') {
 
-  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B')");
+  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B')AND (choose_question.stat_question='Ready')");
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
-
-  						 			<tr>
+  						 			<tr class="table-danger">
+  						 				<td></td>
+  						 				<td></td>
+  						 				<td></td>
 	  									<td class="text-center">No Records ....</td>
+	  									<td></td>
+	  									<td></td>
+	  									<td></td>
 	  								</tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {
@@ -258,12 +269,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   						 			}
   						 		}
   						 	}elseif ($course['section']=='4C') {
-  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C')");
+  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C')  AND (choose_question.stat_question='Ready')");
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
-
-  						 			<tr>
+  						 			<tr class="table-danger">
+  						 				<td></td>
+  						 				<td></td>
+  						 				<td></td>
 	  									<td class="text-center">No Records ....</td>
+	  									<td></td>
+	  									<td></td>
+	  									<td></td>
 	  								</tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {

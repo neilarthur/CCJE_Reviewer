@@ -22,19 +22,19 @@ while ($rows = mysqli_fetch_assoc($view_quiz)) { ?>
 				</tr>
 				<tr>
 					<td>
-						<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="A" disabled > A.<?php echo $rows['option_a']; ?></span>
+						<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="A" disabled > A. <?php echo $rows['option_a']; ?></span>
 					</td>
 				</tr>
 
 				<tr>
 					<td>
-						<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="B" disabled > B.<?php echo $rows['option_b']; ?></span>
+						<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="B" disabled > B. <?php echo $rows['option_b']; ?></span>
 					</td>
 				</tr>
 
 				<tr>
 					<td>
-						<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="C" disabled > C.<?php echo $rows['option_c']; ?></span>
+						<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="C" disabled > C. <?php echo $rows['option_c']; ?></span>
 					</td>
 				</tr>
 
@@ -43,14 +43,14 @@ while ($rows = mysqli_fetch_assoc($view_quiz)) { ?>
 				</tr>
 
 					<td>
-						<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="D" disabled > D.<?php echo $rows['option_d']; ?></span>
+						<span><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" value="D" disabled > D. <?php echo $rows['option_d']; ?></span>
 					</td>
 				</tr>
 				</tr>
 
 					<td>
-						<span class="text-success"><input   class="form-check-input pl-4 ms-5" type="radio"  id="exampleRadios1" checked="" disabled >&nbsp;<?php echo $rows['correct_ans']; ?>&nbsp;&nbsp;.<?php if ($rows['correct_ans'] =='A') {
-							echo $rows['option_a']; }elseif ($rows['correct_ans'] =='B') { echo $rows['option_b'];}elseif ($rows['correct_ans']== 'C') { echo $rows['option_c'];}elseif ($rows['option_d']) { echo $rows['option_d'];} ?></span>
+						<span class="text-success"><b class="me-2">Correct Answer:</b><b  class=" pl-4"  id="exampleRadios1">&nbsp;<?php echo $rows['correct_ans']; ?>&nbsp;. <?php if ($rows['correct_ans'] =='A') {
+							echo $rows['option_a']; }elseif ($rows['correct_ans'] =='B') { echo $rows['option_b'];}elseif ($rows['correct_ans']== 'C') { echo $rows['option_c'];}elseif ($rows['option_d']) { echo $rows['option_d'];} ?></b></span>
 					</td>
 				</tr>
 			</tbody>

@@ -182,7 +182,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 							<div class="col ">
 								<div class="card">
 									<div class="card-body rounded-3 m-3 table-responsive-lg">
-										<table class="table table-hover align-middle" id="examTab">
+										<table class="table bg-light align-middle" id="examTab">
 											<thead>
 												<tr>
 													<th scope="col">#</th>
@@ -209,13 +209,13 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                <td><?php echo $rows['first_name'] ."".$rows['last_name']; ?></td>
 	                                                <td><?php echo $rows['time_limit']; ?></td>
 	                                                <td>09-12-2022</td>
-	                                                <?php 
+	                                               <?php 
 	                                                
-	                                                if ($rows['pre_board_status'] =='active') {
+	                                                if ($rows['approval'] =='Approve') {
 	                                                	echo'<td class="badge bg-success text-white mt-2" style="font-size:15px;">Approve</td>';
-	                                                }elseif ($rows['pre_board_status'] =='pending') {
+	                                                }elseif ($rows['approval'] =='Pending') {
 	                                                	echo'<td class="badge bg-warning text-dark mt-2" style="font-size:15px;">Pending</td>';
-	                                                }elseif ($rows['pre_board_status']=='archive') {
+	                                                }elseif ($rows['approval']=='Decline') {
 	                                                	echo'<td class="badge bg-danger text-white mt-2" style="font-size:15px;">Rejected</td>';
 	                                                } 
 	                                                ?>
@@ -268,15 +268,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	    			<div class="modal-header flex-column border-0">
 	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         				<div class="icon-box mt-3">
-        					<i class="far fa-times-circle fa-5x text-danger"></i>
+        					<i class="far fa-question-circle fa-5x text-danger"></i>
         				</div>
-        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h4>
+        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure</h4>
 	    			</div>
 	    			<form class="form" action="exam_approve.php" method="POST">
 	    				<div class="modal-body">
 	    					<div class="container d-flex justify-content-center">
 	    						<input type="hidden" name="update_id" id="pre_exam_id">
-	    						<p>Do you really want to delete these record?</p>
+	    						<p>Do want to approve these exam?</p>
 	    					</div>
 	    					<div class="modal-footer d-flex justify-content-center border-0">
 	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">
@@ -296,15 +296,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	    			<div class="modal-header flex-column border-0">
 	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         				<div class="icon-box mt-3">
-        					<i class="far fa-times-circle fa-5x text-danger"></i>
+        					<i class="far fa-question-circle fa-5x text-danger"></i>
         				</div>
-        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h4>
+        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure</h4>
 	    			</div>
 	    			<form class="form" action="exam_manage_reject.php" method="POST">
 	    				<div class="modal-body">
 	    					<div class="container d-flex justify-content-center">
 	    						<input type="hidden" name="update_id" id="delete_id">
-	    						<p>Do you really want to delete these record?</p>
+	    						<p>Do you want to decline these exam?</p>
 	    					</div>
 	    					<div class="modal-footer d-flex justify-content-center border-0">
 	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">

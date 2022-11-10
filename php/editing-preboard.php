@@ -239,7 +239,7 @@ function getName($n) {
 
 													if (mysqli_num_rows($select) ==0) {
 														echo '<p class="ms-2">Questions:
-														<span class="badge bg-danger" style="font-size: 15px;"> '.$num.'out of '.$total.'</span></p> ';
+														<span class="badge bg-danger" style="font-size: 15px;"> '.$num.' out of '.$total.'</span></p> ';
 													}
 													elseif (mysqli_num_rows($select) >0) {
 														echo '<p class="ms-2">Questions:

@@ -193,7 +193,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 		        </form>
 			</div>
 			<!-- Main Content-->
-			<div class="container-fluid py-4 px-4">
+			<div class="container-fluid py-3 px-4">
 				<div class="row">
 					<!-- Students Card Example -->
 					<div class="col-lg-3 col-xs-6 mb-5">
@@ -202,13 +202,29 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-white text-uppercase mb-2">
-											<?php $query = "SELECT * FROM accounts WHERE role='student'AND status='active'";
-                                                $query_result = mysqli_query($sqlcon,$query);
+											<?php
+											$acc= mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
 
-                                                $row = mysqli_num_rows($query_result);
-                                                echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
-                                                ?>
-                                                Students
+											while ($rows=mysqli_fetch_assoc($acc)) {
+												if ($rows['section']=='4A') {
+													$query = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student'AND status='active' AND(accounts.section='4A')");
+													 
+													 $row = mysqli_num_rows($query);
+													  echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+												elseif ($rows['section']=='4B') {
+													$query = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student'AND status='active' AND(accounts.section='4B')");
+													 $row = mysqli_num_rows($query);
+													  echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+												elseif ($rows['section']=='4C') {
+													$query = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student'AND status='active' AND(accounts.section='4C')");
+													 $row = mysqli_num_rows($query);
+													  echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+												
+											} ?>
+                                            Students
 	                                    </div>
 	                                </div>
 	                                <div class="col-auto mt-2 text-white">
@@ -224,12 +240,32 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-white text-uppercase mb-2">
-											<?php $query = "SELECT * FROM choose_question";
-                                                $query_result = mysqli_query($sqlcon,$query);
+											<?php 
 
-                                                $row = mysqli_num_rows($query_result);
-                                                echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
-                                                ?>
+											$acc= mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+											while ($rows=mysqli_fetch_assoc($acc)) {
+												if ($rows['section']=='4A') {
+													$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND(accounts.section='4A') AND (choose_question.status='active')");
+
+													$row = mysqli_num_rows($exams);
+
+													echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+												elseif ($rows['section']=='4B') {
+													$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND(accounts.section='4B') AND (choose_question.status='active')");
+
+													$row = mysqli_num_rows($exams);
+
+													echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+												elseif ($rows['section']=='4C') {
+													$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND(accounts.section='4C') AND (choose_question.status='active')");
+													$row = mysqli_num_rows($exams);
+
+													echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+											} ?>
 	                                        Quiz and Long Quiz
 	                                    </div>
 	                                </div>
@@ -246,12 +282,29 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-white text-uppercase mb-2">
-											<?php $query = "SELECT * FROM tbl_pre_question";
-                                                $query_result = mysqli_query($sqlcon,$query);
+											<?php 
+											$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
 
-                                                $row = mysqli_num_rows($query_result);
-                                                echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
-                                                ?>
+											while ($rows=mysqli_fetch_assoc($acc)) {
+												if ($rows['section']=='4A') {
+													$preboard = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4A')  AND (tbl_pre_question.pre_board_status='active')");
+
+                                                    $row = mysqli_num_rows($preboard);
+                                                    echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+												elseif ($rows['section']=='4B') {
+													$preboard = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4B')  AND (tbl_pre_question.pre_board_status='active')");
+
+                                                    $row = mysqli_num_rows($preboard);
+                                                    echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+												elseif ($rows['section']=='4C') {
+													$preboard = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4C')  AND (tbl_pre_question.pre_board_status='active')");
+
+                                                    $row = mysqli_num_rows($preboard);
+                                                    echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+											} ?>
 	                                        Preboard Exam
 	                                    </div>
 	                                </div>
@@ -268,12 +321,29 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-white text-uppercase mb-2">
-											<?php $query = "SELECT * FROM test_question WHERE status ='active'";
-                                                $query_result = mysqli_query($sqlcon,$query);
+											<?php 
+											$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}' AND role = 'faculty'");
 
-                                                $row = mysqli_num_rows($query_result);
-                                                echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
-                                                ?>
+											while ($rows = mysqli_fetch_assoc($acc)) {
+												if ($rows['section']=='4A') {
+													$question = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND (test_question.status='active') AND (accounts.section='4A')");
+
+													$row = mysqli_num_rows($question);
+													echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+
+												}
+												elseif ($rows['section']=='4B') {
+	                                                $question = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND (test_question.status='active') AND (accounts.section='4B')");
+													$row = mysqli_num_rows($question);
+													echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+												elseif ($rows['section']=='4C') {
+													$question = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND (test_question.status='active') AND (accounts.section='4C')");
+
+													$row = mysqli_num_rows($question);
+													echo'<h2  class=" mb-0 fw-bold"><b>'.$row.' </b></h2>';
+												}
+											} ?>
 	                                        Questions
 	                                    </div>
 	                                </div>
@@ -289,37 +359,88 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
                            <div class="card-body">
                            	<h5 class="card-title fw-bold">Question Count</h5>
                             <?php
-                            $query = "SELECT * FROM test_question WHERE subject_name ='Criminal Jurisprudence '";
-                            $count = $sqlcon->query($query);
 
-                            $rows_count_value = mysqli_num_rows($count);
+                            $acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}' AND role = 'faculty'");
+                            while ($rows =mysqli_fetch_assoc($acc)) {
+                            	if ($rows['section']=='4B'){
 
-                            $query1 = "SELECT * FROM test_question WHERE subject_name ='Law Enforcement '";
-                            $count1 = $sqlcon->query($query1);
+                            		$question = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Criminal Jurisprudence ') AND (test_question.status='active') AND (accounts.section='4B')");
 
-                            $rows_count_value1 = mysqli_num_rows($count1);
+                            		$rows_count_value = mysqli_num_rows($question);
 
-                            $query2 = "SELECT * FROM test_question WHERE subject_name ='Criminalistics '";
-                            $count2 = $sqlcon->query($query2);
+                            		$question1 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Law Enforcement') AND (test_question.status='active') AND (accounts.section='4B')");
 
-                            $rows_count_value2 = mysqli_num_rows($count2);
+                            		$rows_count_value1 = mysqli_num_rows($question1);
 
-                            $query3 = "SELECT * FROM test_question WHERE subject_name ='Crime Detection and Investigation'";
-                            $count3 = $sqlcon->query($query3);
+                            		$question2 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Criminalistics') AND (test_question.status='active') AND (accounts.section='4B')");
 
-                            $rows_count_value3 = mysqli_num_rows($count3);
+                            		$rows_count_value2 = mysqli_num_rows($question2);
 
-                            $query4 = "SELECT * FROM test_question WHERE subject_name ='Criminal Sociology'";
-                            $count4 = $sqlcon->query($query4);
+                            		$question3 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Crime Detection and Investigation') AND (test_question.status='active') AND (accounts.section='4B')");
 
-                            $rows_count_value4 = mysqli_num_rows($count4);
+                           			 $rows_count_value3 = mysqli_num_rows($question3);
 
-                            $query5 = "SELECT * FROM test_question WHERE subject_name ='Correctional Administration'";
-                            $count5 = $sqlcon->query($query5);
+                           			 $question4 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Criminal Sociology') AND (test_question.status='active') AND (accounts.section='4B')");
 
-                            $rows_count_value5 = mysqli_num_rows($count5);
+                           			 $rows_count_value4 = mysqli_num_rows($question4);
 
+                           			  $question5 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Correctional Administration') AND (test_question.status='active') AND (accounts.section='4B')");
 
+                            		$rows_count_value5 = mysqli_num_rows($question5);
+
+                            	}
+                            	elseif ($rows['section']=='4C') {
+                            		$question = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Criminal Jurisprudence ') AND (test_question.status='active') AND (accounts.section='4C')");
+
+                            		$rows_count_value = mysqli_num_rows($question);
+
+                            		$question1 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Law Enforcement') AND (test_question.status='active') AND (accounts.section='4C')");
+
+                            		$rows_count_value1 = mysqli_num_rows($question1);
+
+                            		$question2 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Criminalistics') AND (test_question.status='active') AND (accounts.section='4C')");
+
+                            		$rows_count_value2 = mysqli_num_rows($question2);
+
+                            		$question3 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Crime Detection and Investigation') AND (test_question.status='active') AND (accounts.section='4C')");
+
+                           			 $rows_count_value3 = mysqli_num_rows($question3);
+
+                           			 $question4 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Criminal Sociology') AND (test_question.status='active') AND (accounts.section='4C')");
+
+                           			 $rows_count_value4 = mysqli_num_rows($question4);
+
+                           			  $question5 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Correctional Administration') AND (test_question.status='active') AND (accounts.section='4C')");
+
+                            		$rows_count_value5 = mysqli_num_rows($question5);
+                            	}
+                            	elseif ($rows['section']=='4A') {
+                            		$question = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Criminal Jurisprudence ') AND (test_question.status='active') AND (accounts.section='4A')");
+
+                            		$rows_count_value = mysqli_num_rows($question);
+
+                            		$question1 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Law Enforcement') AND (test_question.status='active') AND (accounts.section='4A')");
+
+                            		$rows_count_value1 = mysqli_num_rows($question1);
+
+                            		$question2 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Criminalistics') AND (test_question.status='active') AND (accounts.section='4A')");
+
+                            		$rows_count_value2 = mysqli_num_rows($question2);
+
+                            		$question3 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Crime Detection and Investigation') AND (test_question.status='active') AND (accounts.section='4A')");
+
+                           			 $rows_count_value3 = mysqli_num_rows($question3);
+
+                           			 $question4 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Criminal Sociology') AND (test_question.status='active') AND (accounts.section='4A')");
+
+                           			 $rows_count_value4 = mysqli_num_rows($question4);
+
+                           			  $question5 = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND(test_question.subject_name='Correctional Administration') AND (test_question.status='active') AND (accounts.section='4A')");
+
+                            		$rows_count_value5 = mysqli_num_rows($question5);
+                            	}
+                            }
+                            
                              ?>
                             <!-- Pie Chart-->
                             <canvas id="pie-chart" style="position: relative; height:40px; width:80px"></canvas>

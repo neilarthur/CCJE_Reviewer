@@ -62,10 +62,13 @@ $suppd .= "</select>";
          .navbar .breadcrumb li a{
           color: #8C0000;
         }
-        .scrollable {
-			height: 450px;
-			width: 100%;
-			overflow: scroll;
+        .my-custom-scrollbar {
+		position: relative;
+		height: 450px;
+		overflow: auto;
+		}
+		.table-wrapper-scroll-y {
+		display: block;
 		}
     </style>
 </head>
@@ -376,7 +379,7 @@ $suppd .= "</select>";
 					</div>
 				</div>
 		 </section>
-		<!-- Logout Modal data-bs-toggle="modal" data-bs-target="#Viewmodal"-->
+		<!-- Logout Modal -->
 	    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	        <div class="modal-dialog">
 	            <div class="modal-content">
@@ -434,7 +437,7 @@ $suppd .= "</select>";
 
 		<!--Add Question from Question bank modal-->
 		<div class="modal fade " data-bs-backdrop="true"  id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-xl modal-dialog-scrollable modal-fullscreen-xl-down ">
+			<div class="modal-dialog modal-xl  ">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title fw-bold" id="exampleModalLabel">Add from the Question Bank</h4>
@@ -468,37 +471,39 @@ $suppd .= "</select>";
 									</div>
 								</div>
 								<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
-								<input type="hidden" name="t_question" id="total_questions" value="<?php echo $_GET['total']; ?>">
+								
 							</div>
 							<div class="card mt-2">
 								<div class="card-body">
 									<div class="table-responsive-xl" id="flex">
-										<table class="table table-hover bg-light" style="font-size: 15px;" id="example_test">
-											<thead>
-												<tr>
-													<th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>	
-													<th scope="col">Question</th>
-													<th scope="col">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php 
+										<div class="table-wrapper-scroll-y my-custom-scrollbar">
+											<table class="table table-hover bg-light" style="font-size: 15px;" id="example_test">
+												<thead>
+													<tr>
+														<th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>	
+														<th scope="col">Question</th>
+														<th scope="col">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php 
 
-														     
-											      $test = mysqli_query($sqlcon,"SELECT * FROM test_question");
-											      while ($now = mysqli_fetch_assoc($test)) {
-											      	 $_SESSION['exam'] = $now['question_id']; ?>
+															     
+												      $test = mysqli_query($sqlcon,"SELECT * FROM test_question");
+												      while ($now = mysqli_fetch_assoc($test)) {
+												      	 $_SESSION['exam'] = $now['question_id']; ?>
 
-												<tr>
-													<td><input type="checkbox" class="form-check-input" name="chkl[]" id="question_id<?php echo $now['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $now['question_id']; ?>"></td>
-													<td><?php echo $now['questions_title'] ?></td>
+													<tr>
+														<td><input type="checkbox" class="form-check-input" name="chkl[]" id="question_id<?php echo $now['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $now['question_id']; ?>"></td>
+														<td><?php echo $now['questions_title'] ?></td>
 
-													<td><button data-id="<?php echo $now['question_id']; ?>" type="button" class="btn btn-primary popover-test prev_btn"  data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-eye"></i></button></td>
-													
-												</tr>
-												   <?php } ?>
-											</tbody>
-										</table>
+														<td><button data-id="<?php echo $now['question_id']; ?>" type="button" class="btn btn-primary popover-test prev_btn"  data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-eye"></i></button></td>
+														
+													</tr>
+													   <?php } ?>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>

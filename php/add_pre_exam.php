@@ -17,7 +17,8 @@ if (isset($_POST['create'])) {
 	$end_d = $_POST['end_d'];
 	$prepared_by = $_POST['prepared_by'];
 	$access_code = $_POST['access_code'];
-	$status = "pending";
+	$approval="Pending";
+	$status = "active";
 
 	$sacs = mysqli_query($sqlcon,"SELECT email_address FROM accounts WHERE role ='student'");
 

@@ -9,13 +9,13 @@ $view_quiz = mysqli_query($sqlcon, "SELECT * FROM test_question WHERE question_i
 
 while ($rows = mysqli_fetch_assoc($view_quiz)) { ?>
 
-	<div class ="table responsive" >
-	<table class="align-middle mb-0 table table-borderless table-striped table-hover" id="quesTab">
+<div class ="table responsive-xl" >
+	<table class="table align-middle mb-0 table-borderless bg-light " id="quesTab">
 		<thead class="mb-4">
 			<tr>
 
 				<th class="col">Area of Exam</th>
-				<th class="col">Level of Difficulty</th>
+				<th class="col">Difficulty</th>
 				<th class="text-left pl-1">Question</th>
 			</tr>
 		</thead>
@@ -29,7 +29,7 @@ while ($rows = mysqli_fetch_assoc($view_quiz)) { ?>
 					<span class="pl-4 text-success ms-4">B.<?php echo $rows['option_b']; ?></span><br>
 					<span class="pl-4 text-success ms-4">C.<?php echo $rows['option_c'];?></span><br>
 					<span class="pl-4 text-success ms-4">D.<?php echo $rows['option_d']; ?></span><br>
-					<b class="text-success fw-bold">Correct answer:<?php echo $rows['correct_ans']; ?>.<?php if ($rows['correct_ans'] =='A') {
+					<b class="text-success fw-bold">Correct answer: &nbsp;<?php echo $rows['correct_ans']; ?>. <?php if ($rows['correct_ans'] =='A') {
 						echo $rows['option_a']; }elseif ($rows['correct_ans']=='B') { echo $rows['option_b'];}elseif ($rows['correct_ans']=='C') {echo $rows['option_c'];}elseif ($rows['correct_ans']=='D') {
 							echo $rows['option_d'];}  ?></b><br>
 				</td>

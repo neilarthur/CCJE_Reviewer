@@ -266,36 +266,18 @@ $suppd .= "</select>";
 																<td class="ps-5"><?php echo $rows['total_quest']?></td>
 																<td><?php echo $mins; ?> mins</td>
 
+																
 																<?php 
 
-															
 
-													            $quiz = mysqli_query($sqlcon,"SELECT * FROM test_question,choose_question, student_choice WHERE (test_question.question_id=student_choice.question_id) AND (choose_question.test_id=student_choice.test_id) AND student_choice.test_id='{$rows['test_id']}' AND question_stat='active'");
-
-																 if ($rows['stat_question']=='No question') {
-													            	
-													            	if (mysqli_num_rows($quiz)==0) { ?>
-
-													            		<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>
-													            		<?php
-													            	}
-													            	elseif (mysqli_num_rows($quiz) >0 ) { ?>
-													            		<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>
-													            		<?php
-													            	}
+													            #Status 
+													            if ($rows['stat_question']=='No question') {
+													            	echo '<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>';
 													            }
 													            elseif ($rows['stat_question']=='Ready') {
-													            	
-													            	if (mysqli_num_rows($quiz) >0) { ?>
-
-													            		<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>
-													            	<?php
-													            	}
-													            	elseif (mysqli_num_rows($quiz) ==0) { ?>
-													            		<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>
-													            	<?php
-													            	}
+													            	echo '<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>';
 													            }
+
 													            ?>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
@@ -328,36 +310,18 @@ $suppd .= "</select>";
 																<td class="ps-5"><?php echo $rows['total_quest']?></td>
 																<td><?php echo $mins; ?> mins</td>
 
+
 																<?php 
 
-																
 
-													            $quiz = mysqli_query($sqlcon,"SELECT * FROM test_question,choose_question, student_choice WHERE (test_question.question_id=student_choice.question_id) AND (choose_question.test_id=student_choice.test_id) AND student_choice.test_id='{$rows['test_id']}' AND question_stat='active'");
-
-																 if ($rows['stat_question']=='No question') {
-													            	
-													            	if (mysqli_num_rows($quiz)==0) { ?>
-
-													            		<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>
-													            		<?php
-													            	}
-													            	elseif (mysqli_num_rows($quiz) >0 ) { ?>
-													            		<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>
-													            		<?php
-													            	}
+													            #Status 
+													            if ($rows['stat_question']=='No question') {
+													            	echo '<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>';
 													            }
 													            elseif ($rows['stat_question']=='Ready') {
-													            	
-													            	if (mysqli_num_rows($quiz) >0) { ?>
-
-													            		<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>
-													            	<?php
-													            	}
-													            	elseif (mysqli_num_rows($quiz) ==0) { ?>
-													            		<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>
-													            	<?php
-													            	}
+													            	echo '<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>';
 													            }
+
 													            ?>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
@@ -394,36 +358,15 @@ $suppd .= "</select>";
 
 																<?php 
 
-																
 
-													            $quiz = mysqli_query($sqlcon,"SELECT * FROM test_question,choose_question, student_choice WHERE (test_question.question_id=student_choice.question_id) AND (choose_question.test_id=student_choice.test_id) AND student_choice.test_id='{$rows['test_id']}' AND question_stat='active'");
-
-													            #MARKSSSS
-
+													            #Status 
 													            if ($rows['stat_question']=='No question') {
-													            	
-													            	if (mysqli_num_rows($quiz)==0) { ?>
-
-													            		<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>
-													            		<?php
-													            	}
-													            	elseif (mysqli_num_rows($quiz) >0 ) { ?>
-													            		<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>
-													            		<?php
-													            	}
+													            	echo '<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>';
 													            }
 													            elseif ($rows['stat_question']=='Ready') {
-													            	
-													            	if (mysqli_num_rows($quiz) >0) { ?>
-
-													            		<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>
-													            	<?php
-													            	}
-													            	elseif (mysqli_num_rows($quiz) ==0) { ?>
-													            		<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>
-													            	<?php
-													            	}
+													            	echo '<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>';
 													            }
+
 													            ?>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
@@ -561,11 +504,11 @@ $suppd .= "</select>";
 			      					<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
 			      					<div class="input-group mt-2">
 			      						<span class="input-group-text border-0 bg-white fw-bold">Open the quiz</span>
-			      					    <input type="date" name="start_time" class="form-control" >
+			      					    <input type="date" name="start_time" class="form-control" required=>
 			      					</div>
 			      					<div class="input-group mt-2">
 			      						<span class="input-group-text border-0 bg-white fw-bold">Close the quiz</span>
-			      					    <input type="date" name="close_time" class="form-control" >
+			      					    <input type="date" name="close_time" class="form-control" required= >
 			      					</div>
 			      				</div>
 			      			</div>
