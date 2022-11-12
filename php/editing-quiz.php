@@ -298,22 +298,43 @@ $suppd .= "</select>";
 								<div class="card">
 									<div class="card-body m-4">
 										<div class="d-flex justify-content-between mb-3">
-											<button class="btn btn-warning px-3 pb-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i>
+											<button data-id="<?php echo $id; ?>" class="btn btn-warning px-3 pb-2 editinfo" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i>
 											</button>
 											<div class="dropdown me-2">
 												<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Add</a>
 												<?php 
 											    $quiz= mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id = '$id'");
 
-											   while ($rows = mysqli_fetch_assoc($quiz)) { ?>
+											    $quizs = mysqli_query($sqlcon,"SELECT * FROM student_choice WHERE test_id = '$id'");
+
+											    $num = mysqli_num_rows($quizs);
+											   while ($rows = mysqli_fetch_assoc($quiz)) { 
+
+											   	$lows = $rows['total_quest'];
+
+
+											   	?>
 
 											  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 											    <li>
-											    	<a class="dropdown-item" href="adding-quiz-question.php?id=<?php echo $rows['test_id']?>"><i class="fas fa-plus me-2"></i>a new Questions
-											    	</a>
-											    </li>
-											    <div class="dropdown-divider"></div>
-											    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fas fa-plus me-2"></i>from Question Bank</a></li>
+											    	<?php
+
+											    	if ($lows ==$num) {
+											    	 	
+											    	 	echo "<a class='dropdown-item' href='#'><i class='fas fa-plus me-2'></i>a new Questions</a>
+											    	 	</li>
+											    	 	<div class='dropdown-divider'></div>
+											    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
+											    	 		";
+											    	}
+											    	else {
+
+											    		echo "<a class='dropdown-item' href='adding-quiz-question.php?id=$id'><i class='fas fa-plus me-2'></i>a new Questions </a>
+											    		</li>
+											    <div class='dropdown-divider'></div>
+											    <li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#exampleModal2'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>";
+											    	}
+											    	?>
 											  </ul>
 											    <?php }  ?>
 											</div>
@@ -566,6 +587,26 @@ $suppd .= "</select>";
 				</div>
 			</div>
 		</div>
+
+
+		<!-- edit Information Modal -->
+		<div class="modal fade" id="editinformation" data-bs-backdrop="true"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+			<div class="modal-dialog modal-xl">
+
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title fw-bold" id="exampleModalToggleLabel2">Test Information</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="information">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -673,6 +714,25 @@ $suppd .= "</select>";
         		success: function(response){
           		$('.loggin').html(response);
           		$('#question_bank_prev').modal('show');
+          	}
+          });
+    	});
+   	});
+</script>
+
+
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+ 		$('.editinfo').click(function(){
+ 			var userid = $(this).data('id');
+
+ 			$.ajax({
+ 				url: '../php/editinformation.php',
+        		type: 'post',
+        		data: {userid: userid},
+        		success: function(response){
+          		$('.information').html(response);
+          		$('#editinformation').modal('show');
           	}
           });
     	});

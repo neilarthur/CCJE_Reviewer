@@ -104,13 +104,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	</div>
    <!--Main Content-->
    <div class="container py-4">
-   	 <div class="row">
-   	 	<div class="card mb-3" style="background-color: #8C0000;;">
+   	 <div class="row mt-3">
+   	 	<div class="card" style="background-color: #8C0000;;">
    	 		<div class="card-body">
    	 			<h2 class="text-white fw-bold text-uppercase">Quiz and Long Quiz</h2>
    	 		</div>
    	 	</div>
-   	 	<div class="card">
+
+   	 	   	 	<div class="card">
   			<div class="card-body m-3 table-responsive-lg">
   				<table class="table bg-light">
   					<thead class="fs-5 text-center">
@@ -133,18 +134,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   						 	
   						 	if ($course['section'] == '4A') {
   						 		
-  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A')AND (choose_question.stat_question='Ready')");
+  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A')");
 
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
-  						 			<tr class="table-danger">
-  						 				<td></td>
-  						 				<td></td>
-  						 				<td></td>
+  						 			<tr>
 	  									<td class="text-center">No Records ....</td>
-	  									<td></td>
-	  									<td></td>
-	  									<td></td>
 	  								</tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {
@@ -164,6 +159,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  									<td><?php echo $rows['time_limit']/60;  ?> mins</td>
 	   	  									<td><?php echo $rows['first_name']." ".$rows['last_name'];?></td>
 	   	  									<td>
+	   	  										<?php
+
+	   	  										$datetime = date("Y-m-d");
+
+	   	  										if ($rows['start_day'] >= $datetime && $rows['end_day'] <= $datetime) {
+	   	  											
+	   	  											echo '<h5 class="text-danger text-center">Close</h5>';
+	   	  										}
+	   	  										else { 
+	   	  										?>
 	   	  										<form action="take_exam_status.php" method="POST">
 	   	  											<input type="hidden" name="ddd" value="<?php echo $rows['time_limit']; ?>">
 
@@ -196,6 +201,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 
 	   	  										</form>
+	   	  									<?php 
+	   	  									}
+	   	  									?>
 	   	  									</td>
 	  									</tr>
 	  									<?php
@@ -203,17 +211,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   						 		}
   						 	}elseif ($course['section'] == '4B') {
 
-  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B')AND (choose_question.stat_question='Ready')");
+  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B')");
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
-  						 			<tr class="table-danger">
-  						 				<td></td>
-  						 				<td></td>
-  						 				<td></td>
+
+  						 			<tr>
 	  									<td class="text-center">No Records ....</td>
-	  									<td></td>
-	  									<td></td>
-	  									<td></td>
 	  								</tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {
@@ -232,6 +235,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  									<td><?php echo $rows['time_limit']/60;  ?> mins</td>
 	   	  									<td><?php echo $rows['first_name']." ".$rows['last_name'];?></td>
 	   	  									<td>
+	   	  										<?php
+
+	   	  										$datetime = date("Y-m-d");
+
+	   	  										if ($rows['start_day'] >= $datetime && $rows['end_day'] <= $datetime) {
+	   	  											
+	   	  											echo '<h5 class="text-danger text-center">Close</h5>';
+	   	  										}
+	   	  										else { 
+	   	  										?>
 	   	  										<form action="take_exam_status.php" method="POST">
 	   	  											<input type="hidden" name="ddd" value="<?php echo $rows['time_limit']; ?>">
 	   	  											<input type="hidden" name="bbb" value="<?php echo $rows['passing_rate']; ?>">
@@ -263,23 +276,23 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  												}
 	   	  											?>
 	   	  										</form>
+	   	  										<?php
+	   	  										} 
+	   	  										?>
 	   	  									</td>
 	  									</tr>
 	  								<?php
   						 			}
   						 		}
   						 	}elseif ($course['section']=='4C') {
-  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C')  AND (choose_question.stat_question='Ready')");
+
+  						 		
+  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C') AND (stat_question='Ready')");
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
-  						 			<tr class="table-danger">
-  						 				<td></td>
-  						 				<td></td>
-  						 				<td></td>
+
+  						 			<tr>
 	  									<td class="text-center">No Records ....</td>
-	  									<td></td>
-	  									<td></td>
-	  									<td></td>
 	  								</tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {
@@ -298,17 +311,24 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  									<td><?php echo $rows['time_limit']/60;  ?> mins</td>
 	   	  									<td><?php echo $rows['first_name']." ".$rows['last_name'];?></td>
 	   	  									<td>
-	   	  										<form action="take_exam_status.php" method="POST">
-	   	  											<!-- ddd-->
-	   	  											<input type="hidden" name="time" value="<?php echo $rows['time_limit']; ?>">
-	   	  											<!-- ccc -->
-	   	  											<input type="hidden" name="test" value="<?php echo $rows['test_id']; ?>">
-	   	  											<!-- aaa -->
-	   	  											<input type="hidden" name="t_quest" value="<?php echo $rows['total_quest']; ?>">
-	   	  											<input type="hidden" name="acc" value="<?php echo $_SESSION['acc_id']; ?>">
+	   	  										<?php
 
+	   	  										$datetime = date("Y-m-d");
+
+	   	  										if ($rows['start_day'] >= $datetime && $rows['end_day'] <= $datetime) {
 	   	  											
-
+	   	  											echo '<h5 class="text-danger text-center">Close</h5>';
+	   	  										}
+	   	  										else { 
+	   	  											?>
+	   	  											<form action="take_exam_status.php" method="POST">
+	   	  												<!-- ddd-->
+	   	  												<input type="hidden" name="time" value="<?php echo $rows['time_limit']; ?>">
+	   	  												<!-- ccc -->
+	   	  												<input type="hidden" name="test" value="<?php echo $rows['test_id']; ?>">
+	   	  												<!-- aaa -->
+	   	  												<input type="hidden" name="t_quest" value="<?php echo $rows['total_quest']; ?>">
+	   	  												<input type="hidden" name="acc" value="<?php echo $_SESSION['acc_id']; ?>">
 	   	  											<?php
 
 	   	  											$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$rows['test_id']}'");
@@ -330,6 +350,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  												}
 	   	  											?>
 	   	  										</form>
+	   	  										<?php
+	   	  										}
+	   	  										?>
+	   	  										
 	   	  									</td>
 	  									</tr>
 	  								<?php
