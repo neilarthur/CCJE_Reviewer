@@ -316,23 +316,25 @@ $suppd .= "</select>";
 											   	?>
 
 											  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-											    <li>
 											    	<?php
 
 											    	if ($lows ==$num) {
 											    	 	
-											    	 	echo "<a class='dropdown-item' href='#'><i class='fas fa-plus me-2'></i>a new Questions</a>
+											    	 	echo "<li><a class='dropdown-item'><i class='fas fa-plus me-2'></i>a new Questions</a>
 											    	 	</li>
 											    	 	<div class='dropdown-divider'></div>
 											    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
+											    	 	<div class='dropdown-divider'></div>
+											    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>a random question</a></li>
 											    	 		";
 											    	}
 											    	else {
 
-											    		echo "<a class='dropdown-item' href='adding-quiz-question.php?id=$id'><i class='fas fa-plus me-2'></i>a new Questions </a>
-											    		</li>
-											    <div class='dropdown-divider'></div>
-											    <li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#exampleModal2'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>";
+											    		echo "<li><a class='dropdown-item' href='adding-quiz-question.php?id=$id'><i class='fas fa-plus me-2'></i>a new Questions </a></li>
+											    		<div class='dropdown-divider'></div>
+											    		<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#exampleModal2'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
+											    		<div class='dropdown-divider'></div>
+											    	 	<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#addRandom'><i class='fas fa-plus me-2'></i>a random question</a></li>";
 											    	}
 											    	?>
 											  </ul>
@@ -539,11 +541,99 @@ $suppd .= "</select>";
 			</div>
 		</div>
 
+		<!-- Add Ramdom question Modal -->
+		<div class="modal fade" id="addRandom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title fw-bold" id="exampleModalLabel">Add a random question</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="card border-0">
+								<div class="card-body m-2">
+									<div class="mb-2 row">
+										<label for="Area" class="col-sm-4 col-form-label fw-bold">Area of Exam</label>
+										<div class="col-sm-8"> 
+											<select class="form-select" name="subjects" id="subjects">
+												<option selected value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+												<option value="Law Enforcement">Law Enforcement</option>
+												<option value="Criminalistics">Criminalistics</option>
+												<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+												<option value="Criminal Sociology">Criminal Sociology</option>
+												<option value="Correctional Administration">Correctional Administration</option>
+											</select>
+										</div>
+									</div>
+									<div class="mb-2 row">
+										<label for="level" class="col-sm-4 col-form-label fw-bold">Level of difficulty</label>
+										<div class="col-sm-6">
+											<select class="form-select custom-select difficult" name="difficult" id="difficult" >
+												<option selected value="">Select Difficulty</option>
+												<option value="Easy">Easy</option>
+												<option  value="Moderate">Moderate</option>
+												<option value="Hard">Hard</option>
+											</select>
+										</div>
+									</div>
+									<input class="form-control" type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
+									<div class="row">
+										<label for="number" class="col-sm-4 col-form-label fw-bold">Number of random question</label>
+										<div class="col-sm-4">
+											<select class="form-select" name="t_question" id="">
+												<option selected value="1">1</option>
+												<?php
+												for($i = 2; $i <= 100; $i+=1){
+													echo ' <option>'.$i.'</option>';
+												}
+												?>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card mt-2">
+								<div class="card-body">
+									<p class="fw-bold">Questions matching this filter: 16</p>
+									<div class="table-responsive-xl" id="flex">
+										<div class="table-wrapper-scroll-y my-custom-scrollbar">
+											<table class="table table-hover bg-light" style="font-size: 15px;" id="example_test">
+												<thead>
+													<tr>	
+														<th scope="col">Question</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php 
+
+															     
+												      $test = mysqli_query($sqlcon,"SELECT * FROM test_question");
+												      while ($now = mysqli_fetch_assoc($test)) {
+												      	 $_SESSION['exam'] = $now['question_id']; ?>
+													<tr>
+														<td><?php echo $now['questions_title'] ?></td>
+													</tr>
+													   <?php } ?>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-success">Add random questions</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- View Action Modal -->
 		<div class="modal fade" id="question_bank_prev" data-bs-backdrop="true"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
 			<div class="modal-dialog modal-xl">
-
-
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title fw-bold" id="exampleModalToggleLabel2">View question</h5>
@@ -589,14 +679,12 @@ $suppd .= "</select>";
 		</div>
 
 
-		<!-- edit Information Modal -->
+		<!-- Edit Information Modal -->
 		<div class="modal fade" id="editinformation" data-bs-backdrop="true"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
 			<div class="modal-dialog modal-xl">
-
-
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title fw-bold" id="exampleModalToggleLabel2">Test Information</h5>
+						<h4 class="modal-title fw-bold" id="exampleModalToggleLabel2">Test Information</h4>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
@@ -720,7 +808,7 @@ $suppd .= "</select>";
    	});
 </script>
 
-
+<!-- Edit info modal -->
  <script type="text/javascript">
  	$(document).ready(function(){
  		$('.editinfo').click(function(){

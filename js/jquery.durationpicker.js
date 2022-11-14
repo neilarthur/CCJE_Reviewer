@@ -30,8 +30,8 @@
         showHours: true,
         showMins: true,
         daysLabel: 'Days',
-        hoursLabel: 'Hours',
-        minsLabel: 'Minutes',
+        hoursLabel: 'Hour(s)',
+        minsLabel: 'Minute(s)',
         allowZeroTime: true,
         minsJump: 5
     };

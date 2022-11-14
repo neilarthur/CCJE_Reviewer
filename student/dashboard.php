@@ -106,9 +106,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 		</div>
 	</div>
 	<!-- Main content-->
-    <div class="container-fluid py-5">
+    <div class="container-fluid mt-3 pb-5">
         <div class="row mx-4 ">
-        	<div class="col-lg-3 col-xs-6 mb-5">
+        	<div class="col-lg-3 col-xs-6">
         		<div class="card border-0" style="background-color: #FFA701;" >
         			<div class="card-body">
         				<div class="row">
@@ -129,7 +129,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         			</div>
         		</div>
         	</div>
-        	<div class="col-lg-3 col-xs-6 mb-5">
+        	<div class="col-lg-3 col-xs-6">
         		<div class="card border-0 bg-primary" >
         			<div class="card-body">
         				<div class="row no-gutters align-items-center">
@@ -151,7 +151,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         			</div>
         		</div>
         	</div>
-        	<div class="col-lg-3 col-xs-6 mb-5">
+        	<div class="col-lg-3 col-xs-6">
         		<div class="card border-0 bg-danger"  >
         			<div class="card-body">
         				<div class="row no-gutters align-items-center">
@@ -173,7 +173,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         			</div>
         		</div>
         	</div>
-        	<div class="col-lg-3 col-xs-6 mb-5">
+        	<div class="col-lg-3 col-xs-6">
         		<div class="card border-0" style="background-color: rgb(0, 166, 90);" >
         			<div class="card-body">
         				<div class="row no-gutters align-items-center">
@@ -196,10 +196,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         		</div>
         	</div>
         </div>
-        <div class="row mx-5">
+        <div class="row mx-4 mt-4">
         	<div class="col-lg-4">
-        		<div class="card shadow">
-        			<div class="card-body m-4 fs-5">
+        		<div class="card h-100">
+        			<div class="card-body " style="font-size: 18px;">
         				<h4 class="fw-bold">My Status</h4>
         				<hr>
                         <?php $query = "SELECT * FROM choose_question WHERE section='4C'AND status='active'";
@@ -221,16 +221,55 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         				<p class="fw-bold">Lowest score in: Criminal jurisdinance</p>
         				<hr>
         				<p class="fw-bold">Average percentage: 85%</p>
-        				<hr>
         			</div>
         		</div>
         	</div>
-        	<div class="col-lg-8">
-        		<div class="card shadow">
-        			<div class="card-body">
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <div class="card-header pb-0">
+                        <h4 class="fw-bold">Upcoming</h4>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                            <div class="timeline-block mb-3">
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0"><i class="fas fa-sticky-note text-primary me-2 fa-lg"></i>Ouiz #1 Criminal Jurisprudence</h6>
+                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="timeline-block mb-3">
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0"><i class="fas fa-sticky-note me-2 fa-lg text-primary"></i>Ouiz #1 Criminal Jurisprudence</h6>
+                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="timeline-block mb-3">
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0"><i class="fas fa-sticky-note me-2 fa-lg text-primary"></i>Ouiz #1 Criminal Jurisprudence</h6>
+                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                   <div class="card-footer text-muted bg-white border-0">
+                    <a href="" class="d-flex justify-content-center" style="text-decoration: none; font-size: 18px;">View All</a>
+                   </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                
+            </div>
+        </div>
+        <div class="row mx-4 mt-4">
+            <div class="col-lg-6">
+                <div class="card ">
+                    <div class="card-body">
                         <h4 class="card-title text-dark fw-bold">Quiz Percentage</h4>
                         <div>
-                            <canvas id="myChart"    style="height: 400px; width: 100%;" ></canvas>
+                            <canvas id="myChart"    style="height: 300px; width: 100%;" ></canvas>
                         </div>
                         <?php 
 
@@ -331,9 +370,67 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                             }
 
                          </script> 
-        			</div>
-        		</div>
-        	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card ">
+                    <div class="card-body">
+                        <h4 class="card-title text-dark fw-bold">Preboard Exam Percentage</h4>
+                    </div>
+                    <div>
+                        <canvas id="Chart" style="height: 300px; width: 100%;" ></canvas>
+                    </div>
+                    <script >
+                         window.onload=function(){/*from w  w  w  .j  av a2  s . c  o m*/
+                            var ctx = document.getElementById("Chart").getContext("2d");
+                            var data = {
+                                labels: ["Score Percentage" ],
+                                datasets: [{
+                                    label: "Criminal Jurisprudence",
+                                    backgroundColor: "#0052cc",
+                                    data: [85]
+                                }, {
+                                    label: "Law Enforcement",
+                                    backgroundColor: "#ff5630",
+                                    data: [80]
+                                }, {
+                                    label: "Criminalistics",
+                                    backgroundColor: "#ffab00",
+                                    data: [83]
+                                },{
+                                    label: "Crime Detection & Investigation",
+                                    backgroundColor:  "#23AE22",
+                                    data: [92]
+                                },{
+                                    label: "Criminal Sociology",
+                                    backgroundColor: "#e81705",
+                                    data: [75]
+                                },{
+                                    label: "Correctional Administration",
+                                    backgroundColor:'#13169B',
+                                    data: [79]
+                                }]
+                            };
+                            var myBarChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: data,
+                                options: {
+                                    barValueSpacing: 20,
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                min: 0,
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        }
+
+                    </script> 
+                </div>
+            </div>
         </div>
     </div>
 </body>

@@ -15,43 +15,54 @@ $sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AN
  ?>
 <link href="../css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
+<style type="text/css">
+    .my-custom-scrollbar {
+    position: relative;
+    height: 450px;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }
+</style>
  <div class="table-responsive">
-
-  <table class="table table-hover bg-light" style="font-size: 15px;" id="pre_board">
-    <thead>
-      <tr>
-        <th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>  
-        <th scope="col">Question</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-
-      if (mysqli_num_rows($sql) ==0) { ?>
-
-        <tr class="table-danger">
-          <td></td>
-          <td class="text-center">No Record of Question yet.</td>
-          <td></td>
+  <div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-hover bg-light" style="font-size: 15px;" id="pre_board">
+      <thead>
+        <tr>
+          <th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>  
+          <th scope="col">Question</th>
+          <th scope="col">Action</th>
         </tr>
+      </thead>
+      <tbody>
+        <?php
 
-      <?php } elseif (mysqli_num_rows($sql) >0) { ?>
+        if (mysqli_num_rows($sql) ==0) { ?>
 
-        <?php 
-        while ($now = mysqli_fetch_assoc($sql)) { $_SESSION['exam'] = $now['question_id'];  ?>
-
-          <tr>
-            <td><input type="checkbox" class="checkbox" name="chkl[]" id="question_id<?php echo $now['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $now['question_id']; ?>"></td>
-            <td><?php echo $now['questions_title']; ?></td>
-            
-              <td><button data-id="<?php echo $now['question_id']; ?>"  type="button" class="btn btn-primary popover-test view_btn" data-bs-toggle="modal" data-bs-target="#exampleModalToggle2" data-bs-dismiss="modal"><i class="fas fa-eye"></i></button></td>
+          <tr class="table-danger">
+            <td></td>
+            <td class="text-center">No Record of Question yet.</td>
+            <td></td>
           </tr>
-        <?php } ?>
 
-      <?php } ?>
-    </tbody>
-  </table>
+        <?php } elseif (mysqli_num_rows($sql) >0) { ?>
+
+          <?php 
+          while ($now = mysqli_fetch_assoc($sql)) { $_SESSION['exam'] = $now['question_id'];  ?>
+
+            <tr>
+              <td><input type="checkbox" class="checkbox" name="chkl[]" id="question_id<?php echo $now['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $now['question_id']; ?>"></td>
+              <td><?php echo $now['questions_title']; ?></td>
+              
+                <td><button data-id="<?php echo $now['question_id']; ?>"  type="button" class="btn btn-primary popover-test view_btn" data-bs-toggle="modal" data-bs-target="#exampleModalToggle2" data-bs-dismiss="modal"><i class="fas fa-eye"></i></button></td>
+            </tr>
+          <?php } ?>
+
+        <?php } ?>
+      </tbody>
+    </table>
+  </div>
  </div>
   
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

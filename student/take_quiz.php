@@ -138,9 +138,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
-  						 			<tr>
-	  									<td class="text-center">No Records ....</td>
-	  								</tr>
+  						 			
+  						 			<tr class="table-danger">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center">No records has been added </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {
   						 			
@@ -165,7 +172,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 	   	  										if ($rows['start_day'] >= $datetime && $rows['end_day'] <= $datetime) {
 	   	  											
-	   	  											echo '<h5 class="text-danger text-center">Close</h5>';
+	   	  											echo '<span class="badge bg-danger" style="font-size:15px;">Close</span>';
 	   	  										}
 	   	  										else { 
 	   	  										?>
@@ -215,9 +222,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
 
-  						 			<tr>
-	  									<td class="text-center">No Records ....</td>
-	  								</tr>
+  						 			<tr class="table-danger">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center">No records has been added </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {
   						 			
@@ -241,7 +254,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 	   	  										if ($rows['start_day'] >= $datetime && $rows['end_day'] <= $datetime) {
 	   	  											
-	   	  											echo '<h5 class="text-danger text-center">Close</h5>';
+	   	  											echo '<span class="badge bg-danger" style="font-size:15px;">Close</span>';
 	   	  										}
 	   	  										else { 
 	   	  										?>
@@ -291,9 +304,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
 
-  						 			<tr>
-	  									<td class="text-center">No Records ....</td>
-	  								</tr>
+  						 			<tr class="table-danger">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center">No records has been added </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
   						 		<?php
   						 		}elseif (mysqli_num_rows($query)>0) {
   						 			
@@ -317,7 +336,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 	   	  										if ($rows['start_day'] >= $datetime && $rows['end_day'] <= $datetime) {
 	   	  											
-	   	  											echo '<h5 class="text-danger text-center">Close</h5>';
+	   	  											echo '<span class="badge bg-danger" style="font-size:15px;">Close</span>';
 	   	  										}
 	   	  										else { 
 	   	  											?>

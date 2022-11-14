@@ -52,6 +52,14 @@ function getName($n) {
          .navbar .breadcrumb li a{
           color: #8C0000;
         }
+         .my-custom-scrollbar {
+		position: relative;
+		height: 450px;
+		overflow: auto;
+		}
+		.table-wrapper-scroll-y {
+		display: block;
+		}
     </style>
 </head>
 <body style="background-color: rgb(229, 229, 229);">
@@ -259,19 +267,43 @@ function getName($n) {
 								<div class="card">
 									<div class="card-body m-4">
 										<div class="d-flex justify-content-between mb-3">
-											<button class="btn btn-warning px-3 pb-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i>
+											<button data-id="<?php echo $id; ?>"  class="btn btn-warning px-3 pb-2 editinfo"  data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i>
 											</button>
 											<div class="dropdown me-2">
 												<?php 
 											   $preboard= mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '$id'");
+											   $board = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_choose_quest WHERE pre_exam_id = '$id'");
 
-											   while ($rows = mysqli_fetch_assoc($preboard)) { ?>
+											   $nums = mysqli_num_rows($board);
+
+											   while ($rows = mysqli_fetch_assoc($preboard)) { 
+											   	$total = $rows['total_question'];
+
+											   	?>
 
 												<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Add</a>
 											  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-											    <li><a class="dropdown-item" href="adding-preboard-question.php?id=<?php echo $rows['pre_exam_id']?>"><i class="fas fa-plus me-2"></i>a new Questions</a></li>
-											    <div class="dropdown-divider"></div>
-											    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fas fa-plus me-2"></i>from Question Bank</a></li>
+											  	<?php
+
+											  	if ($total == $nums) {
+											  		echo "<li><a class='dropdown-item'><i class='fas fa-plus me-2'></i>a new Questions</a>
+											    	 	</li>
+											    	 	<div class='dropdown-divider'></div>
+											    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
+											    	 	<div class='dropdown-divider'></div>
+											    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>a random question</a></li>
+											    	 		";
+											  	}
+											  	else {
+											  		echo "<li><a class='dropdown-item' href='adding-preboard-question.php?id=$id'><i class='fas fa-plus me-2'></i>a new Questions </a></li>
+											    		<div class='dropdown-divider'></div>
+											    		<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#exampleModal2'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
+											    		<div class='dropdown-divider'></div>
+											    	 	<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#addRandom'><i class='fas fa-plus me-2'></i>a random question</a></li>";
+
+											  	}
+
+											  	 ?>
 											  </ul>
 											   <?php }  ?>
 											</div>
@@ -386,7 +418,7 @@ function getName($n) {
 
 		<!--Add from the Question bank modal-->
 		<div class="modal fade " data-bs-backdrop="true"  id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-xl modal-dialog-scrollable modal-fullscreen-xl-down ">
+			<div class="modal-dialog modal-xl  modal-fullscreen-xl-down ">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title fw-bold" id="exampleModalLabel">Add from the Question Bank</h4>
@@ -425,39 +457,120 @@ function getName($n) {
 							<div class="card mt-2">
 								<div class="card-body">
 									<div class="table-responsive-xl" id="test">
-										<table class="table bg-light table-hover" style="font-size: 15px;" id="pre_board">
-											<thead>
-												<tr>
-													<th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>	
-													<th hidden>ID</th>
-													<th scope="col">Question</th>
-													<th scope="col">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-											 <?php 
+										<div class="table-wrapper-scroll-y my-custom-scrollbar">
+											<table class="table bg-light table-hover" style="font-size: 15px;" id="pre_board">
+												<thead>
+													<tr>
+														<th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>	
+														<th hidden>ID</th>
+														<th scope="col">Question</th>
+														<th scope="col">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													 <?php 
 
-												     
-										      $Slow = mysqli_query($sqlcon,"SELECT * FROM test_question");
-										      while ($now = mysqli_fetch_assoc($Slow)) {
+														     
+												      $Slow = mysqli_query($sqlcon,"SELECT * FROM test_question");
+												      while ($now = mysqli_fetch_assoc($Slow)) {
 
-										        $_SESSION['exam'] = $now['question_id']; ?>
-											<tr>
-												<td><input type="checkbox" class="checkbox" name="chkl[]" id="question_id<?php echo $now['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $now['question_id']; ?>"></td>
-												<td hidden><?php echo $now['question_id']?></td>
-												<td><?php echo $now['questions_title'] ?></td>
-												<td><button data-id="<?php echo $now['question_id']; ?>" type="button" class="btn btn-primary popover-test view_btn" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-eye"></i></button></td>
-											</tr>
+												        $_SESSION['exam'] = $now['question_id']; ?>
+													<tr>
+														<td><input type="checkbox" class="checkbox" name="chkl[]" id="question_id<?php echo $now['question_id'];  ?>"  value="<?php echo $_SESSION['exam'] ?>" data-id="<?php echo $now['question_id']; ?>"></td>
+														<td hidden><?php echo $now['question_id']?></td>
+														<td><?php echo $now['questions_title'] ?></td>
+														<td><button data-id="<?php echo $now['question_id']; ?>" type="button" class="btn btn-primary popover-test view_btn" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-eye"></i></button></td>
+													</tr>
 
-										 <?php } ?>
-										</tbody>
-									</table>
+												 <?php } ?>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
 							<div class="modal-footer">
 								<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
 								<button type="submit" name="create" class="btn btn-success">Add selected questions</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Add Ramdom question Modal -->
+		<div class="modal fade" id="addRandom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title fw-bold" id="exampleModalLabel">Add a random question</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="card border-0">
+								<div class="card-body mx-3">
+									<div class="mb-2 row">
+										<label for="Area" class="col-sm-4 col-form-label fw-bold">Area of Examination</label>
+										<div class="col-sm-6"> 
+											<select class="form-select" name="subjects" id="subjects">
+												<option selected value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+												<option value="Law Enforcement">Law Enforcement</option>
+												<option value="Criminalistics">Criminalistics</option>
+												<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+												<option value="Criminal Sociology">Criminal Sociology</option>
+												<option value="Correctional Administration">Correctional Administration</option>
+											</select>
+										</div>
+									</div>
+									<input class="form-control" type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
+									<div class="row">
+										<label for="number" class="col-sm-4 col-form-label fw-bold">Number of random question</label>
+										<div class="col-sm-3">
+											<select class="form-select" name="t_question" id="">
+												<option selected value="1">1</option>
+												<?php
+												for($i = 2; $i <= 100; $i+=1){
+													echo ' <option>'.$i.'</option>';
+												}
+												?>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card mt-2">
+								<div class="card-body">
+									<p class="fw-bold">Questions matching this filter: 16</p>
+									<div class="table-responsive-xl" id="flex">
+										<div class="table-wrapper-scroll-y my-custom-scrollbar">
+											<table class="table table-hover bg-light" style="font-size: 15px;" id="example_test">
+												<thead>
+													<tr>	
+														<th scope="col">Question</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php 
+
+															     
+												      $test = mysqli_query($sqlcon,"SELECT * FROM test_question");
+												      while ($now = mysqli_fetch_assoc($test)) {
+												      	 $_SESSION['exam'] = $now['question_id']; ?>
+													<tr>
+														<td><?php echo $now['questions_title'] ?></td>
+													</tr>
+													   <?php } ?>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-success">Add random questions</button>
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 							</div>
 						</form>
@@ -500,6 +613,23 @@ function getName($n) {
 					</div>
 					<div class="modal-footer border-0">
 						<button type="button" class="btn btn-secondary pb-2 px-4" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Edit Information Modal -->
+		<div class="modal fade" id="editinformation" data-bs-backdrop="true"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title fw-bold" id="exampleModalToggleLabel2">Exam Information</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="information">
+							
+						</div>
 					</div>
 				</div>
 			</div>
@@ -586,7 +716,7 @@ function getName($n) {
 
 </script>
 
- <!-- preview modal --->
+ <!-- View modal --->
  <script type="text/javascript">
 
    $(document).ready(function(){
@@ -625,6 +755,25 @@ function getName($n) {
     });
    });
  </script>
+
+ <!--Edit info modal -->
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+ 		$('.editinfo').click(function(){
+ 			var userid = $(this).data('id');
+
+ 			$.ajax({
+ 				url: '../php/editinfopreboard.php',
+        		type: 'post',
+        		data: {userid: userid},
+        		success: function(response){
+          		$('.information').html(response);
+          		$('#editinformation').modal('show');
+          	}
+          });
+    	});
+   	});
+</script>
 <script>
 let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {

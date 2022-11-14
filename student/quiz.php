@@ -247,11 +247,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                     </tbody>
                                     <tbody>
                                          <tr>
-                                            <input type="text" name="update_id" value="<?php echo $ids; ?>">
+                                            <input type="hidden" name="update_id" value="<?php echo $ids; ?>">
                                             <input type="hidden" name="update_acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
                                             <input type="hidden" name="total_quest" value="<?php echo $sad; ?>">
-                                            <input type="text" name="correct" value="<?php echo $shows['correct_ans']; ?>">
-                                        </tr>
                                      </tbody>
                                   </table>
                              </div>

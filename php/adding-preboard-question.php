@@ -283,7 +283,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 						                        </div>
 						                        <div class="form-group">
 						                             <label for="name" hidden="">Faculty</label>
-						                             <input type="text" name="update_id" value="<?php echo $_GET['id']; ?>">
+						                             <input type="hidden" name="update_id" value="<?php echo $_GET['id']; ?>">
 						                             <input type="hidden" name="acc[]" value="<?php echo $_SESSION['acc_id'] ?>">
 						                        </div>
 											</div>

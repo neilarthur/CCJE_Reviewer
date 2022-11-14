@@ -218,21 +218,54 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													<th scope="col">Log Out</th>
 												</tr>
 											</thead>
-											<tbody>
+													<tbody>
 												<?php
 
-												$base = mysqli_query($sqlcon, "SELECT * FROM logs,accounts WHERE (accounts.acc_id=logs.acc_id) AND role='student'");
-												while ($rows = mysqli_fetch_array($base)) { ?>
-												<tr>
-													
-													<td><?php echo $rows['first_name'];  ?></td>
-													<td><?php echo $rows['middle_name'];  ?></td>
-													<td><?php echo $rows['user_id'];  ?></td>
-	                                                <td><?php echo $rows['email_address'];  ?></td>
-	                                                <td><?php echo $rows['role'];  ?></td>
-	                                                <td><?php echo $rows['login_time'];  ?></td>
-	                                                <td><?php echo $rows['logout_time'];  ?></td>
-	                                            </tr>
+												$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+												while ($rows = mysqli_fetch_array($accounts)) {
+
+													if ($rows['section']=='4A') {
+														$base = mysqli_query($sqlcon, "SELECT * FROM logs,accounts WHERE (accounts.acc_id=logs.acc_id) AND role='student' AND(accounts.section='4A') ");
+														while ($rows = mysqli_fetch_assoc($base)) {?>
+															<tr>
+																<td><?php echo $rows['first_name'];  ?></td>
+																<td><?php echo $rows['middle_name'];  ?></td>
+																<td><?php echo $rows['user_id'];  ?></td>
+				                                                <td><?php echo $rows['email_address'];  ?></td>
+				                                                <td><?php echo $rows['role'];  ?></td>
+				                                                <td><?php echo $rows['login_time'];  ?></td>
+				                                                <td><?php echo $rows['logout_time'];  ?></td>
+				                                            </tr>
+														<?php }
+													} elseif ($rows['section']=='4B') {
+														$base = mysqli_query($sqlcon, "SELECT * FROM logs,accounts WHERE (accounts.acc_id=logs.acc_id) AND role='student' AND(accounts.section='4B') ");
+														while ($rows = mysqli_fetch_assoc($base)) { ?>
+															<tr>
+																<td><?php echo $rows['first_name'];  ?></td>
+																<td><?php echo $rows['middle_name'];  ?></td>
+																<td><?php echo $rows['user_id'];  ?></td>
+				                                                <td><?php echo $rows['email_address'];  ?></td>
+				                                                <td><?php echo $rows['role'];  ?></td>
+				                                                <td><?php echo $rows['login_time'];  ?></td>
+				                                                <td><?php echo $rows['logout_time'];  ?></td>
+				                                            </tr>
+													<?php }
+												  } elseif ($rows['section']=='4C') {
+												  	$base = mysqli_query($sqlcon, "SELECT * FROM logs,accounts WHERE (accounts.acc_id=logs.acc_id) AND role='student' AND(accounts.section='4C') ");
+												  	while ($rows = mysqli_fetch_assoc($base)) { ?>
+												  		    <tr>
+																<td><?php echo $rows['first_name'];  ?></td>
+																<td><?php echo $rows['middle_name'];  ?></td>
+																<td><?php echo $rows['user_id'];  ?></td>
+				                                                <td><?php echo $rows['email_address'];  ?></td>
+				                                                <td><?php echo $rows['role'];  ?></td>
+				                                                <td><?php echo $rows['login_time'];  ?></td>
+				                                                <td><?php echo $rows['logout_time'];  ?></td>
+				                                            </tr>
+												      <?php	}
+												     }
+												 ?>
+												
 	                                            <?php } ?>
 	                                        </tbody>
 	                                    </table>
