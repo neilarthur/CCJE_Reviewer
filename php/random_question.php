@@ -6,13 +6,14 @@ require_once 'conn.php';
 
 $id = $_SESSION['acc_id'];
 
-$area_exam = $_POST['area_exam'];
-$t_question = $_POST['t_question'];
+$difficult = $_POST['diff'];
+$subjects = $_POST['area_exam'];
+$total_quest = $_POST['total_quest'];
 
-$sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AND `subject_name` LIKE '%$area_exam%' ORDER BY rand() LIMIT $t_question");
-
+$sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AND  level_difficulty LIKE '%$difficult%' AND `subject_name` LIKE '%$subjects%' ORDER BY rand() LIMIT $total_quest ");
 
 $quiz_filt = mysqli_num_rows($sql);
+
 
  ?>
  <style type="text/css">
@@ -30,7 +31,7 @@ $quiz_filt = mysqli_num_rows($sql);
 <p class="fw-bold">Questions matching this filter:<?php echo $quiz_filt; ?></p>
  <div class="table-responsive-xl">
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
-  <table  class="table table-hover bg-light" style="font-size: 15px;" id="randomize">
+  <table  class="table table-hover bg-light" style="font-size: 15px;" id="standing">
     <thead>
       <tr>  
         <th scope="col">Question</th>
@@ -52,7 +53,7 @@ $quiz_filt = mysqli_num_rows($sql);
         while ($now = mysqli_fetch_assoc($sql)) { $_SESSION['exam'] = $now['question_id'];  ?>
 
           <tr>
-            <td hidden=""><input type="hidden" name="preboard_choose[]" value="<?php echo $now['question_id']; ?>"></td>
+            <td hidden=""><input type="hidden" name="unique_quest[]" value="<?php echo $now['question_id']; ?>"></td>
             <td><?php echo $now['questions_title']; ?></td>
           </tr>
         <?php } ?>
@@ -138,3 +139,9 @@ $quiz_filt = mysqli_num_rows($sql);
          return true;
     } 
 </script>
+
+
+  
+
+
+

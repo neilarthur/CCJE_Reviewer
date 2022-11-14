@@ -509,13 +509,13 @@ function getName($n) {
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form>
+						<form action="function_random_preboard.php" method="POST">
 							<div class="card border-0">
 								<div class="card-body mx-3">
 									<div class="mb-2 row">
 										<label for="Area" class="col-sm-4 col-form-label fw-bold">Area of Examination</label>
 										<div class="col-sm-6"> 
-											<select class="form-select" name="subjects" id="subjects">
+											<select class="form-select" name="area_exam" id="area_exam">
 												<option selected value="Criminal Jurisprudence">Criminal Jurisprudence</option>
 												<option value="Law Enforcement">Law Enforcement</option>
 												<option value="Criminalistics">Criminalistics</option>
@@ -529,10 +529,13 @@ function getName($n) {
 									<div class="row">
 										<label for="number" class="col-sm-4 col-form-label fw-bold">Number of random question</label>
 										<div class="col-sm-3">
-											<select class="form-select" name="t_question" id="">
-												<option selected value="1">1</option>
+											<select class="form-select" name="t_question" id="t_question">
+												<option selected><?php echo $_GET['total']; ?></option>
 												<?php
-												for($i = 2; $i <= 100; $i+=1){
+
+												$tot = $_GET['total'];
+
+												for($i = 2; $i <= $total; $i+=1){
 													echo ' <option>'.$i.'</option>';
 												}
 												?>
@@ -542,11 +545,17 @@ function getName($n) {
 								</div>
 							</div>
 							<div class="card mt-2">
-								<div class="card-body">
-									<p class="fw-bold">Questions matching this filter: 16</p>
-									<div class="table-responsive-xl" id="flex">
+								<div class="card-body" id="preb">
+									<?php
+
+									$pre_b = mysqli_query($sqlcon,"SELECT * FROM test_question ORDER BY rand() LIMIT $tot");
+
+									$num = mysqli_num_rows($pre_b);
+									?>
+									<p class="fw-bold">Questions matching this filter:<?php echo $num; ?></p>
+									<div class="table-responsive-xl">
 										<div class="table-wrapper-scroll-y my-custom-scrollbar">
-											<table class="table table-hover bg-light" style="font-size: 15px;" id="example_test">
+											<table class="table table-hover bg-light" style="font-size: 15px;" id="randomize">
 												<thead>
 													<tr>	
 														<th scope="col">Question</th>
@@ -556,10 +565,11 @@ function getName($n) {
 													<?php 
 
 															     
-												      $test = mysqli_query($sqlcon,"SELECT * FROM test_question");
+												      $test = mysqli_query($sqlcon,"SELECT * FROM test_question ORDER BY rand() LIMIT $tot");
 												      while ($now = mysqli_fetch_assoc($test)) {
 												      	 $_SESSION['exam'] = $now['question_id']; ?>
 													<tr>
+														<td hidden=""><input type="hidden" name="preboard_choose[]" value="<?php echo $now['question_id']; ?>"></td>
 														<td><?php echo $now['questions_title'] ?></td>
 													</tr>
 													   <?php } ?>
@@ -570,7 +580,9 @@ function getName($n) {
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-success">Add random questions</button>
+								<input type="hidden" name="test_id" value="<?php echo $_GET['id'] ?>">
+									<input type="hidden" name="total" value="<?php echo $_GET['total'] ?>">
+								<button type="submit" name="create" class="btn btn-success">Add random questions</button>
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 							</div>
 						</form>
@@ -705,6 +717,57 @@ function getName($n) {
       $("#test").hide();    
       $("#test").fadeIn();             
       $("#test").html(data); 
+        // alert(data);
+
+      }
+
+      });
+
+
+  });
+
+</script>
+
+
+ 
+ <script type="text/javascript">
+
+  // var of select input difficult
+
+  // var of select input subject
+
+
+ 
+  $('select').on('change', function() {
+    var name = this.name;
+    var area_exam;
+    var t_question;
+
+       // alert(  name);
+
+
+
+       if (name=="area_exam") {
+          area_exam = this.value;
+          t_question = $("#t_question").val();
+       }else if (name=="t_question") {
+          area_exam =$("#area_exam").val();
+          t_question=  this.value;
+
+       }else{
+        return false;
+       }
+      
+
+      $.ajax({    //create an ajax request to load_page.php
+      type:"POST",
+      url: "update_filter.php",             
+      dataType: "text",   //expect html to be returned  
+      data:{area_exam:area_exam,t_question:t_question},               
+      success: function(data){     
+      $("#preb").hide();    
+      $("#preb").fadeIn();             
+      $("#preb").html(data); 
         // alert(data);
 
       }

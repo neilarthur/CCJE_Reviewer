@@ -17,6 +17,8 @@ if (isset($_POST['create'])) {
 	$status = "active";
 	$stat = "active";
 
+	$add_quest = $_POST['quest'];	
+
 	foreach ($questions as $key => $value) {
 
 		$insert_quiz = "INSERT INTO test_question(subject_name,level_difficulty,questions_title,option_a,option_b,option_c,option_d,correct_ans,acc_id,status)VALUES ('$area_quiz','$difficulty','".$value."','".$option_a[$key]."','".$option_b[$key]."','".$option_c[$key]."','".$option_d[$key]."','".$correct_ans[$key]."','$acc','$status')";
@@ -32,7 +34,7 @@ if (isset($_POST['create'])) {
 			
 			if ($insert_query) {
 				
-				header("location: editing-quiz.php?id=$test_id");
+				header("location: editing-quiz.php?id=$test_id$total=$add_quest");
 
 			}
 			else{

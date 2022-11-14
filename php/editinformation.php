@@ -14,16 +14,17 @@ $results = mysqli_query($sqlcon, $say);
 
 while ($row = mysqli_fetch_array($results)) { ?>
  
-<form action="../php/update_test_yourself.php" method="POST">
+<form action="update_test_yourself.php" method="POST">
 	<div class="modal-body">
 		<div class="row">
       		<div class="col-lg-6">
       			<div class="card h-100">
       				<div class="card-body">
       					<label  class="form-label fw-bold">Title</label>
-      					<input type="text" class="form-control mb-3" name="title" placeholder="Untitled form" value="<?php echo $row['quiz_title'] ;?>">
+      					<input type="text" name="update_id" value="<?php echo $row['test_id']; ?>">
+      					<input type="text" class="form-control mb-3" name="title" value="<?php echo $row['quiz_title'] ;?>">
       					<label  class="form-label fw-bold">Description</label>
-      					<textarea type="text" class="form-control " name="description" placeholder="Answer the following" rows="7" required><?php echo $row['description'] ?></textarea>
+      					<textarea type="text" class="form-control " name="description"  rows="7" required><?php echo $row['description'] ?></textarea>
       				</div>
       			</div>
       		</div>

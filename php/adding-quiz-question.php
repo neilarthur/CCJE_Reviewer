@@ -293,7 +293,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 							<div class="card mt-2">
 								<div class="card-body">
 									<div class="card-footer bg-white border-0 d-flex justify-content-center mb-1">
-										<button type="submit" class="btn btn-primary px-4 pb-2 add_item_btn"><i class="fas fa-plus-circle me-2"></i>Add</button>
+										<input type="hidden" name="quest" value="<?php echo $_GET['total']; ?>">
+										<button type="button" class="btn btn-primary px-4 pb-2 add_item_btn"><i class="fas fa-plus-circle me-2"></i>Add</button>
 										<button type="submit" name="create" class="btn btn-success mx-2 px-4 pb-2" id="create_btn"><i class="fas fa-check-circle me-2"></i>Save and display</button>   
 										<button class="btn btn-danger px-3 pb-2 text-white backbtn"><i class="fas fa-times-circle me-2"></i>Cancel</button> 
  
@@ -337,6 +338,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
 <script>
 let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
@@ -374,4 +377,5 @@ $(".backbtn").on("click", function(e){
 });
 
 </script>
+
 </html>

@@ -352,7 +352,7 @@ function getName($n) {
 																	<div class="d-flex flex-row justify-content-center">
 																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
 
-																		<a href="../php/editing-preboard.php?id=<?php echo $rows['pre_exam_id'];?>" class="btn btn-warning mx-2" ><i class="fas fa-pen pt-1"></i></a>
+																		<a href="../php/editing-preboard.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen pt-1"></i></a>
 																		
 																		<button class="btn btn-secondary mx-2  deletebtn" data-bs-toggle="modal" type="button" style="padding-bottom: 10px; padding-top: 10px; padding-left: 12px; padding-right: 12px;"><i class="fas fa-trash"></i></button>
 																	</div>

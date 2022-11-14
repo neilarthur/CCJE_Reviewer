@@ -318,6 +318,8 @@ $suppd .= "</select>";
 											  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 											    	<?php
 
+											    	$tots = $_GET['total'];
+
 											    	if ($lows ==$num) {
 											    	 	
 											    	 	echo "<li><a class='dropdown-item'><i class='fas fa-plus me-2'></i>a new Questions</a>
@@ -330,7 +332,7 @@ $suppd .= "</select>";
 											    	}
 											    	else {
 
-											    		echo "<li><a class='dropdown-item' href='adding-quiz-question.php?id=$id'><i class='fas fa-plus me-2'></i>a new Questions </a></li>
+											    		echo "<li><a class='dropdown-item' href='adding-quiz-question.php?id=$id&total=$tots'><i class='fas fa-plus me-2'></i>a new Questions </a></li>
 											    		<div class='dropdown-divider'></div>
 											    		<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#exampleModal2'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
 											    		<div class='dropdown-divider'></div>
@@ -550,13 +552,13 @@ $suppd .= "</select>";
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form>
+						<form action="function_random.php" method="POST">
 							<div class="card border-0">
 								<div class="card-body m-2">
 									<div class="mb-2 row">
 										<label for="Area" class="col-sm-4 col-form-label fw-bold">Area of Exam</label>
 										<div class="col-sm-8"> 
-											<select class="form-select" name="subjects" id="subjects">
+											<select class="form-select" name="area_exam" id="area_exam">
 												<option selected value="Criminal Jurisprudence">Criminal Jurisprudence</option>
 												<option value="Law Enforcement">Law Enforcement</option>
 												<option value="Criminalistics">Criminalistics</option>
@@ -569,7 +571,7 @@ $suppd .= "</select>";
 									<div class="mb-2 row">
 										<label for="level" class="col-sm-4 col-form-label fw-bold">Level of difficulty</label>
 										<div class="col-sm-6">
-											<select class="form-select custom-select difficult" name="difficult" id="difficult" >
+											<select class="form-select custom-select difficult"  name="diff" id="diff" >
 												<option selected value="">Select Difficulty</option>
 												<option value="Easy">Easy</option>
 												<option  value="Moderate">Moderate</option>
@@ -581,11 +583,16 @@ $suppd .= "</select>";
 									<div class="row">
 										<label for="number" class="col-sm-4 col-form-label fw-bold">Number of random question</label>
 										<div class="col-sm-4">
-											<select class="form-select" name="t_question" id="">
-												<option selected value="1">1</option>
+											<select class="form-select" name="total_quest" id="total_quest">
+												<option selected=""><?php echo $_GET['total']; ?></option>
+												
 												<?php
-												for($i = 2; $i <= 100; $i+=1){
-													echo ' <option>'.$i.'</option>';
+
+												$tot = $_GET['total'];
+
+												for($i =1; $i <= $tot; $i+=1){
+													echo '
+													<option>'.$i.'</option>';
 												}
 												?>
 											</select>
@@ -594,11 +601,19 @@ $suppd .= "</select>";
 								</div>
 							</div>
 							<div class="card mt-2">
-								<div class="card-body">
-									<p class="fw-bold">Questions matching this filter: 16</p>
-									<div class="table-responsive-xl" id="flex">
+								<div class="card-body" id="coast">
+									<?php
+
+									$filt = mysqli_query($sqlcon,"SELECT * FROM test_question LIMIT $tot");
+
+									$sort = mysqli_num_rows($filt);
+									?>
+									
+
+									<p class="fw-bold">Questions matching this filter:<?php echo $sort; ?></p>
+									<div class="table-responsive-xl">
 										<div class="table-wrapper-scroll-y my-custom-scrollbar">
-											<table class="table table-hover bg-light" style="font-size: 15px;" id="example_test">
+											<table class="table table-hover bg-light" style="font-size: 15px;" id="standing">
 												<thead>
 													<tr>	
 														<th scope="col">Question</th>
@@ -607,11 +622,13 @@ $suppd .= "</select>";
 												<tbody>
 													<?php 
 
-															     
-												      $test = mysqli_query($sqlcon,"SELECT * FROM test_question");
+													  
+
+												      $test = mysqli_query($sqlcon,"SELECT * FROM test_question ORDER BY rand() LIMIT $tot");
 												      while ($now = mysqli_fetch_assoc($test)) {
 												      	 $_SESSION['exam'] = $now['question_id']; ?>
 													<tr>
+														<td hidden=""><input type="hidden" name="unique_quest[]" value="<?php echo $now['question_id']; ?>"></td>
 														<td><?php echo $now['questions_title'] ?></td>
 													</tr>
 													   <?php } ?>
@@ -622,7 +639,9 @@ $suppd .= "</select>";
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-success">Add random questions</button>
+								<input type="hidden" name="test_id" value="<?php echo $_GET['id']; ?>">
+								<input type="hidden" name="total" value="<?php echo $_GET['total']; ?>">
+								<button type="submit" name="create" class="btn btn-success">Add random questions</button>
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 							</div>
 						</form>
@@ -825,6 +844,66 @@ $suppd .= "</select>";
           });
     	});
    	});
+</script>
+
+<!--- random javascript -->
+
+ <script type="text/javascript">
+
+  // var of select input difficult
+
+  // var of select input subject
+
+ 
+  $('select').on('change', function() {
+    var name = this.name;
+    var diff;
+    var area_exam;
+    var total_quest;
+
+       // alert(  name);
+
+
+
+       if (name=="diff") {
+          diff = this.value;
+          area_exam = $("#area_exam").val();
+          total_quest = $("#total_quest").val();
+
+       }else if (name=="area_exam") {
+          diff =$("#diff").val();
+          total_quest = $("#total_quest").val();
+          area_exam =  this.value;
+
+       }
+       else if (name=="total_quest") {
+          diff =$("#diff").val();
+          area_exam = $("#area_exam").val();
+          total_quest = this.value;
+
+       }else{
+        return false;
+       }
+      
+
+      $.ajax({    //create an ajax request to load_page.php
+      type:"POST",
+      url: "random_question.php",             
+      dataType: "text",   //expect html to be returned  
+      data:{diff:diff,area_exam:area_exam,total_quest:total_quest},               
+      success: function(data){     
+      $("#coast").hide();    
+      $("#coast").fadeIn();             
+      $("#coast").html(data); 
+        // alert(data);
+
+      }
+
+      });
+
+
+  });
+
 </script>
 
 <script>
