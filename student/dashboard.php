@@ -197,34 +197,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         	</div>
         </div>
         <div class="row mx-4 mt-4">
-        	<div class="col-lg-4">
-        		<div class="card h-100">
-        			<div class="card-body " style="font-size: 18px;">
-        				<h4 class="fw-bold">My Status</h4>
-        				<hr>
-                        <?php $query = "SELECT * FROM choose_question WHERE section='4C'AND status='active'";
-                           $query_result = mysqli_query($sqlcon,$query);
-
-                            $row = mysqli_num_rows($query_result);
-                              echo'<p class="fw-bold">Total of Quizzes: '.$row.'</p>';
-                        ?>
-        				<hr>
-                        <?php $query = "SELECT * FROM tbl_marks_done";
-                            $query_result = mysqli_query($sqlcon,$query);
-
-                            $row = mysqli_num_rows($query_result);
-                            echo'<p class="fw-bold">Quiz taken: '.$row.'</p>';
-                        ?>
-        				<hr>
-        				<p class="fw-bold">Best score in: Criminal jurisdinance</p>
-        				<hr>
-        				<p class="fw-bold">Lowest score in: Criminal jurisdinance</p>
-        				<hr>
-        				<p class="fw-bold">Average percentage: 85%</p>
-        			</div>
-        		</div>
-        	</div>
-            <div class="col-lg-4 col-md-6">
+             <div class="col-lg-4 col-md-6">
                 <div class="card h-100">
                     <div class="card-header pb-0">
                         <h4 class="fw-bold">Upcoming</h4>
@@ -259,19 +232,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                    </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                
-            </div>
-        </div>
-        <div class="row mx-4 mt-4">
-            <div class="col-lg-6">
-                <div class="card ">
+            <div class="col-lg-8">
+                <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title text-dark fw-bold">Quiz Percentage</h4>
                         <div>
-                            <canvas id="myChart"    style="height: 300px; width: 100%;" ></canvas>
+                            <canvas id="myChart" style="height: 350px; width: 100%;" ></canvas>
                         </div>
-                        <?php 
+                         <?php 
 
                          $quiz_run = mysqli_query($sqlcon,"SELECT * FROM choose_question,tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (choose_question.test_id = tbl_quiz_result.test_id)");
 
@@ -373,62 +341,82 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="card ">
+        </div>
+        <div class="row mx-4 mt-4">
+           <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body " style="font-size: 18px;">
+                        <h4 class="fw-bold">My Status</h4>
+                        <hr>
+                        <?php $query = "SELECT * FROM choose_question WHERE section='4C'AND status='active'";
+                           $query_result = mysqli_query($sqlcon,$query);
+
+                            $row = mysqli_num_rows($query_result);
+                              echo'<p class="fw-bold">Total of Quizzes: '.$row.'</p>';
+                        ?>
+                        <hr>
+                        <?php $query = "SELECT * FROM tbl_marks_done";
+                            $query_result = mysqli_query($sqlcon,$query);
+
+                            $row = mysqli_num_rows($query_result);
+                            echo'<p class="fw-bold">Quiz taken: '.$row.'</p>';
+                        ?>
+                        <hr>
+                        <p class="fw-bold">Best score in: Criminal jurisdinance</p>
+                        <hr>
+                        <p class="fw-bold">Lowest score in: Criminal jurisdinance</p>
+                        <hr>
+                        <p class="fw-bold">Average percentage: 85%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title text-dark fw-bold">Preboard Exam Percentage</h4>
                     </div>
                     <div>
-                        <canvas id="Chart" style="height: 300px; width: 100%;" ></canvas>
+                        <canvas id="mychart" style="height: 350px; width:100%;"></canvas>
                     </div>
-                    <script >
-                         window.onload=function(){/*from w  w  w  .j  av a2  s . c  o m*/
-                            var ctx = document.getElementById("Chart").getContext("2d");
-                            var data = {
-                                labels: ["Score Percentage" ],
+                    <script>
+                        const ctx = document.getElementById('mychart').getContext('2d');
+                        const mychart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Criminal Jurisprudence','Law Enforcement','Criminalistics','Crime Detection & Investigation','Criminal Sociology','Correctional Administration'],
                                 datasets: [{
-                                    label: "Criminal Jurisprudence",
-                                    backgroundColor: "#0052cc",
-                                    data: [85]
-                                }, {
-                                    label: "Law Enforcement",
-                                    backgroundColor: "#ff5630",
-                                    data: [80]
-                                }, {
-                                    label: "Criminalistics",
-                                    backgroundColor: "#ffab00",
-                                    data: [83]
-                                },{
-                                    label: "Crime Detection & Investigation",
-                                    backgroundColor:  "#23AE22",
-                                    data: [92]
-                                },{
-                                    label: "Criminal Sociology",
-                                    backgroundColor: "#e81705",
-                                    data: [75]
-                                },{
-                                    label: "Correctional Administration",
-                                    backgroundColor:'#13169B',
-                                    data: [79]
+                                    label: 'Score Percentage',
+                                    data: [90,92,88,76,85,83],
+                                    backgroundColor: [
+                                    '#0052cc',
+                                    '#ff5630',
+                                    '#ffab00',
+                                    '#23AE22',
+                                    '#e81705',
+                                    '#13169B',
+                                        
+                                        
+                                    ],
+                                    borderColor: [
+                                    'rgb(15, 157, 88)',
+                                    'rgb(204, 204, 204)',
+                                    'rgb(204, 204, 204)',
+                                    'rgb(204, 204, 204)',
+                                        
+                                    ],
+                                    borderWidth: 1
                                 }]
-                            };
-                            var myBarChart = new Chart(ctx, {
-                                type: 'bar',
-                                data: data,
-                                options: {
-                                    barValueSpacing: 20,
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                min: 0,
-                                            }
-                                        }]
+                            },
+                            options: {
+                                indexAxis: 'y',
+                                scales: {
+                                    y: {
+                                       ticks: { color: '##000000', beginAtZero: true , precision: 0 }
                                     }
                                 }
-                            });
-                        }
-
-                    </script> 
+                            },
+                        });
+                    </script>
                 </div>
             </div>
         </div>

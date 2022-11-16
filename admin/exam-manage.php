@@ -34,6 +34,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
        .dp .dropdown-toggle::after {
             content: none;
         }
+         .navbar .breadcrumb li a{
+          color: #8C0000;
+        }
     </style> 
 </head>
 <body style="background: rgb(230, 230, 230);">
@@ -124,9 +127,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 		</div>
 		<section class="home-section " >
 			<div class="home-content d-flex justify-content-between" style="background: white;">
-				<button style="border-style: none; background: white;">
-					<i class='bx bx-menu' ></i>
-				</button>
+				<div class="d-flex">
+					<button style="border-style: none; background: white; height: 60px;" class="mt-1">
+						<i class='bx bx-menu' ></i>
+					</button>
+					<nav class="navbar navbar-expand-lg navbar-light" style="margin-top: 10px;">
+						<div class="container-fluid">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Examination Management</li>
+								</ol>
+							</nav>
+						</div>
+					</nav>
+				</div>
 				<form class="d-flex">
 					<div class="dropdown dp mt-3">
 		                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
@@ -180,15 +195,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 						</div>
 						<div class="row">
 							<div class="col ">
-								<div class="card">
+								<div class="card mt-2">
 									<div class="card-body rounded-3 m-3 table-responsive-lg">
-										<table class="table bg-light align-middle" id="examTab">
+										<table class="table bg-light align-middle w-100" id="examTab">
 											<thead>
 												<tr>
-													<th scope="col">#</th>
+													<th scope="col" hidden>ID</th>
+													<th scope="col">No.</th>
 													<th scope="col">Area of Exam</th>
 													<th scope="col">Number of items</th>
-													<th scope="col">Created By</th>
+													<th scope="col">Prepared By</th>
 													<th scope="col">Time Limit</th>
 													<th scope="col">Date</th>
 													<th scope="col">Status</th>
@@ -201,14 +217,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												$manage = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by)");
 
 												while ($rows = mysqli_fetch_assoc($manage)) {
+													$counter = 1;
 												?>
 												<tr>
-													<td><?php echo $rows['pre_exam_id']; ?></td>
+													<td hidden><?php echo $rows['pre_exam_id']; ?></td>
+													<td><?php echo $counter ;?></td>
 													<td><?php echo $rows['subjects']; ?></td>
-	                                                <td><?php echo $rows['total_question']; ?></td>
+	                                                <td class="ps-5"><?php echo $rows['total_question']; ?></td>
 	                                                <td><?php echo $rows['first_name'] ."".$rows['last_name']; ?></td>
-	                                                <td><?php echo $rows['time_limit']; ?></td>
-	                                                <td>09-12-2022</td>
+	                                                <td><?php echo $rows['time_limit'] /60; ?> mins</td>
+	                                                <td><?php echo $rows['start_date']; ?></td>
 	                                               <?php 
 	                                                
 	                                                if ($rows['approval'] =='Approve') {
@@ -227,7 +245,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                	</div>
 	                                                </td>
 	                                            </tr>
-	                                        <?php } ?>
+	                                        <?php $counter++; } ?>
 	                                        </tbody>
 	                                    </table>
 	                                </div>

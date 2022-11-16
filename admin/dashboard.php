@@ -34,8 +34,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
        .dp .dropdown-toggle::after {
             content: none;
         }
+         .navbar .breadcrumb li a{
+          color: #8C0000;
+        }
     </style>
-
 </head>
 <body>
 	<div class="sidebar close">
@@ -124,9 +126,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
     </div>
 	<section class="home-section" >
 		<div class="home-content d-flex justify-content-between " style="background: white;">
-            <button style="border-style: none; background: white;">
-                <i class='bx bx-menu' ></i>
-            </button>
+             <div class="d-flex">
+                <button style="border-style: none; background: white; height: 20px; margin-top: 15px;" class="btn-sm">
+                    <i class='bx bx-menu' ></i>
+                </button>
+                <nav class="navbar navbar-expand-lg navbar-light ms-3" style="margin-top: 10px;">
+                    <div class="container-fluid">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </nav>
+            </div>
             <form class="d-flex">
                 <div class="dropdown dp mt-3">
                     <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg"></i>
@@ -170,7 +184,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
             </form>
 		</div>
 		<!-- Main Content-->
-		<div class="container-fluid py-3">
+		<div class="container-fluid mt-3">
 			<div class="row">
 				<!-- Accounts Card Example -->
 				<div class="col-xl-3 col-md-6 mb-5 mt">
@@ -378,9 +392,18 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                     </div>
                  </div>
             </div>
-            	
-                
-           
+            <div class="container">
+                <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 my-4 border-top">
+                    <p class="col-md-6 mb-0 text-muted">&copy; 2022 Copyright: College of Criminal Justice and Education LSPU Santa Cruz</p>
+                    <ul class="nav col-md-4 justify-content-end">
+                        <li class="nav-item"><a href="dashboard.php" class="nav-link px-2 text-muted">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+                    </ul>
+                </footer>
+            </div> 
         </div>
     </section>
     <!-- Logout Modal-->

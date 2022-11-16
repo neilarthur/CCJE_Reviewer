@@ -34,6 +34,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
        .dp .dropdown-toggle::after {
             content: none;
         }
+         .navbar .breadcrumb li a{
+          color: #8C0000;
+        }
     </style> 
 </head>
 <body style="background: rgb(230, 230, 230);">
@@ -124,9 +127,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	</div>
 	<section class="home-section float-start ">
 		<div class="home-content d-flex justify-content-between" style="background: white;">
-			<button style="border-style: none; background: white;">
-				<i class='bx bx-menu' ></i>
-			</button>
+			<div class="d-flex">
+				<button style="border-style: none; background: white; height: 60px;" class="mt-1">
+					<i class='bx bx-menu' ></i>
+				</button>
+				<nav class="navbar navbar-expand-lg navbar-light" style="margin-top: 10px;">
+					<div class="container-fluid">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Account Management</li>
+							</ol>
+						</nav>
+					</div>
+				</nav>
+			</div>
 			<form class="d-flex">
 				<div class="dropdown dp mt-3">
                     <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>

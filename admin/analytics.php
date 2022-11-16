@@ -36,6 +36,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
        .dp .dropdown-toggle::after {
             content: none;
         }
+        .navbar .breadcrumb li a{
+          color: #8C0000;
+        }
     </style>
 </head>
 <body style="background: rgb(230, 230, 230);">
@@ -126,9 +129,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 		</div>
 		<section class="home-section " >
 			<div class="home-content d-flex justify-content-between" style="background: white;">
-				<button style="border-style: none; background: white;">
-					<i class='bx bx-menu' ></i>
-				</button>
+				<div class="d-flex">
+					<button style="border-style: none; background: white; height: 60px;" class="mt-1">
+						<i class='bx bx-menu' ></i>
+					</button>
+					<nav class="navbar navbar-expand-lg navbar-light" style="margin-top: 10px;">
+						<div class="container-fluid">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Question Analysis</li>
+								</ol>
+							</nav>
+						</div>
+					</nav>
+				</div>
 				<form class="d-flex">
 					<div class="dropdown dp mt-3">
 	                    <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
@@ -185,27 +200,27 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 								<div class="card">
 									<div class="card-body rounded-3 m-3 table-responsive-lg">
 										<div class="row justify-content-between">
-											<div class="col-lg-3">
-												<div class="form-group">
-													<select class="form-select custom-select" name="class_section">
-														<option selected>Select Area of exam</option>
-														<option>Criminal Jurisprudence </option>
-														<option >Law Enforcement</option>
-														<option >Criminalistics </option>
-														<option> Crime Detection and Investigation </option>
-														<option>Criminal Sociology</option>
-														<option>Correctional Administration</option>
+											<div class="col-lg-6">
+												<div class="input-group mt-2">
+													<span class="input-group-text custom-select mb-3 bg-white">Sort By</span>
+													<select class="form-select custom-select mb-3" name="subjects" id="subjects" required>
+														<option selected value="">Select Category</option>
+														<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+														<option value="Law Enforcement">Law Enforcement</option>
+														<option value="Criminalistics">Criminalistics</option>
+														<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+														<option value="Criminal Sociology">Criminal Sociology</option>
+														<option value="Correctional Administration">Correctional Administration</option>
 													</select>
-												</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="form-group">
-													<select class="form-select custom-select mb-3  difficult" name="difficult" id="difficult">
-														<option selected>Select Difficulty level</option>
-														<option value="Easy">Easy</option>
-														<option value="Moderate">Moderate</option>
-														<option value="Hard">Hard</option>
-													</select>
+													<span class="input-group-text custom-select mb-3 bg-white">In</span>
+													<div class="col-lg-4">
+														<select class="form-select custom-select mb-3  difficult" name="difficult" id="difficult">
+															<option selected value="">Select Difficulty</option>
+															<option value="Easy">Easy</option>
+															<option  value="Moderate">Moderate</option>
+															<option value="Hard">Hard</option>
+														</select>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -215,8 +230,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">No.</th>
 													<th scope="col">Question</th>
 													<th scope="col">Area of Exam</th>
-													<th scope="col">Level of Difficulty</th>
-													<th scope="col">Total of Correct answers</th>
+													<th scope="col">Correct responses</th>
 													<th scope="col">Percentage</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
@@ -226,8 +240,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td>1</td>
 	                                                <td>Berto, with evident premeditation and treachery killed his father. What was the crime committed?</td>
 	                                                <td>Criminal Jurisprudence </td>
-	                                                <td>EASY</td>
-	                                                <td>45</td>
+	                                                <td>45/45</td>
 	                                                <td>100%</td>
 	                                                <td>
 	                                                	<div class="d-flex flex-row">

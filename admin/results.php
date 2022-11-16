@@ -34,6 +34,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
        .dp .dropdown-toggle::after {
             content: none;
         }
+         .navbar .breadcrumb li a{
+          color: #8C0000;
+        }
     </style>
 </head>
 <body style="background: rgb(230, 230, 230);">
@@ -124,9 +127,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 		</div>
 		<section class="home-section " >
 			<div class="home-content d-flex justify-content-between" style="background: white;">
-				<button style="border-style: none; background: white;">
-					<i class='bx bx-menu' ></i>
-				</button>
+				<div class="d-flex">
+					<button style="border-style: none; background: white; height: 60px;" class="mt-1">
+						<i class='bx bx-menu' ></i>
+					</button>
+					<nav class="navbar navbar-expand-lg navbar-light" style="margin-top: 10px;">
+						<div class="container-fluid">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Preboard Exam Results</li>
+								</ol>
+							</nav>
+						</div>
+					</nav>
+				</div>
 				<form class="d-flex">
 					<div class="dropdown dp mt-3">
 		                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
@@ -181,11 +196,28 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 						<div class="row">
 							<div class="col ">
 								<div class="card mt-2">
-									<div class="card-body rounded-3 m-3 table-responsive-lg">
-										<table class="table table-hover align-middle" id="resultTab">
+									<div class="card-body rounded-3  m-2 table-responsive-lg">
+										<div class="row justify-content-between mb-2">
+											<div class="col-lg-4">
+												<div class="input-group mt-2">
+													<span class="input-group-text custom-select mb-3 bg-white">Sort By</span>
+													<select class="form-select custom-select mb-3" name="subjects" id="subjects" required>
+														<option selected value="">Select Category</option>
+														<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+														<option value="Law Enforcement">Law Enforcement</option>
+														<option value="Criminalistics">Criminalistics</option>
+														<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+														<option value="Criminal Sociology">Criminal Sociology</option>
+														<option value="Correctional Administration">Correctional Administration</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<table class="table table-hover bg-light align-middle w-100" id="resultTab">
 											<thead>
 												<tr>
-													<th scope="col">#</th>
+													<th scope="col" hidden>ID</th>
+													<th scope="col">No.</th>
 													<th scope="col">Student Name</th>
 													<th scope="col">Year & Section</th>
 													<th scope="col">Total Questions</th>
@@ -196,6 +228,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 											</thead>
 											<tbody>
 												<tr>
+													<td hidden>ID</td>
 													<td>1</td>
 	                                                <td>Ralph Vincent Pagcaliwagan</td>
 	                                                <td>4C</td>
