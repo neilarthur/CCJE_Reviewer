@@ -32,7 +32,7 @@ $suppd .= "</select>";
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Test Yourself</title>
+	<title>Preview</title>
 	<!-- Boostrap 5.2 -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<!-- CSS -->
@@ -44,8 +44,8 @@ $suppd .= "</select>";
 	<!-- Bootstrap CSS -->
 	<link href="../css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
-	<!-- JS Chart-->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<!-- System Logo -->
+    <link rel="icon" href="../assets/pics/system-ico.ico">
 	<style>
        .dp .dropdown-toggle::after {
             content: none;
@@ -54,8 +54,62 @@ $suppd .= "</select>";
 		  color: #8C0000;
 		}
   </style>
+  <style type="text/css">
+		.base-timer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}
+
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}
+
+.base-timer__label {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+	</style>
 </head>
-<body style="background-color: rgb(229, 229, 229);">
+<body style="background-color: rgb(229, 229, 229); " onload="timeout()">
 	<div class="sidebar close">
 		<div class="logo-details">
 			<i class="fas fa-fingerprint"></i><span class="logo_name">CCJE Reviewer</span>
@@ -63,67 +117,67 @@ $suppd .= "</select>";
 		<hr style="color:rgb(255, 255, 255);">
 		<ul class="nav-links fw-bolder">
 			<li class="navigation-list-item">
-				<a href="dashboard.php">
+				<a href="../faculty/dashboard.php">
 					<i class="fas fa-tachometer-alt"></i>
 					<span class="link_name">Dashboard</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="dashboard.php">Dashboard</a></li>
+					<li><a class="link_name" href="../faculty/dashboard.php">Dashboard</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="testbank.php">
+				<a href="../faculty/testbank.php">
 					<i class="fas fa-list-ol"></i>
-					<span class="link_name">Test Bank</span>
+					<span class="link_name">Question Bank</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="testbank.php">Test Bank</a></li>
+					<li><a class="link_name" href="../faculty/testbank.php">Question Bank</a></li>
 				</ul>
 			</li>
 			<li>
-			<li class="navigation-list-item">
-				<a href="testyourself.php">
+			<li class="../faculty/navigation-list-item">
+				<a href="../faculty/testyourself.php">
 					<i class="fas fa-sticky-note"></i>
 					<span class="link_name">Manage Test</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="testyourself.php">Manage Test</a></li>
+					<li><a class="link_name" href="../faculty/testyourself.php">Manage Test</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="preboard.php">
+				<a href="../faculty/preboard.php">
 					<i class="fas fa-list-alt"></i>
 					<span class="link_name">Pre-Board Examination</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="preboard.php">Pre-Board Examination</a></li>
+					<li><a class="link_name" href="../faculty/preboard.php">Pre-Board Examination</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="examresults.php">
+				<a href="../faculty/examresults.php">
 					<i class="fas fa-poll"></i>
 					<span class="link_name">Exam Results</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="examresults.php">Exam Results</a></li>
+					<li><a class="link_name" href="../faculty/examresults.php">Exam Results</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="accounts_manage.php">
+				<a href="../faculty/accounts_manage.php">
 					<i class='bx bxs-user-account bx-sm' ></i>
 					<span class="link_name">Accounts</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="accounts_manage.php">Accounts</a></li>
+					<li><a class="link_name" href="../faculty/accounts_manage.php">Accounts</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="log-history.php">
+				<a href="../faculty/log-history.php">
 					<i class="fas fa-history"></i>
 					<span class="link_name">Log History</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="log-history.php">Logs History</a></li>
+					<li><a class="link_name" href="../faculty/log-history.php">Logs History</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list">
@@ -143,7 +197,7 @@ $suppd .= "</select>";
 
                         ?>
 						<div class="name-job">
-							<div class="profile_name"><a class="profile text-warning"href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><?php echo $_SESSION["first_name"];?></a></div>
+							<div class="profile_name"><a class="profile text-warning"href="../faculty/profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><?php echo $_SESSION["first_name"];?></a></div>
 							<div class="job"><?php echo $_SESSION["role"];?></div>
 						</div>
 					</div>
@@ -160,9 +214,9 @@ $suppd .= "</select>";
 						<div class="container-fluid">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
-									<li class="breadcrumb-item"><a href="preboard.php" style="text-decoration: none;">Preboard Examination</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Question Analytics</li>
+									<li class="breadcrumb-item"><a href="../faculty/dashboard.php" style="text-decoration: none;">Home</a></li>
+									<li class="breadcrumb-item"><a href="../faculty/testyourself.php" style="text-decoration: none;">Manage Test</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Preview Quiz</li>
 								</ol>
 							</nav>
 						</div>
@@ -203,8 +257,8 @@ $suppd .= "</select>";
 		                    ?>
 		                    </button>
 		                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-		                        <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
-		                        <li><a class="dropdown-item" href="change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+		                        <li><a class="dropdown-item" href="../faculty/profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
+		                        <li><a class="dropdown-item" href="../faculty/change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
 		                        <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
 		                    </ul>
 		                </div>
@@ -213,127 +267,96 @@ $suppd .= "</select>";
 				<!-- Main Content-->
 				<div class="col py-3 overflow-auto mx-2">
 					<div class="container-fluid">
-						<div class="row">
-							<div class="col d-flex justify-content">
-								<div class="w-50">
-									<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Question Analytics</h2>
+						<div class="col-lg-12">
+							<?php
+							 $id = $_GET['id'];
+
+							 $row = mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id = '$id'");
+							 while ($show = mysqli_fetch_assoc($row)) { ?>
+							<div class="card">
+								<div class="card-header" style="background-color: rgb(43, 43, 43);">
+									<p class="h2 fw-bold text-uppercase text-white"> <?php echo $show['quiz_title']; ?></p>
+									<p class="h5  text-uppercase text-white"><?php echo $show['subject_name']; ?></p>
+								</div>
+								<div class="card-body">
+									<p class=" h5 text-dark fw-bold" > <?php echo $show['description']; ?> </p>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col ">
-									<div class="card">
-										<div class="card-body rounded-3 m-2 table-responsive-xl">
-											<table class="table table-hover align-middle bg-light" width="100%"  id="examTab">
-												<thead>
-													<tr>
-														<th hidden="">Id</th>
-														<th>No.</th>
-														<th scope="col">Areas of Exam</th>
-														<th scope="col">Question</th>
-														<th scope="col" class="text-center" >Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
+						<?php }?>
+						</div>
+						<form action="#"id="form1" method="POST">
+							<div class="col-lg-12">
+								<?php
+								 $c = 0;
+								 $ids = $_GET['id'];
+								 $number = 1;
 
-													$let = $_GET['id'];
+								 $display = mysqli_query($sqlcon,"SELECT * FROM test_question,student_choice WHERE (test_question.question_id=student_choice.question_id) AND test_id = '$ids'");
 
-													$exams = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_question,tbl_pre_choose_quest WHERE (test_question.question_id=tbl_pre_choose_quest.question_id) AND (tbl_pre_question.pre_exam_id=tbl_pre_choose_quest.pre_exam_id) AND tbl_pre_choose_quest.pre_exam_id='$let' AND pre_choose_status='active'");
-													$counter = 1;
-													while ($rows = mysqli_fetch_assoc($exams)) {
-														
-													?>
-													<tr>
-														<td hidden=""><?php echo $rows['exam_choose_id'] ?></td>
-														<td><?php echo $counter ;?></td>
-														<td scope="row"><?php echo $rows['subjects'];?></td>
-														<td><?php echo $rows['questions_title'];?></td>
-														<td>
-															<div class="d-flex flex-row justify-content-center">
-																<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"  type="button"><i class="fas fa-chart-bar"></i></button>
-																<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
-															</div>
-														</td>
-													</tr>
-													<?php $counter++; }  ?>
-												</tbody>
-											</table>
+								  while ($shows = mysqli_fetch_assoc($display)) {  ?>
+
+								<div class="card mt-2">
+									<div class="card-body bg-white">
+										<div class="card">
+											<div class="card-body" style="background-color: rgb(219, 235, 247);">
+												<div class="table-responsive-xl">
+													<table class="align-middle mb-0 table table-borderless">
+														<thead>
+														</thead>
+														<tbody style="font-size: 17px;">
+															 <tr>
+															 	<th>
+															 		<b><span><?php echo $number.". &nbsp;". $shows['questions_title']; ?></span></b>
+															 	</th>
+															 	<th><span><p class="d-flex justify-content-end"><span><i class="fas fa-asterisk fa-xs text-danger me-1"></i></span> 1 point</p></span></th>
+															 </tr>
+															  <tr>
+															  	<td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="A"> A. <?php echo $shows['option_a']; ?></span>
+															  	</td>
+															  </tr>
+															  <tr>
+															  	<td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="B"> B. <?php echo $shows['option_b']; ?></span></td>
+															  </tr>
+															  <tr>
+															  	<td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="C"> C. <?php echo $shows['option_c']; ?></span></td>
+															  </tr>
+															   <tr>
+															   	<td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="D"> D. <?php echo $shows['option_d']; ?></span></td>
+															   </tr>
+														</tbody>
+														<tbody>
+															<tr>
+																<input type="hidden" name="update_id" value="<?php echo $ids; ?>">
+																<input type="hidden" name="update_acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
+																<input type="hidden" name="total_quest" value="<?php echo $sad; ?>">
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
+								 <?php $number++; } ?>
+								<div class="d-flex justify-content-center mt-3">
+				                <?php
+
+					            $ter = mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id = '$ids'");
+
+					            while ($ger = mysqli_fetch_assoc($ter)) { ?>
+
+					              <input type="hidden" name="subjectas" value="<?php echo $ger['subject_name']; ?>">
+					              
+					              <?php
+					            }
+					            ?>
+					            <input type="submit" value="submit" class="btn btn-success px-4 pb-2 mx-2 text-uppercase btn-lg">
+					          </div>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</section>
-
-			<!-- Analytics Modal-->
-			<div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title"></h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<!-- Horizantal graph Chart-->
-							<canvas id="myChart" style="height: 100px; width: 250px;"></canvas>
-							<script>
-								const ctx = document.getElementById('myChart').getContext('2d');
-								const myChart = new Chart(ctx, {
-								    type: 'bar',
-								    data: {
-								        labels: ['A. Murder','B.  Parricide','C. Homicide','D. Qualified Homicide'],
-								        datasets: [{
-								            label: 'Correct Response',
-								            data: [10,9,8,6],
-								            backgroundColor: [
-								            'rgba(15, 157, 88)',
-								            'rgba(204, 204, 204)',
-								            'rgba(204, 204, 204)',
-								            'rgba(204, 204, 204)',
-								                
-								                
-								            ],
-								            borderColor: [
-								            'rgb(15, 157, 88)',
-								            'rgb(204, 204, 204)',
-								            'rgb(204, 204, 204)',
-								            'rgb(204, 204, 204)',
-								                
-								            ],
-								            borderWidth: 1
-								        }]
-								    },
-								    options: {
-								    	indexAxis: 'y',
-								        scales: {
-								            y: {
-								               ticks: { color: '##000000', beginAtZero: true , precision: 0 }
-								            }
-								        }
-								    },
-								});
-							</script>
-						</div>
-						<div class="card mt-3 m-4 border-0">
-							<div class="card-body">
-								<label class="d-flex ps-1 justify-content-start">Question</label>
-								<textarea type="text" name="last_name" class="form-control"readonly="">Berto, with evident premeditation and treachery killed his father. What was the crime committed?</textarea> 
-								<label class="d-flex ps-1 mt-2 justify-content-start" >Area of Exam</label>
-								<input type="text" name="last_name" class="form-control" value="Criminal Jurisprudence " readonly="">
-								<label class="d-flex ps-1 mt-2 justify-content-start">Level of diffculty</label>
-								<input type="text" name="last_name" class="form-control" value="EASY" readonly="">
-								<label  class="d-flex ps-1 mt-2 justify-content-start">Percentage</label>
-								<input type="text" name="last_name" class="form-control" value="100%" readonly="">
-							</div>		
-						</div>
-						<div class="modal-footer border-0">
-							<button type="button" class="btn btn-danger mx-2" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
 			<!-- Delete Question -->
 		    <div class="modal fade" id="ArchiveAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 		    	<div class="modal-dialog">
@@ -346,7 +369,7 @@ $suppd .= "</select>";
 	        				</div>
 	        				<h3 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h3>
 		    			</div>
-		    			<form class="form" action="../php/delete_pre_question.php" method="POST">
+		    			<form class="form" action="../php/delete_test_yourself.php" method="POST">
 		    				<div class="modal-body">
 		    					<div class="container d-flex justify-content-center">
 		    						<input type="hidden" name="update_id" id="delete_id">
@@ -393,7 +416,6 @@ $suppd .= "</select>";
 
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script>
 let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
@@ -411,7 +433,6 @@ let arrow = document.querySelectorAll(".arrow");
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
  <script type="text/javascript">
  	$(document).ready(function() {
  		$('.deletebtn').on('click', function() {
@@ -427,6 +448,31 @@ let arrow = document.querySelectorAll(".arrow");
             $('#delete_id').val(data[0]);
         })
  	});
+</script>
+<script src="../TimeCircles-master/inc/TimeCircles.js"></script>
+<script type="text/javascript">
+  
+  $('#exam_timer').TimeCircles({
+    time:{
+      Days:{
+        show:false
+      } 
+    }
+  });
+
+  setInterval(function(){
+
+    var remaining_second = $('#exam_timer').TimeCircles().getTime();
+    if (remaining_second < 1) 
+    {
+      clearTimeout(tm);
+      document.getElementById('form1').submit();
+    }
+
+    var tm = setTimeout(function(){setInterval()},1000)
+  },2000);
+
+
 </script>
 <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

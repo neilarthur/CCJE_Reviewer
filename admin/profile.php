@@ -35,6 +35,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
        .dp .dropdown-toggle::after {
             content: none;
         }
+         .navbar .breadcrumb li a{
+		  color: #8C0000;
+		}
     </style>
 </head>
 
@@ -127,9 +130,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 		</div>
 		<section class="home-section float-start" >
 			<div class="home-content d-flex justify-content-between" style="background: white;">
-				<button style="border-style: none; background: white;">
-					<i class='bx bx-menu' ></i>
-				</button>
+				<div class="d-flex">
+					<button style="border-style: none; background: white; height: 60px;" class="mt-1">
+						<i class='bx bx-menu' ></i>
+					</button>
+					<nav class="navbar navbar-expand-lg navbar-light" style="margin-top: 10px; margin-left: 12px;">
+						<div class="container-fluid">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Profile</li>
+								</ol>
+							</nav>
+						</div>
+					</nav>
+				</div>
 				<form class="d-flex">
 					<div class="dropdown dp mt-3">
 		                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
@@ -166,7 +181,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 		                </button>
 		                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 		                    <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
-		                    <li><a class="dropdown-item" href="#"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+		                    <li><a class="dropdown-item" href="change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
 		                    <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
 		                </ul>
 		            </div>

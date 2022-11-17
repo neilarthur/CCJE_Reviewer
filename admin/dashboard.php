@@ -177,7 +177,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+                        <li><a class="dropdown-item" href="change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
                         <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
                     </ul>
                 </div>
@@ -188,7 +188,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 			<div class="row">
 				<!-- Accounts Card Example -->
 				<div class="col-xl-3 col-md-6 mb-5 mt">
-					<div class="card border-left-dark shadow p-3 py-1 ms-1" style="background-color: rgb(243, 156, 18 );">
+					<div class="card border-left-dark p-3 py-1 ms-1" style="background-color: rgb(243, 156, 18 );">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
@@ -215,7 +215,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                 </div>
                 <!-- Students Card Example -->
                 <div class="col-xl-3 col-md-6 mb-5">
-                    <div class="card border-left-dark shadow p-3 py-1" style="background-color: rgb(221, 75, 57);">
+                    <div class="card border-left-dark p-3 py-1" style="background-color: rgb(221, 75, 57);">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
@@ -241,7 +241,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                 </div>
                 <!--Faculty Card Example -->
                 <div class="col-xl-3 col-md-6 mb-5">
-                    <div class="card border-left-dark shadow p-3 py-1" style="background-color: rgb(0, 115, 183);">
+                    <div class="card border-left-dark p-3 py-1" style="background-color: rgb(0, 115, 183);">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
@@ -267,7 +267,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                 </div>
                 <!-- Analytics Card Example -->
                 <div class="col-xl-3 col-md-6 mb-5">
-                    <div class="card border-left-dark shadow p-3 py-1" style="background-color: rgb(0, 192, 239);">
+                    <div class="card border-left-dark p-3 py-1" style="background-color: rgb(0, 192, 239);">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
@@ -394,7 +394,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
             </div>
             <div class="container">
                 <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 my-4 border-top">
-                    <p class="col-md-6 mb-0 text-muted">&copy; 2022 Copyright: College of Criminal Justice and Education LSPU Santa Cruz</p>
+                    <p class="col-md-6 mb-0 text-muted">&copy; 2022 Copyright College of Criminal Justice and Education LSPU Santa Cruz</p>
                     <ul class="nav col-md-4 justify-content-end">
                         <li class="nav-item"><a href="dashboard.php" class="nav-link px-2 text-muted">Home</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>

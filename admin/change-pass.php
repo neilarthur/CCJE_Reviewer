@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -17,27 +16,29 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login History</title>
+	<title>Change Password</title>
 	<!-- Boostrap 5.2 -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<!-- Password Requirements CSS -->
+    <link rel="stylesheet" href="../css/jquery.passwordRequirements.css" />
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="../css/dash.css">
+	<link rel="stylesheet" href="../css/demo.css" />
 	<!-- Box Icons-->
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
-	 <!-- Bootstrap CSS -->
-	<link href="../css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
 	<!-- System Logo -->
     <link rel="icon" href="../assets/pics/system-ico.ico">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>	
+    <script src="../js/jquery.passwordRequirements.min.js"></script>
 	<style>
        .dp .dropdown-toggle::after {
             content: none;
         }
-         .navbar .breadcrumb li a{
-          color: #8C0000;
-        }
+        .navbar .breadcrumb li a{
+		  color: #8C0000;
+		}
     </style>
 </head>
 <body style="background: rgb(230, 230, 230);">
@@ -126,18 +127,18 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 				</li>
 			</ul>
 		</div>
-		<section class="home-section " >
+		<section class="home-section float-start" >
 			<div class="home-content d-flex justify-content-between" style="background: white;">
 				<div class="d-flex">
 					<button style="border-style: none; background: white; height: 60px;" class="mt-1">
 						<i class='bx bx-menu' ></i>
 					</button>
-					<nav class="navbar navbar-expand-lg navbar-light" style="margin-top: 10px;">
+					<nav class="navbar navbar-expand-lg navbar-light" style="margin-top: 10px; margin-left: 12px;">
 						<div class="container-fluid">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Log History</li>
+									<li class="breadcrumb-item active" aria-current="page">Change Password</li>
 								</ol>
 							</nav>
 						</div>
@@ -186,78 +187,76 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 		        </form>
 			</div>
 			<!-- Main Content-->
-			<div class="col py-3 overflow-auto">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col d-flex justify-content">
-							<div class="w-50">
-								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-4">Log History</h2>
+			<div class="container-fluid py-5 px-5">
+				<div class="card h-100">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-lg-5">
+								<img class="img-fluid center" alt="" id="picture" src="../assets/pics/change.jpg "width="800" height="800"/>
+							</div>
+							<div class="col-lg-7 pe-5">
+								<form method="POST" action="change_password.php">
+									<div class="card h-100 mt-4 shadow">
+										<div class="card-body m-2">
+											<h4 class=" fw-bolder mb-3 text-uppercase text-center text-primary" style="font-family: 'Nunito', sans-serif;">Change Password</h4>
+											<div class="mb-3">
+												<input type="hidden" name="acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
+												<label for="password" class="fw-bold mb-2">Enter Current Password:</label>
+												<input type="password" class=" form-control" placeholder="Enter Current Password" name="c_password">
+											</div>
+											<div class="mb-3">
+												<label for="password" class="fw-bold mb-2">Enter New Password:</label>
+												<input type="password" class="pr-password form-control" id="Password" placeholder="Enter New Password" name="new_password">
+											</div>
+											<div class="mb-3">
+												<label for="user" class="fw-bold mb-2">Confirm New Password:</label>
+												<input type="password" class="form-control" id="ConfirmPassword" placeholder="Enter Confirm Password" name="conf_password">
+											</div>
+											<div style="margin-top: 7px;" id="CheckPasswordMatch" class="fw-bold mb-2 ms-3"></div>
+											<div class="d-flex justify-content-center ">
+												<button class="btn btn-success text-uppercase px-5 pb-2" name="submit">Submit</button>
+											</div>
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col ">
-								<div class="card">
-									<div class="card-body rounded-3 table-responsive-lg">
-										<table class="table table-hover align-middle" id="logTab">
-											<thead>
-												<tr>
-													<th scope="col">Name</th>
-													<th scope="col">Position</th>
-													<th scope="col">Assign Section</th>
-													<th scope="col">Log In</th>
-													<th scope="col">Log Out</th>
-													<th scope="col">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-
-												$base = mysqli_query($sqlcon, "SELECT * FROM logs,accounts WHERE (accounts.acc_id=logs.acc_id) AND role='faculty'");
-												while ($rows = mysqli_fetch_array($base)) { ?>
-												<tr>
-													<td><?php echo $rows['first_name']."". $rows['last_name']; ?></td>
-	                                                <td><?php echo $rows['role'] ; ?></td>
-	                                                <td style="padding-left: 30px;"><?php echo $rows['section'] ; ?></td>
-	                                                <td><?php echo $rows['login_time'] ; ?></td>
-	                                                <td><?php echo $rows['logout_time'] ; ?></td>
-	                                                <td><?php echo $rows['action']; ?></td>
-	                                            </tr>
-	                                            <?php } ?>
-	                                        </tbody>
-	                                    </table>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
+					</div>
 				</div>
 			</div>
-			
 		</section>
 		<!-- Logout Modal-->
 	    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	        <div class="modal-dialog">
 	            <div class="modal-content">
 	                <div class="modal-header flex-column border-0 bg-danger">
+	                    <h5 class="modal-title"></h5>
 	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	                    <div class="icon-box mt-2 mb-2">
-	                        <i class="fas fa-exclamation-circle fa-5x text-white"></i>
+	                    	<i class="fas fa-exclamation-circle fa-5x text-white"></i>
 	                    </div>
-	                    <h5 class="modal-title"></h5>
-	                    
 	                </div>
 	                <div class="modal-body text-center mt-2">
 	                    <h4 class="fw-bold">Do you really wish to leave or log out?</h4>
 	                </div>
 	                <div class="modal-footer border-0">
-	                    <a href="../php/logout.php" class="btn btn-success mx-2">YES</a>
-	                    <button type="button" class="btn btn-danger mx-2" data-bs-dismiss="modal">NO</button>
+	                    <form action="../php/logout_faculty.php" class="hide" method="POST">
+	                    	<input type="hidden" name="id" value="<?php echo $_SESSION['acc_id']  ?>">
+							<input type="hidden" name="times" value="<?php echo $_SESSION['login_id']  ?>">
+							<div>
+								<button type="submit" class="btn btn-success">YES</button>
+								<button type="button" class="btn btn-danger mx-2" data-bs-dismiss="modal">NO</button>
+							</div>
+						</form>
 	                </div>
 	            </div>
 	        </div>
 	    </div>
-
+	    
 </body>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
@@ -273,14 +272,53 @@ let arrow = document.querySelectorAll(".arrow");
     sidebar.classList.toggle("close");
   });
 </script>
-<script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-<script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-  	 $('#logTab').DataTable({
-  	 	paging: true
-  	 });
-  });
+<script>
+/* trigger when page is ready */
+    $(document).ready(function (){
+        $(".pr-password").passwordRequirements({
+
+        });
+    });
 </script>
+<script>
+$(document).ready(function () {
+	$("#ConfirmPassword").on('keyup', function(){
+		var password = $("#Password").val();
+		var confirmPassword = $("#ConfirmPassword").val();
+		if (password == confirmPassword) {
+			$("#CheckPasswordMatch").html("Password match!").css("color","green");
+		}
+		else if (password != confirmPassword){
+			$("#CheckPasswordMatch").html("Password does not match!").css("color","red");
+		}
+		else if (  confirmPassword == " "){
+			$("#CheckPasswordMatch").html("!").css("color","red");
+		}
+		else if ( password == "") {
+			$("#CheckPasswordMatch").html("!").css("color","red");
+		}
+		else {
+			return false;
+		}
+	});
+});
+</script>
+
+ <?php
+
+#Proifile
+ 
+if (isset($_GET['profsuccess'])) {
+	echo ' <script> swal("Profile has been Saved!", " clicked the okay!", "success");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/faculty/profile.php?acc_id=$update_id");
+	</script>';
+}
+elseif (isset($_GET['addproferror'])) {
+	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/faculty/profile.php?acc_id=$update_id");
+	</script>';
+}
+
+ 
+?> 
 </html>

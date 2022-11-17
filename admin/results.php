@@ -178,7 +178,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 		                </button>
 		                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 		                    <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
-		                    <li><a class="dropdown-item" href="#"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+		                    <li><a class="dropdown-item" href="change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
 		                    <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
 		                </ul>
 		            </div>
@@ -193,61 +193,186 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Preboard Examination Results</h2>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col ">
-								<div class="card mt-2">
-									<div class="card-body rounded-3  m-2 table-responsive-lg">
-										<div class="row justify-content-between mb-2">
-											<div class="col-lg-4">
-												<div class="input-group mt-2">
-													<span class="input-group-text custom-select mb-3 bg-white">Sort By</span>
-													<select class="form-select custom-select mb-3" name="subjects" id="subjects" required>
-														<option selected value="">Select Category</option>
-														<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
-														<option value="Law Enforcement">Law Enforcement</option>
-														<option value="Criminalistics">Criminalistics</option>
-														<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
-														<option value="Criminal Sociology">Criminal Sociology</option>
-														<option value="Correctional Administration">Correctional Administration</option>
-													</select>
+					</div>
+					<div class="tab-content" id="nav-tabContent">
+						<nav>
+							<div class="nav nav-pills mt-2" id="nav-tab" role="tablist">
+								<button class="nav-link active" id="nav-home-tab" data-bs-toggle="pill" data-bs-target="#nav-4A" type="button" role="tab" aria-controls="nav-4A" aria-selected="true" style="width: 33%;"><i class="fas fa-user-graduate"></i> 4A</button>
+								<button class="nav-link" id="nav-profile-tab" data-bs-toggle="pill" data-bs-target="#nav-4B" type="button" role="tab" aria-controls="nav-4B" aria-selected="false" style="width: 33%;"><i class="fas fa-user-graduate"></i> 4B</button>
+								<button class="nav-link" id="nav-contact-tab" data-bs-toggle="pill" data-bs-target="#nav-4C" type="button" role="tab" aria-controls="nav-4C" aria-selected="false" style="width: 34%;"><i class="fas fa-user-graduate"></i> 4C</button>
+							</div>
+						</nav>
+						<div class="tab-pane fade show active" id="nav-4A" role="tabpanel" aria-labelledby="nav-home-tab">
+							<div class="row">
+								<div class="col ">
+									<div class="card">
+										<div class="card-body rounded-3 table-responsive-xl">
+											<div class="row justify-content-between mb-2">
+												<div class="col-lg-4">
+													<div class="input-group mt-2">
+														<span class="input-group-text custom-select mb-3 bg-white">Sort By</span>
+														<select class="form-select custom-select mb-3" name="subjects" id="subjects" required>
+															<option selected value="">Select Category</option>
+															<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+															<option value="Law Enforcement">Law Enforcement</option>
+															<option value="Criminalistics">Criminalistics</option>
+															<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+															<option value="Criminal Sociology">Criminal Sociology</option>
+															<option value="Correctional Administration">Correctional Administration</option>
+														</select>
+													</div>
 												</div>
 											</div>
-										</div>
-										<table class="table table-hover bg-light align-middle w-100" id="resultTab">
-											<thead>
-												<tr>
-													<th scope="col" hidden>ID</th>
-													<th scope="col">No.</th>
-													<th scope="col">Student Name</th>
-													<th scope="col">Year & Section</th>
-													<th scope="col">Total Questions</th>
-													<th scope="col">Time Limit</th>
-													<th scope="col">Answered In</th>
-													<th scope="col" style="text-align: center;">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td hidden>ID</td>
-													<td>1</td>
-	                                                <td>Ralph Vincent Pagcaliwagan</td>
-	                                                <td>4C</td>
-	                                                <td>600</td>
-	                                                <td>360 mins</td>
-	                                                <td >300 mins</td>
-	                                                <td>
-	                                                	<div class="d-flex flex-row">
-	                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
-	                                                		<button class="btn btn-secondary  mx-2" data-bs-toggle="modal" data-bs-target="#Delete"type="button"><i class="fas fa-trash"></i></button>
-	                                                	</div>
-	                                                </td>
-	                                            </tr>
-	                                        </tbody>
-	                                    </table>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
+											<table class="table table-hover bg-light align-middle w-100" id="resultTab">
+												<thead>
+													<tr>
+														<th scope="col" hidden>ID</th>
+														<th scope="col">No.</th>
+														<th scope="col">Student Name</th>
+														<th scope="col">Year & Section</th>
+														<th scope="col">Total Questions</th>
+														<th scope="col">Time Limit</th>
+														<th scope="col">Answered In</th>
+														<th scope="col" style="text-align: center;">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td hidden>ID</td>
+														<td>1</td>
+		                                                <td>Ralph Vincent Pagcaliwagan</td>
+		                                                <td>4A</td>
+		                                                <td>600</td>
+		                                                <td>360 mins</td>
+		                                                <td >300 mins</td>
+		                                                <td>
+		                                                	<div class="ps-5">
+		                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
+		                                                		<button class="btn btn-secondary  mx-2" data-bs-toggle="modal" data-bs-target="#Delete"type="button"><i class="fas fa-trash"></i></button>
+		                                                	</div>
+		                                                </td>
+		                                            </tr>
+		                                        </tbody>
+		                                    </table>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+						</div>
+						<div class="tab-pane fade" id="nav-4B" role="tabpanel" aria-labelledby="nav-profile-tab">
+							<div class="row">
+								<div class="col ">
+									<div class="card">
+										<div class="card-body rounded-3  table-responsive-xl">
+											<div class="row justify-content-between mb-2">
+												<div class="col-lg-4">
+													<div class="input-group mt-2">
+														<span class="input-group-text custom-select mb-3 bg-white">Sort By</span>
+														<select class="form-select custom-select mb-3" name="subjects" id="subjects" required>
+															<option selected value="">Select Category</option>
+															<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+															<option value="Law Enforcement">Law Enforcement</option>
+															<option value="Criminalistics">Criminalistics</option>
+															<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+															<option value="Criminal Sociology">Criminal Sociology</option>
+															<option value="Correctional Administration">Correctional Administration</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<table class="table table-hover bg-light align-middle w-100" id="result2Tab">
+												<thead>
+													<tr>
+														<th scope="col" hidden>ID</th>
+														<th scope="col">No.</th>
+														<th scope="col">Student Name</th>
+														<th scope="col">Year & Section</th>
+														<th scope="col">Total Questions</th>
+														<th scope="col">Time Limit</th>
+														<th scope="col">Answered In</th>
+														<th scope="col" style="text-align: center;">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td hidden>ID</td>
+														<td>1</td>
+		                                                <td>Ralph Vincent Pagcaliwagan</td>
+		                                                <td>4B</td>
+		                                                <td>600</td>
+		                                                <td>360 mins</td>
+		                                                <td >300 mins</td>
+		                                                <td>
+		                                                	<div class="ps-5">
+		                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
+		                                                		<button class="btn btn-secondary  mx-2" data-bs-toggle="modal" data-bs-target="#Delete"type="button"><i class="fas fa-trash"></i></button>
+		                                                	</div>
+		                                                </td>
+		                                            </tr>
+		                                        </tbody>
+		                                    </table>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+						</div>
+						<div class="tab-pane fade" id="nav-4C" role="tabpanel" aria-labelledby="nav-profile-tab">
+							<div class="row">
+								<div class="col ">
+									<div class="card">
+										<div class="card-body rounded-3 table-responsive-xl">
+											<div class="row justify-content-between mb-2">
+												<div class="col-lg-4">
+													<div class="input-group mt-2">
+														<span class="input-group-text custom-select mb-3 bg-white">Sort By</span>
+														<select class="form-select custom-select mb-3" name="subjects" id="subjects" required>
+															<option selected value="">Select Category</option>
+															<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+															<option value="Law Enforcement">Law Enforcement</option>
+															<option value="Criminalistics">Criminalistics</option>
+															<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
+															<option value="Criminal Sociology">Criminal Sociology</option>
+															<option value="Correctional Administration">Correctional Administration</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<table class="table table-hover bg-light align-middle w-100" id="result3Tab">
+												<thead>
+													<tr>
+														<th scope="col" hidden>ID</th>
+														<th scope="col">No.</th>
+														<th scope="col">Student Name</th>
+														<th scope="col">Year & Section</th>
+														<th scope="col">Total Questions</th>
+														<th scope="col">Time Limit</th>
+														<th scope="col">Answered In</th>
+														<th scope="col" style="text-align: center;">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td hidden>ID</td>
+														<td>1</td>
+		                                                <td>Ralph Vincent Pagcaliwagan</td>
+		                                                <td>4C</td>
+		                                                <td>600</td>
+		                                                <td>360 mins</td>
+		                                                <td >300 mins</td>
+		                                                <td>
+		                                                	<div class="ps-5">
+		                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
+		                                                		<button class="btn btn-secondary  mx-2" data-bs-toggle="modal" data-bs-target="#Delete"type="button"><i class="fas fa-trash"></i></button>
+		                                                	</div>
+		                                                </td>
+		                                            </tr>
+		                                        </tbody>
+		                                    </table>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+						</div>
 	                </div>
 				</div>
 			</div>
@@ -355,6 +480,20 @@ let arrow = document.querySelectorAll(".arrow");
 <script type="text/javascript">
   $(document).ready(function() {
   	 $('#resultTab').DataTable({
+  	 	paging: true
+  	 });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+  	 $('#result2Tab').DataTable({
+  	 	paging: true
+  	 });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+  	 $('#result3Tab').DataTable({
   	 	paging: true
   	 });
   });
