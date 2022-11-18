@@ -545,36 +545,11 @@ function getName($n) {
 								</div>
 							</div>
 							<div class="card mt-2">
-								<div class="card-body" id="preb">
-									<?php
-
-									$pre_b = mysqli_query($sqlcon,"SELECT * FROM test_question ORDER BY rand() LIMIT $tot");
-
-									$num = mysqli_num_rows($pre_b);
-									?>
-									<p class="fw-bold">Questions matching this filter:<?php echo $num; ?></p>
+								<div class="card-body" id="preb"></p>
+									<p class="fw-bold">Questions matching this filter: 0 </p>
 									<div class="table-responsive-xl">
 										<div class="table-wrapper-scroll-y my-custom-scrollbar">
-											<table class="table table-hover bg-light" style="font-size: 15px;" id="randomize">
-												<thead>
-													<tr>	
-														<th scope="col">Question</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php 
-
-															     
-												      $test = mysqli_query($sqlcon,"SELECT * FROM test_question ORDER BY rand() LIMIT $tot");
-												      while ($now = mysqli_fetch_assoc($test)) {
-												      	 $_SESSION['exam'] = $now['question_id']; ?>
-													<tr>
-														<td hidden=""><input type="hidden" name="preboard_choose[]" value="<?php echo $now['question_id']; ?>"></td>
-														<td><?php echo $now['questions_title'] ?></td>
-													</tr>
-													   <?php } ?>
-												</tbody>
-											</table>
+											
 										</div>
 									</div>
 								</div>
@@ -741,7 +716,6 @@ function getName($n) {
   $('select').on('change', function() {
     var name = this.name;
     var area_exam;
-    var t_question;
 
        // alert(  name);
 
@@ -749,11 +723,6 @@ function getName($n) {
 
        if (name=="area_exam") {
           area_exam = this.value;
-          t_question = $("#t_question").val();
-       }else if (name=="t_question") {
-          area_exam =$("#area_exam").val();
-          t_question=  this.value;
-
        }else{
         return false;
        }
@@ -763,7 +732,7 @@ function getName($n) {
       type:"POST",
       url: "update_filter.php",             
       dataType: "text",   //expect html to be returned  
-      data:{area_exam:area_exam,t_question:t_question},               
+      data:{area_exam:area_exam},               
       success: function(data){     
       $("#preb").hide();    
       $("#preb").fadeIn();             

@@ -602,37 +602,12 @@ $suppd .= "</select>";
 							</div>
 							<div class="card mt-2">
 								<div class="card-body" id="coast">
-									<?php
 
-									$filt = mysqli_query($sqlcon,"SELECT * FROM test_question LIMIT $tot");
-
-									$sort = mysqli_num_rows($filt);
-									?>
-									
-
-									<p class="fw-bold">Questions matching this filter:<?php echo $sort; ?></p>
+									<p class="fw-bold">Questions matching this filter:0</p>
 									<div class="table-responsive-xl">
 										<div class="table-wrapper-scroll-y my-custom-scrollbar">
 											<table class="table table-hover bg-light" style="font-size: 15px;" id="standing">
-												<thead>
-													<tr>	
-														<th scope="col">Question</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php 
-
-													  
-
-												      $test = mysqli_query($sqlcon,"SELECT * FROM test_question ORDER BY rand() LIMIT $tot");
-												      while ($now = mysqli_fetch_assoc($test)) {
-												      	 $_SESSION['exam'] = $now['question_id']; ?>
-													<tr>
-														<td hidden=""><input type="hidden" name="unique_quest[]" value="<?php echo $now['question_id']; ?>"></td>
-														<td><?php echo $now['questions_title'] ?></td>
-													</tr>
-													   <?php } ?>
-												</tbody>
+												
 											</table>
 										</div>
 									</div>
@@ -859,7 +834,6 @@ $suppd .= "</select>";
     var name = this.name;
     var diff;
     var area_exam;
-    var total_quest;
 
        // alert(  name);
 
@@ -868,18 +842,10 @@ $suppd .= "</select>";
        if (name=="diff") {
           diff = this.value;
           area_exam = $("#area_exam").val();
-          total_quest = $("#total_quest").val();
 
        }else if (name=="area_exam") {
           diff =$("#diff").val();
-          total_quest = $("#total_quest").val();
           area_exam =  this.value;
-
-       }
-       else if (name=="total_quest") {
-          diff =$("#diff").val();
-          area_exam = $("#area_exam").val();
-          total_quest = this.value;
 
        }else{
         return false;
@@ -890,7 +856,7 @@ $suppd .= "</select>";
       type:"POST",
       url: "random_question.php",             
       dataType: "text",   //expect html to be returned  
-      data:{diff:diff,area_exam:area_exam,total_quest:total_quest},               
+      data:{diff:diff,area_exam:area_exam},               
       success: function(data){     
       $("#coast").hide();    
       $("#coast").fadeIn();             

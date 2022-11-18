@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,13 +65,14 @@
 	            <div class="card px-0 pt-4 pb-0 mt-3 mb-3 m-2">
 	                <h2 id="heading">Sign Up Your User Account</h2>
 	                <p>Fill all form field to go to next step</p>
-	                <form id="msform" action="#" method="POST">
+	                <form id="msform" action="function_registration.php" method="POST" enctype="multipart/form-data">
 	                    <!-- progressbar -->
 	                    <ul id="progressbar">
 	                        <li class="active" id="account" style="color: #8C0000;"><strong>Account</strong></li>
 	                        <li id="personal" style="color: #8C0000;"><strong>Personal</strong></li>
 	                        <li id="payment" style="color: #8C0000;"><strong>Image</strong></li>
 	                        <li id="confirm" style="color: #8C0000;"><strong>Finish</strong></li>
+
 	                    </ul>
 	                    <div class="progress">
 	                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
@@ -78,19 +82,21 @@
 	                            <div class="row">
 	                                <div class="col-7">
 	                                    <h2 class="fs-title">Account Information:</h2>
+
+
 	                                </div>
 	                                <div class="col-5">
 	                                    <h2 class="steps">Step 1 - 4</h2>
 	                                </div>
 	                            </div> 
-	                            <label class="fieldlabels ms-2">Emai Address:</label> 
-	                            <input type="email" name="email" placeholder="Email address" />
+	                            <label class="fieldlabels ms-2">Email Address:</label> 
+	                            <input type="email" name="email_ad" placeholder="Email address" />
 	                            <label class="fieldlabels ms-2">ID No:</label>
-	                            <input type="number" name="uname" placeholder="019***" />
+	                            <input type="number" name="u_name" placeholder="019***" />
 	                            <label class="fieldlabels ms-2">Password:</label> 
-	                            <input type="password" name="pwd" placeholder="Password" />
+	                            <input type="password" name="pass_word" placeholder="Password" />
 	                            <label class="fieldlabels ms-2">Confirm Password:</label>
-	                            <input type="password" name="cpwd" placeholder="Confirm Password" />
+	                            <input type="password" name="conf_pass" placeholder="Confirm Password" />
 	                        </div>
 	                        <input type="button" name="next" class="next action-button btn-btn rounded" value="Next" />
 	                    </fieldset>
@@ -107,28 +113,28 @@
 	                            <div class="row">
 	                            	<div class="col-sm-4">
 	                            		<label class="fieldlabels ms-2">First Name:</label>
-	                                    <input type="text" name="fname" placeholder="First Name"  class="form-control" />
+	                                    <input type="text" name="f_name" placeholder="First Name"  class="form-control" />
 	                            	</div>
 	                            	<div class="col-sm-4">
 	                            		<label class="fieldlabels ms-2">Middle Name:</label>
-	                                    <input type="text" name="fname" placeholder="Middle Name" class="form-control" />
+	                                    <input type="text" name="m_name" placeholder="Middle Name" class="form-control" />
 	                            	</div>
 	                            	<div class="col-sm-4">
 	                            		 <label class="fieldlabels ms-2">Last Name: </label>
-	                                     <input type="text" name="mname" placeholder="Last Name"  class="form-control" /> 
+	                                     <input type="text" name="l_name" placeholder="Last Name"  class="form-control" /> 
 	                            	</div>
 	                            </div>
 	                            <div class="row">
 	                            	<div class="col-sm-5">
 	                            		<label class="fieldlabels ms-2">Age</label>
 	                            	 	<div class="input-group">
-	                            	 		 <input type="number" class="form-control" placeholder="Age" >
+	                            	 		 <input type="number" name="age" class="form-control" placeholder="Age" >
 	                            	 	</div>
 	                            	</div>
 	                            	<div class="col-sm-5">
 	                            		<label class="fieldlabels ms-2">Date of Birth</label>
 	                            	 	<div class="input-group">
-	                            	 		 <input type="date" class="form-control" placeholder="Birthdate" >
+	                            	 		 <input type="date" name="date_birth" class="form-control" placeholder="Birthdate" >
 	                            	 	</div>
 	                            	</div>
 	                            </div>
@@ -136,7 +142,7 @@
 		                            <div class="col-sm-4">
 	                            	 	<label class="fieldlabels ms-2">Role</label>
 		                            	 <div class="form-group">
-			                            	<select class="form-select" required="" name="gender" value="">
+			                            	<select class="form-select" required="" name="role" value="">
 			                            		<option selected value="studnet">Student</option>
 			                            		<option value="faculty">Faculty</option>
 			                            	</select>
@@ -165,9 +171,9 @@
 		                            </div>
 	                            </div>
 	                            <label class="fieldlabels ms-2 mt-3">Contact No:</label>
-	                            <input type="number" name="phno" placeholder="09***********" />
+	                            <input type="number" name="contact_no" placeholder="09***********" />
 	                            <label class="fieldlabels ms-2" >Address</label>
-	                            <textarea type="text" rows="2" class="form-control"></textarea>
+	                            <textarea type="text" name="address" rows="2" class="form-control"></textarea>
 	                        </div> 
 	                        <input type="button" name="next" class="next action-button btn-btn rounded" value="Next" /> <input type="button" name="previous" class="previous action-button-previous rounded" value="Previous" />
 	                    </fieldset>
@@ -182,11 +188,12 @@
 	                                </div>
 	                            </div>
 	                            <label class="fieldlabels ms-2">Upload Your Photo:</label>
-	                            <input type="file" name="pic" accept="image/*">
+	                            <input type="file" name="image" class="form-control" id="reg_img" required="" accept=".jpg, .jpeg, .png">
+	                            <img src="../assets/pics/tempo.png" id="img_up" alt="preview" class="img-fluid img-thumbnail rounded-circle mb-2">
 	                        </div>
-	                         <input type="button" name="next" class="next action-button btn-btn rounded" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous rounded" value="Previous" />
+	                         <input type="submit" name="register" class="next action-button btn-btn rounded" value="Next" /> <input type="button" name="previous" class="previous action-button-previous rounded" value="Previous" />
 	                    </fieldset>
-	                    <fieldset>
+	                   	<fieldset>
 	                        <div class="form-card">
 	                            <div class="row">
 	                                <div class="col-7">
@@ -196,13 +203,21 @@
 	                                    <h2 class="steps">Step 4 - 4</h2>
 	                                </div>
 	                            </div> <br><br>
-	                            <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
+	                            
 	                            <div class="row justify-content-center">
 	                                <div class="col-3"> <i class="fas fa-check-circle ms-3 fa-6x" style="color: #8C0000;"></i> </div>
 	                            </div> <br><br>
 	                            <div class="row justify-content-center">
 	                                <div class="col-7 text-center">
-	                                    <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
+	                                    
+	                                    <?php
+
+	                                    if (isset($_SESSION['status'])) {
+	                                    	
+	                                    	echo "<h5 class='purple-text text-center'>".$_SESSION['status']."</h5>";
+	                                    	unset($_SESSION['status']);
+	                                    }
+	                                    ?>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -219,6 +234,8 @@
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(){
   window.addEventListener('scroll', function() {
@@ -235,6 +252,18 @@
   });
 }); 
 </script>
+
+<script type="text/javascript">
+	reg_img.onchange = evt => {
+		const [file] = reg_img.files;
+		if (file) {
+			img_up.src = URL.createObjectURL(file);
+
+		}
+	}
+</script>
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 

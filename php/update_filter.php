@@ -7,9 +7,8 @@ require_once 'conn.php';
 $id = $_SESSION['acc_id'];
 
 $area_exam = $_POST['area_exam'];
-$t_question = $_POST['t_question'];
 
-$sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AND `subject_name` LIKE '%$area_exam%' ORDER BY rand() LIMIT $t_question");
+$sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AND `subject_name` LIKE '%$area_exam%' ORDER BY rand()");
 
 
 $quiz_filt = mysqli_num_rows($sql);

@@ -8,9 +8,8 @@ $id = $_SESSION['acc_id'];
 
 $difficult = $_POST['diff'];
 $subjects = $_POST['area_exam'];
-$total_quest = $_POST['total_quest'];
 
-$sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AND  level_difficulty LIKE '%$difficult%' AND `subject_name` LIKE '%$subjects%' ORDER BY rand() LIMIT $total_quest ");
+$sql=mysqli_query($sqlcon,"SELECT * FROM `test_question` WHERE `acc_id`='$id' AND  level_difficulty LIKE '%$difficult%' AND `subject_name` LIKE '%$subjects%' ORDER BY rand()");
 
 $quiz_filt = mysqli_num_rows($sql);
 
