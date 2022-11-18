@@ -230,7 +230,7 @@ $suppd .= "</select>";
 														<th>No.</th>
 														<th scope="col">Areas of Exam</th>
 														<th scope="col">Question</th>
-														<th scope="col" class="text-center" >Action</th>
+														<th scope="col" class="ps-4">Action</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -251,7 +251,6 @@ $suppd .= "</select>";
 														<td>
 															<div class="d-flex flex-row justify-content-center">
 																<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"  type="button"><i class="fas fa-chart-bar"></i></button>
-																<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
 															</div>
 														</td>
 													</tr>

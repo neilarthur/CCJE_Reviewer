@@ -256,7 +256,24 @@ function getName($n) {
 											    }
 
 												 ?>
-												<span><p class="ms-2">|  This preboard is not approved yet</p></span>
+												<span>
+													<?php 
+													  
+													   $preboard= mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '$id'");
+													   while ($rows = mysqli_fetch_assoc($preboard)) {
+													   	       if ($rows['Approval']=='approve') {
+													            	echo '<p class="ms-1">|  <strong class="text-success ms-2">This preboard is now approved</strong></p>';
+													           }
+													           elseif ($rows['Approval']=='pending') {
+													            	echo '<p class="ms-2">|  <strong class="text-warning ms-1">This preboard is not approved yet</strong></p>';
+													            }
+													            elseif ($rows['Approval']=='decline') {
+													            	echo '<p class="ms-2">|  <strong class="text-danger ms-1">This preboard is has been decline</strong></p>';
+													            }
+													    }
+
+													   ?>   
+												</span>
 											</div>
 											<input class="btn btn-success px-4 pb-2" type="submit" value="Save">
 										</div>
@@ -284,6 +301,7 @@ function getName($n) {
 												<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Add</a>
 											  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 											  	<?php
+											  	$tot = $_GET['total'];
 
 											  	if ($total == $nums) {
 											  		echo "<li><a class='dropdown-item'><i class='fas fa-plus me-2'></i>a new Questions</a>
@@ -295,7 +313,7 @@ function getName($n) {
 											    	 		";
 											  	}
 											  	else {
-											  		echo "<li><a class='dropdown-item' href='adding-preboard-question.php?id=$id'><i class='fas fa-plus me-2'></i>a new Questions </a></li>
+											  		echo "<li><a class='dropdown-item' href='adding-preboard-question.php?id=$id&total=$tot'><i class='fas fa-plus me-2'></i>a new Questions </a></li>
 											    		<div class='dropdown-divider'></div>
 											    		<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#exampleModal2'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
 											    		<div class='dropdown-divider'></div>
@@ -403,6 +421,7 @@ function getName($n) {
 	    				<div class="modal-body">
 	    					<div class="container d-flex justify-content-center">
 	    						<input type="hidden" name="update_id" id="delete_id">
+	    						<input type="hidden" name="total" value="<?php echo $_GET['total']?>">
 	    						<input type="hidden" name="lets" value="<?php echo $_GET['id']?>">
 	    						<p>Do you really want to delete these question?</p>
 	    					</div>
@@ -491,6 +510,7 @@ function getName($n) {
 							</div>
 							<div class="modal-footer">
 								<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+								<input type="hidden" name="total" value="<?php echo $_GET['total'] ?>">
 								<button type="submit" name="create" class="btn btn-success">Add selected questions</button>
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 							</div>
@@ -516,7 +536,8 @@ function getName($n) {
 										<label for="Area" class="col-sm-4 col-form-label fw-bold">Area of Examination</label>
 										<div class="col-sm-6"> 
 											<select class="form-select" name="area_exam" id="area_exam">
-												<option selected value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+												<option selected value="">Select Category</option>
+												<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
 												<option value="Law Enforcement">Law Enforcement</option>
 												<option value="Criminalistics">Criminalistics</option>
 												<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
@@ -530,7 +551,7 @@ function getName($n) {
 										<label for="number" class="col-sm-4 col-form-label fw-bold">Number of random question</label>
 										<div class="col-sm-3">
 											<select class="form-select" name="t_question" id="t_question">
-												<option selected><?php echo $_GET['total']; ?></option>
+												<option selected value="1">1</option>
 												<?php
 
 												$tot = $_GET['total'];
@@ -545,18 +566,41 @@ function getName($n) {
 								</div>
 							</div>
 							<div class="card mt-2">
-								<div class="card-body" id="preb"></p>
+								<div class="card-body" id="preb">
 									<p class="fw-bold">Questions matching this filter: 0 </p>
 									<div class="table-responsive-xl">
 										<div class="table-wrapper-scroll-y my-custom-scrollbar">
-											
+											<table class="table bg-light table-hover" style="font-size: 15px;" id="pre_board">
+												<thead>
+													<tr>	
+														<th hidden>ID</th>
+														<th scope="col">Question</th>
+													</tr>
+												</thead>
+												<tbody>
+													 <?php 
+
+														     
+												      $Slow = mysqli_query($sqlcon,"SELECT * FROM test_question");
+												      while ($now = mysqli_fetch_assoc($Slow)) {
+
+												        $_SESSION['exam'] = $now['question_id']; ?>
+													<tr>
+														
+														<td hidden><?php echo $now['question_id']?></td>
+														<td><?php echo $now['questions_title'] ?></td>
+													</tr>
+
+												 <?php } ?>
+												</tbody>
+											</table>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="modal-footer">
 								<input type="hidden" name="test_id" value="<?php echo $_GET['id'] ?>">
-									<input type="hidden" name="total" value="<?php echo $_GET['total'] ?>">
+								<input type="hidden" name="total" value="<?php echo $_GET['total'] ?>">
 								<button type="submit" name="create" class="btn btn-success">Add random questions</button>
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 							</div>

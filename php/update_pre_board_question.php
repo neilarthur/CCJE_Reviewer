@@ -5,7 +5,9 @@ require_once 'conn.php';
 
 if (isset($_POST['create'])) {
 
+	
 	$id = $_POST['id'];
+	$totas = $_POST['total'];
 	$checkbox1 = $_POST['chkl'];
 	$pre_status = "active";
 
@@ -18,7 +20,7 @@ if (isset($_POST['create'])) {
 
 		if ($pre_query_exam) {
 
-			header("location: editing-preboard.php?id=$id");
+			header("location: editing-preboard.php?id=$id&total=$totas");
 		}
 		else {
 			echo mysqli_error($sqlcon);

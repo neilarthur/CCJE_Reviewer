@@ -16,6 +16,7 @@ if (isset($_POST['create'])) {
 	$update_id = $_POST['update_id'];
 	$status = "active";
 	$stat = "active";
+	$totas = $_POST['total'];
 
 
 	foreach ($questions_title as $key => $value) {
@@ -34,7 +35,7 @@ if (isset($_POST['create'])) {
 
 			if ($query_choose_preboard) {
 				
-				header("location: editing-preboard.php?id=$update_id");
+				header("location: editing-preboard.php?id=$update_id&total=$totas");
 			}
 			else{
 

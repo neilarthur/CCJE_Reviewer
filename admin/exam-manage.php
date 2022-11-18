@@ -229,11 +229,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                <td><?php echo $rows['start_date']; ?></td>
 	                                               <?php 
 	                                                
-	                                                if ($rows['approval'] =='Approve') {
+	                                                if ($rows['Approval'] =='approve') {
 	                                                	echo'<td class="badge bg-success text-white mt-2" style="font-size:15px;">Approve</td>';
-	                                                }elseif ($rows['approval'] =='Pending') {
+	                                                }elseif ($rows['Approval'] =='pending') {
 	                                                	echo'<td class="badge bg-warning text-dark mt-2" style="font-size:15px;">Pending</td>';
-	                                                }elseif ($rows['approval']=='Decline') {
+	                                                }elseif ($rows['approval']=='decline') {
 	                                                	echo'<td class="badge bg-danger text-white mt-2" style="font-size:15px;">Rejected</td>';
 	                                                } 
 	                                                ?>

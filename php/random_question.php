@@ -27,7 +27,7 @@ $quiz_filt = mysqli_num_rows($sql);
  </style>
 <link href="../css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
-<p class="fw-bold">Questions matching this filter:<?php echo $quiz_filt; ?></p>
+<p class="fw-bold">Questions matching this filter: <?php echo $quiz_filt; ?></p>
  <div class="table-responsive-xl">
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
   <table  class="table table-hover bg-light" style="font-size: 15px;" id="standing">

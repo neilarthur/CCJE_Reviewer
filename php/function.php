@@ -3,7 +3,8 @@
 require_once 'conn.php';
 
 if (isset($_POST["create"])) {
-
+	
+    $tots = $_POST['total'];
 	$let = $_POST['test'];
 	$checkbox1 = $_POST['chkl'];
 
@@ -17,7 +18,7 @@ if (isset($_POST["create"])) {
 
 		if ($ss) {
 			
-			header("location:editing-quiz.php?id=$let");
+			header("location:editing-quiz.php?id=$let&total=$tots");
 
 		}
 		else {

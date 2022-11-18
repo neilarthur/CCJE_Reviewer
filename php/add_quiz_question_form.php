@@ -34,7 +34,7 @@ if (isset($_POST['create'])) {
 			
 			if ($insert_query) {
 				
-				header("location: editing-quiz.php?id=$test_id$total=$add_quest");
+				header("location: editing-quiz.php?id=$test_id$&total=$add_quest");
 
 			}
 			else{

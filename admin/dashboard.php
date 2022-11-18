@@ -292,7 +292,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                     </div>
                 </div>
                  <div class="col-lg-4">
-                     <div class="card h-100 ms-4">
+                     <div class="card h-100 ms-2">
                         <div class="card-body card-body rounded-2">
                             <h5 class="card-title fw-bold">Question Count</h5>
                             <?php

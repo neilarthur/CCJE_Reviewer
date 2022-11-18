@@ -447,6 +447,7 @@ $suppd .= "</select>";
 	    				<div class="modal-body">
 	    					<div class="container d-flex justify-content-center">
 	    						<input type="hidden" name="update_id" id="delete_id">
+	    						<input type="hidden" name="total" value="<?php echo $_GET['total']?>">
 	    						<input type="hidden" name="lets" value="<?php echo $_GET['id']?>">
 	    						<p>Do you really want to delete these question?</p>
 	    					</div>
@@ -534,6 +535,7 @@ $suppd .= "</select>";
 							</div>
 							<div class="modal-footer">
 								<input type="hidden" name="test" value="<?php echo $_GET['id']; ?>">
+								<input type="hidden" name="total" value="<?php echo $_GET['total']; ?>">
 								<button type="submit" name="create" class="btn btn-success">Add selected questions</button>
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 							</div>	
@@ -559,7 +561,8 @@ $suppd .= "</select>";
 										<label for="Area" class="col-sm-4 col-form-label fw-bold">Area of Exam</label>
 										<div class="col-sm-8"> 
 											<select class="form-select" name="area_exam" id="area_exam">
-												<option selected value="Criminal Jurisprudence">Criminal Jurisprudence</option>
+												<option selected value="">Select Category</option>
+												<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
 												<option value="Law Enforcement">Law Enforcement</option>
 												<option value="Criminalistics">Criminalistics</option>
 												<option value="Crime Detection and Investigation">Crime Detection and Investigation</option>
@@ -584,13 +587,13 @@ $suppd .= "</select>";
 										<label for="number" class="col-sm-4 col-form-label fw-bold">Number of random question</label>
 										<div class="col-sm-4">
 											<select class="form-select" name="total_quest" id="total_quest">
-												<option selected=""><?php echo $_GET['total']; ?></option>
+												<option selected="1">1</option>
 												
 												<?php
 
 												$tot = $_GET['total'];
 
-												for($i =1; $i <= $tot; $i+=1){
+												for($i =2; $i <= $tot; $i+=1){
 													echo '
 													<option>'.$i.'</option>';
 												}
@@ -602,12 +605,32 @@ $suppd .= "</select>";
 							</div>
 							<div class="card mt-2">
 								<div class="card-body" id="coast">
-
-									<p class="fw-bold">Questions matching this filter:0</p>
+									<p class="fw-bold">Questions matching this filter: 0</p>
 									<div class="table-responsive-xl">
 										<div class="table-wrapper-scroll-y my-custom-scrollbar">
 											<table class="table table-hover bg-light" style="font-size: 15px;" id="standing">
-												
+												<thead>
+													<tr>	
+														<th hidden>ID</th>
+														<th scope="col">Question</th>
+													</tr>
+												</thead>
+												<tbody>
+													 <?php 
+
+														     
+												      $Slow = mysqli_query($sqlcon,"SELECT * FROM test_question");
+												      while ($now = mysqli_fetch_assoc($Slow)) {
+
+												        $_SESSION['exam'] = $now['question_id']; ?>
+													<tr>
+														
+														<td hidden><?php echo $now['question_id']?></td>
+														<td><?php echo $now['questions_title'] ?></td>
+													</tr>
+
+												 <?php } ?>
+												</tbody>
 											</table>
 										</div>
 									</div>

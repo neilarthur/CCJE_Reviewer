@@ -4,7 +4,8 @@ include_once 'conn.php';
 
 
 if (isset($_POST['save'])) {
-
+  
+  $tots = $_POST['total'];
   $ids = $_POST['lets'];
   $id = $_POST['update_id'];
 
@@ -19,7 +20,7 @@ if (isset($_POST['save'])) {
 
     if ($query_run) {
 
-  		header("Location:../php/editing-preboard.php?id=$ids");
+  		header("Location:../php/editing-preboard.php?id=$ids&total=$tots");
   	}
   	else {
 
