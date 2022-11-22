@@ -9,89 +9,51 @@ if (isset($_SESSION["role"]) && $_SESSION["role"]=='admin') {
 
 }
 elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='faculty') {
-	header("location: ../faculty/dashboard.php");
+  header("location: ../faculty/dashboard.php");
 }
 
-if (isset($_GET['verified'])) {
-
-  $code = $_GET['verified'];
-
-  $verify_query = "SELECT * FROM accounts WHERE verification_code='$code'";
-
-  $verify_query_run = mysqli_query($sqlcon,$verify_query);
-
-  if (mysqli_num_rows($verify_query_run)>0) {
-
-    $rows = mysqli_fetch_array($verify_query_run);
-
-    if ($rows['verify_status']==0) {
-      
-      $click_code = $rows['verification_code'];
-
-      $update_stat = "UPDATE accounts SET verify_status='1' WHERE verification_code='$click_code'";
-      $update_query = mysqli_query($sqlcon,$update_stat);
-
-
-      if ($update_query) {
-
-        echo "Your account has been verified";
-      }
-      else {
-
-        echo "verified failed";
-      }
-    }
-    else{
-
-      echo "Email Already verified.Please Login";
-    }
-  }
-  else {
-
-    echo "this code is does not exists";
-  }
-}
 ?>
+
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Log In</title>
-	<!-- Boostrap 5.2 -->
-	<link href="../css/bootstrap.min.css" rel="stylesheet">
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
-	<link rel="stylesheet" type="text/css" href="../css/index.css">
-	<!-- Google Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Albert+Sans&family=Fira+Sans&family=Inter:wght@200&family=Libre+Baskerville&family=Mingzat&family=Montserrat:ital,wght@0,400;0,500;1,400&family=Roboto+Condensed:ital,wght@0,700;1,400&family=Russo+One&family=Source+Sans+Pro&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-	<!-- Box Icons -->
-	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+  <title>Log In</title>
+  <!-- Boostrap 5.2 -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../css/home.css">
+  <link rel="stylesheet" type="text/css" href="../css/index.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans&family=Fira+Sans&family=Inter:wght@200&family=Libre+Baskerville&family=Mingzat&family=Montserrat:ital,wght@0,400;0,500;1,400&family=Roboto+Condensed:ital,wght@0,700;1,400&family=Russo+One&family=Source+Sans+Pro&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+  <!-- Box Icons -->
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
   <!-- Font Awesome-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
-	<!-- System Logo -->
+  <!-- System Logo -->
   <link rel="icon" href="../assets/pics/system-ico.ico">
 </head>
 <body>
-	<div class="header text-uppercase hd " >
-		<div class="container-fluid py-3">
-			<img src="../assets/pics/logo.png" alt="" width="80" height="80" class="d-inline-block align-top mt-2 ms-2" >
-			<h3 class="text-white mt-3 ms-4" >Automated Licensure Examination Reviewer </h3>
-			<span class="text-white text-center dep">College of Criminal Justice and Education</span>
-		</div>
-	</div>
-	<nav id="navbar-top" class="navbar navbar-expand-lg navbar-light fw-bold text-uppercase">
-		<div class="container-fluid">
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse ms-4" id="navbarTogglerDemo03">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0 pe-2">
-					<li class="nav-item">
-						<a class="nav-link" aria-current="page" href="../home.php">Home</a>
-					</li>
-					<li class="nav-item dropdown justify-content-start">
+  <div class="header text-uppercase hd " >
+    <div class="container-fluid py-3">
+      <img src="../assets/pics/logo.png" alt="" width="80" height="80" class="d-inline-block align-top mt-2 ms-2" >
+      <h3 class="text-white mt-3 ms-4" >Automated Licensure Examination Reviewer </h3>
+      <span class="text-white text-center dep">College of Criminal Justice and Education</span>
+    </div>
+  </div>
+  <nav id="navbar-top" class="navbar navbar-expand-lg navbar-light fw-bold text-uppercase">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse ms-4" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 pe-2">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="../home.php">Home</a>
+          </li>
+          <li class="nav-item dropdown justify-content-start">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Criminology
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -99,40 +61,34 @@ if (isset($_GET['verified'])) {
               <li><a class="dropdown-item" href="college.php">College</a></li>  
             </ul>
           </li>
-					<li class="nav-item">
-						<a class="nav-link " href="about.php">About Us</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- Log In form -->
-	<div class="login-form mt-3">    
-		<form action="login.php" method="post">
-			<div class="avatar">
-				<img src="../assets/pics/CCJE.png" alt="">
-			</div>
-			<h4 class="modal-title mt-3 fw-bold">User Account</h4>
-			<div class="input-group mb-3">
+          <li class="nav-item">
+            <a class="nav-link " href="about.php">About Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Log In form -->
+  <div class="login-form mt-3">    
+    <form action="resend.php" method="post">
+      <div class="avatar">
+        <img src="../assets/pics/CCJE.png" alt="">
+      </div>
+      <h4 class="modal-title mt-3 fw-bold">User Account</h4>
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-				<input type="text" name="userID" class="form-control" placeholder="User ID" required="required" autocomplete="off">
-			</div>
-			<div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
-				<input type="password" name="password" class="form-control" placeholder="Password" required="required" autocomplete="off">
-			</div>
-			<div class="d-grid gap-2 mt-2 ">
-				<input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Login">
-			</div>
+        <input type="text" name="email_address" class="form-control" placeholder="Enter email address" required="required" autocomplete="off">
+      </div>
+      <div class="d-grid gap-2 mt-5 ">
+        <input type="submit" name="resend_email_btn" class="btn btn-primary btn-lg rounded-pill" value="Send">
+      </div>
       <div class="form-group small clearfix fs-6 mt-3">
         <a href="registration.php" class="register">Don't have an account? </a>
-        <a href="#" class="forgot-link">Forgot Password?</a>
-        <p class="mt-3">Did not receive your email verification?<a href="email_resend.php" class="register">Resend</a></p>
       </div> 
-		</form>
-	</div>
+    </form>
+  </div>
 
-	<!-- Footer -->
+  <!-- Footer -->
   <footer class="text-center text-lg-start text-white ft mt-3">
     <!-- Section: Social media -->
     <section class="d-flex justify-content-between p-4" style="background-color: #8C0000;">

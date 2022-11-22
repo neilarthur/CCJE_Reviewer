@@ -2,14 +2,15 @@
 
 session_start();
 
-require_once 'conn.php';
+require_once'conn.php';
 
 require("../PHPMailer-master/src/Exception.php");
 require("../PHPMailer-master/src/PHPMailer.php");
 require("../PHPMailer-master/src/SMTP.php");
 
-function sendmail_verify($f_name,$email_ad,$verification_code) {
 
+
+function resend_email($f_name,$email_ad,$verification_code){
 	$mail = new PHPMailer\PHPMailer\PHPMailer();
 
 	//Tell PHPMailer to use SMTP
@@ -69,7 +70,7 @@ function sendmail_verify($f_name,$email_ad,$verification_code) {
 
 	$mail->isHTML(true);
 
-	$mail->Subject ="Email Verification from CCJELSPU";
+	$mail->Subject ="Resend Email Verification from CCJELSPU";
 
 	$email_template="
 	<h2> You have to registerd with lspu</h2>
@@ -86,71 +87,40 @@ function sendmail_verify($f_name,$email_ad,$verification_code) {
 	$mail->send();
 }
 
+if (isset($_POST['resend_email_btn'])) {
 
-if (isset($_POST['next'])) {
-
-
-	$email_ad = $_POST['email_ad'];
-	$u_name = $_POST['u_name'];
-	$pass_word = $_POST['pass_word'];
-	$conf_password = $_POST['conf_pass'];
-	$f_name = $_POST['f_name'];
-	$m_name = $_POST['m_name'];
-	$l_name = $_POST['l_name'];
-	$age = $_POST['age'];
-	$date_birth = $_POST['date_birth'];
-	$role = $_POST['role'];
-	$section = $_POST['section'];
-	$gender = $_POST['gender'];
-	$contact_no = $_POST['contact_no'];
-	$address = $_POST['address'];
-	$image_upload =$_FILES['image']['name'];
-	$verification_code = md5(rand());
-	$year = "4th year";
-	$status = "pending";
+	$email_ad = $_POST['email_address'];
 
 
-	$image_Data =addslashes(file_get_contents($_FILES['image']['tmp_name']));
-	$image_type =$_FILES['image']['type'];
+	$check_mail_query = "SELECT * FROM accounts WHERE email_address='$email_ad'";
 
-	if (substr($image_type,0,5)=="image") {
-		
-		$check_query = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE email_address ='$email_ad'");
+	$check_mail_run = mysqli_query($sqlcon,$check_mail_query);
 
-		if (mysqli_num_rows($check_query) > 0) {
 
-			echo "EMAIL IS ALREADY BEEN TAKEN";
+	if (mysqli_num_rows($check_mail_run) >0) {
+
+		$rows = mysqli_fetch_array($check_mail_run);
+
+		if ($rows['verify_status']=='0') {
+
+			$f_name = $rows['first_name'];
+			$email_ad = $rows['email_address'];
+			$verification_code = $rows['verification_code'];
+
+
+			resend_email($f_name,$email_ad,$verification_code);
+
+			header("Location: email_resend.php?loginsuccess");
 		}
 		else {
 
-			if ($pass_word == $conf_password) {
-
-
-				$insert_query = "INSERT INTO accounts(first_name,user_id,middle_name,last_name,role,birth_date,age,gender,year,section,email_address,mobile_no,address,image,image_size,password,status,verification_code) VALUES('$f_name','$u_name','$m_name','$l_name','$role','$date_birth','$age','$gender','$year','$section','$email_ad','$contact_no','$address','$image_upload','$image_Data','$pass_word','$status','$verification_code')";
-
-				$query_run = mysqli_query($sqlcon,$insert_query);
-
-				if ($query_run) {
-					
-					sendmail_verify("$f_name","$email_ad","$verification_code");
-
-					header("location:registration.php");
-				}
-				else{
-
-					echo mysqli_error($sqlcon);
-				}
-			}
-			else {
-
-				echo "Password is incorrect";
-			}	
+			header("Location:email_resend.php?loginerror");			
 		}
 	}
-	else {
+	else{
 
-		echo mysqli_error($sqlcon);
+		header("Location:email_resend.php?loginerror");
 	}
-}
 
+}
 ?>

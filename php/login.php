@@ -15,60 +15,76 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 	$sql_rows = mysqli_fetch_array($results);
 
 	if ($sql_rows['role']=='admin') {
-		$_SESSION["acc_id"] = $sql_rows['acc_id'];
-		$_SESSION["role"] = $sql_rows['role'];
-
-		$_SESSION["first_name"] = $sql_rows['first_name'];
 		
-		$_SESSION["login"]=true;
+		if ($sql_rows['verify_status']=='1' && $sql_rows['status']=='active') {
 
-		header("Location:../admin/dashboard.php?loginsuccess");
+			$_SESSION["acc_id"] = $sql_rows['acc_id'];
+			$_SESSION["role"] = $sql_rows['role'];
+			$_SESSION["first_name"] = $sql_rows['first_name'];
+			$_SESSION["login"]=true;
+
+			header("Location:../admin/dashboard.php?loginsuccess");
+		}
+		else {
+
+			header("Location:index.php?loginerror");
+		}
 	}
 	elseif ($sql_rows['role']=='faculty') {
-		$_SESSION["role"] = $sql_rows['role'];
-		$_SESSION["first_name"] = $sql_rows['first_name'];
-		$_SESSION["login"]=true;
 
-		$_SESSION["acc_id"] = $sql_rows['acc_id'];
+		if ($sql_rows['verify_status']=='1') {
 
-		$valid = $_SESSION['acc_id'];
+			$_SESSION["role"] = $sql_rows['role'];
+			$_SESSION["first_name"] = $sql_rows['first_name'];
+			$_SESSION["login"]=true;
+			$_SESSION["acc_id"] = $sql_rows['acc_id'];
+			$valid = $_SESSION['acc_id'];
 
-		$data = "INSERT INTO logs(acc_id,login_time,action)VALUES('$valid', now(),'$user_action')";
-		$log_data = mysqli_query($sqlcon,$data);
+			$data = "INSERT INTO logs(acc_id,login_time,action)VALUES('$valid', now(),'$user_action')";
+			$log_data = mysqli_query($sqlcon,$data);
 
-		$_SESSION["login_id"] = mysqli_insert_id($sqlcon);
+			$_SESSION["login_id"] = mysqli_insert_id($sqlcon);
 
-		if ($log_data) {
-			header("Location:../faculty/dashboard.php?acc_id=$valid&loginsuccess");
+			if ($log_data) {
+				header("Location:../faculty/dashboard.php?acc_id=$valid&loginsuccess");
+			}
+			else{
+			 	echo mysqli_error($sqlcon);
+			}	
 		}
-		else{
-			 echo mysqli_error($sqlcon);
+		else {
+
+			header("Location:index.php?loginerror");
 		}
 	}
 	elseif ($sql_rows['role']=='student') {
 
-		$_SESSION["role"] = $sql_rows['role'];
-		$_SESSION["login"]=true;
-		$_SESSION["first_name"] = $sql_rows['first_name'];
-		$_SESSION["acc_id"] = $sql_rows['acc_id'];
 
+		if ($sql_rows['verify_status']=='1') {
 
+			$_SESSION["role"] = $sql_rows['role'];
+			$_SESSION["login"]=true;
+			$_SESSION["first_name"] = $sql_rows['first_name'];
+			$_SESSION["acc_id"] = $sql_rows['acc_id'];
 
+			$validate = $_SESSION['acc_id'];
 
-		$validate = $_SESSION['acc_id'];
+			$auth = "INSERT INTO logs(acc_id,login_time,action)VALUES('$validate', now(),'$user_action')";
+			$log_data = mysqli_query($sqlcon,$auth);
 
-		$auth = "INSERT INTO logs(acc_id,login_time,action)VALUES('$validate', now(),'$user_action')";
-		$log_data = mysqli_query($sqlcon,$auth);
+			$_SESSION["login_id"] = mysqli_insert_id($sqlcon);
 
-		$_SESSION["login_id"] = mysqli_insert_id($sqlcon);
-
-		if ($log_data) {
-			header("Location:../student/dashboard.php?acc_id=$valid");
+			if ($log_data) {
+				header("Location:../student/dashboard.php?acc_id=$valid");
+			}
+			else{
+			 	echo mysqli_error($sqlcon);
+			}	
 		}
 		else{
-			 echo mysqli_error($sqlcon);
-		}
-		
+
+			header("Location:index.php?loginerror");
+		}		
 	}
 	else{
 		header("Location:index.php?loginerror");
