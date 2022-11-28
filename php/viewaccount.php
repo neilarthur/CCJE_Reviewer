@@ -18,7 +18,7 @@ while ($row = mysqli_fetch_array($results)) {
 			<div class="row">
 				<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 me-5 py-2">
 					
-					<img src="data:image;base64,'.base64_encode($row["image_size"]).'" id="imgs"  class="img-fluid img-thumbnail rounded-circle flex justify-content-start w-100 h-100"  style=" object-fit: cover;">
+					<img src="data:image;base64,'.base64_encode($row["image_size"]).'" id="imgs"  class="rounded-circle flex justify-content-start" height="200px" width="200px"  style=" object-fit: cover;">
 				</div>';
 ?>
 
@@ -80,7 +80,7 @@ while ($row = mysqli_fetch_array($results)) {
 				<textarea class="form-control" name="address" rows="2" readonly=""><?php echo $row['address']; ?></textarea>
 			</div>			
 		</div>
-		<div class="modal-footer d-flex justify-content-end">
+		<div class="modal-footer d-flex justify-content-end border-0">
 			<button type="button" class="btn btn-danger btn  px-5 pb-2 text-white" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
 		</div>
 	</form>

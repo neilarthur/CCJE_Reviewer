@@ -18,7 +18,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Quiz</title>
+	<title>Examination Results</title>
 	<!-- Boostrap 5.2 -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<!-- CSS -->

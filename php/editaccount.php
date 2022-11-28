@@ -20,7 +20,7 @@ while ($row = mysqli_fetch_array($results)) {
 					
 					
 
-					<img src="data:image;base64,'.base64_encode($row["image_size"]).'" id="imgs"  class="img-fluid img-thumbnail rounded-circle flex justify-content-start"  style=" object-fit: cover;"> 
+					<img src="data:image;base64,'.base64_encode($row["image_size"]).'" id="imgs" name="type" class=" rounded-circle flex justify-content-start" height="200px" width="200px" style=" object-fit: cover;"> 
 					<input type="file" name="image" class="form-control mt-2" id="file_name" accept=".jpg, .jpeg, .png">
 					<label for="image_browser" class="d-flex justify-content-center ps-1 mt-2">Attach Picture</label>'
 

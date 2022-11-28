@@ -178,7 +178,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 		                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
 		                     while ($rows = mysqli_fetch_assoc($query_row)) {
-		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"></span>';
+		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"></span>';
 		                  ?>
 		               <?php }
 
@@ -355,7 +355,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                    </div>
 	                </div>
 	                 <div class="col-lg-4">
-	                 	<div class="card ">
+	                 	<div class="card h-100">
                            <div class="card-body">
                            	<h5 class="card-title fw-bold">Question Count</h5>
                             <?php
@@ -468,8 +468,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
                       </div>
                    </div>
                    <div class="col-lg-8">
-                   	 <div class="card">
-                   	  	<div class="card-body ,">
+                   	 <div class="card h-100">
+                   	  	<div class="card-body">
                    			<canvas id="myChart" style="position: relative; height:40px; width:80px"></canvas>
                    			<script type="text/javascript">
                    				const ctx = document.getElementById('myChart').getContext('2d');

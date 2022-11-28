@@ -173,7 +173,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 		                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
 		                     while ($rows = mysqli_fetch_assoc($query_row)) {
-		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"></span>';
+		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"  ></span>';
 		                  ?>
 		               <?php }
 
@@ -205,7 +205,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 											         while ($rows = mysqli_fetch_assoc($query_row)) { 
 
 											         	echo '<div class="d-flex flex-column align-items-center text-center p-3 py-5">
-											         	<img src="data:image;base64,'.base64_encode($rows["image_size"]).'" id="imgss"  class="img-fluid img-thumbnail rounded-circle flex justify-content-start w-100 h-100 mb-2"  style=" object-fit: cover;">
+											         	<img src="data:image;base64,'.base64_encode($rows["image_size"]).'" id="imgss"  class="img-thumbnail rounded-circle flex mb-2"  style=" object-fit: cover; height:200px; width:200px;">
 											         	';
 											         	?>
 
@@ -330,7 +330,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 										<div class="row gutters mt-5">
 											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center">
 												<div class="text-right">
-													<button type="submit" id="submit" name="submit" class="btn btn-success mx-2 me-4"><i class="fas fa-save me-2"></i>Save changes</button>
+													<button type="submit" id="submit" name="submit" class="btn btn-success pb-2 px-4 btn-md fs-6 rounded">Save changes</button>
 													
 												</div>
 											</div>

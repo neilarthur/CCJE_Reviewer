@@ -170,7 +170,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
                         $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
                          while ($rows = mysqli_fetch_assoc($query_row)) {
-                      echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"></span>';
+                      echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"></span>';
                       ?>
                    <?php }
 
@@ -212,9 +212,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 						<div class="row">
 							<div class="col ">
 								<div class="card">
-									<div class="card-body rounded-3 m-4 table-responsive-lg">
+									<div class="card-body rounded-3 m-4 table-responsive-xl">
 										<div class="position-left d-flex justify-content-end mb-3">
-											<button type="button" class="btn  px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#AddModal" style="margin-left: 55%; background-color: #8C0000;"><b><i class="fas fa-plus-circle"></i></b> ADD</button>
 										</div>
 										<table class="table table-striped align-middle bg-light" id="student">
 											<thead>
@@ -224,7 +223,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">Year & Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
-													<th scope="col">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -239,20 +237,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $rows['section'];  ?></td>
 													<td><?php echo $rows['role'];  ?></td>
 													<td><?php echo $rows['email_address']; ?></td>
-													<td>
-														<?php
-
-															if ($rows['status']=='active') {
-																
-																echo "<p class='text-center text-success'>Approved</p>";
-															}
-															elseif ($rows['status']=='pending') {
-																
-																echo "<p class='text-center text-success'>Pending</p>";
-															}
-															
-														?>
-													</td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -288,7 +272,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">Class Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
-													<th scope="col">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -304,20 +287,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $raws['section'];  ?></td>
 													<td><?php echo $raws['role'];  ?></td>
 													<td><?php echo $raws['email_address']; ?></td>
-													<td>
-														<?php
-
-															if ($raws['status']=='active') {
-																
-																echo "<p class='text-center text-success'>Approved</p>";
-															}
-															elseif ($raws['status']=='pending') {
-																
-																echo "<p class='text-center text-success'>Pending</p>";
-															}
-															
-														?>
-													</td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -343,9 +312,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					 elseif ($_GET['tab-accounts']=='faculty') {
 					 	?>
 					 	<nav>
-						<div class="nav nav-tabs mt-2" id="nav-tab" role="tablist">
-							<button class="nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Students</button>
-							<button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Faculty Instructor</button>
+						<div class="nav nav-pills mt-2" id="nav-tab" role="tablist">
+							<button class="nav-link" id="nav-home-tab" data-bs-toggle="pill" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Students</button>
+							<button class="nav-link active" id="nav-profile-tab" data-bs-toggle="pill" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Faculty Instructor</button>
 						</div>
 					</nav>
 
@@ -356,7 +325,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 								<div class="card">
 									<div class="card-body rounded-3 m-4 table-responsive-lg">
 										<div class="position-left d-flex justify-content-end mb-3">
-											<button type="button" class="btn  px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#AddModal" style="margin-left: 55%; background-color: #8C0000;"><b><i class="fas fa-plus-circle"></i></b> ADD</button>
 										</div>
 										<table class="table table-striped align-middle bg-light" id="student">
 											<thead>
@@ -366,7 +334,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">Year & Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
-													<th scope="col">status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -430,7 +397,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">Class Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
-													<th scope="col">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -446,20 +412,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $raws['section'];  ?></td>
 													<td><?php echo $raws['role'];  ?></td>
 													<td><?php echo $raws['email_address'];  ?></td>
-													<td>
-														<?php
-
-															if ($raws['status']=='active') {
-																
-																echo "<p class='text-center text-success'>Approved</p>";
-															}
-															elseif ($raws['status']=='pending') {
-																
-																echo "<p class='text-center text-success'>Pending</p>";
-															}
-
-														?>
-													</td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -607,7 +559,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
         						<div class="col">
         							<div class="row">
         								<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 py-2 me-5">
-        									<img src="../assets/pics/tempo.png" id="img_a" alt="preview" class="img-fluid img-thumbnail rounded-circle mb-2">
+        									<img src="../assets/pics/tempo.png" id="img_a" alt="preview" class=" rounded-circle mb-2" height="200px" width="200px">
 											<input type="file" name="image" class="form-control" id="file_s" required="" accept=".jpg, .jpeg, .png">
 											<label for="image_browser" class="d-flex justify-content-center mt-2 ps-1">Attach Picture</label>
         								</div>

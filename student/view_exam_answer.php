@@ -63,7 +63,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
               $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
                while ($rows = mysqli_fetch_assoc($query_row)) {
-            echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"> '.$_SESSION["first_name"].'</span>';
+            echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"> '.$_SESSION["first_name"].'</span>';
             ?>
          <?php }
 
@@ -79,28 +79,29 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
     </div>
   </nav>
  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header border-0">
-                  <h5 class="modal-title"></h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body align-items-center">
-                  <h4 class=""><i class="fas fa-exclamation-triangle alert alert-danger me-2"></i>Do you really wish to leave or log out?</h4>
-              </div>
-              <div class="modal-footer border-0">
-                  <form action="../php/logout_faculty.php" class="hide" method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_SESSION['acc_id']  ?>">
-          <input type="hidden" name="times" value="<?php echo $_SESSION['login_id']  ?>">
-          <div>
-            <button type="submit" class="btn btn-success">YES</button>
-            <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">NO</button>
-          </div>
-        </form>
-              </div>
-          </div>
+ <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header flex-column border-0 bg-warning">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="icon-box mt-2">
+              <i class="fas fa-exclamation-circle fa-6x text-dark"></i>
+            </div> 
+        </div>
+        <div class="modal-body flex-column">
+          <p class="fs-5 modal-title mt-3 text-center">The action are you going to perform is irrevesible. Please confirm!</p>
+            <p class="fs-5 mt-2 text-center">Are you sure that you want to logout?</p>
+        </div>
+        <div class="modal-footer d-flex justify-content-center border-0 mb-2">
+          <form action="../php/logout_students.php" class="hide" method="POST" class="text-center">
+                <input type="hidden" name="id" value="<?php echo $_SESSION['acc_id']  ?>">
+                <input type="hidden" name="times" value="<?php echo $_SESSION['login_id']  ?>">
+                <button type="submit" class="btn btn-success mx-2 px-5 pb-2 rounded-pill">YES</button>
+                <button type="button" class="btn btn-danger mx-2 px-5 pb-2 rounded-pill" data-bs-dismiss="modal">NO</button>
+          </form>
+        </div>
       </div>
+    </div>
   </div>
   <!--Main Content-->
   <div class="container-fluid py-4">

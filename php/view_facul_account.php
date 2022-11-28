@@ -16,7 +16,7 @@ while ($row = mysqli_fetch_array($results)) {
 		<div class="col">
 			<div class="row">
 				<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 me-5 py-2">
-					<img src="data:image;base64,'.base64_encode($row["image_size"]).'" id="iset"  class="img-fluid img-thumbnail rounded-circle flex justify-content-start"  style=" object-fit: cover;">';
+					<img src="data:image;base64,'.base64_encode($row["image_size"]).'" id="iset"  class=" rounded-circle flex justify-content-start" height="200px;" width="200px;" style=" object-fit: cover; ">';
 ?>
 
 

@@ -135,7 +135,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
               $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
                while ($rows = mysqli_fetch_assoc($query_row)) {
-            echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"> '.$_SESSION["first_name"].'</span>';
+            echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"> '.$_SESSION["first_name"].'</span>';
             ?>
          <?php }
 
@@ -154,21 +154,22 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header border-0">
+        <div class="modal-header flex-column border-0 bg-warning">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="icon-box mt-2">
+              <i class="fas fa-exclamation-circle fa-6x text-dark"></i>
+            </div> 
         </div>
-        <div class="icon-box mt-2 mb-2 d-flex justify-content-center">
-          <i class="fa-solid fa-circle-question fa-5x text-danger"></i>
+        <div class="modal-body flex-column">
+          <p class="fs-5 modal-title mt-3 text-center">The action are you going to perform is irrevesible. Please confirm!</p>
+            <p class="fs-5 mt-2 text-center">Are you sure that you want to logout?</p>
         </div>
-        <div class="modal-body d-flex justify-content-center">
-          <p class="h4 text-dark fw-bold">Do you really wish to leave</p>
-        </div>
-        <div class="modal-footer d-flex justify-content-center border-0">
-          <form action="../php/logout_faculty.php" class="hide" method="POST" class="text-center">
-            <input type="hidden" name="id" value="<?php echo $_SESSION['acc_id']  ?>">
-            <input type="hidden" name="times" value="<?php echo $_SESSION['login_id']  ?>">
-            <button type="submit" class="btn btn-primary mx-2 px-5 pb-2">YES</button>
-            <button type="button" class="btn btn-danger mx-2 px-5 pb-2" data-bs-dismiss="modal">NO</button>
+        <div class="modal-footer d-flex justify-content-center border-0 mb-2">
+          <form action="../php/logout_students.php" class="hide" method="POST" class="text-center">
+                <input type="hidden" name="id" value="<?php echo $_SESSION['acc_id']  ?>">
+                <input type="hidden" name="times" value="<?php echo $_SESSION['login_id']  ?>">
+                <button type="submit" class="btn btn-success mx-2 px-5 pb-2 rounded-pill">YES</button>
+                <button type="button" class="btn btn-danger mx-2 px-5 pb-2 rounded-pill" data-bs-dismiss="modal">NO</button>
           </form>
         </div>
       </div>

@@ -182,7 +182,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 		                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
 		                     while ($rows = mysqli_fetch_assoc($query_row)) {
-		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"></span>';
+		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"></span>';
 		                  ?>
 		               <?php }
 
@@ -206,66 +206,33 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 							</div>
 						</div>
 					</div>
-					<div class="tab-content mt-3" id="nav-tabContent">
-						<nav class="text-uppercase">
-							<div class="nav nav-pills" id="nav-tab" role="tablist">
-								<button class="nav-link active w-15" id="nav-criminal-jurisprudence-tab" data-bs-toggle="pill" data-bs-target="#nav-criminal" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-voicemail me-2"></i>Criminal Jurisprudence</button>
-								<button class="nav-link w-15" id="nav-law-tab" data-bs-toggle="pill" data-bs-target="#nav-law-enforcement" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-book me-2"></i></i>Law Enforcement</button>
-								<button class="nav-link w-15" id="nav-crimalistics-tab" data-bs-toggle="pill" data-bs-target="#nav-criminalistics" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-balance-scale me-2"></i>Criminalistics</button>
-								<button class="nav-link w-15" id="nav-crime-tab" data-bs-toggle="pill" data-bs-target="#nav-crime" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-search me-2"></i>Crime Detection & Investigation</button>
-								<button class="nav-link w-15" id="nav-sociology-tab" data-bs-toggle="pill" data-bs-target="#nav-sociology" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-handshake me-2"></i>Criminal Sociology</button>
-								<button class="nav-link w-15" id="nav-correctional-tab" data-bs-toggle="pill" data-bs-target="#nav-correctional" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-gavel me-2"></i>Correctional Administration</button>
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="card mt-2">
+								<div class="card-body">
+									<p class="h4 text-uppercase fw-bold text-center">Categories</p>
+									<nav class="tab-content text-uppercase" style="font-size: 15px;">
+										<div class="nav nav-pills" id="nav-tab" role="tablist">
+											<button class="nav-link active w-100 border border-dark px-5 pb-2 rounded mt-2" id="nav-criminal-jurisprudence-tab" data-bs-toggle="pill" data-bs-target="#nav-criminal" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-voicemail me-2"></i>Criminal Jurisprudence</button>
+											<button class="nav-link w-100 border border-dark px-5 pb-2 rounded mt-2" id="nav-law-tab" data-bs-toggle="pill" data-bs-target="#nav-law-enforcement" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-book me-2"></i>Law Enforcement</button>
+											<button class="nav-link w-100 border border-dark px-5 pb-2 rounded mt-2" id="nav-crimalistics-tab" data-bs-toggle="pill" data-bs-target="#nav-criminalistics" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-balance-scale me-2"></i>Criminalistics</button>
+											<button class="nav-link w-100 border border-dark px-5 pb-2 rounded mt-2 text-left" id="nav-crime-tab" data-bs-toggle="pill" data-bs-target="#nav-crime" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-search me-2"></i>Crime Detection & Investigation</button>
+											<button class="nav-link w-100 border border-dark px-5 pb-2 rounded mt-2" id="nav-sociology-tab" data-bs-toggle="pill" data-bs-target="#nav-sociology" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-handshake me-2"></i>Criminal Sociology</button>
+											<button class="nav-link w-100 border border-dark px-5 pb-2 rounded mt-2" id="nav-correctional-tab" data-bs-toggle="pill" data-bs-target="#nav-correctional" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-gavel me-2"></i>Correctional Administration</button>
+										</div>
+									</nav>
+								</div>
 							</div>
-						</nav>
-						<div class="tab-pane fade show active" id="nav-criminal" role="tabpanel" aria-labelledby="nav-criminal-jurisprudence-tab">
-							<div class="row">
-								<div class="col ">
-									<div class="card">
-										<div class="card-body rounded-3 m-3 table-responsive-lg">
-											<table class="table table-hover align-middle" id="resultTab">
+					    </div>
+					    <div class="col-lg-8">
+					    	<div class="tab-content" id="nav-tabContent">
+					    		<div class="tab-pane fade show active" id="nav-criminal" role="tabpanel" aria-labelledby="nav-criminal-jurisprudence-tab">
+						    		<div class="card mt-2">
+							    		<div class="card-body rounded-3 table-responsive-xl">
+						    				<table class="table table-hover align-middle" width="100%" id="lawTab">
 												<thead>
 													<tr>
-														<th scope="col">Rank No.</th>
-														<th scope="col">Name</th>
-														<th scope="col">Section</th>
-														<th scope="col">Area of Exam</th>
-														<th scope="col">Score</th>
-														<th scope="col">Percentage</th>
-														<th scope="col">Remarks</th>
-														<th scope="col">Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													
-													<tr>
-														<td>1</td>
-		                                                <td>Ralph Vincent Pagcaliwagan</td>
-		                                                <td>4C</td>
-		                                                <td>Criminal Jurisprudence</td>
-		                                                 <td>100</td>
-		                                                <td>100%</td>
-		                                                <td>PASS</td>
-		                                                <td>
-		                                                	<div class="d-flex flex-row">
-		                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-		                                                	</div>
-		                                                </td>
-		                                            </tr>
-		                                        </tbody>
-		                                    </table>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-						</div>
-						<div class="tab-pane fade" id="nav-law-enforcement" role="tabpanel" aria-labelledby="nav-law-enforcement"><div class="row">
-								<div class="col ">
-									<div class="card">
-										<div class="card-body rounded-3 m-3 table-responsive-lg">
-											<table class="table table-hover align-middle" id="lawTab">
-												<thead>
-													<tr>
-														<th scope="col">Rank No.</th>
+														<th scope="col">No.</th>
 														<th scope="col">Name</th>
 														<th scope="col">Section</th>
 														<th scope="col">Area of Exam</th>
@@ -292,19 +259,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 		                                            </tr>
 		                                        </tbody>
 		                                    </table>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-						<div class="tab-pane fade" id="nav-criminalistics" role="tabpanel" aria-labelledby="nav-contact-tab"><div class="row">
-								<div class="col ">
-									<div class="card">
-										<div class="card-body rounded-3 m-3 table-responsive-lg">
-											<table class="table table-hover align-middle" id="criminalTab">
+							    		</div>
+							    	</div>
+						    	</div>
+						    	<div class="tab-pane fade" id="nav-law-enforcement" role="tabpanel" aria-labelledby="nav-law-enforcement">
+					    		<div class="card mt-2">
+							    		<div class="card-body rounded-3 table-responsive-xl">
+						    				<table class="table table-hover align-middle" width="100%" id="resultTab">
 												<thead>
 													<tr>
-														<th scope="col">Rank No.</th>
+														<th scope="col">No.</th>
 														<th scope="col">Name</th>
 														<th scope="col">Section</th>
 														<th scope="col">Area of Exam</th>
@@ -331,130 +295,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 		                                            </tr>
 		                                        </tbody>
 		                                    </table>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-						<div class="tab-pane fade" id="nav-crime" role="tabpanel" aria-labelledby="nav-contact-tab"><div class="row">
-								<div class="col ">
-									<div class="card">
-										<div class="card-body rounded-3 m-3 table-responsive-lg">
-											<table class="table table-hover align-middle" id="crimeTab">
-												<thead>
-													<tr>
-														<th scope="col">Rank No.</th>
-														<th scope="col">Name</th>
-														<th scope="col">Section</th>
-														<th scope="col">Area of Exam</th>
-														<th scope="col">Score</th>
-														<th scope="col">Percentage</th>
-														<th scope="col">Remarks</th>
-														<th scope="col">Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>1</td>
-		                                                <td>Ralph Vincent Pagcaliwagan</td>
-		                                                <td>4C</td>
-		                                                <td>Criminal Jurisprudence</td>
-		                                                 <td>100</td>
-		                                                <td>100%</td>
-		                                                <td>PASS</td>
-		                                                <td>
-		                                                	<div class="d-flex flex-row">
-		                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-		                                                	</div>
-		                                                </td>
-		                                            </tr>
-		                                        </tbody>
-		                                    </table>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-						<div class="tab-pane fade" id="nav-sociology" role="tabpanel" aria-labelledby="nav-contact-tab">
-							<div class="row">
-								<div class="col ">
-									<div class="card">
-										<div class="card-body rounded-3 m-3 table-responsive-lg">
-											<table class="table table-hover align-middle" id="socTab">
-												<thead>
-													<tr>
-														<th scope="col">Rank No.</th>
-														<th scope="col">Name</th>
-														<th scope="col">Section</th>
-														<th scope="col">Area of Exam</th>
-														<th scope="col">Score</th>
-														<th scope="col">Percentage</th>
-														<th scope="col">Remarks</th>
-														<th scope="col">Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>1</td>
-		                                                <td>Ralph Vincent Pagcaliwagan</td>
-		                                                <td>4C</td>
-		                                                <td>Criminal Jurisprudence</td>
-		                                                 <td>100</td>
-		                                                <td>100%</td>
-		                                                <td>PASS</td>
-		                                                <td>
-		                                                	<div class="d-flex flex-row">
-		                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-		                                                	</div>
-		                                                </td>
-		                                            </tr>
-		                                        </tbody>
-		                                    </table>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-						</div>
-						<div class="tab-pane fade" id="nav-correctional" role="tabpanel" aria-labelledby="nav-contact-tab">
-							<div class="row">
-								<div class="col ">
-									<div class="card">
-										<div class="card-body rounded-3 m-3 table-responsive-lg">
-											<table class="table table-hover align-middle" id="corrTab">
-												<thead>
-													<tr>
-														<th scope="col">Rank No.</th>
-														<th scope="col">Name</th>
-														<th scope="col">Section</th>
-														<th scope="col">Area of Exam</th>
-														<th scope="col">Score</th>
-														<th scope="col">Percentage</th>
-														<th scope="col">Remarks</th>
-														<th scope="col">Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>1</td>
-		                                                <td>Ralph Vincent Pagcaliwagan</td>
-		                                                <td>4C</td>
-		                                                <td>Criminal Jurisprudence</td>
-		                                                 <td>100</td>
-		                                                <td>100%</td>
-		                                                <td>PASS</td>
-		                                                <td>
-		                                                	<div class="d-flex flex-row">
-		                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-		                                                	</div>
-		                                                </td>
-		                                            </tr>
-		                                        </tbody>
-		                                    </table>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-						</div>
+							    		</div>
+							    	</div>
+					    	   </div>
+					    	</div>
+					    </div>
 					</div>
 				</div>
 			</div>

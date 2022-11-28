@@ -178,7 +178,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 		                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
 		                     while ($rows = mysqli_fetch_assoc($query_row)) {
-		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"></span>';
+		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"></span>';
 		                  ?>
 		               <?php }
 

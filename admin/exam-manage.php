@@ -170,7 +170,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 		                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
 		                     while ($rows = mysqli_fetch_assoc($query_row)) {
-		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"></span>';
+		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"></span>';
 		                  ?>
 		               <?php }
 
@@ -233,15 +233,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                	echo'<td class="badge bg-success text-white mt-2" style="font-size:15px;">Approve</td>';
 	                                                }elseif ($rows['Approval'] =='pending') {
 	                                                	echo'<td class="badge bg-warning text-dark mt-2" style="font-size:15px;">Pending</td>';
-	                                                }elseif ($rows['approval']=='decline') {
+	                                                }elseif ($rows['Approval']=='decline') {
 	                                                	echo'<td class="badge bg-danger text-white mt-2" style="font-size:15px;">Rejected</td>';
 	                                                } 
 	                                                ?>
 	                                                
 	                                                <td>
-	                                                	<div class="d-flex flex-row justify-content-center">
-	                                                		<button class="btn btn-success mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-check"></i></button>
-	                                                		<button class="btn btn-danger  mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-times"></i></button>
+	                                                	<div class="d-flex text-center">
+	                                                		<button class="btn btn-primary editbtn ms-3" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
 	                                                	</div>
 	                                                </td>
 	                                            </tr>
@@ -286,47 +285,19 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	    			<div class="modal-header flex-column border-0">
 	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         				<div class="icon-box mt-3">
-        					<i class="far fa-question-circle fa-5x text-danger"></i>
         				</div>
-        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure</h4>
+        				<h3 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h3>
+        				<p class="h5 modal-title text-center mt-2">Do want to approve these exam</p>
 	    			</div>
 	    			<form class="form" action="exam_approve.php" method="POST">
 	    				<div class="modal-body">
 	    					<div class="container d-flex justify-content-center">
-	    						<input type="hidden" name="update_id" id="pre_exam_id">
-	    						<p>Do want to approve these exam?</p>
+	    						<input type="hidden" name="update_id" id="pre_exam_id">	
 	    					</div>
 	    					<div class="modal-footer d-flex justify-content-center border-0">
 	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">
-	        					<button type="button" class="btn btn-danger  px-5 pb-2 text-white" data-bs-dismiss="modal">NO</button>
-							</div>
-	    				</div>
-	    			</form>
-	    		</div>
-	    	</div>
-	    </div>
-
-
-	    <!--Reject modal -->
-		<div class="modal fade" id="ArchiveAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-			<div class="modal-dialog">
-	    		<div class="modal-content">
-	    			<div class="modal-header flex-column border-0">
-	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        				<div class="icon-box mt-3">
-        					<i class="far fa-question-circle fa-5x text-danger"></i>
-        				</div>
-        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure</h4>
-	    			</div>
-	    			<form class="form" action="exam_manage_reject.php" method="POST">
-	    				<div class="modal-body">
-	    					<div class="container d-flex justify-content-center">
-	    						<input type="hidden" name="update_id" id="delete_id">
-	    						<p>Do you want to decline these exam?</p>
-	    					</div>
-	    					<div class="modal-footer d-flex justify-content-center border-0">
-	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">
-	        					<button type="button" class="btn btn-danger  px-5 pb-2 text-white" data-bs-dismiss="modal">NO</button>
+	        					<input type="submit" name="reject" class="btn btn-danger px-5 pb-2 text-white" value="NO">
+	        					<button type="button" class="btn btn-secondary  px-4 pb-2 text-white" data-bs-dismiss="modal">CANCEL</button>
 							</div>
 	    				</div>
 	    			</form>

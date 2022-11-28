@@ -108,7 +108,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                     $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
                      while ($rows = mysqli_fetch_assoc($query_row)) {
                         echo '
-                                            <div class="profile-content">
+                         <div class="profile-content">
                         <img class="rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" alt="profileImg">
                     </div>';
                         ?>
@@ -169,7 +169,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
                         $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
                          while ($rows = mysqli_fetch_assoc($query_row)) {
-                      echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"></span>';
+                      echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"></span>';
                       ?>
                    <?php }
 
@@ -354,7 +354,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                      </div>
                  </div>
                   <div class="col-lg-8">
-                    <div class="card  ms-2">
+                    <div class="card h-100  ms-2">
                          <div class="card-body card-body rounded-2 ">
                             <canvas id="myChart"></canvas>
                             <script type="text/javascript">
@@ -391,18 +391,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                          </div>
                     </div>
                  </div>
-            </div>
-            <div class="container">
-                <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 my-4 border-top">
-                    <p class="col-md-6 mb-0 text-muted">&copy; 2022 Copyright College of Criminal Justice and Education LSPU Santa Cruz</p>
-                    <ul class="nav col-md-4 justify-content-end">
-                        <li class="nav-item"><a href="dashboard.php" class="nav-link px-2 text-muted">Home</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-                    </ul>
-                </footer>
             </div> 
         </div>
     </section>

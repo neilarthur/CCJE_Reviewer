@@ -24,6 +24,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<!-- Box Icons-->
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
+	<!-- Font Awesome-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<!-- JS Chart-->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -64,7 +65,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 			              $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
 			               while ($rows = mysqli_fetch_assoc($query_row)) {
-			            echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"> '.$_SESSION["first_name"].'</span>';
+			            echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"> '.$_SESSION["first_name"].'</span>';
 			            ?>
 			         <?php }
 
@@ -84,21 +85,22 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header border-0">
+				<div class="modal-header flex-column border-0 bg-warning">
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					  <div class="icon-box mt-2">
+					  	<i class="fas fa-exclamation-circle fa-6x text-dark"></i>
+					  </div> 
 				</div>
-                 <div class="icon-box mt-2 mb-2 d-flex justify-content-center">
-                    <i class="fa-solid fa-circle-question fa-5x text-danger"></i>
-                </div>
-				<div class="modal-body d-flex justify-content-center">
-					<p class="h4 text-dark fw-bold">Do you really wish to leave</p>
+				<div class="modal-body flex-column">
+					<p class="fs-5 modal-title mt-3 text-center">The action are you going to perform is irrevesible. Please confirm!</p>
+					  <p class="fs-5 mt-2 text-center">Are you sure that you want to logout?</p>
 				</div>
-				<div class="modal-footer d-flex justify-content-center border-0">
-					<form action="../php/logout_faculty.php" class="hide" method="POST" class="text-center">
+				<div class="modal-footer d-flex justify-content-center border-0 mb-2">
+					<form action="../php/logout_students.php" class="hide" method="POST" class="text-center">
 						<input type="hidden" name="id" value="<?php echo $_SESSION['acc_id']  ?>">
 						<input type="hidden" name="times" value="<?php echo $_SESSION['login_id']  ?>">
-                        <button type="submit" class="btn btn-primary mx-2 px-5 pb-2">YES</button>
-                        <button type="button" class="btn btn-danger mx-2 px-5 pb-2" data-bs-dismiss="modal">NO</button>
+                        <button type="submit" class="btn btn-success mx-2 px-5 pb-2 rounded-pill">YES</button>
+                        <button type="button" class="btn btn-danger mx-2 px-5 pb-2 rounded-pill" data-bs-dismiss="modal">NO</button>
 					</form>
 				</div>
 			</div>
@@ -106,158 +108,159 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	</div>
 	<!-- Main  Content  -->
 	<div class="container-fluid">
-				<form action="../php/update_student_profile.php" method="POST" enctype="multipart/form-data">
-					<div class="container py-5">
-						<div class="row gutters">
-							<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-								<!-- Profile -->
-								<div class="card h-100 mb-4">
-									<div class="card-body">
-										<div class="account-settings">
-											<div class="user-profile">
-												<div class="user-avatar">
-													<?php
-													$info = $_GET['acc_id'];
-											        $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '$info' ");
-											         while ($rows = mysqli_fetch_assoc($query_row)) { 
-
-											         	echo '<div class="d-flex flex-column align-items-center text-center p-3 py-5">
-											         	<img src="data:image;base64,'.base64_encode($rows["image_size"]).'" id="imgss"  class="img-fluid img-thumbnail rounded-circle flex justify-content-start w-100 h-100 mb-2"  style=" object-fit: cover;">
-											         	';
-											         	?>
-
-													
-														<input type="file" name="image" class="form-control mb-2" id="file_case" accept=".jpg, .jpeg, .png">
-
-														<span class="fw-bold"><?php  echo $rows['first_name'] ?> <?php  echo $rows['last_name'] ?></span>
-														<span class="text-black-30"><?php  echo $rows['email_address'] ?></span>
-													</div>
-													<?php }
-
-										             ?>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-								<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 t">
-								<div class="card h-100">
-									<div class="card-body">
-										<div class="row gutters m-3">
-											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-												<h3 class="mb-2 text-primary fw-bold text-uppercase mb-4">Personal Information</h3>
-											</div>
+		<form action="../php/update_student_profile.php" method="POST" enctype="multipart/form-data">
+			<div class="container py-4">
+				<div class="row gutters">
+					<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+						<!-- Profile -->
+						<div class="card h-100 mb-4">
+							<div class="card-body">
+								<div class="account-settings">
+									<div class="user-profile">
+										<div class="user-avatar">
 											<?php
-											 $info = $_GET['acc_id'];
-											 $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '$info' ");
-											      while ($rows = mysqli_fetch_assoc($query_row)) { ?>
+											$info = $_GET['acc_id'];
+									        $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '$info' ");
+									         while ($rows = mysqli_fetch_assoc($query_row)) { 
 
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-last">Lastname</label>
-													<input type="hidden" name="update_id" value="<?php echo $info?>">
-													<input type="text" class="form-control" name="last_name" value="<?php  echo $rows['last_name'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-first">Firstname</label>
-													<input type="text" class="form-control" name="first_name" value="<?php  echo $rows['first_name'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-middle">Middlename</label>
-													<input type="text" class="form-control" name="mid_name"value="<?php  echo $rows['middle_name'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-role">Role</label>
-													<input type="text" class="form-control" name="role" value="<?php  echo $rows['role'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-bday">Birtdate</label>
-													<input type="date" class="form-control" name="birth_date" value="<?php  echo $rows['birth_date'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-gender">Gender</label>
-													<div class="input-group">
-														<select class="form-select" required="" name="gender" value="">
-															
-															<option ><?php  echo $rows['gender'] ?></option>
-															<?php 
-															if ($rows['gender']== 'Male') {
-																echo "<option value='Female'>Female</option>";
-															}
-															elseif ($rows['gender']== 'Female') {
-																echo "<option value='Male'>Male</option>";
-															}
-															?>
-															
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="phone">Age</label>
-													<input type="number" class="form-control" name="age" value="<?php  echo $rows['age'] ?>" >
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="phone">Mobile Number</label>
-													<input type="number" class="form-control" name="mobile_no" value="<?php  echo $rows['mobile_no'] ?>" >
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="uder-id">ID No.</label>
-													<input type="number" class="form-control" name="user_id" value="<?php  echo $rows['user_id'] ?>" >
-												</div>
-											</div>
-											<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-email">Email Address</label>
-													<input type="email" class="form-control" name="email_address" value="<?php  echo $rows['email_address'] ?>">
-												</div>
-											</div>
-											<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
-												<div class="form-group">
-													<label for="user-section">Section</label>
-													<input type="text" class="form-control" name="section" value="<?php  echo $rows['section'] ?>">
-												</div>
-											</div>
-										</div>
-										<div class="row gutters m-3">
-											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
-												<label for="user-add">Address</label>
-												<textarea class="form-control" name="address" rows="2" ><?php  echo $rows['address'] ?></textarea>
-											</div>
-										</div>
-										<?php }
+									         	echo '<div class="d-flex flex-column align-items-center text-center p-3 py-5">
+									         	<img src="data:image;base64,'.base64_encode($rows["image_size"]).'" id="imgss"  class="rounded-circle flex justify-content-start mb-2" width="200px;" height="200px;"  style=" object-fit: cover;">
+									         	';
+									         	?>
 
-										 ?>
-										<div class="row gutters mt-5">
-											<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center">
-												<div class="text-right">
-													<button type="submit" id="submit" name="submit" class="btn btn-success mx-2 me-4"><i class="fas fa-save me-2"></i>Save changes</button>
-													
-												</div>
+											
+												<input type="file" name="image" class="form-control mb-2" id="file_case" accept=".jpg, .jpeg, .png">
+
+												<span class="fw-bold"><?php  echo $rows['first_name'] ?> <?php  echo $rows['last_name'] ?></span>
+												<span class="text-black-30"><?php  echo $rows['email_address'] ?></span>
 											</div>
+											<?php }
+
+								             ?>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</form>
+					</div>
+					<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 t">
+						<div class="card h-100">
+							<div class="card-body">
+								<div class="row gutters m-3">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+										<p class="h3 mb-2 text-primary fw-bold text-uppercase mb-4">Personal Information</p>
+									</div>
+									<?php
+									 $info = $_GET['acc_id'];
+									 $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '$info' ");
+									      while ($rows = mysqli_fetch_assoc($query_row)) { ?>
+
+									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="user-last">Lastname</label>
+											<input type="hidden" name="update_id" value="<?php echo $info?>">
+											<input type="text" class="form-control" name="last_name" value="<?php  echo $rows['last_name'] ?>">
+										</div>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="user-first">Firstname</label>
+											<input type="text" class="form-control" name="first_name" value="<?php  echo $rows['first_name'] ?>">
+										</div>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="user-middle">Middlename</label>
+											<input type="text" class="form-control" name="mid_name"value="<?php  echo $rows['middle_name'] ?>">
+										</div>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="user-role">Role</label>
+											<input type="text" class="form-control" name="role" value="<?php  echo $rows['role'] ?>">
+										</div>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="user-bday">Birtdate</label>
+											<input type="date" class="form-control" name="birth_date" value="<?php  echo $rows['birth_date'] ?>">
+										</div>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="user-gender">Gender</label>
+											<div class="input-group">
+												<select class="form-select" required="" name="gender" value="">
+													
+													<option ><?php  echo $rows['gender'] ?></option>
+													<?php 
+													if ($rows['gender']== 'Male') {
+														echo "<option value='Female'>Female</option>";
+													}
+													elseif ($rows['gender']== 'Female') {
+														echo "<option value='Male'>Male</option>";
+													}
+													?>
+													
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="phone">Age</label>
+											<input type="number" class="form-control" name="age" value="<?php  echo $rows['age'] ?>" >
+										</div>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="phone">Mobile Number</label>
+											<input type="number" class="form-control" name="mobile_no" value="<?php  echo $rows['mobile_no'] ?>" >
+										</div>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="uder-id">ID No.</label>
+											<input type="number" class="form-control" name="user_id" value="<?php  echo $rows['user_id'] ?>" >
+										</div>
+									</div>
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="user-email">Email Address</label>
+											<input type="email" class="form-control" name="email_address" value="<?php  echo $rows['email_address'] ?>">
+										</div>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
+										<div class="form-group">
+											<label for="user-section">Section</label>
+											<input type="text" class="form-control" name="section" value="<?php  echo $rows['section'] ?>">
+										</div>
+									</div>
+								</div>
+								<div class="row gutters m-3">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+										<label for="user-add">Address</label>
+										<textarea class="form-control" name="address" rows="2" ><?php  echo $rows['address'] ?></textarea>
+									</div>
+								</div>
+								<?php }
+
+								 ?>
+								<div class="row gutters mt-3">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center">
+										<div class="text-right">
+											<button type="submit" id="submit" name="submit" class="btn btn-success pb-2 px-5 btn-lg  rounded" style="font-size: 18px;">Save changes</button>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+			</form>
+		</div>
+		
 
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>

@@ -179,7 +179,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 		                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
 		                     while ($rows = mysqli_fetch_assoc($query_row)) {
-		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"></span>';
+		                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"></span>';
 		                  ?>
 		               <?php }
 
@@ -207,7 +207,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								<div class="card">	
 									<div class="card-body rounded-3 m-2 table-responsive-lg">
 										<div class="position-left d-flex justify-content-end mb-3">
-											<button type="button" class="btn  px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#AddModal" style="margin-left: 5%; background-color: #8C0000;"><b><i class="fas fa-plus"></i></b> ADD</button>
 										</div>
 										<table class="table table-striped align-middle bg-light" width="100%" id="accountTab">
 											<thead>
@@ -252,7 +251,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-																		<button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-success mx-2 approvebtn" data-bs-toggle="modal" type="button"><i class="fas fa-check"></i></button>
+																		<button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-success mx-2 approvebtn" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
 
 																		<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
 
@@ -283,7 +282,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-																		<button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-success mx-2 approvebtn" data-bs-toggle="modal" type="button"><i class="fas fa-check"></i></button>
+																		<button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-success mx-2 approvebtn" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
 
 																		<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
 
@@ -315,7 +314,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-																		<button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-success mx-2 approvebtn" data-bs-toggle="modal" type="button"><i class="fas fa-check"></i></button>
+																		<button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-success mx-2 approvebtn" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
 
 																		<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
 
@@ -481,9 +480,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	    			<div class="modal-header flex-column border-0">
 	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         				<div class="icon-box mt-3">
-        					<i class="far fa-question-circle fa-5x text-danger"></i>
         				</div>
-        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure</h4>
+        				<h3 class="modal-title text-align-center mt-3 fw-bold">Are you sure</h3>
+        				<p class="h5 modal-title text-align-center mt-2">Do want to approve these account?</p>
 	    			</div>
 	    			<div class="appbtn">
 	    				
