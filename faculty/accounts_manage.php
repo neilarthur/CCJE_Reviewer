@@ -211,10 +211,13 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 												<button type="submit" name="approval" class="btn btn-success px-3 pb-2 text-white">Approve</button>
 												<button type="button" class="btn  px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#AddModal" style="margin-left: 5%; background-color: #8C0000;"><b><i class="fas fa-plus"></i></b> ADD</button>
 											</div>
-											<table class="table table-striped align-middle bg-light" id="accountTab">
+											<table class="table table-striped align-middle bg-light" width="100%" id="accountTab">
 												<thead>
 													<tr>
-														<th scope="col"><input type="checkbox" name="select_all_box" id="select_all_box"></th>
+														<th scope="col">
+															<input type="checkbox" name="select_all_box" id="select_all_box">
+														</th>
+														<th scope="col" hidden="">Email ID</th>
 														<th scope="col">Student ID</th>
 														<th scope="col">Fullname</th>
 														<th scope="col">Year & Section</th>

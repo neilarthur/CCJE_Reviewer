@@ -242,11 +242,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td>
 														<?php
 
-															if ($raws['status']=='active') {
+															if ($rows['status']=='active') {
 																
 																echo "<p class='text-center text-success'>Approved</p>";
 															}
-															elseif ($raws['status']=='pending') {
+															elseif ($rows['status']=='pending') {
 																
 																echo "<p class='text-center text-success'>Pending</p>";
 															}
