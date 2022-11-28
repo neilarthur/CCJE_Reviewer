@@ -90,25 +90,26 @@ function sendmail_verify($email_ad) {
 if (isset($_POST['approval'])) {
 
 	$email_ad = $_POST['email_ad'];
-	$select_all = $_POST['select_all'];
+	$acc_id = $_POST['acc_id'];
 	$stats = "active";
 
-	foreach ($select_all as $key => $value) {
 
-		$update_status = "UPDATE accounts SET status='$stats' WHERE acc_id ='".$value."'";
+	$snatch = "UPDATE accounts SET status = '$stats' WHERE acc_id='$acc_id'";
+	$snatch_query = mysqli_query($sqlcon,$snatch);
 
-		$update_status_run = mysqli_query($sqlcon,$update_status);
+	if ($snatch_query) {
 
-		if ($update_status_run) {
+		sendmail_verify($email_ad);
 
-			sendmail_verify($email_ad);
+		header("location: ../faculty/accounts_manage.php?approvescc");
 
-			header("location: ../faculty/accounts_manage.php?approvescc");
-
-		}
-		else {
-			echo mysqli_error($sqlcon);
-		}
 	}
+	else {
+
+		echo mysqli_error($sqlcon);
+	}
+
+
+
 }
 ?>
