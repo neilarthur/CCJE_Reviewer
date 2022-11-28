@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 
 	if ($sql_rows['role']=='admin') {
 		
-		if ($sql_rows['verify_status']=='1' && $sql_rows['status']=='active') {
+		if ($sql_rows['verify_status']=='verified' && $sql_rows['status']=='active') {
 
 			$_SESSION["acc_id"] = $sql_rows['acc_id'];
 			$_SESSION["role"] = $sql_rows['role'];
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 	}
 	elseif ($sql_rows['role']=='faculty') {
 
-		if ($sql_rows['verify_status']=='1') {
+		if ($sql_rows['verify_status']=='verified'  && $sql_rows['status']=='active' ) {
 
 			$_SESSION["role"] = $sql_rows['role'];
 			$_SESSION["first_name"] = $sql_rows['first_name'];
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 	elseif ($sql_rows['role']=='student') {
 
 
-		if ($sql_rows['verify_status']=='1') {
+		if ($sql_rows['verify_status']=='verified'  && $sql_rows['status']=='active') {
 
 			$_SESSION["role"] = $sql_rows['role'];
 			$_SESSION["login"]=true;

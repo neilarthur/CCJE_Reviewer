@@ -284,7 +284,7 @@ $suppd .= "</select>";
 
 																		<a href="view_question.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus"></i></a>
 
-																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
+																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>&total=<?php echo $rows['total_quest']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
 
 																		<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
 																	</div>

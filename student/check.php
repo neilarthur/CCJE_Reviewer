@@ -28,18 +28,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     #print_r($selected);
 
-    $q = "SELECT * FROM choose_question,test_question,student_choice WHERE (choose_question.test_id = student_choice.test_id) AND (test_question.question_id=student_choice.question_id) AND student_choice.test_id = '$update_id'";
+    $q = "SELECT * FROM test_question,student_choice WHERE (test_question.question_id=student_choice.question_id) AND student_choice.test_id = '$update_id'";
     $query = mysqli_query($sqlcon, $q);
 
     while ($rows = mysqli_fetch_array($query)) {
 
-      $checked = $rows['correct_ans'] == $selected[$i];
+    	$checked = $rows['correct_ans'] == $selected[$i];
 
-      if ($checked) {
-        
-        $result++;
-      }
-      $i++;
+    	if ($checked) {
+    		
+    		$result++;
+    	}
+    	$i++;
     }
     
 

@@ -18,6 +18,10 @@ if (isset($_POST["save"])) {
 	$address =$_POST['address'];
 	$password = $_POST['password'];
 	$category =$_POST['category'];
+
+	$status = "active";
+	$verify_status="verified";
+
 	$image_name = $_FILES['image']['name'];
 
 	$image_Data =addslashes(file_get_contents($_FILES['image']['tmp_name']));
@@ -34,7 +38,7 @@ if (isset($_POST["save"])) {
 		}
 		else
 		{
-			$sql_run = "INSERT INTO accounts (first_name,middle_name,last_name,role,birth_date,age,gender,user_id,section,email_address,mobile_no,address,image,image_size,password) VALUES ('$first_name','$middle_name','$last_name','$role','$birth_date','$age','$gender','$user_id','$section','$email_address','$mobile_no','$address','$image_name','$image_Data','$password')";
+			$sql_run = "INSERT INTO accounts (first_name,middle_name,last_name,role,birth_date,age,gender,user_id,section,email_address,mobile_no,address,image,image_size,password,status,verify_status) VALUES ('$first_name','$middle_name','$last_name','$role','$birth_date','$age','$gender','$user_id','$section','$email_address','$mobile_no','$address','$image_name','$image_Data','$password','$status','$verify_status')";
 			$sql_rows = mysqli_query($sqlcon, $sql_run);
 
 			if ($category=='student') {

@@ -2,15 +2,15 @@
 
 session_start();
 
-require_once'conn.php';
+require_once 'conn.php';
+
 
 require("../PHPMailer-master/src/Exception.php");
 require("../PHPMailer-master/src/PHPMailer.php");
 require("../PHPMailer-master/src/SMTP.php");
 
+function sendmail_verify($email_ad) {
 
-
-function resend_email($f_name,$email_ad,$verification_code){
 	$mail = new PHPMailer\PHPMailer\PHPMailer();
 
 	//Tell PHPMailer to use SMTP
@@ -60,7 +60,7 @@ function resend_email($f_name,$email_ad,$verification_code){
 	//Note that with gmail you can only use your account address (same as `Username`)
 	//or predefined aliases that you have configured within your account.
 	//Do not use user-submitted addresses in here
-	$mail->setFrom('donotreply@gmail.com',$f_name);
+	$mail->setFrom('donotreply@gmail.com',"wwhaaa");
 
 	//Set an alternative reply-to address
 	//This is a good place to put user-submitted addresses
@@ -70,13 +70,12 @@ function resend_email($f_name,$email_ad,$verification_code){
 
 	$mail->isHTML(true);
 
-	$mail->Subject ="Resend Email Verification from CCJELSPU";
+	$mail->Subject ="Email Verification from CCJELSPU";
 
 	$email_template="
-	<h2> You have to registerd with lspu</h2>
-	<h5>Verify your email address to login with the below given link</h5>
+	<h2>Your Email has been approve</h2>
+	<h5>Please login now.</h5>
 	<br><br>
-	<a href='http://localhost/CCJE_Reviewer/php/index.php?verified=$verification_code&email=$email_ad'>Click Me</a>
 	";
 
 
@@ -87,40 +86,29 @@ function resend_email($f_name,$email_ad,$verification_code){
 	$mail->send();
 }
 
-if (isset($_POST['resend_email_btn'])) {
 
-	$email_ad = $_POST['email_address'];
+if (isset($_POST['approval'])) {
 
+	$email_ad = $_POST['email_ad'];
+	$select_all = $_POST['select_all'];
+	$stats = "active";
 
-	$check_mail_query = "SELECT * FROM accounts WHERE email_address='$email_ad'";
+	foreach ($select_all as $key => $value) {
 
-	$check_mail_run = mysqli_query($sqlcon,$check_mail_query);
+		$update_status = "UPDATE accounts SET status='$stats' WHERE acc_id ='".$value."'";
 
+		$update_status_run = mysqli_query($sqlcon,$update_status);
 
-	if (mysqli_num_rows($check_mail_run) >0) {
+		if ($update_status_run) {
 
-		$rows = mysqli_fetch_array($check_mail_run);
+			sendmail_verify($email_ad);
 
-		if ($rows['verify_status']=='not_verified') {
+			header("location: ../faculty/accounts_manage.php?approvescc");
 
-			$f_name = $rows['first_name'];
-			$email_ad = $rows['email_address'];
-			$verification_code = $rows['verify_status'];
-
-
-			resend_email($f_name,$email_ad,$verification_code);
-
-			header("Location: email_resend.php?loginsuccess");
 		}
 		else {
-
-			header("Location:email_resend.php?loginerror");			
+			echo mysqli_error($sqlcon);
 		}
 	}
-	else{
-
-		header("Location:email_resend.php?loginerror");
-	}
-
 }
 ?>

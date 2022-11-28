@@ -364,7 +364,7 @@ $suppd .= "</select>";
 
 													$let = $_GET['id'];
 
-													$quiz = mysqli_query($sqlcon,"SELECT * FROM test_question,choose_question, student_choice WHERE (test_question.question_id=student_choice.question_id) AND (choose_question.test_id=student_choice.test_id) AND student_choice.test_id='$let' AND question_stat='active'");
+													$quiz = mysqli_query($sqlcon,"SELECT DISTINCT * FROM test_question,choose_question, student_choice WHERE (test_question.question_id=student_choice.question_id) AND (choose_question.test_id=student_choice.test_id) AND student_choice.test_id='$let' AND question_stat='active'");
 
 													if (mysqli_num_rows($quiz) ==0) { ?>
 														<tr class="table-danger">
@@ -494,6 +494,8 @@ $suppd .= "</select>";
 											<option  value="Moderate">Moderate</option>
 											<option value="Hard">Hard</option>
 										</select>
+
+										<input type="hidden" name="total_questions" id="total_questions" value="<?php echo $_GET['total']; ?>">
 									</div>
 								</div>
 								<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">

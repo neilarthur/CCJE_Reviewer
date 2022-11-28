@@ -224,6 +224,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">Year & Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
+													<th scope="col">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -238,6 +239,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $rows['section'];  ?></td>
 													<td><?php echo $rows['role'];  ?></td>
 													<td><?php echo $rows['email_address']; ?></td>
+													<td>
+														<?php
+
+															if ($raws['status']=='active') {
+																
+																echo "<p class='text-center text-success'>Approved</p>";
+															}
+															elseif ($raws['status']=='pending') {
+																
+																echo "<p class='text-center text-success'>Pending</p>";
+															}
+															
+														?>
+													</td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -273,6 +288,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">Class Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
+													<th scope="col">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -288,6 +304,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $raws['section'];  ?></td>
 													<td><?php echo $raws['role'];  ?></td>
 													<td><?php echo $raws['email_address']; ?></td>
+													<td>
+														<?php
+
+															if ($raws['status']=='active') {
+																
+																echo "<p class='text-center text-success'>Approved</p>";
+															}
+															elseif ($raws['status']=='pending') {
+																
+																echo "<p class='text-center text-success'>Pending</p>";
+															}
+															
+														?>
+													</td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -336,6 +366,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">Year & Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
+													<th scope="col">status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -350,6 +381,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $rows['section'];  ?></td>
 													<td><?php echo $rows['role'];  ?></td>
 													<td><?php echo $rows['email_address'];  ?></td>
+													<td>
+														<?php
+
+															if ($raws['status']=='active') {
+																
+																echo "<p class='text-center text-success'>Approved</p>";
+															}
+															elseif ($raws['status']=='pending') {
+																
+																echo "<p class='text-center text-success'>Pending</p>";
+															}
+															
+														?>
+													</td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -385,6 +430,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">Class Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
+													<th scope="col">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -401,10 +447,25 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $raws['role'];  ?></td>
 													<td><?php echo $raws['email_address'];  ?></td>
 													<td>
+														<?php
+
+															if ($raws['status']=='active') {
+																
+																echo "<p class='text-center text-success'>Approved</p>";
+															}
+															elseif ($raws['status']=='pending') {
+																
+																echo "<p class='text-center text-success'>Pending</p>";
+															}
+
+														?>
+													</td>
+													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
 															<a href="../php/archiveaccount.php?id=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+
 														</div>
 													</td>
 												</tr>

@@ -8,7 +8,7 @@ require("../PHPMailer-master/src/Exception.php");
 require("../PHPMailer-master/src/PHPMailer.php");
 require("../PHPMailer-master/src/SMTP.php");
 
-function sendmail_verify($f_name,$email_ad,$verification_code) {
+function sendmail_verify($f_name,$email_ad,$verify_status) {
 
 	$mail = new PHPMailer\PHPMailer\PHPMailer();
 
@@ -75,7 +75,7 @@ function sendmail_verify($f_name,$email_ad,$verification_code) {
 	<h2> You have to registerd with lspu</h2>
 	<h5>Verify your email address to login with the below given link</h5>
 	<br><br>
-	<a href='http://localhost/CCJE_Reviewer/php/index.php?verified=$verification_code'>Click Me</a>
+	<a href='http://localhost/CCJE_Reviewer/php/index.php?verifiedsucc&verified=$verify_status&email=$email_ad'>Click Me</a>
 	";
 
 
@@ -87,7 +87,7 @@ function sendmail_verify($f_name,$email_ad,$verification_code) {
 }
 
 
-if (isset($_POST['next'])) {
+if (isset($_POST['register'])) {
 
 
 	$email_ad = $_POST['email_ad'];
@@ -99,16 +99,16 @@ if (isset($_POST['next'])) {
 	$l_name = $_POST['l_name'];
 	$age = $_POST['age'];
 	$date_birth = $_POST['date_birth'];
-	$role = $_POST['role'];
+	$role = "student";
 	$section = $_POST['section'];
 	$gender = $_POST['gender'];
 	$contact_no = $_POST['contact_no'];
 	$address = $_POST['address'];
 	$image_upload =$_FILES['image']['name'];
-	$verification_code = md5(rand());
+
 	$year = "4th year";
 	$status = "pending";
-
+	$verify_status="not verified";
 
 	$image_Data =addslashes(file_get_contents($_FILES['image']['tmp_name']));
 	$image_type =$_FILES['image']['type'];
@@ -126,24 +126,24 @@ if (isset($_POST['next'])) {
 			if ($pass_word == $conf_password) {
 
 
-				$insert_query = "INSERT INTO accounts(first_name,user_id,middle_name,last_name,role,birth_date,age,gender,year,section,email_address,mobile_no,address,image,image_size,password,status,verification_code) VALUES('$f_name','$u_name','$m_name','$l_name','$role','$date_birth','$age','$gender','$year','$section','$email_ad','$contact_no','$address','$image_upload','$image_Data','$pass_word','$status','$verification_code')";
+				$insert_query = "INSERT INTO accounts(first_name,user_id,middle_name,last_name,role,birth_date,age,gender,year,section,email_address,mobile_no,address,image,image_size,password,status,verify_status) VALUES('$f_name','$u_name','$m_name','$l_name','$role','$date_birth','$age','$gender','$year','$section','$email_ad','$contact_no','$address','$image_upload','$image_Data','$pass_word','$status','$verify_status')";
 
 				$query_run = mysqli_query($sqlcon,$insert_query);
 
 				if ($query_run) {
 					
-					sendmail_verify("$f_name","$email_ad","$verification_code");
+					sendmail_verify("$f_name","$email_ad","$verify_status");
 
-					header("location:registration.php");
+					header("location:index.php?registersucc");
 				}
 				else{
 
-					echo mysqli_error($sqlcon);
+					header("location:index.php?regerror");
 				}
 			}
 			else {
 
-				echo "Password is incorrect";
+				header("location:index.php?passerror");
 			}	
 		}
 	}

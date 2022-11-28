@@ -566,16 +566,6 @@
 	                        		<option value="4C">4C</option>
 	                        	</select>
 	                        </div>
-	                        <div class="input-div">
-	                            <label class="fieldlabels ms-2">Role</label>
-	                        	 <div class="form-group">
-	                            	<select class="form-select" required require name="role" value="">
-	                            		<option selected value=""></option>
-	                            		<option value="Male">Male</option>
-	                            		<option value="Female">Female</option>
-	                            	</select>
-								</div>
-	                        </div>
 	                    </div>
 	                    <div class="input-text">
 	                    	 <div class="input-div">
@@ -644,7 +634,7 @@
                     </div>
                     <div class="buttons button_space">
                         <button class="back_button">Back</button>
-                        <button type="submit" class="submit_button" name="register">Submit</button>
+                        <button type="submit" class="next_button" name="register">Submit</button>
                     </div>
                  </div>
                  <div class="main">
@@ -734,6 +724,10 @@
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
+
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(){
   window.addEventListener('scroll', function() {
@@ -869,5 +863,24 @@ function validateform(){
     return validate;
 }
 </script>
+
+<?php 
+#add accounts
+if (isset($_GET['registersucc'])) {
+	echo ' <script> swal("Account has been Saved!", " clicked the okay!", "success");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/registration.php");
+	</script>';
+}
+elseif (isset($_GET['adderror'])) {
+	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/registration.php");
+	</script>';
+}
+elseif (isset($_GET['passerror'])) {
+	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/registration.php");
+	</script>';
+}
+?> 
 
 </html>

@@ -1,9 +1,8 @@
-<!-- may bug pa ito sa filter -->
-
 <?php
 
 session_start();
-include_once '../php/conn.php';
+
+require_once 'conn.php';
 
 if (!isset($_SESSION["login"]) || $_SESSION['login'] !=true) {
     header("location: ../php/index.php");
@@ -15,20 +14,33 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 }
 
 
+if (isset($_POST['trial_quiz'])) {
 
-$lay_run = "SELECT DISTINCT level_difficulty, question_id FROM test_question order by question_id asc";
+	$trial_error = $_POST['trial'];
 
-$results = mysqli_query($sqlcon, $lay_run);
+	$update_id=$_POST['update_id'];
 
-$suppd = "<select class='form-control mb-3' name='level_difficulty'>
-        <option>Select Category</option>";
-  while ($crow = mysqli_fetch_assoc($results)) {
-    $suppd .= "<option value='".$crow['question_id']."'>".$crow['level_difficulty']."</option>";
-  }
 
-$suppd .= "</select>";
 
+	foreach ($trial_error as $key => $value) {
+		
+		$corrects = "INSERT INTO trial_preview (trial_ans,test_id) VALUES ('".$value."','$update_id')";
+
+		$corrects_query = mysqli_query($sqlcon,$corrects);
+
+		if ($corrects_query) {
+			
+			header("location: preview_function.php?id=$update_id");
+		}
+		else {
+
+			echo mysqli_error($sqlcon);
+		}
+	}
+}
 ?>
+<!-- may bug pa ito sa filter -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -293,9 +305,10 @@ $suppd .= "</select>";
 
 								 $display = mysqli_query($sqlcon,"SELECT * FROM test_question,student_choice WHERE (test_question.question_id=student_choice.question_id) AND test_id = '$ids'");
 
+								  $display_1 = mysqli_query($sqlcon,"SELECT * FROM trial_preview,student_choice WHERE (trial_preview.test_id=student_choice.test_id) AND (student_choice.test_id = '$ids')");
 								
 
-								  while ($shows = mysqli_fetch_assoc($display)) {  
+								  while ($shows = mysqli_fetch_assoc($display) AND $clear = mysqli_fetch_assoc($display_1)) {  
 								  	?>
 
 								<div class="card mt-2">
@@ -307,25 +320,43 @@ $suppd .= "</select>";
 														<thead>
 														</thead>
 														<tbody style="font-size: 17px;">
-															 <tr>
-															 	<th>
-															 		<b><span><?php echo $number.". &nbsp;". $shows['questions_title']; ?></span></b>
-															 	</th>
-															 	<th><span><p class="d-flex justify-content-end"><span><i class="fas fa-asterisk fa-xs text-danger me-1"></i></span> 1 point</p></span></th>
-															 </tr>
+															 	<?php
+								                                if ($clear['trial_ans']== $shows['correct_ans']) { ?>
+								                                  <tr>
+								                                    <th>
+								                                     <b><span class="text-success"><?php echo $number.". &nbsp;". $shows['questions_title']; ?></i></span></b>
+								                                    </th>
+								                                    <th><span><p class="d-flex justify-content-end"><span><i class="fas fa-asterisk fa-xs text-danger me-1"></i></span> 1 point</p></span></th>
+								                                  </tr>
+								                                  <?php 
+
+								                                }
+								                                elseif ($clear['trial_ans']!= $shows['correct_ans']) { ?>
+								                                  <tr>
+								                                    <th>
+								                                     <b><span class="text-danger"><?php echo $number.". &nbsp;". $shows['questions_title']; ?></span></b>
+								                                    </th>
+								                                    <th><span><p class="d-flex justify-content-end"><span><i class="fas fa-asterisk fa-xs text-danger me-1"></i></span> 1 point</p></span></th>
+								                                  </tr>
+								                                  <?php
+								                                }
+
+								                                ?>
 															  <tr>
-															  	<td><span><input class="form-check-input pl-4 ms-5" type="radio" name="trial[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="A"> A. <?php echo $shows['option_a']; ?></span>
+															  	<td><span><input class="form-check-input pl-4 ms-5" type="radio" name="trial[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="A" <?php if($clear['trial_ans']=='A'){ echo "checked=checked";}  ?> disabled> A. <?php echo $shows['option_a']; ?></span>
 															  	</td>
 															  </tr>
 															  <tr>
-															  	<td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="trial[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="B"> B. <?php echo $shows['option_b']; ?></span></td>
+															  	<td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="trial[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="B" <?php if($clear['trial_ans']=='B'){ echo "checked=checked";}  ?> disabled> B. <?php echo $shows['option_b']; ?></span></td>
 															  </tr>
 															  <tr>
-															  	<td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="trial[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="C"> C. <?php echo $shows['option_c']; ?></span></td>
+															  	<td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="trial[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="C" <?php if($clear['trial_ans']=='C'){ echo "checked=checked";}  ?> disabled> C. <?php echo $shows['option_c']; ?></span></td>
 															  </tr>
 															   <tr>
-															   	<td><span><input class="form-check-input pl-4 ms-5" type="radio" name="trial[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="D"> D. <?php echo $shows['option_d']; ?></span></td>
+															   	<td><span><input class="form-check-input pl-4 ms-5" type="radio" name="trial[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="D" <?php if($clear['trial_ans']=='D'){ echo "checked=checked";}  ?> disabled> D. <?php echo $shows['option_d']; ?></span></td>
 															   </tr>
+
+															   
 														</tbody>
 														<tbody>
 															<tr>
@@ -353,7 +384,7 @@ $suppd .= "</select>";
 					              <?php
 					            }
 					            ?>
-					            <input type="submit" name="trial_quiz" value="submit" class="btn btn-success px-4 pb-2 mx-2 text-uppercase btn-lg">
+					            <a href="../faculty/testyourself.php" class="btn btn-danger px-4 pb-2 mx-2 text-uppercase btn-lg">BACK</a>
 					          </div>
 							</div>
 						</form>

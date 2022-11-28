@@ -14,9 +14,11 @@ elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='faculty') {
 
 if (isset($_GET['verified'])) {
 
+  $email_ads = $_GET['email'];
+
   $code = $_GET['verified'];
 
-  $verify_query = "SELECT * FROM accounts WHERE verification_code='$code'";
+  $verify_query = "SELECT * FROM accounts WHERE email_address='$email_ads'";
 
   $verify_query_run = mysqli_query($sqlcon,$verify_query);
 
@@ -24,26 +26,27 @@ if (isset($_GET['verified'])) {
 
     $rows = mysqli_fetch_array($verify_query_run);
 
-    if ($rows['verify_status']==0) {
+    if ($rows['verify_status']=='not verified') {
       
-      $click_code = $rows['verification_code'];
+      $click_code = $rows['email_address'];
 
-      $update_stat = "UPDATE accounts SET verify_status='1' WHERE verification_code='$click_code'";
+      $update_stat = "UPDATE accounts SET verify_status='verified' WHERE email_address='$click_code'";
       $update_query = mysqli_query($sqlcon,$update_stat);
 
 
       if ($update_query) {
 
-        echo "Your account has been verified";
+        header("location: index.php?verifiedsucc");
       }
       else {
 
-        echo "verified failed";
+        header("location: index.php?verifiedfailed");
+
       }
     }
     else{
 
-      echo "Email Already verified.Please Login";
+      header("location: index.php?already_exists");
     }
   }
   else {
@@ -226,5 +229,33 @@ if (isset($_GET['loginerror'])) {
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
   </script>';
 }
+#add accounts
+elseif (isset($_GET['registersucc'])) {
+  echo ' <script> swal("check your gmail accout to verified your account and wait for approval.", " clicked the okay!", "success");
+  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
+  </script>';
+}
+elseif (isset($_GET['regerror'])) {
+  echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
+  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
+  </script>';
+}
+elseif (isset($_GET['verifiedsucc'])) {
+  echo ' <script> swal("account has been verified.", " clicked the okay!", "success");
+  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
+  </script>';
+}
+elseif (isset($_GET['verifiedfailed'])) {
+  echo ' <script> swal("verified has been failed.", " clicked the okay!", "success");
+  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
+  </script>';
+}
+
+elseif (isset($_GET['already_exists'])) {
+  echo ' <script> swal("Email already verified.please login", " clicked the okay!", "success");
+  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
+  </script>';
+}
+
 ?>
 </html>

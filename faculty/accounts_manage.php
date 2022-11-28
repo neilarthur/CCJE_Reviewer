@@ -205,95 +205,139 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 						<div class="row">
 							<div class="col ">
 								<div class="card">
-									<div class="card-body rounded-3 m-2 table-responsive-lg">
-										<div class="position-left d-flex justify-content-end mb-3">
-											<button type="button" class="btn  px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#AddModal" style="margin-left: 55%; background-color: #8C0000;"><b><i class="fas fa-plus"></i></b> ADD</button>
+									<form action="../php/approve_accounts.php" method="POST">
+										<div class="card-body rounded-3 m-2 table-responsive-lg">
+											<div class="position-left d-flex justify-content-end mb-3">
+												<button type="submit" name="approval" class="btn btn-success px-3 pb-2 text-white">Approve</button>
+												<button type="button" class="btn  px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#AddModal" style="margin-left: 5%; background-color: #8C0000;"><b><i class="fas fa-plus"></i></b> ADD</button>
+											</div>
+											<table class="table table-striped align-middle bg-light" id="accountTab">
+												<thead>
+													<tr>
+														<th scope="col"><input type="checkbox" name="select_all_box" id="select_all_box"></th>
+														<th scope="col">Student ID</th>
+														<th scope="col">Fullname</th>
+														<th scope="col">Year & Section</th>
+														<th scope="col">Email Address</th>
+														<th scope="col">Status</th>
+														<th scope="col" style="text-align: center;">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+
+													$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+													
+
+													while ($row = mysqli_fetch_assoc($accounts)) { 
+														if ($row['section']=='4A') {
+															$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student' AND(accounts.section='4A')");
+
+															while ($rows = mysqli_fetch_assoc($acc)) {?>
+																<tr>
+																	<td><input type="checkbox" name="seleclt_all[]" value="<?php echo $rows['acc_id']; ?>" id="acc_id<?php echo $rows['acc_id']; ?>" data-id="<?php echo $rows['acc_id']; ?>"></td>
+																	<td><?php echo $rows['user_id'];  ?></td>
+																	<td><?php echo $rows['last_name'];  ?>, &nbsp;<?php echo $rows['first_name'];  ?>&nbsp; <?php echo $rows['middle_name'];  ?></td>
+																	<td><?php echo $rows['section'];  ?></td>
+																	<td><?php echo $rows['email_address']?></td>
+																	<td>
+																		<?php
+																		if ($rows['status']=='active') {
+																			
+																			echo '<span class="badge bg-success" style="font-size: 15px;">Approve</span>';
+																		}
+																		elseif ($rows['status']=='pending') {
+																			echo '<span class="badge bg-warning" style="font-size: 15px;">Pending</span>';
+																		}
+																		?>
+																	</td>
+																	<td>
+																		<div class="d-flex flex-row justify-content-center">
+																			<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+																			<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
+
+																			<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+
+																		</div>
+																	</td>
+																</tr>
+														<?php }
+													}elseif ($row['section']=='4B') {
+														$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student' AND(accounts.section='4B')");
+														while ( $rows = mysqli_fetch_assoc($acc)) { ?>
+															   <tr>
+															   		<td><input type="checkbox" name="seleclt_all[]" value="<?php echo $rows['acc_id']; ?>" id="acc_id<?php echo $rows['acc_id']; ?>" data-id="<?php echo $rows['acc_id']; ?>"></td>
+																	<td><?php echo $rows['user_id'];  ?></td>
+																	<td><?php echo $rows['last_name'];  ?>, &nbsp;<?php echo $rows['first_name'];  ?>&nbsp; <?php echo $rows['middle_name'];  ?></td>
+																	<td><?php echo $rows['section'];  ?></td>
+																	<td><?php echo $rows['email_address']?></td>
+																	<td>
+																		<?php
+																		if ($rows['status']=='active') {
+																			
+																			echo '<span class="badge bg-success" style="font-size: 15px;">Approve</span>';
+																		}
+																		elseif ($rows['status']=='pending') {
+																			echo '<span class="badge bg-warning" style="font-size: 15px;">Pending</span>';
+																		}
+																		?>
+																	</td>
+																	<td>
+																		<div class="d-flex flex-row justify-content-center">
+																			<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+																			<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
+
+																			<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+
+																		</div>
+																	</td>
+																</tr>
+														<?php }
+													}elseif ($row['section']=='4C') {
+														$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student'  AND (accounts.section='4C')");
+														while ( $rows = mysqli_fetch_assoc($acc)) { ?>
+															 <tr>
+
+															 		<td><input type="checkbox" class="checkname" name="select_all[]" value="<?php echo $rows['acc_id']; ?>" id="acc_id<?php echo $rows['acc_id']; ?>" data-id="<?php echo $rows['acc_id']; ?>"></td>
+															 		<td hidden=""><input type="hidden" name="email_ad" value="<?php echo $rows['email_address']; ?>"></td>
+															 		<!---- ---- ----->
+																	<td><?php echo $rows['user_id'];  ?></td>
+																	<td><?php echo $rows['last_name'];  ?>, &nbsp;<?php echo $rows['first_name'];  ?>&nbsp; <?php echo $rows['middle_name'];  ?></td>
+																	<td><?php echo $rows['section'];  ?></td>
+																	<td><?php echo $rows['email_address']?></td>
+																	<td>
+																		<?php
+																		if ($rows['status']=='active') {
+																			
+																			echo '<span class="badge bg-success" style="font-size: 15px;">Approve</span>';
+																		}
+																		elseif ($rows['status']=='pending') {
+																			echo '<span class="badge bg-warning" style="font-size: 15px;">Pending</span>';
+																		}
+																		?>
+																	</td>
+																	<td>
+																		<div class="d-flex flex-row justify-content-center">
+																			<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+																			<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
+
+																			<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+
+																		</div>
+																	</td>
+																</tr>
+														<?php }
+													}
+
+												} ?>
+												</tbody>
+											</table>
+											<?php if (isset($_GET['m'])) : ?>
+												<div class="flash-data" data-flashdata="<?= $_GET['m']; ?>"></div>
+											<?php endif; ?>
 										</div>
-										<table class="table table-striped align-middle bg-light" id="accountTab">
-											<thead>
-												<tr>
-													<th scope="col">Student ID</th>
-													<th scope="col">Fullname</th>
-													<th scope="col">Year & Section</th>
-													<th scope="col">Email Address</th>
-													<th scope="col" style="text-align: center;">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-
-												$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
-
-												
-
-												while ($row = mysqli_fetch_assoc($accounts)) { 
-													if ($row['section']=='4A') {
-														$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student' AND status = 'active' AND(accounts.section='4A')");
-
-														while ($rows = mysqli_fetch_assoc($acc)) {?>
-															<tr>
-																<td><?php echo $rows['user_id'];  ?></td>
-																<td><?php echo $rows['last_name'];  ?>, &nbsp;<?php echo $rows['first_name'];  ?>&nbsp; <?php echo $rows['middle_name'];  ?></td>
-																<td><?php echo $rows['section'];  ?></td>
-																<td><?php echo $rows['email_address']?></td>
-																<td>
-																	<div class="d-flex flex-row justify-content-center">
-																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-
-																		<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
-
-																	</div>
-																</td>
-															</tr>
-													<?php }
-												}elseif ($row['section']=='4B') {
-													$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student' AND status = 'active' AND(accounts.section='4B')");
-													while ( $rows = mysqli_fetch_assoc($acc)) { ?>
-														   <tr>
-																<td><?php echo $rows['user_id'];  ?></td>
-																<td><?php echo $rows['last_name'];  ?>, &nbsp;<?php echo $rows['first_name'];  ?>&nbsp; <?php echo $rows['middle_name'];  ?></td>
-																<td><?php echo $rows['section'];  ?></td>
-																<td><?php echo $rows['email_address']?></td>
-																<td>
-																	<div class="d-flex flex-row justify-content-center">
-																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-
-																		<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
-
-																	</div>
-																</td>
-															</tr>
-													<?php }
-												}elseif ($row['section']=='4C') {
-													$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student' AND status = 'active' AND(accounts.section='4C')");
-													while ( $rows = mysqli_fetch_assoc($acc)) { ?>
-														 <tr>
-																<td><?php echo $rows['user_id'];  ?></td>
-																<td><?php echo $rows['last_name'];  ?>, &nbsp;<?php echo $rows['first_name'];  ?>&nbsp; <?php echo $rows['middle_name'];  ?></td>
-																<td><?php echo $rows['section'];  ?></td>
-																<td><?php echo $rows['email_address']?></td>
-																<td>
-																	<div class="d-flex flex-row justify-content-center">
-																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-
-																		<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
-
-																	</div>
-																</td>
-															</tr>
-													<?php }
-												}
-
-											} ?>
-											</tbody>
-										</table>
-										<?php if (isset($_GET['m'])) : ?>
-											<div class="flash-data" data-flashdata="<?= $_GET['m']; ?>"></div>
-										<?php endif; ?>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -435,6 +479,34 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
     		</div>
     	</div>
     </div>
+
+     <!-- Approve Modal-->
+    <div class="modal fade" id="approve" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header flex-column border-0 bg-danger">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="icon-box mt-2 mb-2">
+                    	<i class="fas fa-exclamation-circle fa-5x text-white"></i>
+                    </div>
+                </div>
+                <div class="modal-body text-center mt-2">
+                    <h4 class="fw-bold">Do you want to approve account ?</h4>
+                </div>
+                <div class="modal-footer border-0">
+                    <form action="../php/approve.php" method="POST">
+                    	<input type="text" name="approve_id" id="approve_id">
+						<div>
+							<button type="submit" class="btn btn-success">YES</button>
+							<button type="button" class="btn btn-danger mx-2" data-bs-dismiss="modal">NO</button>
+						</div>
+					</form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -575,6 +647,18 @@ let arrow = document.querySelectorAll(".arrow");
 	}
 </script>
 
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#select_all_box').click(function(){
+			$(".checkname").prop('checked',$(this).prop('checked'));
+		});
+	});
+</script>
+
+
+
+
 <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
@@ -605,6 +689,11 @@ if (isset($_GET['upsuc'])) {
 }
 elseif (isset($_GET['upsucer'])) {
 	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/faculty/accounts_manage.php");
+	</script>';
+}
+elseif (isset($_GET['approvescc'])) {
+	echo ' <script> swal("approve account has been success!", " clicked the okay!", "success");
 	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/faculty/accounts_manage.php");
 	</script>';
 }
