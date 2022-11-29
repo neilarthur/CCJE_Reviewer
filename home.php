@@ -57,15 +57,30 @@
 	<!-- Carousel -->
 
     <div id="carouselExampleInterval" class="carousel slide " data-bs-ride="carousel">
-      <div class="carousel-inner ">
-        <div class="carousel-item active" data-bs-interval="3000">
-          <img src="assets/pics/1.jpg" class="d-block w-100  " alt="...">
+     <!-- <style type="text/css">
+        .carousel-item {
+          filter: blur (3px);
+          -webkit-filter:blur(3px);
+}
+      </style> -->
+      <div class="carousel-inner" >
+         <div class="carousel-item active" data-bs-interval="2000" style="background-image: url(assets/pics/1.jpg); ">
+          <img src="assets/pics/1.jpg" class="d-block mx-auto" width="1200" height="600" alt="...">
+         </div>
+        <div class="carousel-item" data-bs-interval="2000" style="background-image: url(assets/pics/4.jpg); ">
+          <img src="assets/pics/4.jpg" class="d-block mx-auto" width="1200" height="600" alt="...">
         </div>
-        <div class="carousel-item" data-bs-interval="3000">
-          <img src="assets/pics/depart.jpg" class="d-flex w-100" alt="...">
+        <div class="carousel-item" data-bs-interval="2000" style="background-image: url(assets/pics/2.jpg); ">
+          <img src="assets/pics/2.jpg" class="d-flex mx-auto" width="1200" height="600" alt="...">
         </div>
-        <div class="carousel-item" data-bs-interval="3000">
-          <img src="assets/pics/1.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-item" data-bs-interval="2000" style="background-image: url(assets/pics/3.jpg); ">
+          <img src="assets/pics/3.jpg" class="d-block mx-auto" width="1200" height="600" alt="...">
+        </div>
+         <div class="carousel-item" data-bs-interval="2000" style="background-image: url(assets/pics/7.jpg); ">
+          <img src="assets/pics/7.jpg" class="d-block mx-auto" width="1200" height="600" alt="...">
+        </div>
+         <div class="carousel-item" data-bs-interval="2000" style="background-image: url(assets/pics/6.jpg); ">
+          <img src="assets/pics/6.jpg" class="d-block mx-auto" width="1200" height="600" alt="...">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">

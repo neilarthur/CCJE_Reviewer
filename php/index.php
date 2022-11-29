@@ -111,14 +111,14 @@ if (isset($_GET['verified'])) {
 	</nav>
 	<!-- Log In form -->
 	<div class="login-form mt-3">    
-		<form action="login.php" method="post">
-			<div class="avatar">
+		<form action="login.php" method="post" class="px-4">
+			<div class="avatar mt-2">
 				<img src="../assets/pics/CCJE.png" alt="">
 			</div>
 			<h4 class="modal-title mt-3 fw-bold">User Account</h4>
 			<div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-				<input type="text" name="userID" class="form-control" placeholder="User ID" required="required" autocomplete="off">
+				<input type="text" name="userID" class="form-control" placeholder="ID number" required="required" autocomplete="off">
 			</div>
 			<div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
@@ -129,8 +129,8 @@ if (isset($_GET['verified'])) {
 			</div>
       <div class="form-group small clearfix fs-6 mt-3">
         <a href="registration.php" class="register">Don't have an account? </a>
-        <a href="#" class="forgot-link">Forgot Password?</a>
-        <p class="mt-3">Did not receive your email verification?<a href="email_resend.php" class="register">Resend</a></p>
+        <a href="forgot-pass.php" class="forgot-link">Forgot Password?</a>
+        <p class="mt-3">I did not receive your email confirmation. <a href="email_resend.php" class="register">Resend</a></p>
       </div> 
 		</form>
 	</div>
@@ -231,28 +231,28 @@ if (isset($_GET['loginerror'])) {
 }
 #add accounts
 elseif (isset($_GET['registersucc'])) {
-  echo ' <script> swal("check your gmail accout to verified your account and wait for approval.", " clicked the okay!", "success");
+  echo ' <script> swal("Check your email to verified your account and wait for approval.", " clicked the okay!", "success");
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
   </script>';
 }
 elseif (isset($_GET['regerror'])) {
-  echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
+  echo ' <script> swal("Account has not been saved!", " clicked the okay!", "error");
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
   </script>';
 }
 elseif (isset($_GET['verifiedsucc'])) {
-  echo ' <script> swal("account has been verified.", " clicked the okay!", "success");
+  echo ' <script> swal("Your account has been verified.", " clicked the okay!", "success");
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
   </script>';
 }
 elseif (isset($_GET['verifiedfailed'])) {
-  echo ' <script> swal("verified has been failed.", " clicked the okay!", "success");
+  echo ' <script> swal("The verification processs has failed.", " clicked the okay!", "error");
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
   </script>';
 }
 
 elseif (isset($_GET['already_exists'])) {
-  echo ' <script> swal("Email already verified.please login", " clicked the okay!", "success");
+  echo ' <script> swal("Email has already verified.please login", " clicked the okay!", "success");
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
   </script>';
 }

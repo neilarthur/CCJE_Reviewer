@@ -72,7 +72,7 @@
 	<!--College Profile -->
 	<div class="container bg-white" style="padding-bottom: 5px; padding-left: 30px; padding-right: 30px;" >
 		<div class="faculty-profile mb-4 mt-3 pt-3">
-			<h2 class="text-uppercase text-center fw-bold text-dark " style="font-family: 'Source Sans Pro', sans-serif;">Faculty Profile</h2>
+			<h2 class="text-uppercase text-center fw-bold text-dark pt-3" style="font-family: 'Source Sans Pro', sans-serif;">Faculty Profile</h2>
 		</div>
 		<div class="dean">
 			<img src="../assets/pics/dean.jpg" alt="" class="img-fluid img-thumbnail rounded-circle mx-auto d-block mt-2 mb-5 shadow" style=" object-fit: cover; "width="150" height="150" >
@@ -172,6 +172,17 @@
 			</div>
 		</div>
 	</div>
+	<div class="con container-fluid mt-3 border-0">
+		<div class="col-lg-11 mx-auto" >
+			<div class="card m-4 border-0">
+				<div class="card-body" >
+					<h2 class="text-uppercase text-center fw-bold text-dark pt-3" style="font-family: 'Source Sans Pro', sans-serif; color: #8C0000;">Organizational Chart</h2>
+					<img src="../assets/pics/Organizational-chart.jpg" alt="" class="img-fluid img-thumbnail mx-auto d-block mt-2 mb-5 " style=" object-fit: cover; "width="700px;" height="500px;" >
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	
 	<!-- Footer -->
 	  <footer class="text-center text-lg-start text-white ft mt-5">

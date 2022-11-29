@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Registration</title>
 	<!-- Boostrap 5.2 -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<!-- CSS -->
@@ -543,9 +543,14 @@
 	            			</div>
 	            		</div>
 	                    <div class="input-text">
-	                        <div class="input-div">
-	                        	<label class="fieldlabels ms-2">Mobile number</label>
-	                            <input type="number" required require placeholder="09*********" name="contact_no">
+	                    	<div class="input-div">
+	                        	<label class="fieldlabels ms-2">Year & Section:</label>
+	                            <select class="form-select  custom-select" required require name="section" value="">
+	                        		<option selected value=""></option>
+	                        		<option value="4A">4A</option>
+	                        		<option value="4B">4B</option>
+	                        		<option value="4C">4C</option>
+	                        	</select>
 	                        </div>
 	                        <div class="input-div">
 	                            <label class="fieldlabels ms-2">Gender</label>
@@ -558,26 +563,21 @@
 								</div>
 	                        </div>
 	                        <div class="input-div">
-	                        	<label class="fieldlabels ms-2">Year & Section:</label>
-	                            <select class="form-select  custom-select" required require name="section" value="">
-	                        		<option selected value=""></option>
-	                        		<option value="4A">4A</option>
-	                        		<option value="4B">4B</option>
-	                        		<option value="4C">4C</option>
-	                        	</select>
+	                        	<label class="fieldlabels ms-2">Mobile number</label>
+	                            <input type="number" required require placeholder="09*********" name="contact_no">
 	                        </div>
 	                    </div>
 	                    <div class="input-text">
-	                    	 <div class="input-div">
-	                            <label class="fieldlabels ms-2">Age</label>
-	                        	 <div class="form-group">
-	                        	 	<input type="number" name="age" required require>
-								</div>
-	                        </div>
 	                         <div class="input-div">
 	                            <label class="fieldlabels ms-2">Date of Birth</label>
 	                        	 <div class="form-group">
 	                        	 	<input type="date" name="date_birth" required require class="form-control">
+								</div>
+	                        </div>
+	                        <div class="input-div">
+	                            <label class="fieldlabels ms-2">Age</label>
+	                        	 <div class="form-group">
+	                        	 	<input type="number" name="age" required require>
 								</div>
 	                        </div>
 	                    </div>
@@ -607,19 +607,22 @@
 	                            <input type="number" required require placeholder="019*****" name="u_name">
 	                        </div>
 	                    </div>
-	                    <div class="input-text">
-	                        <div class="input-div">
-	                            <label class="fieldlabels ms-2">Password</label>
-	                            <input type="password" required require name="pass_word">
-	                        </div>
-	                    </div>
-	                    <div class="input-text">
-	                        <div class="input-div">
-	                            <label class="fieldlabels ms-2">Confirm Password</label>
-	                            <input type="password" required require name="conf_pass">
-	                        </div>
-	                    </div>
-	                    <div class="buttons button_space">
+                        <div class="input-div">
+                            <label class="fieldlabels ms-2">Password</label>
+                            <div class="input-group">
+                            	<input type="password" required require name="pass_word" id="id_password" class="form-control">
+                            	<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i></span>
+                            </div>
+                        </div>
+                        <div class="input-div mt-4">
+                            <label class="fieldlabels ms-2">Confirm Password</label>
+                            <div class="input-group">
+                            	<input type="password" required require name="conf_pass" id="confirm_password" class="form-control">
+                            	<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePass" style="margin-left: -30px; cursor: pointer;"></i></span>
+                            </div>
+                        </div>
+	                   
+	                    <div class="buttons button_space mt-4">
 	                        <button class="back_button">Back</button>
 	                        <button class="next_button">Next</button>
 	                    </div>
@@ -629,8 +632,13 @@
                         <h2 class="fw-bold" style="color: #8C0000;">Image Upload</h2>
                     </div>
                     <div class="mb-5 mt-3">
-                    	<label class="fieldlabels ms-2 fs-5">Upload your Photo:</label>
-                        <input type="file" name="image" required require accept="image/*">
+                    	<div class="d-flex justify-content-center">
+                    		<img src="../assets/pics/tempo.png" id="img" alt="preview" class="rounded-circle mb-2 text-center" width="250px;" height="250px;">
+                    	</div>
+                    	<label class="fieldlabels ms-2 fs-5 d-flex justify-content-center">Upload your Photo:</label>
+                    	<div class="col-sm-8 mx-auto mt-3">
+                    		<input type="file" name="image" id="fileimg" require required="" accept=".jpg, .jpeg, .png">
+                    	</div>
                     </div>
                     <div class="buttons button_space">
                         <button class="back_button">Back</button>
@@ -743,6 +751,39 @@
       } 
   });
 }); 
+</script>
+<script type="text/javascript">
+	fileimg.onchange = evt => {
+		const [file] = fileimg.files;
+		if (file) {
+			img.src = URL.createObjectURL(file);
+
+		}
+	}
+</script>
+<script type="text/javascript">
+	const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#id_password');
+
+  togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+<script type="text/javascript">
+  const togglePass = document.querySelector('#togglePass');
+  const pass = document.querySelector('#confirm_password');
+
+  togglePass.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const set = pass.getAttribute('type') === 'password' ? 'text' : 'password';
+    pass.setAttribute('type', set);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
 </script>
 <script type="text/javascript">
 	var next_click=document.querySelectorAll(".next_button");
@@ -867,12 +908,12 @@ function validateform(){
 <?php 
 #add accounts
 if (isset($_GET['registersucc'])) {
-	echo ' <script> swal("Account has been Saved!", " clicked the okay!", "success");
+	echo ' <script> swal("Registration completed!", " clicked the okay!", "success");
 	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/registration.php");
 	</script>';
 }
 elseif (isset($_GET['adderror'])) {
-	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
+	echo ' <script> swal("Registration has failed!", " clicked the okay!", "error");
 	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/registration.php");
 	</script>';
 }

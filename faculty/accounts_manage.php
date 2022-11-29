@@ -243,7 +243,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																		echo '<span class="badge bg-success" style="font-size: 15px;">Approve</span>';
 																	}
 																	elseif ($rows['status']=='pending') {
-																		echo '<span class="badge bg-warning" style="font-size: 15px;">Pending</span>';
+																		echo '<span class="badge bg-warning text-dark" style="font-size: 15px;">Pending</span>';
 																	}
 																	?>
 																</td>
@@ -274,7 +274,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																		echo '<span class="badge bg-success" style="font-size: 15px;">Approve</span>';
 																	}
 																	elseif ($rows['status']=='pending') {
-																		echo '<span class="badge bg-warning" style="font-size: 15px;">Pending</span>';
+																		echo '<span class="badge bg-warning text-dark" style="font-size: 15px;">Pending</span>';
 																	}
 																	?>
 																</td>
@@ -306,7 +306,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																		echo '<span class="badge bg-success" style="font-size: 15px;">Approve</span>';
 																	}
 																	elseif ($rows['status']=='pending') {
-																		echo '<span class="badge bg-warning" style="font-size: 15px;">Pending</span>';
+																		echo '<span class="badge bg-warning text-dark" style="font-size: 15px;">Pending</span>';
 																	}
 																	?>
 																</td>
