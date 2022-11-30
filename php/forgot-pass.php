@@ -69,12 +69,12 @@
 			<div class="input-group mb-3">
 				<span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
 				<input type="password" name="password" class="form-control" placeholder="Enter new password" required="required" autocomplete="off"  id="password-field">
-				<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password input-group-text bg-white mx-auto pt-2 pe-4"></span>
+				<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password input-group-text bg-white mx-auto pt-2" style="padding-right: 30px;"></span>
 			</div>
 			<div class="input-group mb-3">
 				<span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
 				<input type="password" name="password" class="form-control" placeholder="Confirm new password" required="required" autocomplete="off" id="password-view">
-				<span toggle="#password-view" class="fa fa-fw fa-eye field-icon toggle-pass input-group-text bg-white mx-auto pt-2 pe-4"></span>
+				<span toggle="#password-view" class="fa fa-fw fa-eye field-icon toggle-pass input-group-text bg-white mx-auto pt-2" style="padding-right: 30px;"></span>
 			</div>
 			<div class="d-grid gap-2 mt-2 mb-2">
 				<input type="submit" class="btn btn-primary btn-lg rounded-pill" value="Submit">
