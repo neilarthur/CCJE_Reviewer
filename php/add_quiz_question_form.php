@@ -17,7 +17,7 @@ if (isset($_POST['create'])) {
 	$status = "active";
 	$stat = "active";
 
-	$add_quest = $_POST['quest'];	
+	$add_quest = $_POST['quest_1'];	
 
 	foreach ($questions as $key => $value) {
 
@@ -31,10 +31,10 @@ if (isset($_POST['create'])) {
 
 			$insert_lock = "INSERT INTO student_choice(question_id,test_id,question_stat)VALUES ('$last_id','$test_id','$stat')";
 			$insert_query = mysqli_query($sqlcon,$insert_lock);
-			
+		
 			if ($insert_query) {
 				
-				header("location: editing-quiz.php?id=$test_id$&total=$add_quest");
+				header("location: editing-quiz.php?add_new_quest&id=$test_id&total=$add_quest");
 
 			}
 			else{

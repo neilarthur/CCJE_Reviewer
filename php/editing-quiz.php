@@ -507,7 +507,7 @@ $suppd .= "</select>";
 										$valid_total = $get - $valid_row;
 										?>
 
-										<input type="hidden" name="total_questions" id="total_questions" value="<?php echo $valid_total; ?>">
+										<input type="text" name="total_questions" id="total_questions" value="<?php echo $valid_total; ?>">
 									</div>
 								</div>
 								<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
@@ -601,7 +601,6 @@ $suppd .= "</select>";
 										<label for="number" class="col-sm-4 col-form-label fw-bold">Number of random question</label>
 										<div class="col-sm-4">
 											<select class="form-select" name="total_quest" id="total_quest">
-												<option selected="1">1</option>
 												
 												<?php
 
@@ -612,13 +611,13 @@ $suppd .= "</select>";
 
 												$val_total = $tot - $val_run;
 
-												for($i =2; $i <= $val_total; $i+=1){
+												for($i =1; $i <= $val_total; $i+=1){
 													echo '
 													<option>'.$i.'</option>';
 												}
 												?>
-												
 											</select>
+											
 										</div>
 									</div>
 								</div>
@@ -737,6 +736,7 @@ $suppd .= "</select>";
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 <script src="../js/jquery.durationpicker.js"></script>
 <script type="text/javascript">
  	$(document).ready(function() {
@@ -959,20 +959,25 @@ let arrow = document.querySelectorAll(".arrow");
     });
 
 });
-
-  function validate_question(){
-      var $checkboxes = $('#example_test td input[type="checkbox"]');
-         
-        var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
-        var total_question = $("#total_questions").val();
-       
-        
-        if (countCheckedCheckboxes < total_question) { 
-             alert("The selected questions is less than the total questions in the test." ); 
-             return false;
-         } 
-
-         return true;
-    } 
 </script>
+
+<?php 
+#sweet alert of 3 add button 
+if (isset($_GET['add_new_quest'])) {
+  echo ' <script> swal(" add question succesful!", " clicked the okay!", "success");
+  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/editing-quiz.php");
+  </script>';
+}
+elseif (isset($_GET['add__quest_from_bank'])) {
+  echo ' <script> swal(" add question succesful!", " clicked the okay!", "success");
+  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/editing-quiz.php");
+  </script>';
+}
+elseif (isset($_GET['generate_random_quest'])) {
+  echo ' <script> swal("Generate Random Question succesful!", " clicked the okay!", "success");
+  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/editing-quiz.php");
+  </script>';
+}
+
+?>
 </html>
