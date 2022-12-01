@@ -12,18 +12,27 @@ if (isset($_POST["create"])) {
 
 
 	foreach ($checkbox1 as $key => $value) {
-		
-		$query = "INSERT INTO student_choice(question_id,test_id,question_stat) VALUES ('".$value."','$let','$status')";
-		$ss = mysqli_query($sqlcon,$query);
 
-		if ($ss) {
+
+		$checking = mysqli_query($sqlcon,"SELECT * FROM student_choice WHERE test_id='$let' AND question_id='".$value."'");
+
+		if (mysqli_num_rows($checking) >0) {
 			
-			header("location:editing-quiz.php?id=$let&total=$tots");
-
+			echo "Some Questions are already exists";
 		}
 		else {
 
-			echo mysqli_error($sqlcon);
+			$query = "INSERT INTO student_choice(question_id,test_id,question_stat) VALUES ('".$value."','$let','$status')";
+			$ss = mysqli_query($sqlcon,$query);
+
+			if ($ss) {
+				
+				header("location:editing-quiz.php?id=$let&total=$tots");
+			}
+			else {
+
+				echo mysqli_error($sqlcon);
+			}
 		}
 	}
 }

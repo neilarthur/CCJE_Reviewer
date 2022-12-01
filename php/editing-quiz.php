@@ -495,7 +495,19 @@ $suppd .= "</select>";
 											<option value="Hard">Hard</option>
 										</select>
 
-										<input type="hidden" name="total_questions" id="total_questions" value="<?php echo $_GET['total']; ?>">
+																				<?php
+
+										$get = $_GET['total'];
+
+										$valid = "SELECT * FROM student_choice WHERE test_id = '{$_GET['id']}'";
+										$valid_run = mysqli_query($sqlcon,$valid);
+
+										$valid_row = mysqli_num_rows($valid_run);
+
+										$valid_total = $get - $valid_row;
+										?>
+
+										<input type="hidden" name="total_questions" id="total_questions" value="<?php echo $valid_total; ?>">
 									</div>
 								</div>
 								<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
@@ -595,11 +607,17 @@ $suppd .= "</select>";
 
 												$tot = $_GET['total'];
 
-												for($i =2; $i <= $tot; $i+=1){
+												$val = mysqli_query($sqlcon,"SELECT * FROM student_choice WHERE test_id = {$_GET['id']}");
+												$val_run = mysqli_num_rows($val);
+
+												$val_total = $tot - $val_run;
+
+												for($i =2; $i <= $val_total; $i+=1){
 													echo '
 													<option>'.$i.'</option>';
 												}
 												?>
+												
 											</select>
 										</div>
 									</div>

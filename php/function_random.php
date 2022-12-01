@@ -25,18 +25,15 @@ if (isset($_POST['create'])) {
 		$base[] = $rows['question_id'];
 	}
 
+	foreach ($base as $key => $value) {
 
-	$select_dis = mysqli_query($sqlcon,"SELECT DISTINCT * FROM test_question,student_choice WHERE (test_question.question_id = student_choice.question_id) AND (student_choice.question_id = '$base') AND  (student_choice.test_id='$test_id')");
+		$validate = mysqli_query($sqlcon,"SELECT * FROM student_choice WHERE test_id='$test_id' AND question_id='".$value."'");
 
-	$select_run = mysqli_num_rows($select_dis);
-
-	if ($select_run) {
-
-		header("location: editing-quiz.php?id=$test_id&total=$totas");
-	}
-	else {
-
-		foreach ($base as $key => $value) {
+		if (mysqli_num_rows($validate) >0) {
+			
+			echo "Question are already exists";
+		}
+		else {
 
 			$random_insert = "INSERT INTO student_choice(question_id,test_id,question_stat)VALUES('".$value."','$test_id','$stat')";
 

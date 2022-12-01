@@ -293,7 +293,19 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 							<div class="card mt-2">
 								<div class="card-body">
 									<div class="card-footer bg-white border-0 d-flex justify-content-center mb-1">
-										<input type="hidden" name="quest" id="totals" value="<?php echo $_GET['total']; ?>">
+										<?php
+
+										$get = $_GET['total'];
+
+										$valid = "SELECT * FROM student_choice WHERE test_id='{$_GET['id']}'";
+
+										$valid_query = mysqli_query($sqlcon,$valid);
+
+										$valid_row = mysqli_num_rows($valid_query);
+
+										$valid_total = $get - $valid_row;
+										?>
+										<input type="hidden" name="quest" id="totals" value="<?php echo $valid_total; ?>">
 										<button type="button" class="btn btn-primary px-4 pb-2 add_item_btn"><i class="fas fa-plus-circle me-2"></i>Add</button>
 										<button type="submit" name="create" class="btn btn-success mx-2 px-4 pb-2" id="create_btn"><i class="fas fa-check-circle me-2"></i>Save and display</button>   
 										<button class="btn btn-danger px-3 pb-2 text-white backbtn"><i class="fas fa-times-circle me-2"></i>Cancel</button> 
