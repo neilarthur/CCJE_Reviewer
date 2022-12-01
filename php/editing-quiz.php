@@ -300,47 +300,58 @@ $suppd .= "</select>";
 										<div class="d-flex justify-content-between mb-3">
 											<button data-id="<?php echo $id; ?>" class="btn btn-warning px-3 pb-2 editinfo" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i>
 											</button>
-											<div class="dropdown me-2">
-												<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Add</a>
-												<?php 
-											    $quiz= mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id = '$id'");
+											<div class="d-flex">
+												<div class="dropdown">
+													<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Add</a>
+													<?php 
+												    $quiz= mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id = '$id'");
 
-											    $quizs = mysqli_query($sqlcon,"SELECT * FROM student_choice WHERE test_id = '$id'");
+												    $quizs = mysqli_query($sqlcon,"SELECT * FROM student_choice WHERE test_id = '$id'");
 
-											    $num = mysqli_num_rows($quizs);
-											   while ($rows = mysqli_fetch_assoc($quiz)) { 
+												    $num = mysqli_num_rows($quizs);
+												   while ($rows = mysqli_fetch_assoc($quiz)) { 
 
-											   	$lows = $rows['total_quest'];
+												   	$lows = $rows['total_quest'];
 
 
-											   	?>
+												   	?>
 
-											  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-											    	<?php
+												  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+												    	<?php
 
-											    	$tots = $_GET['total'];
+												    	$tots = $_GET['total'];
 
-											    	if ($lows ==$num) {
-											    	 	
-											    	 	echo "<li><a class='dropdown-item'><i class='fas fa-plus me-2'></i>a new Questions</a>
-											    	 	</li>
-											    	 	<div class='dropdown-divider'></div>
-											    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
-											    	 	<div class='dropdown-divider'></div>
-											    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>a random question</a></li>
-											    	 		";
-											    	}
-											    	else {
+												    	if ($lows ==$num) {
+												    	 	
+												    	 	echo "<li><a class='dropdown-item'><i class='fas fa-plus me-2'></i>a new Questions</a>
+												    	 	</li>
+												    	 	<div class='dropdown-divider'></div>
+												    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
+												    	 	<div class='dropdown-divider'></div>
+												    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>a random question</a></li>
+												    	 		";
+												    	}
+												    	else {
 
-											    		echo "<li><a class='dropdown-item' href='adding-quiz-question.php?id=$id&total=$tots'><i class='fas fa-plus me-2'></i>a new Questions </a></li>
-											    		<div class='dropdown-divider'></div>
-											    		<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#exampleModal2'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
-											    		<div class='dropdown-divider'></div>
-											    	 	<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#addRandom'><i class='fas fa-plus me-2'></i>a random question</a></li>";
-											    	}
-											    	?>
-											  </ul>
-											    <?php }  ?>
+												    		echo "<li><a class='dropdown-item' href='adding-quiz-question.php?id=$id&total=$tots'><i class='fas fa-plus me-2'></i>a new Questions </a></li>
+												    		<div class='dropdown-divider'></div>
+												    		<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#exampleModal2'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
+												    		<div class='dropdown-divider'></div>
+												    	 	<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#addRandom'><i class='fas fa-plus me-2'></i>a random question</a></li>";
+												    	}
+												    	?>
+												  </ul>
+												    <?php }  ?>
+												</div>
+												<div class="dropdown">
+													<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i>
+													</a>
+													<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+														<li><a class="dropdown-item" data-bs-toggle='modal' data-bs-target='#userModal'><i class="fas fa-user-alt me-2"></i>User overide</a></li>
+														<div class='dropdown-divider'></div>
+														<li><a class="dropdown-item" data-bs-toggle='modal' data-bs-target='#resultModal'><i class="fas fa-chart-bar me-2"></i>Results</a></li>
+													</ul>
+												</div> 
 											</div>
 										</div>
 										<div class="table-responsive-xl">
@@ -495,7 +506,7 @@ $suppd .= "</select>";
 											<option value="Hard">Hard</option>
 										</select>
 
-																				<?php
+										<?php
 
 										$get = $_GET['total'];
 
@@ -507,7 +518,7 @@ $suppd .= "</select>";
 										$valid_total = $get - $valid_row;
 										?>
 
-										<input type="text" name="total_questions" id="total_questions" value="<?php echo $valid_total; ?>">
+										<input type="hidden" name="total_questions" id="total_questions" value="<?php echo $valid_total; ?>">
 									</div>
 								</div>
 								<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
@@ -731,6 +742,98 @@ $suppd .= "</select>";
 				</div>
 			</div>
 		</div>
+
+		<!-- User overide modal -->
+		<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title fw-bold" id="exampleModalLabel">Add user overide</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="card border-0">
+							<div class="card-body">
+								<div class="input-group mb-2">
+									<span class="input-group-text bg-white fw-bold">Overide user</span>
+									<input type="" name="user" class="form-control">
+								</div>
+								<div class="col-md-10 mb-2" style="margin-left: 120px;">
+									<div class="input-group">
+										<select class="form-select custom-select">
+											<option selected value="" disabled selected>Search</option>
+											<option>Ralph vincent pagcaliwagan, ralphvincent@gmail.com, ID No: 01183039</option>
+											<option>Neil Arthur Pornela, neilpornela@gmail.com, ID No: 01190635</option>
+											<option>Chadwick Balota, chadwickbalota@gmail.com, ID No: 01190608</option>
+										</select>
+									</div>
+								</div>
+								<div class="input-group mb-2">
+									<span class="input-group-text bg-white fw-bold">Open Quiz</span>
+									<input type="date" name="start_time" class="form-control" required>
+								</div>
+								<div class="input-group mb-2">
+									<span class="input-group-text bg-white fw-bold">Close Quiz</span>
+									<input type="date" name="close_time" class="form-control" required >
+								</div>
+								<div class="input-group ">
+									<span class="input-group-text border-0 bg-white fw-bold me-3">Time limit</span>
+									<label id="btn-example4"  type="text" hidden  style="font-size: 13px;"></label>
+									<input name="time_limit" class="form-control" required />
+			                    </div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success rounded px-4">Save</button>
+						<button type="button" class="btn btn-secondary rounded px-4" data-bs-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--Results Modal -->
+		<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title fw-bold" id="exampleModalLabel">Score Release</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="card border-0">
+							<div class="card-body">
+								<div class="table-responsive-xl">
+									<table class="table table-hover table-striped" id="resultTab">
+										<thead>
+											<tr>
+												<th scope="col">ID</th>
+												<th scope="col">Fullname</th>
+												<th scope="col">Section</th>
+												<th scope="col">Score</th>
+												<th scope="col">Date submitted</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>01190635</td>
+												<td>Ralph Vincent Pagcaliwagan</td>
+												<td>4C</td>
+												<td>5/5</td>
+												<td>12/01/2022</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -754,7 +857,13 @@ $suppd .= "</select>";
         })
  	});
  </script>
- 
+  <script type="text/javascript">
+  $(document).ready(function() {
+  	 $('#resultTab').DataTable({
+  	 	paging: true
+  	 });
+  });
+</script>
  <script type="text/javascript">
 
   // var of select input difficult
@@ -960,24 +1069,4 @@ let arrow = document.querySelectorAll(".arrow");
 
 });
 </script>
-
-<?php 
-#sweet alert of 3 add button 
-if (isset($_GET['add_new_quest'])) {
-  echo ' <script> swal(" add question succesful!", " clicked the okay!", "success");
-  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/editing-quiz.php");
-  </script>';
-}
-elseif (isset($_GET['add__quest_from_bank'])) {
-  echo ' <script> swal(" add question succesful!", " clicked the okay!", "success");
-  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/editing-quiz.php");
-  </script>';
-}
-elseif (isset($_GET['generate_random_quest'])) {
-  echo ' <script> swal("Generate Random Question succesful!", " clicked the okay!", "success");
-  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/editing-quiz.php");
-  </script>';
-}
-
-?>
 </html>

@@ -27,7 +27,7 @@ if (isset($_POST["create"])) {
 
 			if ($ss) {
 				
-				header("location:editing-quiz.php?add__quest_from_bank&id=$let&total=$tots");
+				header("location:editing-quiz.php?id=$let&total=$tots");
 			}
 			else {
 

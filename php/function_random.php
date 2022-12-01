@@ -41,7 +41,7 @@ if (isset($_POST['create'])) {
 
 			if ($random_query) {
 
-				header("location: editing-quiz.php?generate_random_quest&id=$test_id&total=$totas");
+				header("location:editing-quiz.php?id=$test_id&total=$totas");
 			}
 			else{
 				echo mysqli_error($sqlcon);

@@ -151,7 +151,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 									$id = $_GET['id'];
 									$quiz= mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id = '$id'");
 									while ($rows = mysqli_fetch_assoc($quiz)) { ?>
-									<li class="breadcrumb-item"><a href="editing-quiz.php?id=<?php echo $rows['test_id']?>" style="text-decoration: none;">Editing quiz</a></li>
+									<li class="breadcrumb-item"><a href="editing-quiz.php?id=<?php echo $rows['test_id']?>&total=<?php echo $rows['total_quest']; ?>" style="text-decoration: none;">Editing quiz</a></li>
 									 <?php }  ?>
 									<li class="breadcrumb-item active" aria-current="page">Editing & Adding quiz question</li>
 								</ol>

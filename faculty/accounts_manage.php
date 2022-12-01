@@ -475,7 +475,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
     <!-- Approve Modal -->
 		<div class="modal fade"  id="approve" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-dialog-centered">
 	    		<div class="modal-content">
 	    			<div class="modal-header flex-column border-0">
 	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
