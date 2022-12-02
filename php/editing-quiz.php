@@ -297,6 +297,34 @@ $suppd .= "</select>";
 							<div class="col-lg-12 mt-2">
 								<div class="card">
 									<div class="card-body m-4">
+										<?php
+
+										if (isset($_SESSION['stat_over'])) { ?>
+
+											<div class="alert alert-success alert-dismissible fade show" role="alert">
+											  <strong><?php echo $_SESSION['stat_over']; ?></strong> 
+											  <button type="button" class=" btn-close" data-bs-dismiss="alert" aria-label="Close">
+											  </button>
+											</div>
+											<?php
+											unset($_SESSION['stat_over']);
+										}
+
+										elseif (isset($_SESSION['stat_over_1'])) {
+											 ?>
+
+											 <div class="alert alert-warning alert-dismissible fade show" role="alert">
+											  <strong><?php echo $_SESSION['stat_over_1']; ?></strong> 
+											  <button type="button" class=" btn-close" data-bs-dismiss="alert" aria-label="Close">
+											  </button>
+											</div>
+
+											<?php
+
+											unset($_SESSION['stat_over_1']);
+											
+										}
+										?>
 										<div class="d-flex justify-content-between mb-3">
 											<button data-id="<?php echo $id; ?>" class="btn btn-warning px-3 pb-2 editinfo" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i>
 											</button>

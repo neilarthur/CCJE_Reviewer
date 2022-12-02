@@ -283,6 +283,34 @@ function getName($n) {
 							<div class="col-lg-12 mt-2">
 								<div class="card">
 									<div class="card-body m-4">
+
+											<?php
+												
+												if (isset($_SESSION['validate'])) { ?>
+													
+												<div class="alert alert-success alert-dismissible fade show" role="alert">
+												  <strong><?php echo $_SESSION['validate']; ?></strong> 
+												  <button type="button" class=" btn-close" data-bs-dismiss="alert" aria-label="Close">
+												  </button>
+												</div>
+												<?php
+
+												unset($_SESSION['validate']);
+												}
+
+												elseif (isset($_SESSION['exists'])) { ?>
+												
+												<div class="alert alert-success alert-dismissible fade show" role="alert">
+												  <strong><?php echo $_SESSION['exists']; ?></strong> 
+												  <button type="button" class=" btn-close" data-bs-dismiss="alert" aria-label="Close">
+												  </button>
+												</div>
+
+												<?php 
+
+												unset($_SESSION['exists']);
+												}
+											?>
 										<div class="d-flex justify-content-between mb-3">
 											<button data-id="<?php echo $id; ?>"  class="btn btn-warning px-3 pb-2 editinfo"  data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i>
 											</button>
@@ -510,7 +538,19 @@ function getName($n) {
 							</div>
 							<div class="modal-footer">
 								<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
-								<input type="hidden" name="total" value="<?php echo $_GET['total'] ?>">
+
+																	<?php
+
+									$tots = $_GET['total'];
+
+									$valss = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_choose_quest WHERE pre_exam_id = {$_GET['id']}");
+									$val_runsd = mysqli_num_rows($valss);
+
+									$val_totals = $tots - $val_runsd;
+
+									?>
+								<input type="hidden" name="total" value="<?php echo $val_totals; ?>">
+								<input type="hidden" name="all_tot" value="<?php echo $_GET['total']; ?>">
 								<button type="submit" name="create" class="btn btn-success">Add selected questions</button>
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 							</div>
@@ -551,13 +591,18 @@ function getName($n) {
 										<label for="number" class="col-sm-4 col-form-label fw-bold">Number of random question</label>
 										<div class="col-sm-3">
 											<select class="form-select" name="t_question" id="t_question">
-												<option selected value="1">1</option>
 												<?php
 
-												$tot = $_GET['total'];
+												$tts = $_GET['total'];
 
-												for($i = 2; $i <= $total; $i+=1){
-													echo ' <option>'.$i.'</option>';
+												$val = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_choose_quest WHERE pre_exam_id = {$_GET['id']}");
+												$val_ruin = mysqli_num_rows($val);
+
+												$val_totalae = $tts - $val_ruin;
+
+												for($i =1; $i <= $val_totalae; $i+=1){
+													echo '
+													<option>'.$i.'</option>';
 												}
 												?>
 											</select>

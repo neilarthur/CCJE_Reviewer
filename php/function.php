@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once 'conn.php';
 
 if (isset($_POST["create"])) {
@@ -18,7 +20,9 @@ if (isset($_POST["create"])) {
 
 		if (mysqli_num_rows($checking) >0) {
 			
-			echo "Some Questions are already exists";
+			$_SESSION['stat_over_1']= "Question are already exists!";
+
+			header("location:editing-quiz.php?id=$let&total=$tots");
 		}
 		else {
 
@@ -26,12 +30,16 @@ if (isset($_POST["create"])) {
 			$ss = mysqli_query($sqlcon,$query);
 
 			if ($ss) {
+
+				$_SESSION['stat_over']= "Selected questions added successfully!";
 				
 				header("location:editing-quiz.php?id=$let&total=$tots");
 			}
 			else {
 
-				echo mysqli_error($sqlcon);
+				$_SESSION['stat_over_1']= "Question are already exists!";
+
+				header("location:editing-quiz.php?id=$let&total=$tots");
 			}
 		}
 	}

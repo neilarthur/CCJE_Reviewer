@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once 'conn.php';
 
 if (isset($_POST['create'])) {
@@ -16,7 +18,7 @@ if (isset($_POST['create'])) {
 	$update_id = $_POST['update_id'];
 	$status = "active";
 	$stat = "active";
-	$totas = $_POST['total'];
+	$totas = $_POST['total_1'];
 
 
 	foreach ($questions_title as $key => $value) {
@@ -34,6 +36,8 @@ if (isset($_POST['create'])) {
 			$query_choose_preboard = mysqli_query($sqlcon,$insert_chose_preboard);
 
 			if ($query_choose_preboard) {
+
+				$_SESSION['validate'] = "Questions added successfully";
 				
 				header("location: editing-preboard.php?id=$update_id&total=$totas");
 			}

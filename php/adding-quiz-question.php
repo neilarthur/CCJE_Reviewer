@@ -306,7 +306,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 										$valid_total = $get - $valid_row;
 										?>
 										<input type="hidden" name="quest" id="totals" value="<?php echo $valid_total; ?>">
-										<input type="hidden" name="quest_1" id="totals" value="<?php echo $get; ?>">
+										<input type="hidden" name="quest_1" value="<?php echo $get; ?>">
 										<button type="button" class="btn btn-primary px-4 pb-2 add_item_btn"><i class="fas fa-plus-circle me-2"></i>Add</button>
 										<button type="submit" name="create" class="btn btn-success mx-2 px-4 pb-2" id="create_btn"><i class="fas fa-check-circle me-2"></i>Save and display</button>   
 										<button class="btn btn-danger px-3 pb-2 text-white backbtn"><i class="fas fa-times-circle me-2"></i>Cancel</button> 

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once 'conn.php';
 
 if (isset($_POST['create'])) {
@@ -24,17 +26,31 @@ if (isset($_POST['create'])) {
 
 	foreach ($query_question as $key => $value) {
 		
+		$valid_data = "SELECT * FROM tbl_pre_choose_quest WHERE pre_exam_id='$test_id' AND question_id='".$value."'";
 
-		$random_insert = "INSERT INTO tbl_pre_choose_quest(question_id,pre_exam_id,pre_choose_status)VALUES('".$value."','$test_id','$stat')";
+		$valid_data_query = mysqli_query($sqlcon,$valid_data);
 
-		$random_query = mysqli_query($sqlcon,$random_insert);
+		if (mysqli_num_rows($valid_data_query) >0) {
 
-		if ($random_query) {
-			
+			$_SESSION['exists'] ="Question are already exists!";
+
 			header("location: editing-preboard.php?id=$test_id&total=$totas");
 		}
-		else{
-			echo mysqli_error($sqlcon);
+		else {
+
+			$random_insert = "INSERT INTO tbl_pre_choose_quest(question_id,pre_exam_id,pre_choose_status)VALUES('".$value."','$test_id','$stat')";
+
+			$random_query = mysqli_query($sqlcon,$random_insert);
+
+			if ($random_query) {
+
+				$_SESSION['validate'] = "Random questions added successfully!";
+			
+				header("location: editing-preboard.php?id=$test_id&total=$totas");
+			}
+			else{
+				echo mysqli_error($sqlcon);
+			}
 		}
 	}
  } 

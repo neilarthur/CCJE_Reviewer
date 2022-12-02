@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once'conn.php';
 
 if (isset($_POST['create'])) {
@@ -33,6 +35,10 @@ if (isset($_POST['create'])) {
 			$insert_query = mysqli_query($sqlcon,$insert_lock);
 		
 			if ($insert_query) {
+
+				$_SESSION['stat_over']= "Questions added successfully";
+
+
 				
 				header("location: editing-quiz.php?id=$test_id&total=$add_quest");
 
