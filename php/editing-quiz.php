@@ -832,24 +832,44 @@ $suppd .= "</select>";
 						<div class="card border-0">
 							<div class="card-body">
 								<div class="table-responsive-xl">
-									<table class="table table-hover table-striped" id="resultTab">
+									<table class="table table-hover bg-light table-striped" id="resultTab">
 										<thead>
 											<tr>
 												<th scope="col">ID</th>
 												<th scope="col">Fullname</th>
 												<th scope="col">Section</th>
 												<th scope="col">Score</th>
+												<th scope="col">Percent</th>
+												<th scope="col">Remarks</th>
 												<th scope="col">Date submitted</th>
 											</tr>
 										</thead>
 										<tbody>
+											<?php
+											$id = $_GET['id'];
+											$result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id')");
+											while ($hows= mysqli_fetch_array($result)) {
+												
+											
+											 ?> 
 											<tr>
-												<td>01190635</td>
-												<td>Ralph Vincent Pagcaliwagan</td>
-												<td>4C</td>
-												<td>5/5</td>
+												<td><?php echo $hows['user_id']?></td>
+												<td><?php echo $hows['last_name']." ".$hows['first_name']." ".$hows['middle_name']?></td>
+												<td><?php echo $hows['section']?></td>
+												<td><?php echo $hows['score']?></td>
+												<td><?php echo $hows['score_percent']?></td>
+
+												 <?php if ($hows['result']=='passed') { ?>
+                                                 <td><span class="badge bg-success text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></td>
+	                                            <?php
+	                                            }elseif ($hows['result']=='failed') { ?>
+	                                                <td ><span class="badge bg-danger text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></span></td>
+	                                            <?php
+	                                            } 
+	                                            ?>
 												<td>12/01/2022</td>
 											</tr>
+										<?php } ?>
 										</tbody>
 									</table>
 								</div>
