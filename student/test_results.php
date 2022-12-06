@@ -203,16 +203,44 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                     $exam_query = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND tbl_exam_result.acc_id = '{$_SESSION['acc_id']}' ORDER BY exam_result_id DESC");
+
+
+                                    if (mysqli_num_rows($quiz_query) ==0) { ?>
+
+                                    <tr class="table-danger">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center">No records has been added </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                <?php 
+                                }elseif (mysqli_num_rows($quiz_query)>0) {
+
+                                     while ($rows = mysqli_fetch_assoc($exam_query)) { ?>
                                     <tr>
-                                        <td>Neil Arthur Pornela</td>
-                                        <td>Crime And detection</td>
-                                        <td>100</td>
-                                        <td>82</td>
-                                        <td>82%</td>
+                                        <td><?php echo $rows['first_name']." ".$rows['last_name']; ?></td>
+                                        <td><?php echo $rows['subjects']; ?></td>
+                                        <td><?php echo $rows['total_question']; ?></td>
+                                        <td><?php echo $rows['score']; ?></td>
+                                        <td><?php echo $rows['score_percent']; ?></td>
                                         <td>1hr 30mins</td>
-                                        <td class="fw-bold text-success">PASSED</td>
+                                        <?php if ($rows['result']=='passed') { ?>
+                                                 <td class="text-success text-uppercase fw-bold"><?php echo $rows['result'] ?></td>
+                                            <?php
+                                            }elseif ($rows['result']=='failed') { ?>
+                                                <td class="text-danger text-uppercase fw-bold"><?php echo $rows['result'] ?></td>
+                                            <?php
+                                            } 
+                                        ?>
                                     </tr>
                                 </tbody>
+                            <?php } } ?>
                             </table>
                         </div>
                     </div>

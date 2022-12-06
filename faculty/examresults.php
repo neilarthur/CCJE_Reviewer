@@ -207,7 +207,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="card mt-2">
 								<div class="card-body">
 									<p class="h4 text-uppercase fw-bold text-center">Categories</p>
@@ -224,46 +224,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								</div>
 							</div>
 					    </div>
-					    <div class="col-lg-8">
+					    <div class="col-lg-9">
 					    	<div class="tab-content" id="nav-tabContent">
 					    		<div class="tab-pane fade show active" id="nav-criminal" role="tabpanel" aria-labelledby="nav-criminal-jurisprudence-tab">
 						    		<div class="card mt-2">
-							    		<div class="card-body rounded-3 table-responsive-xl">
-						    				<table class="table table-hover align-middle" width="100%" id="lawTab">
-												<thead>
-													<tr>
-														<th scope="col">No.</th>
-														<th scope="col">Name</th>
-														<th scope="col">Section</th>
-														<th scope="col">Area of Exam</th>
-														<th scope="col">Score</th>
-														<th scope="col">Percentage</th>
-														<th scope="col">Remarks</th>
-														<th scope="col">Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>1</td>
-		                                                <td>Ralph Vincent Pagcaliwagan</td>
-		                                                <td>4C</td>
-		                                                <td>Criminal Jurisprudence</td>
-		                                                 <td>100</td>
-		                                                <td>100%</td>
-		                                                <td>PASS</td>
-		                                                <td>
-		                                                	<div class="d-flex flex-row">
-		                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-		                                                	</div>
-		                                                </td>
-		                                            </tr>
-		                                        </tbody>
-		                                    </table>
-							    		</div>
-							    	</div>
-						    	</div>
-						    	<div class="tab-pane fade" id="nav-law-enforcement" role="tabpanel" aria-labelledby="nav-law-enforcement">
-					    		<div class="card mt-2">
 							    		<div class="card-body rounded-3 table-responsive-xl">
 						    				<table class="table table-hover align-middle" width="100%" id="resultTab">
 												<thead>
@@ -279,25 +243,565 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													</tr>
 												</thead>
 												<tbody>
+													<?php 
+													$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+													while ($row = mysqli_fetch_assoc($accounts)) {
+														if ($row['section']=='4C') {
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND(accounts.section='4C')");
+
+															$counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													  <?php	}
+													  elseif ($row['section']=='4B') {
+
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND(accounts.section='4B')");
+													  	    $counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal"type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													 <?php }
+													 elseif ($row['section']=='4A') {
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND(accounts.section='4A')");
+													 	 $counter = 1;
+														while ($rows = mysqli_fetch_assoc($result)) { ?>
+															<tr>
+																<td><?php echo $counter ;?></td>
+				                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+				                                                <td><?php echo $rows['section'] ?></td>
+				                                                <td><?php echo $rows['subjects'] ?></td>
+				                                                 <td><?php echo $rows['score'] ?></td>
+				                                                <td><?php echo $rows['score_percent'] ?>%</td>
+				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <td>
+				                                                	<div class="d-flex flex-row">
+				                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"><i class="fas fa-eye"></i></button>
+				                                                	</div>
+				                                                </td>
+				                                            </tr>
+
+															<?php $counter++; } ?>
+													 <?php }
+													}
+
+													?>
+		                                        </tbody>
+		                                    </table>
+							    		</div>
+							    	</div>
+						    	</div>
+						    	<div class="tab-pane fade" id="nav-law-enforcement" role="tabpanel" aria-labelledby="nav-law-enforcement">
+					    		<div class="card mt-2">
+							    		<div class="card-body rounded-3 table-responsive-xl">
+						    				<table class="table table-hover align-middle" width="100%" id="lawTab">
+												<thead>
 													<tr>
-														<td>1</td>
-		                                                <td>Ralph Vincent Pagcaliwagan</td>
-		                                                <td>4C</td>
-		                                                <td>Criminal Jurisprudence</td>
-		                                                 <td>100</td>
-		                                                <td>100%</td>
-		                                                <td>PASS</td>
-		                                                <td>
-		                                                	<div class="d-flex flex-row">
-		                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-		                                                	</div>
-		                                                </td>
-		                                            </tr>
+														<th scope="col">No.</th>
+														<th scope="col">Name</th>
+														<th scope="col">Section</th>
+														<th scope="col">Area of Exam</th>
+														<th scope="col">Score</th>
+														<th scope="col">Percentage</th>
+														<th scope="col">Remarks</th>
+														<th scope="col">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php 
+													$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+													while ($row = mysqli_fetch_assoc($accounts)) {
+														if ($row['section']=='4C') {
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND(accounts.section='4C')");
+
+															$counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													  <?php	}
+													  elseif ($row['section']=='4B') {
+
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND(accounts.section='4B')");
+													  	    $counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													 <?php }
+													 elseif ($row['section']=='4A') {
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND(accounts.section='4A')");
+													 	 $counter = 1;
+														while ($rows = mysqli_fetch_assoc($result)) { ?>
+															<tr>
+																<td><?php echo $counter ;?></td>
+				                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+				                                                <td><?php echo $rows['section'] ?></td>
+				                                                <td><?php echo $rows['subjects'] ?></td>
+				                                                 <td><?php echo $rows['score'] ?></td>
+				                                                <td><?php echo $rows['score_percent'] ?>%</td>
+				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <td>
+				                                                	<div class="d-flex flex-row">
+				                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+				                                                	</div>
+				                                                </td>
+				                                            </tr>
+
+															<?php $counter++; } ?>
+													 <?php }
+													}
+
+													?>
 		                                        </tbody>
 		                                    </table>
 							    		</div>
 							    	</div>
 					    	   </div>
+					    	   <div class="tab-pane fade" id="nav-criminalistics" role="tabpanel" aria-labelledby="nav-criminalistics">
+					    		    <div class="card mt-2">
+							    		<div class="card-body rounded-3 table-responsive-xl">
+						    				<table class="table table-hover align-middle" width="100%" id="criminalTab">
+												<thead>
+													<tr>
+														<th scope="col">No.</th>
+														<th scope="col">Name</th>
+														<th scope="col">Section</th>
+														<th scope="col">Area of Exam</th>
+														<th scope="col">Score</th>
+														<th scope="col">Percentage</th>
+														<th scope="col">Remarks</th>
+														<th scope="col">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php 
+													$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+													while ($row = mysqli_fetch_assoc($accounts)) {
+														if ($row['section']=='4C') {
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND(accounts.section='4C')");
+
+															$counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													  <?php	}
+													  elseif ($row['section']=='4B') {
+
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND(accounts.section='4B')");
+													  	    $counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													 <?php }
+													 elseif ($row['section']=='4A') {
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND(accounts.section='4A')");
+													 	 $counter = 1;
+														while ($rows = mysqli_fetch_assoc($result)) { ?>
+															<tr>
+																<td><?php echo $counter ;?></td>
+				                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+				                                                <td><?php echo $rows['section'] ?></td>
+				                                                <td><?php echo $rows['subjects'] ?></td>
+				                                                 <td><?php echo $rows['score'] ?></td>
+				                                                <td><?php echo $rows['score_percent'] ?>%</td>
+				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <td>
+				                                                	<div class="d-flex flex-row">
+				                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+				                                                	</div>
+				                                                </td>
+				                                            </tr>
+
+															<?php $counter++; } ?>
+													 <?php }
+													}
+
+													?>
+		                                        </tbody>
+		                                    </table>
+							    		</div>
+							    	</div>
+					    	    </div>
+					    	    <div class="tab-pane fade" id="nav-crime" role="tabpanel" aria-labelledby="nav-crime">
+					    		    <div class="card mt-2">
+							    		<div class="card-body rounded-3 table-responsive-xl">
+						    				<table class="table table-hover align-middle" width="100%" id="crimeTab">
+												<thead>
+													<tr>
+														<th scope="col">No.</th>
+														<th scope="col">Name</th>
+														<th scope="col">Section</th>
+														<th scope="col">Area of Exam</th>
+														<th scope="col">Score</th>
+														<th scope="col">Percentage</th>
+														<th scope="col">Remarks</th>
+														<th scope="col">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php 
+													$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+													while ($row = mysqli_fetch_assoc($accounts)) {
+														if ($row['section']=='4C') {
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Crime Detection and Investigation') AND(accounts.section='4C')");
+
+															$counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													  <?php	}
+													  elseif ($row['section']=='4B') {
+
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Crime Detection and Investigation') AND(accounts.section='4B')");
+													  	    $counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													 <?php }
+													 elseif ($row['section']=='4A') {
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Crime Detection and Investigation') AND(accounts.section='4A')");
+													 	 $counter = 1;
+														while ($rows = mysqli_fetch_assoc($result)) { ?>
+															<tr>
+																<td><?php echo $counter ;?></td>
+				                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+				                                                <td><?php echo $rows['section'] ?></td>
+				                                                <td><?php echo $rows['subjects'] ?></td>
+				                                                 <td><?php echo $rows['score'] ?></td>
+				                                                <td><?php echo $rows['score_percent'] ?>%</td>
+				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <td>
+				                                                	<div class="d-flex flex-row">
+				                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+				                                                	</div>
+				                                                </td>
+				                                            </tr>
+
+															<?php $counter++; } ?>
+													 <?php }
+													}
+
+													?>
+		                                        </tbody>
+		                                    </table>
+							    		</div>
+							    	</div>
+					    	    </div>
+					    	    <div class="tab-pane fade" id="nav-sociology" role="tabpanel" aria-labelledby="nav-sociology">
+					    		    <div class="card mt-2">
+							    		<div class="card-body rounded-3 table-responsive-xl">
+						    				<table class="table table-hover align-middle" width="100%" id="socTab">
+												<thead>
+													<tr>
+														<th scope="col">No.</th>
+														<th scope="col">Name</th>
+														<th scope="col">Section</th>
+														<th scope="col">Area of Exam</th>
+														<th scope="col">Score</th>
+														<th scope="col">Percentage</th>
+														<th scope="col">Remarks</th>
+														<th scope="col">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php 
+													$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+													while ($row = mysqli_fetch_assoc($accounts)) {
+														if ($row['section']=='4C') {
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND(accounts.section='4C')");
+
+															$counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													  <?php	}
+													  elseif ($row['section']=='4B') {
+
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND(accounts.section='4B')");
+													  	    $counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													 <?php }
+													 elseif ($row['section']=='4A') {
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND(accounts.section='4A')");
+													 	 $counter = 1;
+														while ($rows = mysqli_fetch_assoc($result)) { ?>
+															<tr>
+																<td><?php echo $counter ;?></td>
+				                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+				                                                <td><?php echo $rows['section'] ?></td>
+				                                                <td><?php echo $rows['subjects'] ?></td>
+				                                                 <td><?php echo $rows['score'] ?></td>
+				                                                <td><?php echo $rows['score_percent'] ?>%</td>
+				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <td>
+				                                                	<div class="d-flex flex-row">
+				                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+				                                                	</div>
+				                                                </td>
+				                                            </tr>
+
+															<?php $counter++; } ?>
+													 <?php }
+													}
+
+													?>
+		                                        </tbody>
+		                                    </table>
+							    		</div>
+							    	</div>
+					    	    </div>
+					    	    <div class="tab-pane fade" id="nav-correctional" role="tabpanel" aria-labelledby="nav-correctional">
+					    		    <div class="card mt-2">
+							    		<div class="card-body rounded-3 table-responsive-xl">
+						    				<table class="table table-hover align-middle" width="100%" id="corrTab">
+												<thead>
+													<tr>
+														<th scope="col">No.</th>
+														<th scope="col">Name</th>
+														<th scope="col">Section</th>
+														<th scope="col">Area of Exam</th>
+														<th scope="col">Score</th>
+														<th scope="col">Percentage</th>
+														<th scope="col">Remarks</th>
+														<th scope="col">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php 
+													$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+													while ($row = mysqli_fetch_assoc($accounts)) {
+														if ($row['section']=='4C') {
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND(accounts.section='4C')");
+
+															$counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													  <?php	}
+													  elseif ($row['section']=='4B') {
+
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND(accounts.section='4B')");
+													  	    $counter = 1;
+															while ($rows = mysqli_fetch_assoc($result)) { ?>
+																<tr>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+					                                                <td><?php echo $rows['section'] ?></td>
+					                                                <td><?php echo $rows['subjects'] ?></td>
+					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <td>
+					                                                	<div class="d-flex flex-row">
+					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															<?php $counter++; } ?>
+
+													 <?php }
+													 elseif ($row['section']=='4A') {
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND(accounts.section='4A')");
+													 	 $counter = 1;
+														while ($rows = mysqli_fetch_assoc($result)) { ?>
+															<tr>
+																<td><?php echo $counter ;?></td>
+				                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
+				                                                <td><?php echo $rows['section'] ?></td>
+				                                                <td><?php echo $rows['subjects'] ?></td>
+				                                                 <td><?php echo $rows['score'] ?></td>
+				                                                <td><?php echo $rows['score_percent'] ?>%</td>
+				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <td>
+				                                                	<div class="d-flex flex-row">
+				                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+				                                                	</div>
+				                                                </td>
+				                                            </tr>
+
+															<?php $counter++; } ?>
+													 <?php }
+													}
+
+													?>
+		                                        </tbody>
+		                                    </table>
+							    		</div>
+							    	</div>
+					    	    </div>
 					    	</div>
 					    </div>
 					</div>
@@ -330,6 +834,38 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                </div>
 	            </div>
 	        </div>
+	    </div>
+	    <!-- Modal -->
+	    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	    	<div class="modal-dialog">
+	    		<div class="modal-content">
+	    			<div class="modal-header">
+	    				<h4 class="modal-title fw-bold" id="exampleModalLabel">View Result</h4>
+	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	    			</div>
+	    			<div class="modal-body">
+	    				<div class="card border-0" >
+	    					<div class="card-body">
+	    						<label class="d-flex ps-1 mt-2 justify-content-start" >Name</label>
+	    						<input type="text" name="last_name" class="form-control" value="Ralph Vincent Pagcaliwagan ">
+	    						<label class="d-flex ps-1 mt-2 justify-content-start">Section</label>
+								<input type="text" name="last_name" class="form-control" value="4C">
+								<label  class="d-flex ps-1 mt-2 justify-content-start">Area of Exam</label>
+								<input type="text" name="last_name" class="form-control" value="Criminal Jurisprudence">
+								<label  class="d-flex ps-1 mt-2 justify-content-start">Score</label>
+								<input type="text" name="last_name" class="form-control" value="100">
+								<label  class="d-flex ps-1 mt-2 justify-content-start">Percentage</label>
+								<input type="text" name="last_name" class="form-control" value="100%">
+								<label  class="d-flex ps-1 mt-2 justify-content-start">Total corect answers</label>
+								<input type="text" name="last_name" class="form-control" value="100">
+							</div>
+						</div>
+	    			</div>
+	    			<div class="modal-footer">
+	    				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	    			</div>
+	    		</div>
+	    	</div>
 	    </div>
 
 

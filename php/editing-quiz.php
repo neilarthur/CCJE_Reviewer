@@ -846,30 +846,89 @@ $suppd .= "</select>";
 										</thead>
 										<tbody>
 											<?php
-											$id = $_GET['id'];
-											$result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id')");
-											while ($hows= mysqli_fetch_array($result)) {
-												
-											
-											 ?> 
-											<tr>
-												<td><?php echo $hows['user_id']?></td>
-												<td><?php echo $hows['last_name']." ".$hows['first_name']." ".$hows['middle_name']?></td>
-												<td><?php echo $hows['section']?></td>
-												<td><?php echo $hows['score']?></td>
-												<td><?php echo $hows['score_percent']?></td>
 
-												 <?php if ($hows['result']=='passed') { ?>
-                                                 <td><span class="badge bg-success text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></td>
-	                                            <?php
-	                                            }elseif ($hows['result']=='failed') { ?>
-	                                                <td ><span class="badge bg-danger text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></span></td>
-	                                            <?php
-	                                            } 
-	                                            ?>
-												<td>12/01/2022</td>
-											</tr>
-										<?php } ?>
+											$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+											while ($row = mysqli_fetch_assoc($accounts)) {
+												if ($row['section']=='4A'){
+
+												  $id = $_GET['id'];
+												  $result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND(accounts.section='4A')");
+
+												  while ($hows= mysqli_fetch_array($result)) { ?>
+												  	<tr>
+														<td><?php echo $hows['user_id']?></td>
+														<td><?php echo $hows['last_name']." ".$hows['first_name']." ".$hows['middle_name']?></td>
+														<td><?php echo $hows['section']?></td>
+														<td><?php echo $hows['score']?></td>
+														<td><?php echo $hows['score_percent']?> %</td>
+
+														 <?php if ($hows['result']=='passed') { ?>
+		                                                 <td><span class="badge bg-success text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></td>
+			                                            <?php
+			                                            }elseif ($hows['result']=='failed') { ?>
+			                                                <td ><span class="badge bg-danger text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></span></td>
+			                                            <?php
+			                                            } 
+			                                            ?>
+														<td>12/01/2022</td>
+													</tr>
+
+												<?php  }
+											  }
+											  elseif ($row['section']=='4B') {
+											  	 $id = $_GET['id'];
+												  $result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND(accounts.section='4B')");
+
+												  while ($hows= mysqli_fetch_array($result)) { ?>
+												  	<tr>
+														<td><?php echo $hows['user_id']?></td>
+														<td><?php echo $hows['last_name']." ".$hows['first_name']." ".$hows['middle_name']?></td>
+														<td><?php echo $hows['section']?></td>
+														<td><?php echo $hows['score']?></td>
+														<td><?php echo $hows['score_percent']?> %</td>
+
+														 <?php if ($hows['result']=='passed') { ?>
+		                                                 <td><span class="badge bg-success text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></td>
+			                                            <?php
+			                                            }elseif ($hows['result']=='failed') { ?>
+			                                                <td ><span class="badge bg-danger text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></span></td>
+			                                            <?php
+			                                            } 
+			                                            ?>
+														<td>12/01/2022</td>
+													</tr>
+
+												<?php  }
+											  		
+											  }
+											  elseif ($row['section']=='4C') {
+											  	  $id = $_GET['id'];
+												  $result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND(accounts.section='4C')");
+
+												  while ($hows= mysqli_fetch_array($result)) { ?>
+												  	<tr>
+														<td><?php echo $hows['user_id']?></td>
+														<td><?php echo $hows['last_name']." ".$hows['first_name']." ".$hows['middle_name']?></td>
+														<td><?php echo $hows['section']?></td>
+														<td><?php echo $hows['score']?></td>
+														<td><?php echo $hows['score_percent']?> %</td>
+
+														 <?php if ($hows['result']=='passed') { ?>
+		                                                 <td><span class="badge bg-success text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></td>
+			                                            <?php
+			                                            }elseif ($hows['result']=='failed') { ?>
+			                                                <td ><span class="badge bg-danger text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></span></td>
+			                                            <?php
+			                                            } 
+			                                            ?>
+														<td>12/01/2022</td>
+													</tr>
+
+												<?php  }
+											  	}	
+											}		
+										?>
 										</tbody>
 									</table>
 								</div>

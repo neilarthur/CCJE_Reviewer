@@ -115,12 +115,34 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         				<div class="row">
         					<div class="col mr-2">
         						<div class="text-xs font-weight-bold text-white text-uppercase mb-1">
-                                    <?php $query = "SELECT * FROM choose_question WHERE section='4C'AND status='active'";
-                                        $query_result = mysqli_query($sqlcon,$query);
+                                    <?php
 
-                                        $row = mysqli_num_rows($query_result);
-                                        echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
-                                        ?> Quiz
+                                    $based = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+                                    while ($course = mysqli_fetch_assoc($based)) {
+                                        if ($course['section'] == '4A') {
+                                             $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A') AND(choose_question.type_test='Quiz')");
+
+                                            $row = mysqli_num_rows($query);
+                                            echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
+                                        }
+                                        elseif ($course['section'] == '4B') {
+                                             $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B') AND(choose_question.type_test='Quiz')");
+                                             
+
+                                             $row = mysqli_num_rows($query);
+                                             echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
+                                        }
+                                        elseif ($course['section'] == '4C') {
+                                              $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C') AND(choose_question.type_test='Quiz')");
+                                             
+
+                                             $row = mysqli_num_rows($query);
+                                             echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
+                                        }
+                                    }
+
+                                    ?> Quiz
         						</div>
         					</div>
         					<div class="col-auto mt-2" style="color: #FFD300;">
@@ -136,13 +158,28 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         				<div class="row no-gutters align-items-center">
         					<div class="col mr-2">
         						<div class="text-xs font-weight-bold text-white text-uppercase mb-1">
-                                    <?php $query = "SELECT * FROM choose_question WHERE type_test='LongQuiz'AND status='active'";
-                                        $query_result = mysqli_query($sqlcon,$query);
-
-                                        $row = mysqli_num_rows($query_result);
-                                        echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
-                                        ?>
-                                        Long Quiz
+                                    <?php 
+                                    $based = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+                                    while ($course = mysqli_fetch_assoc($based)) {
+                                        if ($course['section'] == '4A') {
+                                            $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A') AND(choose_question.type_test='LongQuiz')");
+                                             $row = mysqli_num_rows($query);
+                                             echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
+                                        }
+                                        elseif ($course['section'] == '4B') {
+                                            $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B') AND(choose_question.type_test='LongQuiz')");
+                                             $row = mysqli_num_rows($query);
+                                             echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
+                                        }
+                                        elseif ($course['section'] == '4C') {
+                                            $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C') AND(choose_question.type_test='LongQuiz')");
+                                             $row = mysqli_num_rows($query);
+                                             echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
+                                        }
+                                    }
+                                    
+                                   ?>
+                                    Long Quiz
         						</div>
         					</div>
         					<div class="col-auto mt-2" style="color: rgb(0, 76, 122);">
@@ -158,7 +195,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         				<div class="row no-gutters align-items-center">
         					<div class="col mr-2">
         						<div class="text-xs font-weight-bold text-white text-uppercase mb-1">
-                                    <?php $query = "SELECT * FROM tbl_pre_question";
+                                    <?php $query = "SELECT * FROM tbl_pre_question,accounts WHERE (accounts.acc_id= '{$_SESSION['acc_id']}') ";
                                         $query_result = mysqli_query($sqlcon,$query);
 
                                         $row = mysqli_num_rows($query_result);
@@ -180,7 +217,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         				<div class="row no-gutters align-items-center">
         					<div class="col mr-2">
         						<div class="text-xs font-weight-bold text-white text-uppercase mb-1">
-                                    <?php $query = "SELECT * FROM tbl_quiz_result";
+                                    <?php $query = "SELECT * FROM tbl_quiz_result,accounts,choose_question WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (choose_question.test_id = tbl_quiz_result.test_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}')";
                                         $query_result = mysqli_query($sqlcon,$query);
 
                                         $row = mysqli_num_rows($query_result);
@@ -238,107 +275,103 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                     <div class="card-body">
                         <h4 class="card-title text-dark fw-bold">Quiz Percentage</h4>
                         <div>
-                            <canvas id="myChart" style="height: 350px; width: 100%;" ></canvas>
+                            <canvas id="mychart" style="height: 350px; width: 100%;" ></canvas>
                         </div>
                          <?php 
 
-                         $quiz_run = mysqli_query($sqlcon,"SELECT * FROM choose_question,tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (choose_question.test_id = tbl_quiz_result.test_id)");
+                         $quiz_run = mysqli_query($sqlcon,"SELECT * FROM choose_question,tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (choose_question.test_id = tbl_quiz_result.test_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}')");
 
                          // Criminal Jurisprudence//
 
-                         $query = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminal Jurisprudence')");
-                         $fetch = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminal Jurisprudence')");
+                         $query = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminal Jurisprudence') AND (tbl_quiz_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}')");
+
+                         $fetch = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminal Jurisprudence') AND (tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
+
                          $percent = mysqli_num_rows($fetch);
 
                           // Crime Detection and Investigation//
-                         $query1 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Crime Detection and Investigation')");
-                         $fetch1 = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Crime Detection and Investigation')");
+                         $query1 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Crime Detection and Investigation') AND (tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
+
+                         $fetch1 = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Crime Detection and Investigation') AND (tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
                          $percent1 = mysqli_num_rows($fetch1);
 
                           // Law enforcement //
 
-                         $query2 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Law Enforcement')");
-                         $fetch2 = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Law Enforcement')");
+                         $query2 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Law Enforcement') AND (tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
+
+                         $fetch2 = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Law Enforcement') AND(tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
                          $percent2 = mysqli_num_rows($fetch2);
 
                          // Criminalistics //
-                         $query3 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminalistics')");
-                         $fetch3 = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminalistics')");
+                         $query3 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminalistics')AND (tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
+
+                         $fetch3 = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminalistics') AND (tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
                          $percent3 = mysqli_num_rows($fetch3);
 
                          // Criminal Sociology //
-                         $query4 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminal Sociology')");
-                         $fetch4 = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminal Sociology')");
+                         $query4 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminal Sociology')AND (tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
+
+                         $fetch4 = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Criminal Sociology') AND (tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
                          $percent4 = mysqli_num_rows($fetch4);
 
                         // Correctional Administration //
-                         $query5 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Correctional Administration')");
-                         $fetch5 = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Correctional Administration')");
+                         $query5 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Correctional Administration') AND (tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
+
+                         $fetch5 = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result, choose_question,accounts WHERE (tbl_quiz_result.test_id= choose_question.test_id) AND(choose_question.subject_name = 'Correctional Administration') AND (tbl_quiz_result.acc_id= accounts.acc_id) AND(accounts.acc_id= {$_SESSION['acc_id']})");
+
                          $percent5 = mysqli_num_rows($fetch5);
 
 
-                         while ($baws = mysqli_fetch_assoc($quiz_run) AND $cows =mysqli_fetch_assoc($query) AND $cows1 =mysqli_fetch_assoc($query1) ) {
-                             
-                            $quiz[] = $baws['subject_name'];
-                            $difficult = $baws['question_difficulty'];
+                         while ($baws = mysqli_fetch_assoc($quiz_run) AND $cows =mysqli_fetch_assoc($query) AND $cows1 =mysqli_fetch_assoc($query1) AND $cows2 =mysqli_fetch_assoc($query2) AND $cows3 =mysqli_fetch_assoc($query3)AND $cows4 =mysqli_fetch_assoc($query4) AND $cows5 =mysqli_fetch_assoc($query5) ) {
                            
-                            $ave [] = $cows['num'] / $percent;
-
+                            $ave [] = $cows['num'] / $percent; // Criminal jurisprudence
+                            $ave1[] =$cows1['num'] /$percent1; // Crime and Detection
+                            $ave2 [] = $cows2['num'] / $percent2; // Law enforcement
+                            $ave3 [] = $cows3['num'] / $percent3; // Criminalistics 
+                            $ave4 [] = $cows4['num'] / $percent4; // Criminal Sociology
+                            $ave5 [] = $cows5['num'] / $percent5; // Correctional Administration
                             
-                            
-
                         }
 
                         ?>
-                       <script >
-                             window.onload=function(){
-                                var ctx = document.getElementById("myChart").getContext("2d");
-                                var data = {
-                                    labels: ["Score Percentage"],
-                                    datasets: [{
-                                        label: <?php echo json_encode($quiz) ?>,
-                                        backgroundColor: "#0052cc",
-                                        data: <?php echo json_encode($ave) ?>
-                                    }, {
-                                        label: "Law Enforcement",
-                                        backgroundColor: "#ff5630",
-                                        data: []
-                                    }, {
-                                        label: "Criminalitics",
-                                        backgroundColor: "#ffab00",
-                                        data:[]
-                                    }, {
-                                        label: "Crime Detection and Investigation",
-                                        backgroundColor: ' #23AE22',
-                                        data: []
-                                    }, {
-                                        label: "Criminal Sociology",
-                                        backgroundColor: "#e81705",
-                                        data:[]
-                                    },{
-                                        label: "Correctional Administration",
-                                        backgroundColor: '#13169B',
-                                        data: []
-                                    }]
+                       
+                       <script>
+                              const ctx = document.getElementById('mychart');
 
-                                };
-                                var myBarChart = new Chart(ctx, {
-                                    type: 'bar',
-                                    data: data,
-                                    options: {
-                                        barValueSpacing: 20,
-                                        scales: {
-                                            yAxes: [{
-                                                ticks: {
-                                                    min: 0,
-                                                }
-                                            }]
+                              new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                  labels: ['Criminal Jurisprudence', 'Law Enforcement', 'Criminalistics','Crime Detection And Detection', 'Criminal Sociology', 'Correctional Administration'],
+                                  datasets: [{
+                                    label: "Score percentage",
+                                    data:[<?php echo json_encode($ave) ?>,<?php echo json_encode($ave2) ?>, <?php echo json_encode($ave3) ?>,<?php echo json_encode($ave1) ?>, <?php echo json_encode($ave4) ?>,<?php echo json_encode($ave5) ?>],
+                                    backgroundColor: [
+                                      "#0052cc",
+                                      "#ff5630",
+                                      "#ffab00",
+                                      "#23AE22",
+                                      "#e81705",
+                                      '#13169B',
+                                    ],
+                                    borderWidth: 1
+                                  }]
+                                },
+                                options: {
+                                  scales: {
+                                    y: {
+                                        min: 0,
+                                        max: 100,
+                                        ticks: {
+                                            stepSize: 20,
+                                            callback: function(value, index, values) {
+                                                return value + " %";
+                                            }            
                                         }
                                     }
-                                });
-                            }
-
-                         </script> 
+                                  }
+                                }
+                              });
+                          </script>
                     </div>
                 </div>
             </div>
@@ -349,79 +382,225 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                     <div class="card-body " style="font-size: 18px;">
                         <h4 class="fw-bold">My Status</h4>
                         <hr>
-                        <?php $query = "SELECT * FROM choose_question WHERE section='4C'AND status='active'";
-                           $query_result = mysqli_query($sqlcon,$query);
-
-                            $row = mysqli_num_rows($query_result);
-                              echo'<p class="fw-bold">Total of Quizzes: '.$row.'</p>';
+                        <?php 
+                        $based = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+                        while ($course = mysqli_fetch_assoc($based)) {
+                            if ($course['section'] == '4A') {
+                                $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A')");
+                                $row = mysqli_num_rows($query);
+                                echo'<p class="fw-bold">Total of Quizzes: '.$row.'</p>';
+                            }
+                            elseif ($course['section'] == '4B') {
+                                $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B')");
+                                $row = mysqli_num_rows($query);
+                                echo'<p class="fw-bold">Total of Quizzes: '.$row.'</p>';
+                            }
+                            elseif ($course['section'] == '4C') {
+                                $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C')");
+                                $row = mysqli_num_rows($query);
+                                echo'<p class="fw-bold">Total of Quizzes: '.$row.'</p>';
+                            }
+                        }
+                       
                         ?>
                         <hr>
-                        <?php $query = "SELECT * FROM tbl_marks_done";
-                            $query_result = mysqli_query($sqlcon,$query);
+                        <?php 
 
-                            $row = mysqli_num_rows($query_result);
+                        $query = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,choose_question,accounts WHERE (tbl_quiz_result.test_id =choose_question.test_id) AND (tbl_quiz_result.acc_id = accounts.acc_id) AND tbl_quiz_result.acc_id = '{$_SESSION['acc_id']}' ORDER BY ans_id DESC");
+
+                            $row = mysqli_num_rows($query);
                             echo'<p class="fw-bold">Quiz taken: '.$row.'</p>';
                         ?>
                         <hr>
-                        <p class="fw-bold">Best score in: Criminal jurisdinance</p>
+
+                        <?php
+                       // $best = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,choose_question,accounts ")
+
+                         ?>
+
+                        <p class="fw-bold">Best score in Quiz: Criminal jurisdinance</p>
                         <hr>
-                        <p class="fw-bold">Lowest score in: Criminal jurisdinance</p>
+                        <p class="fw-bold">Lowest score in Quiz: Criminal jurisdinance</p>
                         <hr>
-                        <p class="fw-bold">Average percentage: 85%</p>
+                        <?php
+                         $query = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}') ");
+
+                          $fetch = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id=tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id= accounts.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}')");
+
+                          $percent = mysqli_num_rows($fetch);
+
+                          while ($rows = mysqli_fetch_assoc($query)) {
+
+                             /// $ave ['ave'] = $rows['num'] / $percent;   
+                          }
+
+                         ?>
+                         <!--- <?php echo $ave['ave'] ?> -->
+                         <p class="fw-bold">Preboard general average:  %</p>
+                        
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8">
+           <div class="col-lg-8">
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title text-dark fw-bold">Preboard Exam Percentage</h4>
                     </div>
                     <div>
-                        <canvas id="mychart" style="height: 350px; width:100%;"></canvas>
+                        <canvas id="chart" style="height: 350px; width:100%;"></canvas>
                     </div>
+                   <?php
+
+                     $query = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminal Sociology') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}') ");
+
+                    $query1 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}') ");
+
+                    $query2 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Law Enforcement') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}') ");
+
+                    $query3 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminalistics') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}') ");
+
+
+                    $query4 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Crime Detection and Investigation') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}') ");
+
+                    $query5 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Correctional Administration') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}') ");
+
+
+                     while ($row= mysqli_fetch_assoc($query) AND $baws = mysqli_fetch_assoc($query1) AND $kaws = mysqli_fetch_assoc($query2) AND $meows = mysqli_fetch_assoc($query3) AND $whop = mysqli_fetch_assoc($query4) AND $pst = mysqli_fetch_assoc($query5)) {
+
+                          $per [] = $row['num'];
+                          $per1 [] = $baws['num'];
+                          $per2 [] = $kaws['num'];
+                          $per3 [] = $meows['num'];
+                          $per4 [] = $whop['num'];
+                          $per5 [] = $pst['num'];
+                     }
+                     ?>
                     <script>
-                        const ctx = document.getElementById('mychart').getContext('2d');
-                        const mychart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: ['Criminal Jurisprudence','Law Enforcement','Criminalistics','Crime Detection & Investigation','Criminal Sociology','Correctional Administration'],
+                    window.onload=function(){
+                            var ctx = document.getElementById("chart").getContext("2d");
+                            var data = {
+                                labels: [""],
                                 datasets: [{
-                                    label: 'Score Percentage',
-                                    data: [90,92,88,76,85,83],
-                                    backgroundColor: [
-                                    '#0052cc',
-                                    '#ff5630',
-                                    '#ffab00',
-                                    '#23AE22',
-                                    '#e81705',
-                                    '#13169B',
-                                        
-                                        
-                                    ],
-                                    borderColor: [
-                                    'rgb(15, 157, 88)',
-                                    'rgb(204, 204, 204)',
-                                    'rgb(204, 204, 204)',
-                                    'rgb(204, 204, 204)',
-                                        
-                                    ],
-                                    borderWidth: 1
+                                    label: "Criminal Jurisprudence",
+                                    backgroundColor: "#0052cc",
+                                    data: <?php echo json_encode($per1) ?> 
+                                }, {
+                                    label: "Law Enforcement",
+                                    backgroundColor: "#ff5630",
+                                    data: <?php echo json_encode($per2) ?>
+                                }, {
+                                    label: "Criminalistics",
+                                    backgroundColor: "#ffab00",
+                                    data:<?php echo json_encode($per3) ?>
+                                }, {
+                                    label: "Crime Detection and Investigation",
+                                    backgroundColor: ' #23AE22',
+                                    data: <?php echo json_encode($per4) ?>
+                                }, {
+                                    label: "Criminal Sociology",
+                                    backgroundColor: "#e81705",
+                                    data:<?php echo json_encode($per) ?>,
+                                },{
+                                    label: "Correctional Administration",
+                                    backgroundColor: '#13169B',
+                                    data: <?php echo json_encode($per5) ?>
                                 }]
-                            },
-                            options: {
-                                indexAxis: 'y',
-                                scales: {
-                                    y: {
-                                       ticks: { color: '##000000', beginAtZero: true , precision: 0 }
+
+                            };
+                            var myBarChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: data,
+                                options: {
+                                    indexAxis: 'y',
+                                    barValueSpacing: 20,
+                                    min: 0,
+                                    scales: {
+                                        x: {
+                                            min: 0,
+                                            max: 100,
+                                            ticks: {
+                                                stepSize: 20,
+                                                callback: function(value, index, values) {
+                                                    return value + " %";
+                                                }            
+                                            }
+                                        }
                                     }
                                 }
-                            },
-                        });
-                    </script>
+                            });
+                        }
+
+                     </script> 
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
+    <!-- Footer -->
+  <footer class="text-center text-lg-start text-white ft mt-3">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-between p-4" style="background-color: #8C0000;">
+      <!-- Left -->
+      <div class="me-5 ">
+        <h5>Get connected with us on social networks:</h5>
+      </div>
+      <!-- Left -->
+    </section>
+
+    <!-- Section: Links  -->
+    <section>
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold">College of Criminal Justice and Education LSPU Santa Cruz Campus</h6>
+            <hr class="mb-4 mt-0 d-inline-block mx-auto"style="width: 90%; background-color: #7c4dff; height: 2px"/>
+            <p>
+              Here you can use the links and contacts to learn more about 
+              the College of Criminal Justice and Education LSPU.
+            </p>
+          </div>
+        
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Useful links</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 100px; background-color: #7c4dff; height: 2px"
+                />
+            <p>
+              <a href="https://www.facebook.com/groups/LSPU.CRIMINOLOGY.SCC.Official" class="text-white"><i class='bx-fw bx bxl-facebook-circle me-2'></i> Facebook: @LSPU CRIMINOLOGY SCC Official</a>
+            </p>
+            <p>
+              <a href="#!" class="text-white"><p><i class="fas fa-envelope mr-3 me-2"></i>Email: marklito.repugia@lspu.edu.ph</a>
+            </p>
+          </div>
+         
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Contact</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #7c4dff; height: 2px"
+                />
+            <p><i class="fas fa-home mr-3 me-2"></i>ccje.scc@lspu.edu.ph</p>
+            <p><i class="fas fa-envelope mr-3 me-2"></i>marklito.repugia@lspu.edu.ph</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3">
+      © 2022 Copyright: College of Criminal Justice and Education LSPU Sta. Cruz Campus
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
     
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
