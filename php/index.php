@@ -256,6 +256,10 @@ elseif (isset($_GET['already_exists'])) {
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
   </script>';
 }
-
+elseif (isset($_GET['forgot'])) {
+  echo ' <script> swal("Account has been saved", " clicked the okay!", "success");
+  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
+  </script>';
+}
 ?>
 </html>

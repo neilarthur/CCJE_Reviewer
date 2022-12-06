@@ -3,6 +3,35 @@
 session_start();
 
 require_once 'conn.php';
+
+
+if (isset($_POST['pass_forg'])) {
+
+	$id = $_POST['id'];
+	$new = $_POST['new_pass'];
+	$conf = $_POST['c_pass'];
+
+	if ($new == $conf) {
+
+		$valid = "UPDATE accounts SET password='$new' WHERE email_address='$id'";
+		$valid_run = mysqli_query($sqlcon,$valid);
+
+		if ($valid_run) {
+			
+			header("location: index.php?forgot");
+		}
+		else {
+
+			header("location: index.php");
+		}
+	}
+	else {
+
+		header("location:index.php");
+	}
+
+
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,38 +91,24 @@ require_once 'conn.php';
 		</div>
 	</nav>
 	<!-- Log In form -->
-	<div class="login-form mt-3">    
-		<?php
-
-			if (isset($_SESSION['status'])) { ?>
-			<div class="alert alert-success alert-dismissible fade show" role="alert">
-				<strong><?php echo $_SESSION['status']; ?></strong>
-				<button type="button" class=" btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-			<?php
-
-			unset($_SESSION['status']);
-			}
-			elseif (isset($_SESSION['status_1'])) { ?>
-			<div class="alert alert-warning alert-dismissible fade show" role="alert">
-				<strong><?php echo $_SESSION['status_1']; ?></strong>
-				<button type="button" class=" btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-			<?php 
-			unset($_SESSION['status_1']);
-			}
-			?>
-		<form action="resent_pass.php" method="post" class="px-4">
+	<div class="login-form mt-3">
+		<form action="for_pass_reset.php" method="post" class="px-4">
 			<div class="avatar mt-2">
 				<img src="../assets/pics/CCJE.png" alt="">
 			</div>
-			<h4 class="modal-title mt-3 fw-bold">Email Address</h4>
-			<div class="input-group mb-4">
-				<span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-				<input type="text" name="email_address" class="form-control" placeholder="Enter your email address" required="required" autocomplete="off">
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
+				<input type="hidden" name="id" value="<?php echo $_GET['email']; ?>">
+				<input type="password" name="new_pass" class="form-control" placeholder="Enter new password" required="required" autocomplete="off"  id="password-field">
+				<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password input-group-text bg-white mx-auto pt-2" style="padding-right: 30px;"></span>
+			</div>
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
+				<input type="password" name="c_pass" class="form-control" placeholder="Confirm new password" required="required" autocomplete="off" id="password-view">
+				<span toggle="#password-view" class="fa fa-fw fa-eye field-icon toggle-pass input-group-text bg-white mx-auto pt-2" style="padding-right: 30px;"></span>
 			</div>
 			<div class="d-grid gap-2 mt-2 mb-4">
-				<input type="submit" name="reset_pass" class="btn btn-primary btn-lg rounded-pill" value="Send Password Reset Link">
+				<input type="submit" name="pass_forg" class="btn btn-primary btn-lg rounded-pill" value="Send Password Reset Link">
 			</div>
 		</form>
 	</div>
@@ -173,5 +188,29 @@ require_once 'conn.php';
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
 
+<script type="text/javascript">
+$(".toggle-password").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+</script>
+<script type="text/javascript">
+$(".toggle-pass").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+</script>
 
 </html>
