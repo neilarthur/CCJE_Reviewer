@@ -847,7 +847,7 @@ $suppd .= "</select>";
 										<tbody>
 											<?php
 
-											$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+											$accounts = mysqli_query($sqlcon,"SELECT * FROM choose_question ");
 
 											while ($row = mysqli_fetch_assoc($accounts)) {
 												if ($row['section']=='4A'){

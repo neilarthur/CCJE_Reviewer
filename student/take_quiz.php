@@ -134,7 +134,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   						 	
   						 	if ($course['section'] == '4A') {
   						 		
-  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A')");
+  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A') AND (stat_question='Ready')");
 
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
@@ -177,11 +177,13 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  										else { 
 	   	  										?>
 	   	  										<form action="take_exam_status.php" method="POST">
-	   	  											<input type="hidden" name="ddd" value="<?php echo $rows['time_limit']; ?>">
-
-	   	  											<input type="hidden" name="ccc" value="<?php echo $rows['test_id']; ?>">
-	   	  											<input type="hidden" name="aaa" value="<?php echo $rows['total_quest']; ?>">
-	   	  											<input type="hidden" name="coders" value="<?php echo $_SESSION['acc_id']; ?>">
+	   	  											<!-- ddd-->
+   	  												<input type="hidden" name="time" value="<?php echo $rows['time_limit']; ?>">
+   	  												<!-- ccc -->
+   	  												<input type="hidden" name="test" value="<?php echo $rows['test_id']; ?>">
+   	  												<!-- aaa -->
+   	  												<input type="hidden" name="t_quest" value="<?php echo $rows['total_quest']; ?>">
+   	  												<input type="hidden" name="acc" value="<?php echo $_SESSION['acc_id']; ?>">
 
 	   	  											
 
@@ -218,7 +220,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   						 		}
   						 	}elseif ($course['section'] == '4B') {
 
-  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B')");
+  						 		$query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B') AND (stat_question='Ready')");
 
   						 		if (mysqli_num_rows($query) ==0) { ?>
 
@@ -259,12 +261,13 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  										else { 
 	   	  										?>
 	   	  										<form action="take_exam_status.php" method="POST">
-	   	  											<input type="hidden" name="ddd" value="<?php echo $rows['time_limit']; ?>">
-	   	  											<input type="hidden" name="bbb" value="<?php echo $rows['passing_rate']; ?>">
-
-	   	  											<input type="hidden" name="ccc" value="<?php echo $rows['test_id']; ?>">
-	   	  											<input type="hidden" name="aaa" value="<?php echo $rows['total_quest']; ?>">
-	   	  											<input type="hidden" name="coders" value="<?php echo $_SESSION['acc_id']; ?>">
+	   	  											    <!-- ddd-->
+	   	  												<input type="hidden" name="time" value="<?php echo $rows['time_limit']; ?>">
+	   	  												<!-- ccc -->
+	   	  												<input type="hidden" name="test" value="<?php echo $rows['test_id']; ?>">
+	   	  												<!-- aaa -->
+	   	  												<input type="hidden" name="t_quest" value="<?php echo $rows['total_quest']; ?>">
+	   	  												<input type="hidden" name="acc" value="<?php echo $_SESSION['acc_id']; ?>">
 
 	   	  											
 

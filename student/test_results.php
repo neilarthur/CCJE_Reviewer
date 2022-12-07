@@ -228,7 +228,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                         <td><?php echo $rows['subjects']; ?></td>
                                         <td><?php echo $rows['total_question']; ?></td>
                                         <td><?php echo $rows['score']; ?></td>
-                                        <td><?php echo $rows['score_percent']; ?></td>
+                                        <td><?php echo $rows['score_percent']; ?> %</td>
                                         <td>1hr 30mins</td>
                                         <?php if ($rows['result']=='passed') { ?>
                                                  <td class="text-success text-uppercase fw-bold"><?php echo $rows['result'] ?></td>
