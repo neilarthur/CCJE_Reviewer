@@ -12,6 +12,37 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
     exit;
 }
 
+
+if (isset($_POST['submit'])) {
+
+	$acc_id = $_POST['acc_id'];
+	$current = $_POST['c_password'];
+	$new = $_POST['new_password'];
+	$conf_pass = $_POST['conf_password'];
+
+
+	$select_pass = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id='$acc_id'");
+
+	$fetch_pass = mysqli_fetch_array($select_pass);
+
+	$run_pass = $fetch_pass['password'];
+
+	if ($new == $conf_password) {
+		
+		$update_pass = "UPDATE accounts SET password='$new' WHERE acc_id='$acc_id'";
+		$query_pass = mysqli_query($sqlcon,$update_pass);
+
+		if ($query_pass) {
+			
+			header("location: accounts.php");
+		}
+		else {
+
+			echo mysqli_error($sqlcon);
+		}
+	}
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -195,7 +226,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 								<img class="img-fluid center" alt="" id="picture" src="../assets/pics/change.jpg "width="800" height="800"/>
 							</div>
 							<div class="col-lg-7 pe-5">
-								<form method="POST" action="change_password.php">
+								<form method="POST" action="change-pass.php">
 									<div class="card h-100 mt-4 shadow">
 										<div class="card-body m-2">
 											<h4 class=" fw-bolder mb-3 text-uppercase text-center text-primary" style="font-family: 'Nunito', sans-serif;">Change Password</h4>

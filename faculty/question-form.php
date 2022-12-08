@@ -295,6 +295,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								<div class="card-body">
 									<div class="card-footer bg-white border-0 d-flex justify-content-center mb-1">
 										<button type="submit" class="btn btn-primary mx-2 add_item_btn"><i class="fas fa-plus-circle me-2"></i>Add</button>
+
+										<input type="hidden" name="logs_his" value="<?php echo $_SESSION['acc_id']; ?>">
 										
 										<button type="submit" name="create" class="btn btn-success mx-2" id="create_btn"><i class="fas fa-check-circle me-2"></i>Submit</button>
 

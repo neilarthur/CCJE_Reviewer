@@ -427,7 +427,23 @@ $suppd .= "</select>";
 												    	<td>
 												    		<div class="d-flex flex-row">
 													      		<button data-id="<?php echo $rows['question_id']; ?>" type="button"class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-search-plus"></i></button>
-		                                                		<button type="button" class="btn btn-secondary deletebtn  mx-2" data-bs-toggle="modal" ><i class="fas fa-trash-alt"></i></button>
+													      		<?php
+
+													      		$del_quer = mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id='{$_GET['id']}'");
+
+													      		while ($qwer = mysqli_fetch_assoc($del_quer)) {
+													      		
+														      		if ($qwer['stat_question']=='No question') {
+														      			
+														      			echo '<button type="button" class="btn btn-secondary deletebtn  mx-2" data-bs-toggle="modal" ><i class="fas fa-trash-alt"></i></button>';
+														      		}
+														      		else {
+
+														      			echo '<button type="button" class="btn btn-secondary  mx-2"><i class="fas fa-trash-alt"></i></button>';
+														      		}
+													      		}
+													      		?>
+		                                                		
 		                                                	</div>
 		                                                </td>
 												    </tr>
@@ -485,7 +501,7 @@ $suppd .= "</select>";
 	    			<form class="form" action="../php/delete_test_yourself.php" method="POST">
 	    				<div class="modal-body">
 	    					<div class="container d-flex justify-content-center">
-	    						<input type="hidden" name="update_id" id="delete_id">
+	    						<input type="text" name="update_id" id="delete_id">
 	    						<input type="hidden" name="total" value="<?php echo $_GET['total']?>">
 	    						<input type="hidden" name="lets" value="<?php echo $_GET['id']?>">
 	    						<p>Do you really want to delete these question?</p>

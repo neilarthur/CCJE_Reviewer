@@ -13,6 +13,8 @@ if (isset($_POST["create"])) {
 	$option_d = $_POST['option_d'];
 	$correct_ans = $_POST['correct_ans'];
 	$acc_id = $_POST['acc'];
+	$logs_his = $_POST['logs_his'];
+	$acts = "Added an Question";
 
 	foreach ($questions_title as $key => $value) {
 
@@ -23,7 +25,17 @@ if (isset($_POST["create"])) {
 
 		if ($query) {
 
-			header("location:../faculty/testbank.php?testsuccess");
+			$act_log = "INSERT INTO logs (acc_id,login_time,action) VALUES('$logs_his',now(),'$acts')";
+			$act_logs_query = mysqli_query($sqlcon,$act_log);
+
+			if ($act_logs_query) {
+
+				header("location:../faculty/testbank.php?testsuccess");
+			}
+			else {
+				
+				header("location:../faculty/testbank.php?testerror");
+			}
 		}
 		else {
 			header("location:../faculty/testbank.php?testerror");

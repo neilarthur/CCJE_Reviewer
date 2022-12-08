@@ -506,6 +506,7 @@ $suppd .= "</select>";
 			      					    <input type="date" name="start_time" class="form-control" required=>
 			      					</div>
 			      					<div class="input-group mt-2">
+			      						<input type="hidden" name="history_acc" value="<?php echo $_SESSION['acc_id']; ?>">
 			      						<span class="input-group-text border-0 bg-white fw-bold">Close the quiz</span>
 			      					    <input type="date" name="close_time" class="form-control" required= >
 			      					</div>

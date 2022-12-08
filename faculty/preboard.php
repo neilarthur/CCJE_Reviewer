@@ -447,6 +447,7 @@ function getName($n) {
 					      	</div>
 					   </div>
 					   <div class="modal-footer d-flex justify-content-center border-0 mt-3 mb-2">
+					   	<input type="hidden" name="acc_ids" value="<?php echo $_SESSION['acc_id']; ?>">
 					   	<button type="submit" name="create" onclick="getInputValue();"  class="btn btn-success" ><i class="fas fa-save me-2"></i>Save and Display</button>
 					   	<button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-times me-2"></i>Cancel</button>
 				      </div>

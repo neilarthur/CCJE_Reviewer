@@ -15,6 +15,8 @@ if (isset($_POST["create"])) {
 	$prep = $_POST['prepared_by'];
 	$start_time = $_POST['start_time'];
 	$close_time = $_POST['close_time'];
+	$history_acc = $_POST['history_acc'];
+	$acs = "Added an quiz";
 
 	$stat_question = "No question";
 
@@ -25,9 +27,18 @@ if (isset($_POST["create"])) {
 
 
 	if ($sql_rows) {
-		
-		header("location:../faculty/testyourself.php?testsuccess");
-		
+
+		$history = "INSERT INTO logs(acc_id,login_time,action) VALUES ('$history_acc',now(),'$acs')";
+		$logs_history = mysqli_query($sqlcon,$history);
+
+		if ($logs_history) {
+
+			header("location:../faculty/testyourself.php?testsuccess");	
+		}
+		else {
+			
+			header("location: ../faculty/testyourself.php?testerror");
+		}
 	}
 	else {
 

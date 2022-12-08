@@ -11,13 +11,10 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 
 	$last_id = $_SESSION['login_id'];
 
-	$user_logout = "User has been logout";
-
-
 	$myDate = date("d-m-y h:i:s");
 
 
-	$logout_Querry = "UPDATE logs SET action= '$user_logout', logout_time =  now() WHERE log_id = '$last_id'";
+	$logout_Querry = "UPDATE logs SET logout_time =  now() WHERE log_id = '$last_id'";
 	$logs2 = mysqli_query($sqlcon,$logout_Querry);
 
 	if ($logs2) {

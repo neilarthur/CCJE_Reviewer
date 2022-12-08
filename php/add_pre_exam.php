@@ -20,6 +20,10 @@ if (isset($_POST['create'])) {
 	$approval="Pending";
 	$status = "active";
 
+	$acc_ids = $_POST['acc_ids'];
+
+	$acts = " Added an exam ";
+
 	$sacs = mysqli_query($sqlcon,"SELECT email_address FROM accounts WHERE role ='student'");
 
 	$mail = new PHPMailer\PHPMailer\PHPMailer();
@@ -107,8 +111,19 @@ if (isset($_POST['create'])) {
 		$query_pre_exam = mysqli_query($sqlcon,$pre_exam_insert);
 
 		if ($query_pre_exam) {
-			
-			header("location: ../faculty/preboard.php");
+
+
+			$logs_run = "INSERT INTO logs(acc_id,login_time,action) VALUES ('$acc_ids',now(),'$acts')";
+			$logs_query = mysqli_query($sqlcon,$logs_run);
+
+			if ($logs_query) {
+
+				header("location: ../faculty/preboard.php");
+			}
+			else {
+
+				echo mysqli_error($sqlcon);
+			}
 		}
 		else{
 
