@@ -138,7 +138,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Examination Analytics</li>
+									<li class="breadcrumb-item"><a href="analytics.php" style="text-decoration: none;">Examination Analysis</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Examination summary</li>
 								</ol>
 							</nav>
 						</div>
@@ -192,59 +193,128 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					<div class="row">
 						<div class="col d-flex justify-content">
 							<div class="w-50">
-								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Examination Analytics</h2>
+								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Examination Summary</h2>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col ">
-								<div class="card">
+					    <div class="row">
+							<div class="col-lg-7">
+								<div class="card h-100 w-100 mb-1">
 									<div class="card-body rounded-3 m-3 table-responsive-lg">
-										<table class="table table-hover align-middle" id="resultTab">
+										<h5 class="card-title fw-bold text-uppercase">Difficulty</h5>
+										<p class="mb-3">Indicates the percentage of students who answered questions correctly.</p>
+										<p>Easy (80%)</p>
+										<div class="progress mb-2">
+											<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 80%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+											</div>
+										</div>
+										<p>Moderate (60%)</p>
+										<div class="progress mb-2">
+											<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 60%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+											</div>
+										</div>
+										<p>Hard (20%)</p>
+										<div class="progress">
+											<div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: 20%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+											</div>
+										</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="col-lg-5">
+	                        	<div class="card mb-2" style="height :49%">
+	                        		<div class="card-body">
+	                        			<div class="row no-gutters align-items-center">
+	                        				<div class="col mr-2">
+	                        					<div class="text-xs font-weight-bold text-dark text-uppercase mb-2">
+	                        						Possible Questions
+	                        						<?php
+	                        						$id = $_GET['id'];
+
+												    $quest = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_choose_quest,tbl_pre_question WHERE (tbl_pre_choose_quest.question_id =test_question.question_id) AND (tbl_pre_choose_quest.pre_exam_id=tbl_pre_question.pre_exam_id) AND tbl_pre_choose_quest.pre_exam_id ='$id' " );
+
+												    $rows =mysqli_num_rows($quest);
+
+	                        						echo '<h1  class="mb-0 fw-bold mt-2"><b>'.$rows.' </b></h1>';
+	                        						?>
+	                        					</div>
+	                        				</div>
+			                                <div class="col-auto">
+			                                     <span class="fa-stack fa-2x me-4 mt-4">
+			                                     	<i class="far fa-question-circle fa-stack-1x fa-2x ms-3  text-primary"></i>
+			                                    </span>                                        
+			                                </div>
+			                            </div>
+	                        		</div>
+	                        	</div>
+	                        	<div class="card mb-2" style="height :49%">
+	                        		<div class="card-body">
+	                        			<div class="row no-gutters align-items-center">
+	                        				<div class="col mr-2">
+	                        					<div class="text-xs font-weight-bold text-dark text-uppercase mb-2">
+	                        						Completed Attempts
+	                        						<h1  class="mb-0 mt-2"><b>12</b></h1>
+	                        					</div>
+	                        				</div>
+			                                <div class="col-auto">
+			                                     <span class="fa-stack fa-2x me-4 mt-4">
+			                                     	<i class="fas fa-check-circle  fa-stack-1x fa-2x ms-3 text-success"></i>
+			                                    </span>                                        
+			                                </div>
+			                            </div>
+	                        		</div>
+	                        	</div>
+	                        </div>
+	                    </div> 
+	                </div>
+	                <div class="row">
+	                	<div class="col py-3" style="padding-right: 35px;">
+	                		<div class="card">
+	                			<div class="card-body">
+	                				<div class="table-responsive-lg">
+	                					<table class="table table-hover align-middle" id="resultTab">
 											<thead>
 												<tr>
 													<th scope="col">No.</th>
-													<th scope="col">Area of Examination</th>
-													<th scope="col">Total of items</th>
-													<th scope="col">Time Limit</th>
-													<th scope="col">Prepared by</th>
-													<th scope="col" class="d-flex justify-content-center">Action</th>
+													<th scope="col">Question</th>
+													<th scope="col">Graded attempts</th>
+													<th scope="col">Not yet answered</th>
+													<th scope="col">Percentage</th>
+													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
 											<tbody>
 												<?php
+												$id = $_GET['id'];
 
-												$manage = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by)");
-
-												$counter = 1;
-												while ($rows= mysqli_fetch_assoc($manage)) {
-													
+												$quest = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_choose_quest,tbl_pre_question WHERE (tbl_pre_choose_quest.question_id =test_question.question_id) AND (tbl_pre_choose_quest.pre_exam_id=tbl_pre_question.pre_exam_id) AND tbl_pre_choose_quest.pre_exam_id ='$id' " ); 
+												$count =1;
+												while ($rows= mysqli_fetch_assoc($quest)) {
 												 ?>
 												<tr>
-													<td><?php echo $counter; ?></td>
-	                                                <td><?php echo $rows['subjects']; ?></td>
-	                                                <td class="ps-5"><?php echo $rows['total_question']; ?></td>
-	                                                <td><?php echo $rows['time_limit'] /3600 ; ?>hr(s)</td>
-	                                                <td><?php echo $rows['first_name'] ." ".$rows['last_name']; ?></td>
+													<td><?php echo $count; ?></td>
+	                                                <td><?php echo $rows['questions_title']; ?></td>
+	                                                <td>30</td>
+	                                                <td>15</td>
+	                                                <td>100%</td>
 	                                                <td>
-	                                                	<div class= "d-flex justify-content-center">
-	                                                		<a href="question_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>" class="btn btn-secondary mx-2"><i class="fas fa-file-alt"></i></a>
-	                                                		<button class="btn btn-primary"><i class="fas fa-download"></i></button>
+	                                                	<div class="d-flex flex-row">
+	                                                		<button data-id="<?php echo $rows['question_id']; ?>" type="button"class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 	                                                	</div>
 	                                                </td>
 	                                            </tr>
-	                                        <?php $counter ++; } ?>
+	                                        <?php $count ++; } ?>
 	                                        </tbody>
 	                                    </table>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
+	                				</div>
+	                			</div>
+	                		</div>
+	                	</div>
 	                </div>
 				</div>
 			</div>
 		</section>
 		<!-- View Modal-->
-		<div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<!-- <div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -252,7 +322,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<!-- Horizantal graph Chart-->
 						<canvas id="myChart" style="height: 100px; width: 250px;"></canvas>
 						<script>
 							const ctx = document.getElementById('myChart').getContext('2d');
@@ -309,7 +378,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --->
+		
 		<!-- Logout Modal-->
 	    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	        <div class="modal-dialog">
@@ -358,6 +428,25 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	    		</div>
 	    	</div>
 	    </div>
+	    <!--Question analysis Modal -->
+		<div class="modal fade" id="viewToggle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title fw-bold">Question analysis</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mugs">
+							
+						</div>					           
+					</div>
+					<div class="modal-footer border-0">
+						<button type="button" class="btn btn-danger pb-2 px-4" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 </body>
@@ -390,4 +479,23 @@ let arrow = document.querySelectorAll(".arrow");
   	 });
   });
 </script>
+<!-- preview modal --->
+ <script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.view_btn').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: '../php/view_analysis.php',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.mugs').html(response);
+          $('#viewToggle').modal('show');
+        }
+      });
+    });
+   });
+ </script>
 </html>

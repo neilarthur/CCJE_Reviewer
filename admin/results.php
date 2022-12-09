@@ -194,7 +194,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 							</div>
 						</div>
 					</div>
-					<div class="tab-content" id="nav-tabContent">
+						<div class="tab-content" id="nav-tabContent">
 						<nav>
 							<div class="nav nav-pills mt-2" id="nav-tab" role="tablist">
 								<button class="nav-link active" id="nav-home-tab" data-bs-toggle="pill" data-bs-target="#nav-4A" type="button" role="tab" aria-controls="nav-4A" aria-selected="true" style="width: 33%;"><i class="fas fa-user-graduate"></i> 4A</button>
@@ -230,28 +230,41 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<th scope="col">No.</th>
 														<th scope="col">Student Name</th>
 														<th scope="col">Year & Section</th>
+														<th scope="col">Area of Exam</th>
 														<th scope="col">Total Questions</th>
 														<th scope="col">Time Limit</th>
-														<th scope="col">Answered In</th>
-														<th scope="col" style="text-align: center;">Action</th>
+														<th scope="col"style="padding-left: 30px;">Score</th>
+														<th scope="col" class="text-center">Action</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td hidden>ID</td>
-														<td>1</td>
-		                                                <td>Ralph Vincent Pagcaliwagan</td>
-		                                                <td>4A</td>
-		                                                <td>600</td>
-		                                                <td>360 mins</td>
-		                                                <td >300 mins</td>
-		                                                <td>
-		                                                	<div class="ps-5">
-		                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
-		                                                		<button class="btn btn-secondary  mx-2" data-bs-toggle="modal" data-bs-target="#Delete"type="button"><i class="fas fa-trash"></i></button>
-		                                                	</div>
-		                                                </td>
-		                                            </tr>
+													<?php
+
+													$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id)  AND(accounts.section='4A')"); 
+													$counter =1;
+													while ($row = mysqli_fetch_array($result)) {
+														if ($row['section']=='4A') { ?>
+															
+															 <tr>
+																	<td hidden>ID</td>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $row['last_name']." ".$row['first_name']." ".$row['middle_name']?></td>
+					                                                <td class="ps-5"><?php echo $row['section'] ?></td>
+					                                                <td><?php echo $row['subjects'] ?></td>
+					                                                <td class="ps-5"><?php echo $row['total_question'] ?></td>
+					                                                <td><?php echo $row['time_limit'] /3600?> hr(s)</td>
+					                                                <td style="padding-left: 35px;" ><?php echo $row['score'] ?></td>
+					                                                <td>
+					                                                	<div class="text-center">
+					                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															
+														<?php }
+													$counter++;  }
+												 ?>
 		                                        </tbody>
 		                                    </table>
 		                                </div>
@@ -287,28 +300,43 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<th scope="col">No.</th>
 														<th scope="col">Student Name</th>
 														<th scope="col">Year & Section</th>
+														<th scope="col">Area of Exam</th>
 														<th scope="col">Total Questions</th>
 														<th scope="col">Time Limit</th>
-														<th scope="col">Answered In</th>
-														<th scope="col" style="text-align: center;">Action</th>
+														<th scope="col"style="padding-left: 30px;">Score</th>
+														<th scope="col" class="text-center">Action</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td hidden>ID</td>
-														<td>1</td>
-		                                                <td>Ralph Vincent Pagcaliwagan</td>
-		                                                <td>4B</td>
-		                                                <td>600</td>
-		                                                <td>360 mins</td>
-		                                                <td >300 mins</td>
-		                                                <td>
-		                                                	<div class="ps-5">
-		                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
-		                                                		<button class="btn btn-secondary  mx-2" data-bs-toggle="modal" data-bs-target="#Delete"type="button"><i class="fas fa-trash"></i></button>
-		                                                	</div>
-		                                                </td>
-		                                            </tr>
+													<?php
+
+													$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id)  AND(accounts.section='4B')"); 
+
+													$counter= 1;
+													while ($row = mysqli_fetch_array($result)) {
+														if ($row['section']=='4B') { ?>
+															
+															 <tr>
+																	<td hidden>ID</td>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $row['last_name']." ".$row['first_name']." ".$row['middle_name']?></td>
+					                                                <td class="ps-5"><?php echo $row['section'] ?></td>
+					                                                <td><?php echo $row['subjects'] ?></td>
+					                                                <td class="ps-5"><?php echo $row['total_question'] ?></td>
+					                                                <td><?php echo $row['time_limit'] /3600?> hr(s)</td>
+					                                                <td class="ps-5" ><?php echo $row['score'] ?></td>
+					                                                <td>
+					                                                	<div class="text-center">
+					                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															
+														<?php }
+													$counter++;  }
+												 ?>
+													
 		                                        </tbody>
 		                                    </table>
 		                                </div>
@@ -320,7 +348,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 							<div class="row">
 								<div class="col ">
 									<div class="card">
-										<div class="card-body rounded-3 table-responsive-xl">
+										<div class="card-body rounded-3  table-responsive-xl">
 											<div class="row justify-content-between mb-2">
 												<div class="col-lg-4">
 													<div class="input-group mt-2">
@@ -344,28 +372,42 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<th scope="col">No.</th>
 														<th scope="col">Student Name</th>
 														<th scope="col">Year & Section</th>
+														<th scope="col">Area of Exam</th>
 														<th scope="col">Total Questions</th>
 														<th scope="col">Time Limit</th>
-														<th scope="col">Answered In</th>
-														<th scope="col" style="text-align: center;">Action</th>
+														<th scope="col"style="padding-left: 30px;">Score</th>
+														<th scope="col" class="text-center">Action</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td hidden>ID</td>
-														<td>1</td>
-		                                                <td>Ralph Vincent Pagcaliwagan</td>
-		                                                <td>4C</td>
-		                                                <td>600</td>
-		                                                <td>360 mins</td>
-		                                                <td >300 mins</td>
-		                                                <td>
-		                                                	<div class="ps-5">
-		                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
-		                                                		<button class="btn btn-secondary  mx-2" data-bs-toggle="modal" data-bs-target="#Delete"type="button"><i class="fas fa-trash"></i></button>
-		                                                	</div>
-		                                                </td>
-		                                            </tr>
+													<?php
+
+													$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id)  AND(accounts.section='4C')"); 
+													$counter = 1;
+													while ($row = mysqli_fetch_array($result)) {
+														if ($row['section']=='4C') { ?>
+															
+															 <tr>
+																	<td hidden>ID</td>
+																	<td><?php echo $counter ;?></td>
+					                                                <td><?php echo $row['last_name']." ".$row['first_name']." ".$row['middle_name']?></td>
+					                                                <td class="ps-5"><?php echo $row['section'] ?></td>
+					                                                <td><?php echo $row['subjects'] ?></td>
+					                                                <td class="ps-5"><?php echo $row['total_question'] ?></td>
+					                                                <td><?php echo $row['time_limit'] /3600?> hr(s)</td>
+					                                                <td class="ps-5" ><?php echo $row['score'] ?></td>
+					                                                <td>
+					                                                	<div class="text-center" >
+					                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
+					                                                	</div>
+					                                                </td>
+					                                            </tr>
+
+															
+														<?php }
+													$counter++;  }
+												 ?>
+													
 		                                        </tbody>
 		                                    </table>
 		                                </div>

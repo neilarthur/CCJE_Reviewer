@@ -229,9 +229,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                            <th>
                                               <b><span><?php echo $number.". &nbsp;". $shows['questions_title']; ?></span></b>
                                             </th>
-                                            <th>
-                                              <span><p class="d-flex justify-content-end"><span><i class="fas fa-asterisk fa-xs text-danger me-1"></i></span> 1 point</p></span>
-                                            </th>
                                         </tr>
                                         <tr>
                                             <td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="A"> A. <?php echo $shows['option_a']; ?></span></td>
