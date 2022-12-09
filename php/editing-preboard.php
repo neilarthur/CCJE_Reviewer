@@ -220,7 +220,7 @@ function getName($n) {
 		        <!-- Main Content-->
 		        <div class="col py-3 overflow-auto">
 					<div class="container-fluid ">
-						<form action="#" method="POST">
+						<form action="save_pre_data.php" method="POST">
 							<div class="col-lg-12">
 								<div class="card">
 									<div class="card-body">
@@ -275,7 +275,8 @@ function getName($n) {
 													   ?>   
 												</span>
 											</div>
-											<input class="btn btn-success px-4 pb-2" type="submit" value="Save">
+											<input type="hidden" name="pre_boards" value="<?php echo $_GET['id']; ?>">
+											<input class="btn btn-success px-4 pb-2" type="submit" name="save" value="Save">
 										</div>
 									</div>
 								</div>

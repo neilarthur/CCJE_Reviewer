@@ -125,18 +125,40 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 						<tbody>
 							<?php
 
-							
-
 							$code = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question");
 
-							while ($rows = mysqli_fetch_assoc($code)) { ?>
+							while ($rows = mysqli_fetch_assoc($code)) {
+
+								$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '{$rows['pre_exam_id']}'");
+
+								$shine = mysqli_fetch_array($boast);
+								?>
 							
 							<tr>
 								<td><?php echo $rows['subjects']; ?></td>
 								<td><?php echo $rows['total_question']; ?></td>
 								<td><?php echo $rows['time_limit']; ?></td>
 								<td>
-									<button class="btn btn-success text-uppercase"><a href="#" class="text-white" data-bs-toggle="modal" data-bs-target="#access" style="text-decoration: none;"><i class='bx bxs-hourglass-top me-2'></i>Start</a></button>
+
+									<?php
+
+									$board = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE acc_id='{$_SESSION['acc_id']}' AND pre_exam_id='{$rows['pre_exam_id']}'");
+
+									$drove = mysqli_fetch_assoc($board);
+
+									if (mysqli_num_rows($board) ==0) { ?>
+
+										<button class="btn btn-success text-uppercase"><a href="#" data-id="<?php echo $rows['pre_exam_id'] ?>" class="text-white suc_code" data-bs-toggle="modal" style="text-decoration: none;"><i class='bx bxs-hourglass-top me-2'></i>Start</a></button>
+									
+									<?php
+									}
+									elseif ($drove['acc_id']==$_SESSION['acc_id'] AND $drove['pre_exam_id']==$shine['pre_exam_id']) { ?>
+
+										<button type="button" class="btn btn-secondary" disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
+
+									<?php
+									}
+									?>
 								</td>
 							</tr>
 							<?php } ?>
@@ -155,23 +177,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 <div class="modal-header flex-column ">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="student_access.php" method="POST">
-                	 <h4 class="modal-title mx-3 mt-3 fw-bold">Access code</h4>
-                    <div class="modal-body">
-                               <?php if (isset($_GET['error'])) { ?>
-                  <p class="error"><center><b style="color: red;"><?php echo $_GET['error'];  ?></b></center></p>
-                <?php }  
-                ?>
-                        <div class="form-group d-flex justify-content-center">
-                        	<input type="hidden" name="acc_id" value="<?php echo $_SESSION['acc_id']; ?>">
-                            <input type="text" class="form-control" name="access_code" placeholder="Enter Access Code">
-                            
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center border-0">
-                            <input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="Enter">
-                        </div>
-                    </div>
-                </form>
+                <h4 class="modal-title mx-3 mt-3 fw-bold">Access code</h4>
+                <div class="modal-body">
+                	<div class="pre">
+                		
+                	</div>
+                </div>
             </div>
         </div>
     </div>
@@ -181,6 +192,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(){
   window.addEventListener('scroll', function() {
@@ -197,5 +211,25 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   });
 }); 
 </script>
+
+ <!-- preview modal --->
+ <script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.suc_code').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: 'preboard_marks.php',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.pre').html(response);
+          $('#access').modal('show');
+        }
+      });
+    });
+   });
+ </script>
 
 </html>

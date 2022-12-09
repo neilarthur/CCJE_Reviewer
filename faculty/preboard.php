@@ -235,6 +235,7 @@ function getName($n) {
 													<th scope="col">Time Limit</th>
 													<th scope="col">Access Code</th>
 													<th scope="col">Status</th>
+													<th scope="col">Exam Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -273,6 +274,17 @@ function getName($n) {
 				                                                	echo'<td class="badge bg-danger text-white mt-2" style="font-size:15px;">Rejected</td>';
 				                                                } 
 				                                                ?>
+				                                                <td><?php
+
+				                                                if ($rows['stat_exam']=='Ready') {
+				                                                	echo '<span class="badge bg-success text-white text-center p-2" style="font-size:15px;">Ready</span>';
+				                                                }
+				                                                elseif ($rows['stat_exam']=='No question') {
+				                                                	
+				                                                	echo '<span class="badge bg-danger text-center text-white p-2" style="font-size:15px;">No question</span>';
+				                                                }
+
+				                                                ?></td>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
 																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
@@ -310,6 +322,17 @@ function getName($n) {
 				                                                	echo'<td class="badge bg-danger text-white mt-2" style="font-size:15px;">Rejected</td>';
 				                                                } 
 				                                                ?>
+				                                                <td><?php
+
+				                                                if ($rows['stat_exam']=='Ready') {
+				                                                	echo '<span class="badge bg-success text-white text-center p-2" style="font-size:15px;">Ready</span>';
+				                                                }
+				                                                elseif ($rows['stat_exam']=='No question') {
+				                                                	
+				                                                	echo '<span class="badge bg-danger text-center text-white p-2" style="font-size:15px;">No question</span>';
+				                                                }
+
+				                                                ?></td>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
 																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
@@ -348,6 +371,18 @@ function getName($n) {
 				                                                	echo'<td class="badge bg-danger text-white mt-2" style="font-size:15px;">Rejected</td>';
 				                                                } 
 				                                                ?>
+
+				                                                <td><?php
+
+				                                                if ($rows['stat_exam']=='Ready') {
+				                                                	echo '<span class="badge bg-success text-white text-center p-2" style="font-size:15px;">Ready</span>';
+				                                                }
+				                                                elseif ($rows['stat_exam']=='No question') {
+				                                                	
+				                                                	echo '<span class="badge bg-danger text-center text-white p-2" style="font-size:15px;">No question</span>';
+				                                                }
+
+				                                                ?></td>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
 																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
