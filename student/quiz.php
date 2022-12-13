@@ -245,7 +245,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                     </tbody>
                                     <tbody>
                                          <tr>
-                                            <input type="text" name="update_id" value="<?php echo $_GET['id']; ?>">
+                                            <input type="hidden" name="update_id" value="<?php echo $_GET['id']; ?>">
                                             <input type="hidden" name="update_acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
                                             <input type="hidden" name="total_quest" value="<?php echo $sad; ?>">
                                      </tbody>

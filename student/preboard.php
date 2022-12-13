@@ -88,23 +88,19 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 				<div class="card mb-2">
 					<div class="card-body m-2">
 						<div class="row">
-							<div class="col-lg-4">
-								<div class="card h-100" style="background-color: rgb(237, 237, 241);">
-									<div class="card-body">
-										<p class="fw-bold fs-5 "> Question <?php echo $number ?></p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-8">
+							<div class="col-lg-12">
 								<div class="card">
 									<div class="card-body table-reponsive" style="background-color: rgb(219, 235, 247);" >
 										<table class="table table-borderless">
 											<thead class="mb-4">
 											</thead>
 											<tbody style="font-size: 17px;">
+												<tr>
+													<p class="fw-bold fs-5 "> Question:</p>
+												</tr>
 												 <tr>
 												 	<th>
-												 		<b><span><?php echo $rows['questions_title']; ?></span></b>
+												 		<b><span><?php echo $number ?>.&nbsp;<?php echo $rows['questions_title']; ?></span></b>
 												 	</th>
 												 </tr>
 												 <tr>

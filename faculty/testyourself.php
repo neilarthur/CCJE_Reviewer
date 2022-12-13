@@ -272,10 +272,10 @@ $suppd .= "</select>";
 
 													            #Status 
 													            if ($rows['stat_question']=='No question') {
-													            	echo '<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>';
+													            	echo '<td><span class="badge bg-danger p-2" style="font-size: 15px;">No Question</span></td>';
 													            }
 													            elseif ($rows['stat_question']=='Ready') {
-													            	echo '<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>';
+													            	echo '<td class="ps-4"><span class="badge bg-success p-2" style="font-size: 15px;">Ready</span></td>';
 													            }
 
 													            ?>
@@ -316,10 +316,10 @@ $suppd .= "</select>";
 
 													            #Status 
 													            if ($rows['stat_question']=='No question') {
-													            	echo '<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>';
+													            	echo '<td><span class="badge bg-danger p-2" style="font-size: 15px;">No Question</span></td>';
 													            }
 													            elseif ($rows['stat_question']=='Ready') {
-													            	echo '<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>';
+													            	echo '<td class="ps-4"><span class="badge bg-success p-2" style="font-size: 15px;">Ready</span></td>';
 													            }
 
 													            ?>
@@ -361,10 +361,10 @@ $suppd .= "</select>";
 
 													            #Status 
 													            if ($rows['stat_question']=='No question') {
-													            	echo '<td><span class="badge bg-danger" style="font-size: 15px;">No Question</span></td>';
+													            	echo '<td><span class="badge bg-danger p-2" style="font-size: 15px;">No Question</span></td>';
 													            }
 													            elseif ($rows['stat_question']=='Ready') {
-													            	echo '<td class="ps-4"><span class="badge bg-success" style="font-size: 15px;">Ready</span></td>';
+													            	echo '<td class="ps-4"><span class="badge bg-success p-2" style="font-size: 15px;">Ready</span></td>';
 													            }
 
 													            ?>

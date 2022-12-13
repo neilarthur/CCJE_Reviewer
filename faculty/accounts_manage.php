@@ -215,7 +215,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													<th scope="col">Fullname</th>
 													<th scope="col">Year & Section</th>
 													<th scope="col">Email Address</th>
-													<th scope="col">Status</th>
+													<th scope="col" class="ps-3">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>

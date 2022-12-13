@@ -224,7 +224,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $counter ;?></td>
 													<td><?php echo $rows['subjects']; ?></td>
 	                                                <td class="ps-5"><?php echo $rows['total_question']; ?></td>
-	                                                <td><?php echo $rows['first_name'] ."".$rows['last_name']; ?></td>
+	                                                <td><?php echo $rows['first_name'] ." ".$rows['last_name']; ?></td>
 	                                                <td><?php echo $rows['time_limit'] /60; ?> mins</td>
 	                                                <td><?php echo $rows['start_date']; ?></td>
 	                                               <?php 

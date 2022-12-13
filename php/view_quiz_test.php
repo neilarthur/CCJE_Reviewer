@@ -5,7 +5,7 @@ require_once 'conn.php';
 
 $userid =  $_POST['userid'];
 
-$view_quiz = mysqli_query($sqlcon, "SELECT * FROM test_question,student_choice WHERE (test_question.question_id = student_choice.question_id) AND test_question.question_id = '$userid'");
+$view_quiz = mysqli_query($sqlcon, "SELECT * FROM test_question WHERE  test_question.question_id = '$userid'");
 
 while ($rows = mysqli_fetch_assoc($view_quiz)) { ?>
 

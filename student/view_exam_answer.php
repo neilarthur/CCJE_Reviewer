@@ -128,18 +128,27 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
       <div class="col">
         <div class="card mt-2 mb-2">
           <div class="card-body">
-            <?php
-                        $exam_id =$_GET['sec'];
+           <div class="d-grid gap-1" style="font-size: 18px;">
+                <div class="p-2 bg-light border">
+                <?php
+                  $exam_id =$_GET['sec'];
 
-                        $score = mysqli_query($sqlcon,"SELECT score FROM tbl_exam_result WHERE exam_result_id='$exam_id'");
-                        while ($result= mysqli_fetch_array($score)) { ?>
-                          <tr>
-                          <th class="text-left pl-1 fs-5"><p class="fs-4 pl-1 fw-bold">Total points:<b class="badge bg-success ms-2"><?php echo $result['score']; ?> / <?php echo $_GET['total']; ?></b>
-                        </tr> 
-                        <?php 
-                        }
+                  $score = mysqli_query($sqlcon,"SELECT score FROM tbl_exam_result WHERE exam_result_id='$exam_id'");
+                  while ($result= mysqli_fetch_array($score)) { ?>
+                    
+                  <p class="fw-bold card-text">Total points:<b class="badge bg-success ms-2" style="font-size: 18px;"><?php echo $result['score']; ?> / <?php echo $_GET['total']; ?></b>
+                  
+                  <?php 
+                  }
 
-                        ?>
+                  ?>
+                </div>
+                <div class="p-2 bg-light border"><p class="card-text"><b>Started on:</b> </p></div>
+                <div class="p-2 bg-light border"><p class="card-text"><b>State:</b> Finished</p></div>
+                <div class="p-2 bg-light border"><p class="card-text"><b>Completed on:</b> </p></div>
+                <div class="p-2 bg-light border"><p class="card-text"><b>Time Taken:</b> 19 mins</p></div>
+                <div class="p-2 bg-light border"><p class="card-text"><b>Grade:</b> <b>96.00</b> out of 100.00</p></div>
+            </div>
           </div>
         </div>
       </div>
@@ -168,27 +177,23 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 <div class="card mb-2">
                   <div class="card-body m-2">
                     <div class="row">
-                      <div class="col-lg-4">
-                        <div class="card h-100" style="background-color: rgb(237, 237, 241);">
-                          <div class="card-body">
-                            <p class="fw-bold fs-5">Question: <?php echo $number ?></p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-8">
+                      <div class="col-lg-12">
                         <div class="card" style="background-color: rgb(219, 235, 247);">
                           <div class="card-body">
                             <div class="table-reponsive">
                               <table class="align-middle mb-0 table table-borderless " id="quesTab">
                                 <thead class="mb-4"></thead>
                                 <tbody style="font-size: 17px;">
+                                  <tr>
+                                     <p class="fw-bold fs-5">Question: </p>
+                                  </tr>
                          
                             
                                         <?php
                                         if ($coat['exam_check']== $cane['correct_ans']) { ?>
                                           <tr>
                                             <th>
-                                             <b><span class="text-success"><?php echo $cane['questions_title']; ?> <i class="fas fa-check ms-2 fa-lg"></i></span></b>
+                                             <b><span class="text-success"><?php echo $number ?>.&nbsp;<?php echo $cane['questions_title']; ?> <i class="fas fa-check ms-2 fa-lg"></i></span></b>
                                             </th>
                                           </tr>
                                           <?php 
@@ -197,7 +202,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                         elseif ($coat['exam_check']!= $cane['correct_ans']) { ?>
                                           <tr>
                                             <th>
-                                             <b><span class="text-danger"><?php echo $cane['questions_title']; ?> <i class="fas fa-times text-danger ms-2 fa-lg"></i></span></b>
+                                             <b><span class="text-danger"><?php echo $number ?>.&nbsp;<?php echo $cane['questions_title']; ?> <i class="fas fa-times text-danger ms-2 fa-lg"></i></span></b>
                                             </th>
                                           </tr>
                                           <?php
@@ -221,7 +226,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                       </tr>
 
                                       <tr>
-                                        <td><span class="text-success ms-4"><b>Correct Answer:</b><b class="ms-2"><?php echo  $cane['correct_ans']; ?>. <?php if ($core =='A') { echo  $cane['option_a'];}elseif ($core =='B') { echo  $cane['option_b']; }elseif ($core =='C') { echo  $cane['option_c']; }elseif ($core =='D') { echo  $cane['option_d'];} ?></b></span></td>
+                                        <td><span class="text-dark ms-4"><b>Correct Answer:</b><b class="ms-2"><?php echo  $cane['correct_ans']; ?>. <?php if ($core =='A') { echo  $cane['option_a'];}elseif ($core =='B') { echo  $cane['option_b']; }elseif ($core =='C') { echo  $cane['option_c']; }elseif ($core =='D') { echo  $cane['option_d'];} ?></b></span></td>
                                       </tr>
                                     
                                 

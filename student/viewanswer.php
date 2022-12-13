@@ -128,17 +128,60 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
       <div class="col">
         <div class="card mt-2 mb-2">
           <div class="card-body">
-            <?php
+            <div class="d-grid gap-1" style="font-size: 18px;">
+              <div class="p-2 bg-light border">
+                <?php
                 $ans_id =$_GET['sec'];
+
                 $score = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,choose_question WHERE (choose_question.test_id=tbl_quiz_result.test_id) AND ans_id='$ans_id'");
+
                 while ($result= mysqli_fetch_array($score)) { ?>
-                  <tr>
-                  <th class="text-left pl-1 fs-5"><p class="fs-4 pl-1 fw-bold">Total points:<b class="badge bg-success ms-2 fs-5"><?php echo $result['score']; ?> / <?php echo $result['total_quest']; ?></b>
-                </tr> 
+                 
+                 <p class="fw-bold card-text">Total points:<b class="badge bg-success ms-2 " style="font-size: 18px;"><?php echo $result['score']; ?> / <?php echo $result['total_quest']; ?></b></p>
                 <?php 
                 }
 
             ?>
+              </div>
+              <div class="p-2 bg-light border"><p class="card-text"><b>Started on:</b> </p></div>
+              <div class="p-2 bg-light border">
+                <?php 
+                
+                $id = $_GET['id'];
+                $code = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id')");
+
+
+                while ($rows = mysqli_fetch_assoc($code)) {
+                $boast = mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id = '{$rows['test_id']}'");
+                $shine = mysqli_fetch_array($boast);
+
+                $board = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id='{$_SESSION['acc_id']}' AND test_id='{$rows['test_id']}'");
+
+                $row= mysqli_fetch_assoc($board);
+
+                if ($row['acc_id']==$_SESSION['acc_id'] AND $row['test_id']==$shine['test_id']) {
+                  echo '<p class="card-text"><b>State:</b><span class="badge bg-light text-success" style="font-size: 18px;">Finished</span></p>';
+
+                  }
+                }
+                ?>
+               
+               
+              </div>
+              <div class="p-2 bg-light border"><p class="card-text"><b>Completed on:</b> </p></div>
+              <div class="p-2 bg-light border"><p class="card-text"><b>Time Taken:</b> 19 mins</p></div>
+              <div class="p-2 bg-light border">
+                <?php
+
+                $id = $_GET['id'];
+                $quiz_query = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id')");
+
+                 while ($rows = mysqli_fetch_assoc($quiz_query)) {?>
+                   <p class="card-text"><b>Grade:</b> <b><?php echo $rows['score_percent']; ?>.00</b> out of 100.00</p>
+
+                <?php } ?>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -175,7 +218,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                            <div class="table-reponsive">
                               <table class="align-middle mb-0 table table-borderless " id="quesTab" style="font-size: 17px;">
                                   <thead class="mb-4">
-                                      <th class="text-left pl-1 fs-5">Question: <?php echo $number ?></th>
+                                      <th class="text-left pl-1 fs-5">Question:</th>
                                   </thead>
                                   <tbody>
                              
@@ -217,7 +260,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                               </tr>
 
                               <tr>
-                                <td>&emsp;<span class="text-success"><b class="me-2">Correct Answer:</b><b class="ms-1"><?php echo $shows['correct_ans']; ?>. <?php if ($core =='A') { echo $shows['option_a'];}elseif ($core =='B') { echo $shows['option_b']; }elseif ($core =='C') { echo $shows['option_c']; }elseif ($core =='D') { echo $shows['option_d'];} ?></b></span></td>
+                                <td>&emsp;<span class="text-dark"><b class="me-2">Correct Answer:</b><b class="ms-1"><?php echo $shows['correct_ans']; ?>. <?php if ($core =='A') { echo $shows['option_a'];}elseif ($core =='B') { echo $shows['option_b']; }elseif ($core =='C') { echo $shows['option_c']; }elseif ($core =='D') { echo $shows['option_d'];} ?></b></span></td>
                               </tr>
                             
                         

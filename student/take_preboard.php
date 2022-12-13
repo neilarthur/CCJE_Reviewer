@@ -105,8 +105,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	</div>
 	<!--Main Content-->
 	<div class="container py-4">
-		<div class="row">
-			<div class="card mb-3"style="background-color: #8C0000;;">
+		<div class="row mt-3">
+			<div class="card"style="background-color: #8C0000;;">
 				<div class="card-body">
 					<h2 class="fw-bold text-white text-uppercase">Preboard Examination</h2>
 				</div>
@@ -117,7 +117,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 						<thead class="fs-5">
 							<tr>
 								<th scope="col">Area of Exam</th>
-								<th scope="col">Number of Items</th>
+								<th scope="col">Prepared By</th>
+								<th scope="col">Total of Items</th>
 								<th scope="col">Time Limit</th>
 								<th scope="col">Action</th>
 							</tr>
@@ -125,7 +126,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 						<tbody>
 							<?php
 
-							$code = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question");
+							$code = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question,accounts WHERE (accounts.acc_id = tbl_pre_question.prepared_by)");
 
 							while ($rows = mysqli_fetch_assoc($code)) {
 
@@ -136,8 +137,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 							
 							<tr>
 								<td><?php echo $rows['subjects']; ?></td>
+								<td><?php echo $rows['first_name'] ." ".$rows['last_name']; ?></td>
 								<td><?php echo $rows['total_question']; ?></td>
-								<td><?php echo $rows['time_limit']; ?></td>
+								<td><?php echo $rows['time_limit'] /60 ; ?> mins</td>
 								<td>
 
 									<?php

@@ -27,7 +27,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
-
+  <!-- System Logo -->
+  <link rel="icon" href="../assets/pics/system-ico.ico">
 	<style type="text/css">
    .progress {
   width: 150px;
@@ -120,7 +121,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
             $bos = mysqli_fetch_assoc($rev);
                        
                       ?>
-            <h4 class="fw-bold text-white text-uppercase"> Area of Exam: <?php echo $bos['subjects']; ?> </h4>
+            <p class=" h3 fw-bold text-white text-uppercase">Area of Exam: <?php echo $bos['subjects']; ?></p>
+            
           </div>
         </div>
      </div>

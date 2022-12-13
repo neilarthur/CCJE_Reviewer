@@ -863,7 +863,7 @@ $suppd .= "</select>";
 										<tbody>
 											<?php
 
-											$accounts = mysqli_query($sqlcon,"SELECT * FROM choose_question ");
+											$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE acc_id = '{$_SESSION['acc_id']}'AND (choose_question.test_id='$id')");
 
 											while ($row = mysqli_fetch_assoc($accounts)) {
 												if ($row['section']=='4A'){
@@ -922,7 +922,7 @@ $suppd .= "</select>";
 											  	  $id = $_GET['id'];
 												  $result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND(accounts.section='4C')");
 
-												  while ($hows= mysqli_fetch_array($result)) { ?>
+												  while ($hows= mysqli_fetch_assoc($result)) { ?>
 												  	<tr>
 														<td><?php echo $hows['user_id']?></td>
 														<td><?php echo $hows['last_name']." ".$hows['first_name']." ".$hows['middle_name']?></td>
