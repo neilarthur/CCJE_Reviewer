@@ -138,6 +138,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 			<?php
 				$number++;
 				}
+
+				$loan = array();
+
+				$buss = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question,tbl_pre_choose_quest,test_question WHERE (tbl_pre_question.pre_exam_id=tbl_pre_choose_quest.pre_exam_id) AND (tbl_pre_question.access_code = '$code') AND (tbl_pre_choose_quest.question_id = test_question.question_id)");
+
+				while ($gpr = mysqli_fetch_assoc($buss)) {
+					
+					$loan[] = $gpr;
+				}
+
+				foreach ($loan as $valued) {
+						
+					echo '<input type="hidden" class="input-control" name="question_di[]" value="'.$valued['question_id'].'">';
+				}
 			?>
 
 		</div>

@@ -46,6 +46,7 @@ if (isset($_POST['create'])) {
 
 			if ($random_query) {
 
+				
 				$_SESSION['stat_over']= "Random questions added successfully!";
 
 				header("location:editing-quiz.php?id=$test_id&total=$totas");

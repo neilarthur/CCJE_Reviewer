@@ -14,6 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	$pre_exam = $_POST['pre_exam_id'];
 
+	$question_di = $_POST['question_di'];
+
 
 	$choices = $_POST['examcheck'];
 
@@ -52,9 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	if ($examinner) {
 
-		foreach ($choices as $key => $value) {
+		foreach ($question_di as $qty => $value) {
 
-			$exam_query = "INSERT INTO tbl_pre_student_ans(exam_check,pre_exam_id,exam_result_id) VALUES ('".$value."','$pre_exam','$last_insert')";
+			$ccc = $_POST['examcheck'][$value];
+
+			$exam_query = "INSERT INTO tbl_pre_student_ans(exam_check,pre_exam_id,exam_result_id,question_id) VALUES ('$ccc','$pre_exam','$last_insert','".$value."')";
 
 			mysqli_query($sqlcon,$exam_query);
 		}

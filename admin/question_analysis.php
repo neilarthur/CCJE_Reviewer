@@ -202,21 +202,224 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 									<div class="card-body rounded-3 m-3 table-responsive-lg">
 										<h5 class="card-title fw-bold text-uppercase">Difficulty</h5>
 										<p class="mb-3">Indicates the percentage of students who answered questions correctly.</p>
-										<p>Easy (80%)</p>
-										<div class="progress mb-2">
-											<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 80%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-											</div>
-										</div>
-										<p>Moderate (60%)</p>
-										<div class="progress mb-2">
-											<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 60%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-											</div>
-										</div>
-										<p>Hard (20%)</p>
-										<div class="progress">
-											<div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: 20%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-											</div>
-										</div>
+
+										<?php
+
+										$results=0;
+
+										$easy_quest = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_student_ans WHERE (test_question.question_id=tbl_pre_student_ans.question_id) AND test_question.subject_name='{$_GET['area']}' AND test_question.level_difficulty='Easy' AND tbl_pre_student_ans.pre_exam_id='{$_GET['id']}'");
+
+										$total_raw = mysqli_num_rows($easy_quest);
+
+
+
+										while (list($question_id,$subject_name,$level_difficulty,$questions_title,$option_a,$option_b,$option_c,$option_d,$correct_ans,$acc_id,$status,$date_created,$student_ans_id,$exam_check) = mysqli_fetch_row($easy_quest)) {
+											
+											if ($correct_ans == $exam_check) {
+												
+												$results++;
+
+												
+											}
+										}
+
+										if ($total_raw == 0) {
+											
+											$total_raw=1;
+
+											$percent = round(($results/$total_raw)*100);
+
+											if ($percent >=40) {
+
+												$progress_bars = 'bg-success';
+											}
+											elseif ($percent >25 && $percent < 40) {
+												
+												$progress_bars = 'bg-warning';
+											}
+											else {
+
+												$progress_bars = 'bg-danger';
+											}
+
+											echo '<p>Easy ('.$percent.'%)</p>
+											<div class="progress mb-2">
+												<div class="progress-bar progress-bar-striped '.$progress_bars.'" role="progressbar" style="width:'.$percent.'%;" aria-valuenow="'. $percent.'" aria-valuemin="0" aria-valuemax="100">
+												</div>
+											</div>';
+
+										}else {
+
+											$percent = round(($results/$total_raw)*100);
+
+											if ($percent >=40) {
+
+												$progress_bars = 'bg-success';
+											}
+											elseif ($percent >25 && $percent < 40) {
+												
+												$progress_bars = 'bg-warning';
+											}
+											else {
+
+												$progress_bars = 'bg-danger';
+											}
+
+											echo '<p>Easy ('.$percent.'%)</p>
+											<div class="progress mb-2">
+												<div class="progress-bar progress-bar-striped '.$progress_bars.'" role="progressbar" style="width:'.$percent.'%;" aria-valuenow="'. $percent.'" aria-valuemin="0" aria-valuemax="100">
+												</div>
+											</div>';
+
+										}
+
+										
+
+										
+										?>
+
+										<?php
+
+										$correct=0;
+
+										$easy_quest2 = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_student_ans WHERE (test_question.question_id=tbl_pre_student_ans.question_id) AND test_question.subject_name='{$_GET['area']}' AND test_question.level_difficulty='Moderate' AND tbl_pre_student_ans.pre_exam_id='{$_GET['id']}'");
+
+										$total_rows = mysqli_num_rows($easy_quest2);
+
+
+
+										while (list($question_id,$subject_name,$level_difficulty,$questions_title,$option_a,$option_b,$option_c,$option_d,$correct_answer,$acc_id,$status,$date_created,$student_ans_id,$exam_checks) = mysqli_fetch_row($easy_quest2)) {
+											
+											if ($correct_answer == $exam_checks) {
+												
+												$correct++;
+
+												
+											}
+										}
+
+										if ($total_rows==0) {
+											
+											$total_rows=1;
+
+											$percents = round(($correct/$total_rows)*100);
+
+											if ($percents >=40) {
+												
+												$progress_barss = 'bg-success';
+											}
+											elseif ($percents >25 && $percents < 40) {
+												
+												$progress_barss = 'bg-warning';
+											}
+											else {
+
+												$progress_barss = 'bg-danger';
+											}
+
+											echo '<p>Moderate ('.$percents.'%)</p>
+											<div class="progress mb-2">
+												<div class="progress-bar progress-bar-striped '.$progress_barss.'" role="progressbar" style="width:'.$percents.'%;" aria-valuenow="'. $percents.'" aria-valuemin="0" aria-valuemax="100">
+												</div>
+											</div>';
+
+										}else {
+
+											$percents = round(($correct/$total_rows)*100);
+
+											if ($percents >=40) {
+												
+												$progress_barss = 'bg-success';
+											}
+											elseif ($percents >25 && $percents < 40) {
+												
+												$progress_barss = 'bg-warning';
+											}
+											else {
+
+												$progress_barss = 'bg-danger';
+											}
+
+											echo '<p>Moderate ('.$percents.'%)</p>
+											<div class="progress mb-2">
+												<div class="progress-bar progress-bar-striped '.$progress_barss.'" role="progressbar" style="width:'.$percents.'%;" aria-valuenow="'. $percents.'" aria-valuemin="0" aria-valuemax="100">
+												</div>
+											</div>';
+										}
+
+										
+										?>
+
+										<?php
+
+										$correct_res=0;
+
+										$easy_quest3 = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_student_ans WHERE (test_question.question_id=tbl_pre_student_ans.question_id) AND test_question.subject_name='{$_GET['area']}' AND test_question.level_difficulty='Hard' AND tbl_pre_student_ans.pre_exam_id='{$_GET['id']}'");
+
+										$total_laws = mysqli_num_rows($easy_quest3);
+
+
+
+										while (list($question_id,$subject_name,$level_difficulty,$questions_title,$option_a,$option_b,$option_c,$option_d,$correct_answerss,$acc_id,$status,$date_created,$student_ans_id,$exam_checkss) = mysqli_fetch_row($easy_quest3)) {
+											
+											if ($correct_answerss == $exam_checkss) {
+												
+												$correct_res++;
+
+												
+											}
+										}
+
+										if ($total_laws ==0) {
+											
+											$total_laws =1;
+
+											$percentage = round(($correct_res/$total_laws)*100);
+
+											if ($percentage >=40) {
+												
+												$progress_barraged = 'bg-success';
+											}
+											elseif ($percentage >25 && $percentage < 40) {
+												
+												$progress_barraged = 'bg-warning';
+											}
+											else {
+
+												$progress_barraged = 'bg-danger';
+											}
+
+											echo '<p>Hard ('.$percentage.'%)</p>
+											<div class="progress mb-2">
+												<div class="progress-bar progress-bar-striped '.$progress_barraged.'" role="progressbar" style="width:'.$percentage.'%;" aria-valuenow="'. $percentage.'" aria-valuemin="0" aria-valuemax="100">
+												</div>
+											</div>';
+										}
+										else {
+
+											$percentage = round(($correct_res/$total_laws)*100);
+
+											if ($percentage >=40) {
+												
+												$progress_barraged = 'bg-success';
+											}
+											elseif ($percentage >25 && $percentage < 40) {
+												
+												$progress_barraged = 'bg-warning';
+											}
+											else {
+
+												$progress_barraged = 'bg-danger';
+											}
+
+											echo '<p>Hard ('.$percentage.'%)</p>
+											<div class="progress mb-2">
+												<div class="progress-bar progress-bar-striped '.$progress_barraged.'" role="progressbar" style="width:'.$percentage.'%;" aria-valuenow="'. $percentage.'" aria-valuemin="0" aria-valuemax="100">
+												</div>
+											</div>';
+										}
+										
+										?>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -252,7 +455,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                        				<div class="col mr-2">
 	                        					<div class="text-xs font-weight-bold text-dark text-uppercase mb-2">
 	                        						Completed Attempts
-	                        						<h1  class="mb-0 mt-2"><b>12</b></h1>
+
+	                        						<?php
+
+	                        						$attp = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE pre_exam_id = '{$_GET['id']}'");
+
+	                        						$row_count = mysqli_num_rows($attp);
+	                        						?>
+	                        						<h1  class="mb-0 mt-2"><b><?php echo $row_count; ?></b></h1>
 	                        					</div>
 	                        				</div>
 			                                <div class="col-auto">
@@ -286,7 +496,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<?php
 												$id = $_GET['id'];
 
-												$quest = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_choose_quest,tbl_pre_question WHERE (tbl_pre_choose_quest.question_id =test_question.question_id) AND (tbl_pre_choose_quest.pre_exam_id=tbl_pre_question.pre_exam_id) AND tbl_pre_choose_quest.pre_exam_id ='$id' " ); 
+												$quest = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_choose_quest,tbl_pre_question WHERE (tbl_pre_choose_quest.question_id =test_question.question_id) AND (tbl_pre_choose_quest.pre_exam_id=tbl_pre_question.pre_exam_id) AND tbl_pre_choose_quest.pre_exam_id ='$id' " );
 												$count =1;
 												while ($rows= mysqli_fetch_assoc($quest)) {
 												 ?>
@@ -298,7 +508,22 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                <td>100%</td>
 	                                                <td>
 	                                                	<div class="d-flex flex-row">
-	                                                		<button data-id="<?php echo $rows['question_id']; ?>" type="button"class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
+	                                                		<?php
+
+	                                                		$student_ans = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_student_ans WHERE pre_exam_id='$id'");
+
+	                                                		$num_law = mysqli_num_rows($student_ans);
+
+	                                                		if ($num_law == 0) {
+	                                                			
+	                                                			echo '<button type="button"class="btn btn-primary  mx-2"><i class="fas fa-eye"></i></button>';
+	                                                		}
+	                                                		else {
+
+	                                                			echo '<button data-id="'.$rows['question_id'].'" type="button"class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>';
+	                                                		}
+	                                                		?>
+	                                                		
 	                                                	</div>
 	                                                </td>
 	                                            </tr>
@@ -487,7 +712,7 @@ let arrow = document.querySelectorAll(".arrow");
       var userid = $(this).data('id');
 
       $.ajax({
-        url: '../php/view_analysis.php',
+        url: '../php/view_analysis.php?id=<?php echo $_GET['id']; ?>',
         type: 'post',
         data: {userid: userid},
         success: function(response){

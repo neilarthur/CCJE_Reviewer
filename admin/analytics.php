@@ -227,7 +227,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                <td><?php echo $rows['first_name'] ." ".$rows['last_name']; ?></td>
 	                                                <td>
 	                                                	<div class= "d-flex justify-content-center">
-	                                                		<a href="question_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>" class="btn btn-secondary mx-2"><i class="fas fa-file-alt"></i></a>
+	                                                		<a href="question_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="btn btn-secondary mx-2"><i class="fas fa-file-alt"></i></a>
 	                                                		<button class="btn btn-primary"><i class="fas fa-download"></i></button>
 	                                                	</div>
 	                                                </td>
