@@ -481,7 +481,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                		<div class="card">
 	                			<div class="card-body">
 	                				<div class="table-responsive-lg">
-	                					<table class="table table-hover align-middle" id="resultTab">
+	                					<table class="table table-hover align-middle" id="resultTabs">
 											<thead>
 												<tr>
 													<th scope="col">No.</th>
@@ -496,9 +496,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<?php
 												$id = $_GET['id'];
 
-												$quest = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_choose_quest,tbl_pre_question WHERE (tbl_pre_choose_quest.question_id =test_question.question_id) AND (tbl_pre_choose_quest.pre_exam_id=tbl_pre_question.pre_exam_id) AND tbl_pre_choose_quest.pre_exam_id ='$id' " );
+												$quest = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_choose_quest WHERE (tbl_pre_choose_quest.question_id =test_question.question_id) AND tbl_pre_choose_quest.pre_exam_id ='$id' " );
 												$count =1;
-												while ($rows= mysqli_fetch_assoc($quest)) {
+												while ($rows= mysqli_fetch_array($quest)) {
 												 ?>
 												<tr>
 													<td><?php echo $count; ?></td>
@@ -510,9 +510,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                	<div class="d-flex flex-row">
 	                                                		<?php
 
-	                                                		$student_ans = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_student_ans WHERE pre_exam_id='$id'");
+	                                                		$qwertyu = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_student_ans WHERE pre_exam_id='$id'");
 
-	                                                		$num_law = mysqli_num_rows($student_ans);
+	                                                		$num_law = mysqli_num_rows($qwertyu);
 
 	                                                		if ($num_law == 0) {
 	                                                			

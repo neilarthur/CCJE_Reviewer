@@ -1,9 +1,4 @@
-<!-- Bootstrap CSS -->
-<link href="../css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
-
 <?php
-
-session_start();
 
 require_once 'conn.php';
 
@@ -15,13 +10,11 @@ $scoreD = 0;
 $userid =  $_POST['userid'];
 
 
+$view1 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_student_ans WHERE pre_exam_id='{$_GET['id']}' AND question_id='$userid'");
 
+$num_rows = mysqli_num_rows($view1);
 
-$view = mysqli_query($sqlcon, "SELECT * FROM test_question,tbl_pre_student_ans WHERE (test_question.question_id=tbl_pre_student_ans.question_id) AND test_question.question_id = '$userid' AND tbl_pre_student_ans.question_id='$userid' AND (tbl_pre_student_ans.pre_exam_id='{$_GET['id']}')");
-
-$num_rows = mysqli_num_rows($view);
-
-while (list($question_id,$subject_name,$level_difficulty,$questions_title,$option_a,$option_b,$option_c,$option_d,$correct_ans,$acc_id,$status,$date_created,$student_ans_id,$exam_check) = mysqli_fetch_row($view)) { 
+while (list($student_ans_id,$exam_check,$pre_exam_id,$exam_result_id,$question_id) = mysqli_fetch_row($view1)) {
 
 	if ($exam_check == 'A') {
 		$scoreA++;
@@ -41,15 +34,20 @@ while (list($question_id,$subject_name,$level_difficulty,$questions_title,$optio
 		$marksB = round(($scoreB/$num_rows)*100);
 		$marksC = round(($scoreC/$num_rows)*100);
 		$marksD = round(($scoreD/$num_rows)*100);
+}
+
+$viewer = mysqli_query($sqlcon,"SELECT * FROM test_question WHERE question_id='$userid'");
+
+while ($rows = mysqli_fetch_assoc($viewer)) {
 
 	?>
 
 	<h4 class="d-flex ps-1 fw-bold justify-content-start">Question:</h4>
-		<textarea type="text" name="last_name" class="form-control mt-3 ps-2 mb-3 bg-white" rows="3" readonly=""><?php echo $questions_title; ?></textarea> 
+		<textarea type="text" name="last_name" class="form-control mt-3 ps-2 mb-3 bg-white" rows="3" readonly=""><?php echo $rows['questions_title']; ?></textarea> 
 		<div class="row mb-2">
 			<div class="col-md-6">
 				<label class="d-flex ps-1 justify-content-start fw-bold">Option A</label>
-				<textarea type="text" name="option_a" class="form-control " rows="2" readonly= ""><?php echo $option_a ?></textarea>
+				<textarea type="text" name="option_a" class="form-control " rows="2" readonly= ""><?php echo $rows['option_a'] ?></textarea>
 			</div>
 			<div class="col-md-6">
 				<div class="card h-100">
@@ -65,7 +63,7 @@ while (list($question_id,$subject_name,$level_difficulty,$questions_title,$optio
 		<div class="row mb-2">
 			<div class="col-md-6">
 				<label class="d-flex ps-1 justify-content-start fw-bold">Option B</label>
-				<textarea type="text" name="option_a" class="form-control" rows="2" readonly= ""><?php echo $option_b ?></textarea>
+				<textarea type="text" name="option_a" class="form-control" rows="2" readonly= ""><?php echo $rows['option_b'] ?></textarea>
 			</div>
 			<div class="col-md-6">
 				<div class="card h-100">
@@ -81,7 +79,7 @@ while (list($question_id,$subject_name,$level_difficulty,$questions_title,$optio
 		<div class="row mb-2">
 			<div class="col-md-6">
 				<label class="d-flex ps-1 justify-content-start fw-bold">Option C</label>
-				<textarea type="text" name="option_a" class="form-control" rows="2" readonly= ""><?php echo $option_c ?></textarea>
+				<textarea type="text" name="option_a" class="form-control" rows="2" readonly= ""><?php echo $rows['option_c'] ?></textarea>
 			</div>
 			<div class="col-md-6">
 				<div class="card h-100">
@@ -97,7 +95,7 @@ while (list($question_id,$subject_name,$level_difficulty,$questions_title,$optio
 		<div class="row">
 			<div class="col-md-6">
 				<label class="d-flex ps-1 justify-content-start fw-bold">Option D</label>
-				<textarea type="text" name="option_a" class="form-control" rows="2" readonly= ""><?php echo $option_d ?></textarea>
+				<textarea type="text" name="option_a" class="form-control" rows="2" readonly= ""><?php echo $rows['option_d'] ?></textarea>
 			</div>
 			<div class="col-md-6">
 				<div class="card h-100">
@@ -110,7 +108,6 @@ while (list($question_id,$subject_name,$level_difficulty,$questions_title,$optio
 				</div>
 			</div>
 		</div>
-
 <?php } ?>
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
