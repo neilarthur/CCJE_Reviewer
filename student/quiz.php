@@ -187,7 +187,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         </div>
         <?php }  ?>
     </div>
-    <form action="check.php" id="form1" method="POST">
+    <form action="check.php"  id="form1" method="POST">
       <div class="row">
        <div class="col-lg-12">
           <div class="card mb-2" id="timer">

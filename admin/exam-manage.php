@@ -224,6 +224,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<td><?php echo $counter ;?></td>
 													<td><?php echo $rows['subjects']; ?></td>
 	                                                <td class="ps-5"><?php echo $rows['total_question']; ?></td>
+	                                                <td hidden><?php echo $rows['access_code']; ?></td>
 	                                                <td><?php echo $rows['first_name'] ." ".$rows['last_name']; ?></td>
 	                                                <td><?php echo $rows['time_limit'] /60; ?> mins</td>
 	                                                <td><?php echo $rows['start_date']; ?></td>
@@ -292,7 +293,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	    			<form class="form" action="exam_approve.php" method="POST">
 	    				<div class="modal-body">
 	    					<div class="container d-flex justify-content-center">
-	    						<input type="hidden" name="update_id" id="pre_exam_id">	
+	    						<input type="hidden" name="update_id" id="pre_exam_id">
+	    						<input type="text" name="access" id="access">
+	    						
 	    					</div>
 	    					<div class="modal-footer d-flex justify-content-center border-0">
 	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">
@@ -345,6 +348,7 @@ let arrow = document.querySelectorAll(".arrow");
             }).get();
             console.log(data);
             $('#pre_exam_id').val(data[0]);
+            $('#access').val(data[4]);
         })
  	});
 </script>

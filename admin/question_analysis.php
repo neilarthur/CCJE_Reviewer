@@ -229,22 +229,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 											$percent = round(($results/$total_raw)*100);
 
-											if ($percent >=40) {
-
-												$progress_bars = 'bg-success';
-											}
-											elseif ($percent >25 && $percent < 40) {
-												
-												$progress_bars = 'bg-warning';
-											}
-											else {
-
-												$progress_bars = 'bg-danger';
-											}
-
 											echo '<p>Easy ('.$percent.'%)</p>
 											<div class="progress mb-2">
-												<div class="progress-bar progress-bar-striped '.$progress_bars.'" role="progressbar" style="width:'.$percent.'%;" aria-valuenow="'. $percent.'" aria-valuemin="0" aria-valuemax="100">
+												<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width:'.$percent.'%;" aria-valuenow="'. $percent.'" aria-valuemin="0" aria-valuemax="100">
 												</div>
 											</div>';
 
@@ -267,7 +254,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 											echo '<p>Easy ('.$percent.'%)</p>
 											<div class="progress mb-2">
-												<div class="progress-bar progress-bar-striped '.$progress_bars.'" role="progressbar" style="width:'.$percent.'%;" aria-valuenow="'. $percent.'" aria-valuemin="0" aria-valuemax="100">
+												<div class="progress-bar progress-bar-striped bg-success " role="progressbar" style="width:'.$percent.'%;" aria-valuenow="'. $percent.'" aria-valuemin="0" aria-valuemax="100">
 												</div>
 											</div>';
 
@@ -304,22 +291,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 											$percents = round(($correct/$total_rows)*100);
 
-											if ($percents >=40) {
-												
-												$progress_barss = 'bg-success';
-											}
-											elseif ($percents >25 && $percents < 40) {
-												
-												$progress_barss = 'bg-warning';
-											}
-											else {
-
-												$progress_barss = 'bg-danger';
-											}
-
+											
 											echo '<p>Moderate ('.$percents.'%)</p>
 											<div class="progress mb-2">
-												<div class="progress-bar progress-bar-striped '.$progress_barss.'" role="progressbar" style="width:'.$percents.'%;" aria-valuenow="'. $percents.'" aria-valuemin="0" aria-valuemax="100">
+												<div class="progress-bar progress-bar-striped bg-warning " role="progressbar" style="width:'.$percents.'%;" aria-valuenow="'. $percents.'" aria-valuemin="0" aria-valuemax="100">
 												</div>
 											</div>';
 
@@ -327,22 +302,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 											$percents = round(($correct/$total_rows)*100);
 
-											if ($percents >=40) {
-												
-												$progress_barss = 'bg-success';
-											}
-											elseif ($percents >25 && $percents < 40) {
-												
-												$progress_barss = 'bg-warning';
-											}
-											else {
-
-												$progress_barss = 'bg-danger';
-											}
+											
 
 											echo '<p>Moderate ('.$percents.'%)</p>
 											<div class="progress mb-2">
-												<div class="progress-bar progress-bar-striped '.$progress_barss.'" role="progressbar" style="width:'.$percents.'%;" aria-valuenow="'. $percents.'" aria-valuemin="0" aria-valuemax="100">
+												<div class="progress-bar progress-bar-striped bg-warning " role="progressbar" style="width:'.$percents.'%;" aria-valuenow="'. $percents.'" aria-valuemin="0" aria-valuemax="100">
 												</div>
 											</div>';
 										}
@@ -376,22 +340,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 											$percentage = round(($correct_res/$total_laws)*100);
 
-											if ($percentage >=40) {
-												
-												$progress_barraged = 'bg-success';
-											}
-											elseif ($percentage >25 && $percentage < 40) {
-												
-												$progress_barraged = 'bg-warning';
-											}
-											else {
-
-												$progress_barraged = 'bg-danger';
-											}
 
 											echo '<p>Hard ('.$percentage.'%)</p>
 											<div class="progress mb-2">
-												<div class="progress-bar progress-bar-striped '.$progress_barraged.'" role="progressbar" style="width:'.$percentage.'%;" aria-valuenow="'. $percentage.'" aria-valuemin="0" aria-valuemax="100">
+												<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width:'.$percentage.'%;" aria-valuenow="'. $percentage.'" aria-valuemin="0" aria-valuemax="100">
 												</div>
 											</div>';
 										}
@@ -399,22 +351,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 											$percentage = round(($correct_res/$total_laws)*100);
 
-											if ($percentage >=40) {
-												
-												$progress_barraged = 'bg-success';
-											}
-											elseif ($percentage >25 && $percentage < 40) {
-												
-												$progress_barraged = 'bg-warning';
-											}
-											else {
-
-												$progress_barraged = 'bg-danger';
-											}
-
 											echo '<p>Hard ('.$percentage.'%)</p>
 											<div class="progress mb-2">
-												<div class="progress-bar progress-bar-striped '.$progress_barraged.'" role="progressbar" style="width:'.$percentage.'%;" aria-valuenow="'. $percentage.'" aria-valuemin="0" aria-valuemax="100">
+												<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width:'.$percentage.'%;" aria-valuenow="'. $percentage.'" aria-valuemin="0" aria-valuemax="100">
 												</div>
 											</div>';
 										}
@@ -481,7 +420,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                		<div class="card">
 	                			<div class="card-body">
 	                				<div class="table-responsive-lg">
-	                					<table class="table table-hover align-middle" id="resultTabs">
+	                					<table class="table table-hover align-middle" id="resultTab">
 											<thead>
 												<tr>
 													<th scope="col">No.</th>
@@ -697,13 +636,6 @@ let arrow = document.querySelectorAll(".arrow");
 <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-  	 $('#resultTab').DataTable({
-  	 	paging: true
-  	 });
-  });
-</script>
 <!-- preview modal --->
  <script type="text/javascript">
 
@@ -723,4 +655,11 @@ let arrow = document.querySelectorAll(".arrow");
     });
    });
  </script>
+ <script type="text/javascript">
+  $(document).ready(function() {
+  	 $('#resultTab').DataTable({
+  	 	paging: true
+  	 });
+  });
+</script>
 </html>
