@@ -503,12 +503,12 @@ $suppd .= "</select>";
 			      					<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
 			      					<div class="input-group mt-2">
 			      						<span class="input-group-text border-0 bg-white fw-bold">Open the quiz</span>
-			      					    <input type="date" name="start_time" class="form-control" required=>
+			      					    <input type="datetime-local" name="start_time" class="form-control" required=>
 			      					</div>
 			      					<div class="input-group mt-2">
 			      						<input type="hidden" name="history_acc" value="<?php echo $_SESSION['acc_id']; ?>">
 			      						<span class="input-group-text border-0 bg-white fw-bold">Close the quiz</span>
-			      					    <input type="date" name="close_time" class="form-control" required= >
+			      					    <input type="datetime-local" name="close_time" class="form-control" required= >
 			      					</div>
 			      				</div>
 			      			</div>

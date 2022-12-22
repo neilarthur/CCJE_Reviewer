@@ -323,15 +323,19 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 
                          while ($baws = mysqli_fetch_assoc($quiz_run) AND $cows =mysqli_fetch_assoc($query) AND $cows1 =mysqli_fetch_assoc($query1) AND $cows2 =mysqli_fetch_assoc($query2) AND $cows3 =mysqli_fetch_assoc($query3)AND $cows4 =mysqli_fetch_assoc($query4) AND $cows5 =mysqli_fetch_assoc($query5) ) {
-                           
-                            $ave [] = $cows['num'] / $percent; // Criminal jurisprudence
-                            $ave1[] =$cows1['num'] /$percent1; // Crime and Detection
-                            $ave2 [] = $cows2['num'] / $percent2; // Law enforcement
-                            $ave3 [] = $cows3['num'] / $percent3; // Criminalistics 
-                            $ave4 [] = $cows4['num'] / $percent4; // Criminal Sociology
-                            $ave5 [] = $cows5['num'] / $percent5; // Correctional Administration
-                            
-                        }
+
+
+                                $ave [] = $cows['num'] / $percent; // Criminal jurisprudence
+                                $ave1[] =$cows1['num'] /$percent1; // Crime and Detection
+
+                                $ave2 [] = $cows2['num'] / $percent2; // Law enforcement
+                        
+                                $ave3 [] = $cows3['num'] / $percent3; // Criminalistics
+
+                                $ave4 [] = $cows4['num'] / $percent4; // Criminal Sociology
+                                $ave5 [] = $cows5['num'] / $percent5; // Correctional Administration
+
+                            }
 
                         ?>
                        

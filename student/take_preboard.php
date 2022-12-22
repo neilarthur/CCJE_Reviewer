@@ -126,11 +126,24 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 						<tbody>
 							<?php
 
-							$code = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question,accounts WHERE (accounts.acc_id = tbl_pre_question.prepared_by)");
+							$code = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question,accounts WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND Approval='approve'");
 
-							while ($rows = mysqli_fetch_assoc($code)) {
+							if (mysqli_num_rows($code) == 0) {
 
-								$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '{$rows['pre_exam_id']}'");
+								echo "<tr class='table-danger'>
+                                        <td></td>
+                                        <td></td>
+                                        <td class='text-center'>No records has been added </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>";
+							}
+							elseif (mysqli_num_rows($code)> 0) {
+
+								while ($rows = mysqli_fetch_assoc($code)) {
+
+								$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '{$rows['pre_exam_id']}' AND Approval='approve'");
 
 								$shine = mysqli_fetch_array($boast);
 								?>
@@ -163,7 +176,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 									?>
 								</td>
 							</tr>
-							<?php } ?>
+							<?php } } ?>
 							
 						</tbody>
 					</table>

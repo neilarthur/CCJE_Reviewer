@@ -240,9 +240,22 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                ?>
 	                                                
 	                                                <td>
-	                                                	<div class="d-flex text-center">
+	                                                	<?php
+
+	                                                	if ($rows['Approval']=='approve') {
+	                                                		
+	                                                		echo '<div class="d-flex text-center">
+	                                                		<button class="btn btn-secondary ms-3"type="button" disabled><i class="fas fa-check-circle"></i></button>
+	                                                	</div>';
+	                                                	}
+	                                                	else {
+
+	                                                	echo '<div class="d-flex text-center">
 	                                                		<button class="btn btn-primary editbtn ms-3" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
-	                                                	</div>
+	                                                	</div>'; 
+	                                                		
+	                                                	}
+	                                                	?>
 	                                                </td>
 	                                            </tr>
 	                                        <?php $counter++; } ?>

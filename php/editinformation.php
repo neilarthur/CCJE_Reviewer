@@ -126,11 +126,11 @@ while ($row = mysqli_fetch_array($results)) { ?>
       					<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
       					<div class="input-group mt-2">
       						<span class="input-group-text border-0 bg-white fw-bold">Open the quiz</span>
-      					    <input type="date" name="start_time" class="form-control" required  value="<?php echo $row['start_day']?>">
+      					    <input type="datetime-local" name="start_time" class="form-control" required  value="<?php echo $row['start_day']?>">
       					</div>
       					<div class="input-group mt-2">
       						<span class="input-group-text border-0 bg-white fw-bold">Close the quiz</span>
-      					    <input type="date" name="close_time" class="form-control" required value="<?php echo $row['end_day']?>" >
+      					    <input type="datetime-local" name="close_time" class="form-control" required value="<?php echo $row['end_day']?>" >
       					</div>
       				</div>
       			</div>

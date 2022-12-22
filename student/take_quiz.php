@@ -165,8 +165,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  									<td><?php echo $rows['total_quest']; ?></td>
 	   	  									<td><?php echo $rows['time_limit']/60;  ?> mins</td>
 	   	  									<td><?php echo $rows['first_name']." ".$rows['last_name'];?></td>
+
 	   	  									<td>
 	   	  										<?php
+
+	   	  										
 
 	   	  										$datetime = date("Y-m-d");
 
@@ -252,9 +255,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  									<td>
 	   	  										<?php
 
-	   	  										$datetime = date("Y-m-d");
+	   	  										$datetime = date('d-m-y h:i:s a');
 
-	   	  										if ($rows['start_day'] >= $datetime && $rows['end_day'] <= $datetime) {
+	   	  										$life = $rows['start_day'];
+	   	  										$lifersss = date('d-m-y h:i:s a',strtotime($rows['end_day']));
+
+	   	  										$lifesss = date('d-m-y h:i:s a',strtotime($life));
+
+	   	  										if ($lifesss <= $datetime && $lifersss <= $datetime) {
 	   	  											
 	   	  											echo '<span class="badge bg-danger" style="font-size:15px;">Close</span>';
 	   	  										}
@@ -335,13 +343,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  									<td>
 	   	  										<?php
 
-	   	  										$datetime = date("Y-m-d");
+	   	  										date_default_timezone_set('Asia/Manila');
 
-	   	  										if ($rows['start_day'] >= $datetime && $rows['end_day'] <= $datetime) {
+	   	  										$datetime = date('d-m-y h:i:s a');
+
+	   	  										$life = $rows['start_day'];
+	   	  										$lifersss = date('d-m-y h:i:s a',strtotime($rows['end_day']));
+
+	   	  										$lifesss = date('d-m-y h:i:s a',strtotime($life));
+
+	   	  										if ($lifesss <= $datetime && $lifersss <= $datetime) {
 	   	  											
 	   	  											echo '<span class="badge bg-danger" style="font-size:15px;">Close</span>';
 	   	  										}
-	   	  										else { 
+	   	  										else {
+	   	  											
 	   	  											?>
 	   	  											<form action="take_exam_status.php" method="POST">
 	   	  												<!-- ddd-->
