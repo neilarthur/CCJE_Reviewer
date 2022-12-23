@@ -112,8 +112,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 				</div>
 			</div>
 			<div class="card">
-				<div class="card-body m-3 table-responsive-lg">
-					<table class="table table-striped align text-center">
+				<div class="card-body m-2 table-responsive-lg">
+					<table class="table table-light table-hover align text-center">
 						<thead class="fs-5">
 							<tr>
 								<th scope="col">Area of Exam</th>
@@ -169,7 +169,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 									}
 									elseif ($drove['acc_id']==$_SESSION['acc_id'] AND $drove['pre_exam_id']==$shine['pre_exam_id']) { ?>
 
-										<button type="button" class="btn btn-secondary" disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
+										<button type="button" class="btn btn-secondary badge px-2 py-2 " style="font-size:15px;" disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
 
 									<?php
 									}

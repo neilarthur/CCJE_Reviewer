@@ -197,7 +197,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                         <th class="fs-5">Area of Examination</th>
                                         <th class="fs-5">Total of Items</th>
                                         <th class="fs-5">Score</th>
-                                        <th class="fs-5">Percent</th>
+                                        <th class="fs-5">Percentage</th>
                                         <th class="fs-5">Time committed</th>
                                         <th class="fs-5">Remarks</th>
                                     </tr>
@@ -226,12 +226,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                     <tr>
                                         <td><?php echo $rows['first_name']." ".$rows['last_name']; ?></td>
                                         <td><?php echo $rows['subjects']; ?></td>
-                                        <td><?php echo $rows['total_question']; ?></td>
-                                        <td><?php echo $rows['score']; ?></td>
-                                        <td><?php echo $rows['score_percent']; ?> %</td>
-                                        <td>1hr 30mins</td>
+                                        <td class="ps-5"><?php echo $rows['total_question']; ?></td>
+                                        <td class="ps-4"><?php echo $rows['score']; ?></td>
+                                        <td class="ps-4"><?php echo $rows['score_percent']; ?> %</td>
+                                        <td class="ps-4">1hr 30mins</td>
                                         <?php if ($rows['result']=='passed') { ?>
-                                                 <td class="text-success text-uppercase fw-bold"><?php echo $rows['result'] ?></td>
+                                                 <td class="text-success text-uppercase fw-bold ps-3"><?php echo $rows['result'] ?></td>
                                             <?php
                                             }elseif ($rows['result']=='failed') { ?>
                                                 <td class="text-danger text-uppercase fw-bold"><?php echo $rows['result'] ?></td>

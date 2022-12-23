@@ -261,24 +261,17 @@ if (isset($_POST['submit'])) {
 	        <div class="modal-dialog">
 	            <div class="modal-content">
 	                <div class="modal-header flex-column border-0 bg-danger">
-	                    <h5 class="modal-title"></h5>
 	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	                    <div class="icon-box mt-2 mb-2">
-	                    	<i class="fas fa-exclamation-circle fa-5x text-white"></i>
+	                        <i class="fas fa-exclamation-circle fa-5x text-white"></i>
 	                    </div>
 	                </div>
 	                <div class="modal-body text-center mt-2">
 	                    <h4 class="fw-bold">Do you really wish to leave or log out?</h4>
 	                </div>
 	                <div class="modal-footer border-0">
-	                    <form action="../php/logout_faculty.php" class="hide" method="POST">
-	                    	<input type="hidden" name="id" value="<?php echo $_SESSION['acc_id']  ?>">
-							<input type="hidden" name="times" value="<?php echo $_SESSION['login_id']  ?>">
-							<div>
-								<button type="submit" class="btn btn-success">YES</button>
-								<button type="button" class="btn btn-danger mx-2" data-bs-dismiss="modal">NO</button>
-							</div>
-						</form>
+	                    <a href="../php/logout.php" class="btn btn-success mx-2">YES</a>
+	                    <button type="button" class="btn btn-danger mx-2" data-bs-dismiss="modal">NO</button>
 	                </div>
 	            </div>
 	        </div>

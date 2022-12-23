@@ -112,8 +112,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
    	 		</div>
    	 	</div>
    	 	<div class="card h-100">
-  			<div class="card-body m-3 table-responsive-lg">
-  				<table class="table bg-light" width="100%">
+  			<div class="card-body m-2 table-responsive-lg">
+  				<table class="table bg-light table-hover" width="100%">
   					<thead class="fs-5 text-center">
   						<tr>
   							<th scope="col">Title</th>
@@ -175,7 +175,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 	   	  										if ($rows['start_day'] >= $datetime && $rows['end_day'] <= $datetime) {
 	   	  											
-	   	  											echo '<span class="badge bg-danger" style="font-size:15px;">Close</span>';
+	   	  											echo '<span class="badge bg-danger px-3 py-2" style="font-size:15px;">CLOSED</span>';
 	   	  										}
 	   	  										else { 
 	   	  										?>
@@ -205,7 +205,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  											
 	   	  											elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) { ?>
 
-	   	  													<button type="submit" class="btn btn-secondary" disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
+	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
 	   	  												<?php
 	   	  												}
 	   	  											
@@ -264,7 +264,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 	   	  										if ($lifesss <= $datetime && $lifersss <= $datetime) {
 	   	  											
-	   	  											echo '<span class="badge bg-danger" style="font-size:15px;">Close</span>';
+	   	  											echo '<span class="badge bg-danger px-3 py-2" style="font-size:15px;">CLOSED</span>';
 	   	  										}
 	   	  										else { 
 	   	  										?>
@@ -295,7 +295,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  												
 	   	  											elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) { ?>
 
-	   	  													<button type="submit" class="btn btn-secondary" disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
+	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
 	   	  												<?php
 	   	  												}
 	   	  											?>
@@ -354,7 +354,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 	   	  										if ($lifesss <= $datetime && $lifersss <= $datetime) {
 	   	  											
-	   	  											echo '<span class="badge bg-danger" style="font-size:15px;">Close</span>';
+	   	  											echo '<span class="badge bg-danger px-3 py-2" style="font-size:15px;">CLOSED</span>';
 	   	  										}
 	   	  										else {
 	   	  											
@@ -383,7 +383,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  												
 	   	  											elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) { ?>
 
-	   	  													<button type="submit" class="btn btn-secondary" disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
+	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
 	   	  												<?php
 	   	  												}
 	   	  											?>

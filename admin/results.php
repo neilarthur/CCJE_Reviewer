@@ -233,7 +233,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<th scope="col">Area of Exam</th>
 														<th scope="col">Total Questions</th>
 														<th scope="col">Time Limit</th>
-														<th scope="col"style="padding-left: 30px;">Score</th>
+														<th scope="col" class="text-center">Score</th>
 														<th scope="col" class="text-center">Action</th>
 													</tr>
 												</thead>
@@ -246,17 +246,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														if ($row['section']=='4A') { ?>
 															
 															 <tr>
-																	<td hidden>ID</td>
+																	<td hidden><?php echo $row['acc_id'] ?></td>
 																	<td><?php echo $counter ;?></td>
 					                                                <td><?php echo $row['last_name']." ".$row['first_name']." ".$row['middle_name']?></td>
 					                                                <td class="ps-5"><?php echo $row['section'] ?></td>
 					                                                <td><?php echo $row['subjects'] ?></td>
 					                                                <td class="ps-5"><?php echo $row['total_question'] ?></td>
 					                                                <td><?php echo $row['time_limit'] /3600?> hr(s)</td>
-					                                                <td style="padding-left: 35px;" ><?php echo $row['score'] ?></td>
+					                                                <td style="padding-left: 55px;"><?php echo $row['score'] ?></td>
 					                                                <td>
-					                                                	<div class="text-center">
-					                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
+					                                                	<div class="d-flex justify-content-center me-3">
+					                                                		<button data-id="<?php echo $row['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -303,7 +303,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<th scope="col">Area of Exam</th>
 														<th scope="col">Total Questions</th>
 														<th scope="col">Time Limit</th>
-														<th scope="col"style="padding-left: 30px;">Score</th>
+														<th scope="col" class="text-center">Score</th>
 														<th scope="col" class="text-center">Action</th>
 													</tr>
 												</thead>
@@ -317,17 +317,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														if ($row['section']=='4B') { ?>
 															
 															 <tr>
-																	<td hidden>ID</td>
+																	<td hidden><?php echo $row['acc_id'] ?></td>
 																	<td><?php echo $counter ;?></td>
 					                                                <td><?php echo $row['last_name']." ".$row['first_name']." ".$row['middle_name']?></td>
 					                                                <td class="ps-5"><?php echo $row['section'] ?></td>
 					                                                <td><?php echo $row['subjects'] ?></td>
 					                                                <td class="ps-5"><?php echo $row['total_question'] ?></td>
 					                                                <td><?php echo $row['time_limit'] /3600?> hr(s)</td>
-					                                                <td class="ps-5" ><?php echo $row['score'] ?></td>
+					                                                <td style="padding-left: 55px;"><?php echo $row['score'] ?></td>
 					                                                <td>
-					                                                	<div class="text-center">
-					                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
+					                                                	<div class="d-flex justify-content-center me-3">
+					                                                		<button data-id="<?php echo $row['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -375,7 +375,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<th scope="col">Area of Exam</th>
 														<th scope="col">Total Questions</th>
 														<th scope="col">Time Limit</th>
-														<th scope="col"style="padding-left: 30px;">Score</th>
+														<th scope="col" class="text-center">Score</th>
 														<th scope="col" class="text-center">Action</th>
 													</tr>
 												</thead>
@@ -388,17 +388,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														if ($row['section']=='4C') { ?>
 															
 															 <tr>
-																	<td hidden>ID</td>
+																	<td hidden><?php echo $row['acc_id'] ?></td>
 																	<td><?php echo $counter ;?></td>
 					                                                <td><?php echo $row['last_name']." ".$row['first_name']." ".$row['middle_name']?></td>
 					                                                <td class="ps-5"><?php echo $row['section'] ?></td>
 					                                                <td><?php echo $row['subjects'] ?></td>
 					                                                <td class="ps-5"><?php echo $row['total_question'] ?></td>
 					                                                <td><?php echo $row['time_limit'] /3600?> hr(s)</td>
-					                                                <td class="ps-5" ><?php echo $row['score'] ?></td>
+					                                                <td style="padding-left: 55px;"><?php echo $row['score'] ?></td>
 					                                                <td>
-					                                                	<div class="text-center" >
-					                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"type="button"><i class="fas fa-eye"></i></button>
+					                                                	<div class="d-flex justify-content-center me-3" >
+					                                                		<button data-id="<?php echo $row['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -499,6 +499,23 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	    		</div>
 	    	</div>
 	    </div>
+	    <!--View Result Modal -->
+		<div class="modal fade" id="viewToggle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title fw-bold">View Result</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="mugs">
+						
+					</div>					           
+					<div class="modal-footer border-0">
+						<button type="button" class="btn btn-danger pb-2 px-4" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 </body>
 <script>
@@ -540,4 +557,22 @@ let arrow = document.querySelectorAll(".arrow");
   	 });
   });
 </script>
+<script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.view_btn').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: '../php/view_results_acc.php',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.mugs').html(response);
+          $('#viewToggle').modal('show');
+        }
+      });
+    });
+   });
+ </script>
 </html>
