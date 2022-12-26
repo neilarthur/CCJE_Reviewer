@@ -213,7 +213,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="text-center">No records has been added </td>
+                                        <td>No records has been added </td>
                                         <td></td>
                                         <td></td>
                                         <td></td>

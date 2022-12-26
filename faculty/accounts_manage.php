@@ -240,10 +240,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	<?php
 																	if ($rows['status']=='active') {
 																		
-																		echo '<span class="badge bg-success" style="font-size: 15px;">Approve</span>';
+																		echo '<span class="badge bg-success p-2 px-2" style="font-size: 15px;">Approve</span>';
 																	}
 																	elseif ($rows['status']=='pending') {
-																		echo '<span class="badge bg-warning text-dark" style="font-size: 15px;">Pending</span>';
+																		echo '<span class="badge bg-warning text-dark p-2 px-2" style="font-size: 15px;">Pending</span>';
 																	}
 																	?>
 																</td>
@@ -271,10 +271,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	<?php
 																	if ($rows['status']=='active') {
 																		
-																		echo '<span class="badge bg-success" style="font-size: 15px;">Approve</span>';
+																		echo '<span class="badge bg-success p-2 px-2" style="font-size: 15px;">Approve</span>';
 																	}
 																	elseif ($rows['status']=='pending') {
-																		echo '<span class="badge bg-warning text-dark" style="font-size: 15px;">Pending</span>';
+																		echo '<span class="badge bg-warning text-dark p-2 px-2" style="font-size: 15px;">Pending</span>';
 																	}
 																	?>
 																</td>
@@ -303,10 +303,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	<?php
 																	if ($rows['status']=='active') {
 																		
-																		echo '<span class="badge bg-success" style="font-size: 15px;">Approve</span>';
+																		echo '<span class="badge bg-success p-2 px-2" style="font-size: 15px;">Approve</span>';
 																	}
 																	elseif ($rows['status']=='pending') {
-																		echo '<span class="badge bg-warning text-dark" style="font-size: 15px;">Pending</span>';
+																		echo '<span class="badge bg-warning text-dark p-2 px-2" style="font-size: 15px;">Pending</span>';
 																	}
 																	?>
 																</td>

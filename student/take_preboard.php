@@ -163,7 +163,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 									if (mysqli_num_rows($board) ==0) { ?>
 
-										<button class="btn btn-success text-uppercase"><a href="#" data-id="<?php echo $rows['pre_exam_id'] ?>" class="text-white suc_code" data-bs-toggle="modal" style="text-decoration: none;"><i class='bx bxs-hourglass-top me-2'></i>Start</a></button>
+										<button class="btn btn-success text-uppercase px-2 py-1"><a href="#" data-id="<?php echo $rows['pre_exam_id'] ?>" class="text-white suc_code" data-bs-toggle="modal" style="text-decoration: none;"><i class='bx bxs-hourglass-top me-1'></i>Start</a></button>
 									
 									<?php
 									}

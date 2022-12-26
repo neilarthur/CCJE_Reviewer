@@ -262,7 +262,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -285,7 +285,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal"type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -307,7 +307,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
-				                                                		<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"><i class="fas fa-eye"></i></button>
+				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 				                                                	</div>
 				                                                </td>
 				                                            </tr>
@@ -358,7 +358,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -381,7 +381,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -403,7 +403,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
-				                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 				                                                	</div>
 				                                                </td>
 				                                            </tr>
@@ -454,7 +454,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -477,7 +477,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -499,7 +499,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
-				                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 				                                                	</div>
 				                                                </td>
 				                                            </tr>
@@ -550,7 +550,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -573,7 +573,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -595,7 +595,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
-				                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 				                                                	</div>
 				                                                </td>
 				                                            </tr>
@@ -646,7 +646,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -669,7 +669,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -691,7 +691,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
-				                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 				                                                	</div>
 				                                                </td>
 				                                            </tr>
@@ -742,7 +742,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -765,7 +765,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
-					                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
 					                                            </tr>
@@ -787,7 +787,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
-				                                                		<button class="btn btn-primary  mx-2" data-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
+				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 				                                                	</div>
 				                                                </td>
 				                                            </tr>
@@ -835,38 +835,23 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	            </div>
 	        </div>
 	    </div>
-	    <!-- Modal -->
-	    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	    	<div class="modal-dialog">
-	    		<div class="modal-content">
-	    			<div class="modal-header">
-	    				<h4 class="modal-title fw-bold" id="exampleModalLabel">View Result</h4>
-	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	    			</div>
-	    			<div class="modal-body">
-	    				<div class="card border-0" >
-	    					<div class="card-body">
-	    						<label class="d-flex ps-1 mt-2 justify-content-start" >Name</label>
-	    						<input type="text" name="last_name" class="form-control" value="Ralph Vincent Pagcaliwagan ">
-	    						<label class="d-flex ps-1 mt-2 justify-content-start">Section</label>
-								<input type="text" name="last_name" class="form-control" value="4C">
-								<label  class="d-flex ps-1 mt-2 justify-content-start">Area of Exam</label>
-								<input type="text" name="last_name" class="form-control" value="Criminal Jurisprudence">
-								<label  class="d-flex ps-1 mt-2 justify-content-start">Score</label>
-								<input type="text" name="last_name" class="form-control" value="100">
-								<label  class="d-flex ps-1 mt-2 justify-content-start">Percentage</label>
-								<input type="text" name="last_name" class="form-control" value="100%">
-								<label  class="d-flex ps-1 mt-2 justify-content-start">Total corect answers</label>
-								<input type="text" name="last_name" class="form-control" value="100">
-							</div>
-						</div>
-	    			</div>
-	    			<div class="modal-footer">
-	    				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	    			</div>
-	    		</div>
-	    	</div>
-	    </div>
+	     <!--View Result Modal -->
+		<div class="modal fade" id="viewToggle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title fw-bold">View Result</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="mugs">
+						
+					</div>					           
+					<div class="modal-footer border-0">
+						<button type="button" class="btn btn-danger pb-2 px-4" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 </body>
@@ -930,4 +915,22 @@ let arrow = document.querySelectorAll(".arrow");
   	 });
   });
 </script>
+<script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.view_btn').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: '../php/view_exam_results.php',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.mugs').html(response);
+          $('#viewToggle').modal('show');
+        }
+      });
+    });
+   });
+ </script>
 </html>

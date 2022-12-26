@@ -220,7 +220,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<tr>
 													<th scope="col">Student ID</th>
 													<th scope="col">Fullname</th>
-													<th scope="col">Year & Section</th>
+													<th scope="col">Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
 													<th scope="col" style="text-align: center;">Action</th>
@@ -234,7 +234,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<tr>
 													<td><?php echo $rows['user_id'];  ?></td>
 													<td><?php echo $rows['last_name'];  ?>,&nbsp;<?php echo $rows['first_name'];  ?>&nbsp;<?php echo $rows['middle_name'];  ?></td>
-													<td><?php echo $rows['section'];  ?></td>
+													<td class="ps-4"><?php echo $rows['section'];  ?></td>
 													<td><?php echo $rows['role'];  ?></td>
 													<td><?php echo $rows['email_address']; ?></td>
 													<td>
@@ -313,8 +313,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					 	?>
 					 	<nav>
 						<div class="nav nav-pills mt-2" id="nav-tab" role="tablist">
-							<button class="nav-link" id="nav-home-tab" data-bs-toggle="pill" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Students</button>
-							<button class="nav-link active" id="nav-profile-tab" data-bs-toggle="pill" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Faculty Instructor</button>
+							<button class="nav-link w-50" id="nav-home-tab" data-bs-toggle="pill" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Students</button>
+							<button class="nav-link active w-50" id="nav-profile-tab" data-bs-toggle="pill" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Faculty Instructor</button>
 						</div>
 					</nav>
 
@@ -331,7 +331,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<tr>
 													<th scope="col">Student ID</th>
 													<th scope="col">Fullname</th>
-													<th scope="col">Year & Section</th>
+													<th scope="col">Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
 													<th scope="col" style="text-align: center;">Action</th>
@@ -343,25 +343,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 												while ($rows = mysqli_fetch_assoc($query_row)) { ?>
 												<tr>
-													<td><?php echo $rows['user_id'];  ?></td><td><?php echo $raws['last_name'];  ?>,&nbsp;<?php echo $raws['first_name'];  ?>&nbsp;<?php echo $raws['middle_name'];  ?></td>
-													<td><?php echo $rows['year'];  ?></td>
-													<td><?php echo $rows['section'];  ?></td>
+													<td><?php echo $rows['user_id'];  ?></td>
+													<td><?php echo $rows['last_name'];  ?>,&nbsp;<?php echo $rows['first_name'];  ?>&nbsp;<?php echo $rows['middle_name'];  ?></td>
+													<td class="ps-4"><?php echo $rows['section'];  ?></td>
 													<td><?php echo $rows['role'];  ?></td>
 													<td><?php echo $rows['email_address'];  ?></td>
-													<td>
-														<?php
-
-															if ($raws['status']=='active') {
-																
-																echo "<p class='text-center text-success'>Approved</p>";
-															}
-															elseif ($raws['status']=='pending') {
-																
-																echo "<p class='text-center text-success'>Pending</p>";
-															}
-															
-														?>
-													</td>
 													<td>
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
@@ -394,7 +380,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<tr>
 													<th scope="col">Teacher ID</th>
 													<th scope="col">Fullname</th>
-													<th scope="col">Class Section</th>
+													<th scope="col" class="text-center">Class Section</th>
 													<th scope="col">Role</th>
 													<th scope="col">Email Address</th>
 													<th scope="col" style="text-align: center;">Action</th>
@@ -409,7 +395,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<tr>
 													<td><?php echo $raws['user_id'];  ?></td>
 													<td><?php echo $raws['last_name'];  ?>,&nbsp;<?php echo $raws['first_name'];  ?>&nbsp;<?php echo $raws['middle_name'];  ?></td>
-													<td><?php echo $raws['section'];  ?></td>
+													<td style="padding-left: 70px;"><?php echo $raws['section'];  ?></td>
 													<td><?php echo $raws['role'];  ?></td>
 													<td><?php echo $raws['email_address'];  ?></td>
 													<td>

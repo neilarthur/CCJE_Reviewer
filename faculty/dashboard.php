@@ -196,7 +196,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 			<div class="container-fluid py-3 px-4">
 				<div class="row">
 					<!-- Students Card Example -->
-					<div class="col-lg-3 col-xs-6 mb-5">
+					<div class="col-lg-3 col-xs-6 mb-3">
 						<div class="card border-left-dark shadow h-100 py-1" style="background-color: rgb(221, 75, 57);">
 							<div class="card-body">
 								<div class="row no-gutters align-items-center">
@@ -234,7 +234,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                        </div>
 	                    </div>
 	                </div>
-	                <div class="col-lg-3 col-xs-6 mb-5">
+	                <div class="col-lg-3 col-xs-6 mb-3">
 						<div class="card border-left-dark shadow h-100 py-1" style="background-color: rgb(243, 156, 18 );">
 							<div class="card-body">
 								<div class="row no-gutters align-items-center">
@@ -276,7 +276,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                        </div>
 	                    </div>
 	                </div>
-	                 <div class="col-lg-3 col-xs-6 mb-5">
+	                 <div class="col-lg-3 col-xs-6 mb-3">
 						<div class="card border-left-dark shadow h-100 py-1" style="background-color: rgb(0, 115, 183);">
 							<div class="card-body">
 								<div class="row no-gutters align-items-center">
@@ -315,7 +315,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                        </div>
 	                    </div>
 	                </div>
-	                 <div class="col-lg-3 col-xs-6 mb-5">
+	                 <div class="col-lg-3 col-xs-6 mb-3">
 						<div class="card border-left-dark shadow h-100 py-1" style="background-color: rgb(0, 192, 239);">
 							<div class="card-body">
 								<div class="row no-gutters align-items-center">

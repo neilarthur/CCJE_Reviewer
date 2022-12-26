@@ -322,20 +322,60 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                          $percent5 = mysqli_num_rows($fetch5);
 
 
-                         while ($baws = mysqli_fetch_assoc($quiz_run) AND $cows =mysqli_fetch_assoc($query) AND $cows1 =mysqli_fetch_assoc($query1) AND $cows2 =mysqli_fetch_assoc($query2) AND $cows3 =mysqli_fetch_assoc($query3)AND $cows4 =mysqli_fetch_assoc($query4) AND $cows5 =mysqli_fetch_assoc($query5) ) {
-
-
-                                $ave [] = $cows['num'] / $percent; // Criminal jurisprudence
-                                $ave1[] =$cows1['num'] /$percent1; // Crime and Detection
-
-                                $ave2 [] = $cows2['num'] / $percent2; // Law enforcement
-                        
-                                $ave3 [] = $cows3['num'] / $percent3; // Criminalistics
-
-                                $ave4 [] = $cows4['num'] / $percent4; // Criminal Sociology
-                                $ave5 [] = $cows5['num'] / $percent5; // Correctional Administration
-
+                         while ($baws = mysqli_fetch_assoc($quiz_run) AND $cows =mysqli_fetch_assoc($query)) {
+                            if ($percent == 0) {
+                                $percent =1;
+                                $ave [] = round($cows['num'] / $percent);
                             }
+                            else{
+                                $ave [] = round($cows['num'] / $percent);
+                            }
+                         }
+                         while ($cows1 =mysqli_fetch_assoc($query1)) {
+                            if ($percent1 == 0) {
+                                $percent1=1;
+                                 $ave1[] = round($cows1['num'] /$percent1);
+                            }
+                            else{
+                                $ave1[] = round($cows1['num'] /$percent1);
+                            }
+                         }
+                         while ( $cows2 =mysqli_fetch_assoc($query2)) {
+                             if ($percent2 == 0) {
+                                $percent2 =1;
+                                $ave2 [] = round($cows2['num'] / $percent2);
+                            }
+                            else{
+                                $ave2 [] = round($cows2['num'] / $percent2);
+                            }
+                         }
+                         while ($cows3 =mysqli_fetch_assoc($query3)) {
+                            if ($percent3 == 0) {
+                                $percent3 =1;
+                                $ave3 [] = round($cows3['num'] / $percent3);
+                            }
+                            else{
+                                $ave3 [] = round($cows3['num'] / $percent3); 
+                            }
+                         }
+                         while ($cows4 =mysqli_fetch_assoc($query4)) {
+                             if ($percent4 == 0) {
+                                $percent4 =1;
+                                $ave4 [] = round($cows4['num'] / $percent4);
+                            }
+                            else{
+                                $ave4 [] = round($cows4['num'] / $percent4);
+                            }
+                         }
+                         while ($cows5 =mysqli_fetch_assoc($query5) ) {
+                            if  ($percent5 == 0) {
+                                $percent5 =1;
+                                $ave5 [] = round($cows5['num'] / $percent5);
+                            }
+                            else{
+                                $ave5 [] = round($cows5['num'] / $percent5);
+                            }
+                         }
 
                         ?>
                        
@@ -350,12 +390,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                     label: "Score percentage",
                                     data:[<?php echo json_encode($ave) ?>,<?php echo json_encode($ave2) ?>, <?php echo json_encode($ave3) ?>,<?php echo json_encode($ave1) ?>, <?php echo json_encode($ave4) ?>,<?php echo json_encode($ave5) ?>],
                                     backgroundColor: [
-                                      "#0052cc",
-                                      "#ff5630",
-                                      "#ffab00",
-                                      "#23AE22",
-                                      "#e81705",
-                                      '#13169B',
+                                      "#3e95cd", "#8e5ea2","#3cba9f","#775FEC","#FF6666","#FFAA00",
                                     ],
                                     borderWidth: 1
                                   }]
@@ -480,33 +515,34 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                      }
                      ?>
                     <script>
+                        
                     window.onload=function(){
                             var ctx = document.getElementById("chart").getContext("2d");
                             var data = {
                                 labels: [""],
                                 datasets: [{
                                     label: "Criminal Jurisprudence",
-                                    backgroundColor: "#0052cc",
+                                    backgroundColor: "#3e95cd",
                                     data: <?php echo json_encode($per1) ?> 
                                 }, {
                                     label: "Law Enforcement",
-                                    backgroundColor: "#ff5630",
+                                    backgroundColor: "#8e5ea2",
                                     data: <?php echo json_encode($per2) ?>
                                 }, {
                                     label: "Criminalistics",
-                                    backgroundColor: "#ffab00",
+                                    backgroundColor: "#3cba9f",
                                     data:<?php echo json_encode($per3) ?>
                                 }, {
                                     label: "Crime Detection and Investigation",
-                                    backgroundColor: ' #23AE22',
+                                    backgroundColor: "#775FEC",
                                     data: <?php echo json_encode($per4) ?>
                                 }, {
                                     label: "Criminal Sociology",
-                                    backgroundColor: "#e81705",
+                                    backgroundColor: "#FF6666",
                                     data:<?php echo json_encode($per) ?>,
                                 },{
                                     label: "Correctional Administration",
-                                    backgroundColor: '#13169B',
+                                    backgroundColor:  "#FFAA00",
                                     data: <?php echo json_encode($per5) ?>
                                 }]
 

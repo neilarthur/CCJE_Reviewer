@@ -294,7 +294,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	    
 	    <!-- Approve Modal -->
 		<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-dialog-centered">
 	    		<div class="modal-content">
 	    			<div class="modal-header flex-column border-0">
 	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -307,7 +307,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	    				<div class="modal-body">
 	    					<div class="container d-flex justify-content-center">
 	    						<input type="hidden" name="update_id" id="pre_exam_id">
-	    						<input type="text" name="access" id="access">
+	    						<input type="hidden" name="access" id="access">
 	    						
 	    					</div>
 	    					<div class="modal-footer d-flex justify-content-center border-0">

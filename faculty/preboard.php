@@ -235,7 +235,7 @@ function getName($n) {
 													<th scope="col">Time Limit</th>
 													<th scope="col">Access Code</th>
 													<th scope="col">Exam Status</th>
-													<th scope="col">Status</th>
+													<th scope="col" class="text-center">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -391,11 +391,11 @@ function getName($n) {
 				                                                <?php
 
 				                                                if ($rows['stat_exam']=='Ready') {
-				                                                	echo '<span class="badge bg-success text-white text-center p-2 px-2" style="font-size:15px;">Ready</span>';
+				                                                	echo '<span class="badge bg-success text-white ms-3 p-2 px-2" style="font-size:15px;">Ready</span>';
 				                                                }
 				                                                elseif ($rows['stat_exam']=='No question') {
 				                                                	
-				                                                	echo '<span class="badge bg-danger text-center text-white p-2 px-2" style="font-size:15px;">No question</span>';
+				                                                	echo '<span class="badge bg-danger  text-white p-2 px-2" style="font-size:15px;">No question</span>';
 				                                                }
 
 				                                                ?>

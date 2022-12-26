@@ -163,6 +163,71 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 			</div>
 		</div>
 	</div>
+	<!-- Footer -->
+  <footer class="text-center text-lg-start text-white ft mt-3">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-between p-4" style="background-color: #8C0000;">
+      <!-- Left -->
+      <div class="me-5 ">
+        <h5>Get connected with us on social networks:</h5>
+      </div>
+      <!-- Left -->
+    </section>
+
+    <!-- Section: Links  -->
+    <section>
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold">College of Criminal Justice and Education LSPU Santa Cruz Campus</h6>
+            <hr class="mb-4 mt-0 d-inline-block mx-auto"style="width: 90%; background-color: #7c4dff; height: 2px"/>
+            <p>
+              Here you can use the links and contacts to learn more about 
+              the College of Criminal Justice and Education LSPU.
+            </p>
+          </div>
+        
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Useful links</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 100px; background-color: #7c4dff; height: 2px"
+                />
+            <p>
+              <a href="https://www.facebook.com/groups/LSPU.CRIMINOLOGY.SCC.Official" class="text-white"><i class='bx-fw bx bxl-facebook-circle me-2'></i> Facebook: @LSPU CRIMINOLOGY SCC Official</a>
+            </p>
+            <p>
+              <a href="#!" class="text-white"><p><i class="fas fa-envelope mr-3 me-2"></i>Email: marklito.repugia@lspu.edu.ph</a>
+            </p>
+          </div>
+         
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold">Contact</h6>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #7c4dff; height: 2px"
+                />
+            <p><i class="fas fa-home mr-3 me-2"></i>ccje.scc@lspu.edu.ph</p>
+            <p><i class="fas fa-envelope mr-3 me-2"></i>marklito.repugia@lspu.edu.ph</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3">
+      © 2022 Copyright: College of Criminal Justice and Education LSPU Sta. Cruz Campus
+    </div>
+    <!-- Copyright -->
+  </footer>
    
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
