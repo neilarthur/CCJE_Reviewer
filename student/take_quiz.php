@@ -354,7 +354,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 	   	  										if ($lifesss <= $datetime && $lifersss <= $datetime) {
 	   	  											
-	   	  											echo '<span class="badge bg-danger px-3 py-2" style="font-size:15px;">CLOSED</span>';
+	   	  											echo '<button data-id="'.$rows['test_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
 	   	  										}
 	   	  										else {
 	   	  											
@@ -407,8 +407,28 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	</div>
 </div>
 
+<!-- Access code Modal-->
+<div class="modal fade" id="close_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header flex-column ">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <h4 class="modal-title mx-3 mt-3 fw-bold">Response</h4>
+            <div class="modal-body">
+            	<div class="pre">
+            		
+            	</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(){
   window.addEventListener('scroll', function() {
@@ -425,4 +445,24 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   });
 }); 
 </script>
+
+ <!-- preview modal --->
+ <script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.btn_closer').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: 'response_marks.php',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.pre').html(response);
+          $('#close_modal').modal('show');
+        }
+      });
+    });
+   });
+ </script>
 </html>

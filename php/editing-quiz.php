@@ -375,7 +375,7 @@ $suppd .= "</select>";
 													<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i>
 													</a>
 													<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-														<li><a class="dropdown-item" data-bs-toggle='modal' data-bs-target='#userModal'><i class="fas fa-user-alt me-2"></i>User overide</a></li>
+														<li><a class="dropdown-item userbtn" data-bs-toggle='modal' data-bs-target="#userModal"><i class="fas fa-user-alt me-2"></i>User overide</a></li>
 														<div class='dropdown-divider'></div>
 														<li><a class="dropdown-item" data-bs-toggle='modal' data-bs-target='#resultModal'><i class="fas fa-chart-bar me-2"></i>Results</a></li>
 													</ul>
@@ -790,7 +790,8 @@ $suppd .= "</select>";
 		<!-- User overide modal -->
 		<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
+				<form action="user_override.php" method="POST">
+					<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title fw-bold" id="exampleModalLabel">Add user overide</h4>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -799,41 +800,25 @@ $suppd .= "</select>";
 						<div class="card border-0">
 							<div class="card-body">
 								<div class="input-group mb-2">
-									<span class="input-group-text bg-white fw-bold">Overide user</span>
-									<input type="" name="user" class="form-control">
-								</div>
-								<div class="col-md-10 mb-2" style="margin-left: 120px;">
-									<div class="input-group">
-										<select class="form-select custom-select">
-											<option selected value="" disabled selected>Search</option>
-											<option>Ralph vincent pagcaliwagan, ralphvincent@gmail.com, ID No: 01183039</option>
-											<option>Neil Arthur Pornela, neilpornela@gmail.com, ID No: 01190635</option>
-											<option>Chadwick Balota, chadwickbalota@gmail.com, ID No: 01190608</option>
-										</select>
-									</div>
-								</div>
-								<div class="input-group mb-2">
+
+									<input type="hidden" name="userover_id" value="<?php echo $_GET['id'] ?>">
 									<span class="input-group-text bg-white fw-bold">Open Quiz</span>
-									<input type="date" name="start_time" class="form-control" required>
+									<input type="datetime-local" name="start_time" class="form-control" required>
 								</div>
 								<div class="input-group mb-2">
 									<span class="input-group-text bg-white fw-bold">Close Quiz</span>
-									<input type="date" name="close_time" class="form-control" required >
+									<input type="datetime-local" name="close_time" class="form-control" required >
 								</div>
-								<div class="input-group ">
-									<span class="input-group-text border-0 bg-white fw-bold me-3">Time limit</span>
-									<label id="btn-example4"  type="text" hidden  style="font-size: 13px;"></label>
-									<input name="time_limit" class="form-control" required />
-			                    </div>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success rounded px-4">Save</button>
+						<button type="submit" name="sub" class="btn btn-success rounded px-4">Save</button>
 						<button type="button" class="btn btn-secondary rounded px-4" data-bs-dismiss="modal">Cancel</button>
 					</div>
-				</div>
+				</form>
 			</div>
+		</div>
 		</div>
 		
 		<!--Results Modal -->
@@ -964,7 +949,8 @@ $suppd .= "</select>";
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 <script src="../js/jquery.durationpicker.js"></script>
-<script type="text/javascript">
+
+ <script type="text/javascript">
  	$(document).ready(function() {
  		$('.deletebtn').on('click', function() {
 
