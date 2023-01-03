@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$update_exam = $_POST['update_pre_question'];
 	$update_id = $_POST['sub_acc_id'];
 	$total_quest = $_POST['total_quest'];
-	$rate = $_POST['rate'];
+	$rate = 70;
 
 
 	$pre_exam = $_POST['pre_exam_id'];

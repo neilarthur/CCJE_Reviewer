@@ -347,12 +347,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 	   	  										$datetime = date('d-m-y h:i:s a');
 
-	   	  										$life = $rows['start_day'];
+	   	  										$life = date('d-m-y h:i:s a',strtotime($rows['start_day']));;
 	   	  										$lifersss = date('d-m-y h:i:s a',strtotime($rows['end_day']));
 
-	   	  										$lifesss = date('d-m-y h:i:s a',strtotime($life));
+	   	  							
 
-	   	  										if ($lifesss <= $datetime && $lifersss <= $datetime) {
+	   	  										if ($life <= $datetime && $lifersss <= $datetime) {
 	   	  											
 	   	  											echo '<button data-id="'.$rows['test_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
 	   	  										}
@@ -407,15 +407,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	</div>
 </div>
 
-<!-- Access code Modal-->
+
+
+<!-- permission to open quiz  Modal-->
 <div class="modal fade" id="close_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-    <div class="modal-dialog modal-confirm">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header flex-column ">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <h4 class="modal-title mx-3 mt-3 fw-bold">Response</h4>
+            <h3 class="modal-title mx-3 mt-3 fw-bold text-uppercase" style="color: #8C0000;">You need permission<br></h3>
+            <p class="m-4 fs-6">&nbsp;&nbsp;This form can only be viewed by users in the owner's organization.Try to message the owner of the form if you think this is a mistake.</p>
+
             <div class="modal-body">
+            	<h4>Message</h4>
             	<div class="pre">
             		
             	</div>
