@@ -83,7 +83,7 @@ while ($row = mysqli_fetch_array($results)) {
      </div> 
      <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 py-2">
           <label for="user-add" class="d-flex ps-1">Address</label>
-          <input class="form-control" name="address" value="<?php echo $row['address']; ?>">
+          <textarea class="form-control" name="address" rows="1"><?php echo $row['address']; ?></textarea>
           <input type="hidden" name="log_id" value="<?php  echo $_SESSION['acc_id']; ?>">
         </div>     
     <div class="modal-footer border-0 mt-3 d-flex justify-content-center">

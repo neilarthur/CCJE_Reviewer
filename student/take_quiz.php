@@ -205,7 +205,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  											
 	   	  											elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) { ?>
 
-	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
+	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled="" style="font-size: 15px;"><i class="fas fa-check-circle me-2"></i>Done</button>
 	   	  												<?php
 	   	  												}
 	   	  											
@@ -295,7 +295,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  												
 	   	  											elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) { ?>
 
-	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
+	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled="" style="font-size: 15px;"><i class="fas fa-check-circle me-2"></i>Done</button>
 	   	  												<?php
 	   	  												}
 	   	  											?>
@@ -383,7 +383,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  												
 	   	  											elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) { ?>
 
-	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
+	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled="" style="font-size: 15px;"><i class="fas fa-check-circle me-2"></i>Done</button>
 	   	  												<?php
 	   	  												}
 	   	  											?>
@@ -413,11 +413,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 <div class="modal fade" id="close_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header flex-column ">
+            <div class="modal-header border-0">
             	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <h3 class="modal-title mx-3 mt-3 fw-bold text-uppercase" style="color: #8C0000;">You need permission<br></h3>
-            <p class="m-4 fs-6">&nbsp;&nbsp;This form can only be viewed by users in the owner's organization.Try to message the owner of the form if you think this is a mistake.</p>
+            <p class="modal-title h3 mx-3 mt-3 fw-bold text-uppercase" style="color: #8C0000;">You need permission<br></p>
+            <p class="m-4 fs-6" style="text-indent: 20px;">This form can only be viewed by users in the owner's organization. Try to message the owner of the form if you think this is a mistake.</p>
 
             <div class="modal-body">
             	<h4>Message</h4>

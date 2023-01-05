@@ -375,7 +375,7 @@ $suppd .= "</select>";
 													<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i>
 													</a>
 													<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-														<li><a class="dropdown-item userbtn" data-bs-toggle='modal' data-bs-target="#userModal"><i class="fas fa-user-alt me-2"></i>User overide</a></li>
+														<li><a class="dropdown-item userbtn" data-bs-toggle='modal' data-bs-target="#userModal"><i class="fas fa-calendar-alt me-2"></i>Date & Time</a></li>
 														<div class='dropdown-divider'></div>
 														<li><a class="dropdown-item" data-bs-toggle='modal' data-bs-target='#resultModal'><i class="fas fa-chart-bar me-2"></i>Results</a></li>
 													</ul>
@@ -787,13 +787,13 @@ $suppd .= "</select>";
 			</div>
 		</div>
 
-		<!-- User overide modal -->
+		<!-- Time And Date modal -->
 		<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<form action="user_override.php" method="POST">
 					<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title fw-bold" id="exampleModalLabel">Add user overide</h4>
+						<h4 class="modal-title fw-bold" id="exampleModalLabel">Date and Time</h4>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">

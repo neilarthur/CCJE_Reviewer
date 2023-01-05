@@ -395,7 +395,8 @@ $supps .= "</select>";
         				<div class="icon-box mt-3">
         					<i class="far fa-times-circle fa-5x text-danger"></i>
         				</div>
-        				<h4 class="modal-title text-align-center mt-3 fw-bold">Delete these question?</h4>
+        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h4>
+        				<p class="h5 modal-title text-align-center mt-2">Do want to delete these question</p>
         			</div>
         			<div class="modal-body">
         				<div class="arch">

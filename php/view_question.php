@@ -18,7 +18,7 @@ while ($row = mysqli_fetch_assoc($results) AND $bows = mysqli_fetch_assoc($resul
 <form class="form" action="#" method="Post">
      <div class="modal-body">
        <div class="form-group">
-         <label for="user-section">Subject Exam</label>
+         <label for="user-section">Area of Exam</label>
          <input type="hidden" class="form-control" name="update_id" value="<?php echo $row['question_id']; ?>">
          <div class="input-group mb-3">
           <select class="form-control"  name="subjected" readonly disabled="">
@@ -79,7 +79,7 @@ while ($row = mysqli_fetch_assoc($results) AND $bows = mysqli_fetch_assoc($resul
           <input type="text" class="form-control" name="acc" value="<?php echo $_GET['acc_id'];  ?>" hidden required="">
       </div>
       <div class="modal-footer border-0">
-          <a type="button" class=" btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-window-close me-2"></i>Close</a>
+          <a type="button" class=" btn btn-danger px-4 pb-2" data-bs-dismiss="modal">Close</a>
       </div>
     </div>
  </form>

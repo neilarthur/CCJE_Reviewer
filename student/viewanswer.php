@@ -148,7 +148,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 <?php 
                 
                 $id = $_GET['id'];
-                $code = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id')");
+                $code = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND tbl_quiz_result.acc_id = '{$_SESSION['acc_id']}' ");
 
 
                 while ($rows = mysqli_fetch_assoc($code)) {
@@ -174,7 +174,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 <?php
 
                 $id = $_GET['id'];
-                $quiz_query = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id')");
+                $quiz_query = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND tbl_quiz_result.acc_id = '{$_SESSION['acc_id']}'");
 
                  while ($rows = mysqli_fetch_assoc($quiz_query)) {?>
                    <p class="card-text"><b>Grade:</b> <b><?php echo $rows['score_percent']; ?>.00</b> out of 100.00</p>

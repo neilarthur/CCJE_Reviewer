@@ -18,7 +18,7 @@ while ($row = mysqli_fetch_assoc($results) AND $bows = mysqli_fetch_assoc($resul
   <form class="form" action="../php/update_questionnaire.php" method="Post">
      <div class="modal-body">
        <div class="form-group">
-         <label for="user-section">Subject Exam</label>
+         <label for="user-section">Area of Exam</label>
          <input type="hidden" class="form-control" name="update_id" value="<?php echo $row['question_id']; ?>">
 
          <div class="input-group mb-3">

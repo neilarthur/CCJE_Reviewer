@@ -274,9 +274,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title text-dark fw-bold">Quiz Percentage</h4>
-                        <div>
-                            <canvas id="mychart" style="height: 350px; width: 100%;" ></canvas>
-                        </div>
+                        
+                        <canvas id="mychart" style="height: 350px; width: 100%;" ></canvas>
+                        
                          <?php 
 
                          $quiz_run = mysqli_query($sqlcon,"SELECT * FROM choose_question,tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (choose_question.test_id = tbl_quiz_result.test_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}')");
@@ -485,9 +485,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                     <div class="card-body">
                         <h4 class="card-title text-dark fw-bold">Preboard Exam Percentage</h4>
                     </div>
-                    <div>
-                        <canvas id="chart" style="height: 350px; width:100%;"></canvas>
-                    </div>
+                    
+                    <canvas id="chart" style="height: 350px; width:100%;"></canvas>
+                    
                    <?php
 
                      $query = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminal Sociology') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}') ");
