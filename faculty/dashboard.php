@@ -183,11 +183,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                                </div> 
 	                            </div>
 
-	                            <div class="fw-bold">
+	                            <div>
 
 	                                <div class="small text-gray-500"><?php  $life = date('M d, Y h:i:s a',strtotime($item['created']));
 	                                 echo $life; ?></div>
-	                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." Message to you "; ?></span>
+	                                <span class="fw-bold"><?php echo $item['first_name']." ".$item['last_name']."&nbsp;has a message from you"; ?></span>
 	                                
 	                            </div>
 
@@ -196,7 +196,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 			                    }
 	                            ?>
 	                        </a>
-	                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+	                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
 	                    </div>
 		            </div>
 		            <div class="dropdown me-3">

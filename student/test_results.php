@@ -135,6 +135,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                 <tr class="text-center">
                                     <th class="fs-5">Name</th>
                                     <th class="fs-5">Section</th>
+                                    <th class="fs-5">Title</th>
                                     <th class="fs-5">Area of Examination</th>
                                     <th class="fs-5">Difficulty</th>
                                     <th class="fs-5">Total of Items</th>
@@ -157,6 +158,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        <td></td>
                                     </tr>
 
                                 <?php 
@@ -167,6 +169,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                         <tr class="text-center">
                                             <th><?php echo $rows['first_name']." ".$rows['last_name']; ?></th>
                                             <td><?php echo $rows['section']; ?></td>
+                                            <td><?php echo $rows['quiz_title']; ?></td>
                                             <td><?php echo $rows['subject_name']; ?></td>
                                             <td><?php echo $rows['question_difficulty']; ?></td>
                                             <td><?php echo $rows['total_quest']; ?></td>

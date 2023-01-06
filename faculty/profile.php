@@ -171,7 +171,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                                <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
 	                            </div>
 	                        </a>
-	                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+	                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
 	                    </div>
 		            </div>
 		            <div class="dropdown me-3">

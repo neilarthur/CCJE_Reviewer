@@ -241,7 +241,7 @@ $suppd .= "</select>";
 		                                  <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
 		                              </div>
 		                          </a>
-		                          <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+		                          <a class="dropdown-item text-center small text-gray-500" href="../faculty/notification.php">Show All Notifications</a>
 		                      </div>
 		                </div>
 		                <div class="dropdown me-3">

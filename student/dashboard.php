@@ -29,6 +29,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- System Logo -->
     <link rel="icon" href="../assets/pics/system-ico.ico">
+    <style>
+       .dp .dropdown-toggle::after {
+            content: none;
+        }
+        .dp .dropdown-list{
+            left: -90px;
+        }
+         .navbar .breadcrumb li a{
+          color: #8C0000;
+        }
+    </style>
 
 </head>
 <body style="background-color: rgb(229, 229, 229);"> 
@@ -59,7 +70,30 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 					<a class="nav-link " href="test_results.php">Results</a> 
 					</li>
 				</ul>
-				<div class="flex-shrink-0 dropdown px-4 text-center">
+                <div class="flex-shrink-0 text-center">
+                     <div class="dropdown dp">
+                        <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg"></i>
+                            <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger">1</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+                            <h6 class="dropdown-header text-dark ">Notifications</h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="me-4">
+                                     <div class="fa-stack fa-1x">
+                                      <i class="fa fa-circle fa-stack-2x ms-2"></i>
+                                      <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
+                                    </div> 
+                                </div>
+                                <div class="fw-bold">
+                                    <div class="small text-gray-500">September 16, 2022</div>
+                                    <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+				<div class="flex-shrink-0 dropdown pe-3 text-center">
 					<button class="btn  dropdown-toggle border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 			          <?php
 
@@ -274,9 +308,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title text-dark fw-bold">Quiz Percentage</h4>
-                        <div>
-                            <canvas id="mychart" style="height: 350px; width: 100%;" ></canvas>
-                        </div>
+                        <canvas id="mychart" style="height: 350px; width: 100%;" ></canvas>
+                        
                          <?php 
 
                          $quiz_run = mysqli_query($sqlcon,"SELECT * FROM choose_question,tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (choose_question.test_id = tbl_quiz_result.test_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}')");
@@ -485,9 +518,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                     <div class="card-body">
                         <h4 class="card-title text-dark fw-bold">Preboard Exam Percentage</h4>
                     </div>
-                    <div>
-                        <canvas id="chart" style="height: 350px; width:100%;"></canvas>
-                    </div>
+                    <canvas id="chart" style="height: 350px; width:100%;"></canvas>
+                    
                    <?php
 
                      $query = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminal Sociology') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}') ");

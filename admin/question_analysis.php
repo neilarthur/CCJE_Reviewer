@@ -164,7 +164,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
 	                            </div>
 	                        </a>
-	                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+	                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
 	                    </div>
 	                </div>
 	                <div class="dropdown me-3">
@@ -436,13 +436,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												$id = $_GET['id'];
 
 												$quest = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_choose_quest WHERE (tbl_pre_choose_quest.question_id =test_question.question_id) AND tbl_pre_choose_quest.pre_exam_id ='$id' " );
+
+												$attp = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE pre_exam_id = '{$_GET['id']}'");
+												$row_count = mysqli_num_rows($attp);
+
 												$count =1;
 												while ($rows= mysqli_fetch_array($quest)) {
 												 ?>
 												<tr>
 													<td><?php echo $count; ?></td>
 	                                                <td><?php echo $rows['questions_title']; ?></td>
-	                                                <td>30</td>
+	                                                <td><?php echo $row_count; ?></td>
 	                                                <td>15</td>
 	                                                <td>100%</td>
 	                                                <td>
@@ -477,72 +481,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 				</div>
 			</div>
 		</section>
-		<!-- View Modal-->
-	<!-- <div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<canvas id="myChart" style="height: 100px; width: 250px;"></canvas>
-						<script>
-							const ctx = document.getElementById('myChart').getContext('2d');
-							const myChart = new Chart(ctx, {
-							    type: 'bar',
-							    data: {
-							        labels: ['A. Murder','B.  Parricide','C. Homicide','D. Qualified Homicide'],
-							        datasets: [{
-							            label: 'Correct Response',
-							            data: [10,9,8,6],
-							            backgroundColor: [
-							            'rgba(15, 157, 88)',
-							            'rgba(204, 204, 204)',
-							            'rgba(204, 204, 204)',
-							            'rgba(204, 204, 204)',
-							                
-							                
-							            ],
-							            borderColor: [
-							            'rgb(15, 157, 88)',
-							            'rgb(204, 204, 204)',
-							            'rgb(204, 204, 204)',
-							            'rgb(204, 204, 204)',
-							                
-							            ],
-							            borderWidth: 1
-							        }]
-							    },
-							    options: {
-							    	indexAxis: 'y',
-							        scales: {
-							            y: {
-							               ticks: { color: '##000000', beginAtZero: true , precision: 0 }
-							            }
-							        }
-							    },
-							});
-						</script>
-					</div>
-					<div class="card mt-3 m-4 border-0">
-						<div class="card-body">
-							<label class="d-flex ps-1 justify-content-start">Question</label>
-							<textarea type="text" name="last_name" class="form-control"readonly="">Berto, with evident premeditation and treachery killed his father. What was the crime committed?</textarea> 
-							<label class="d-flex ps-1 mt-2 justify-content-start" >Area of Exam</label>
-							<input type="text" name="last_name" class="form-control" value="Criminal Jurisprudence " readonly="">
-							<label class="d-flex ps-1 mt-2 justify-content-start">Level of diffculty</label>
-							<input type="text" name="last_name" class="form-control" value="EASY" readonly="">
-							<label  class="d-flex ps-1 mt-2 justify-content-start">Percentage</label>
-							<input type="text" name="last_name" class="form-control" value="100%" readonly="">
-						</div>		
-					</div>
-					<div class="modal-footer border-0">
-						<button type="button" class="btn btn-danger mx-2" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
-					</div>
-				</div>
-			</div>
-		</div> --->
 		
 		<!-- Logout Modal-->
 	    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
