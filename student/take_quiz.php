@@ -165,57 +165,45 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  									<td><?php echo $rows['total_quest']; ?></td>
 	   	  									<td><?php echo $rows['time_limit']/60;  ?> mins</td>
 	   	  									<td><?php echo $rows['first_name']." ".$rows['last_name'];?></td>
-
 	   	  									<td>
+	   	  										<form action="take_exam_status.php" method="POST">
+	   	  												<!-- ddd-->
+	   	  												<input type="hidden" name="time" value="<?php echo $rows['time_limit']; ?>">
+	   	  												<!-- ccc -->
+	   	  												<input type="hidden" name="test" value="<?php echo $rows['test_id']; ?>">
+	   	  												<!-- aaa -->
+	   	  												<input type="hidden" name="t_quest" value="<?php echo $rows['total_quest']; ?>">
+	   	  												<input type="hidden" name="acc" value="<?php echo $_SESSION['acc_id']; ?>">
 	   	  										<?php
 
-	   	  										
+	   	  										date_default_timezone_set('Asia/Manila');
 
-	   	  										$datetime = date("Y-m-d");
+	   	  										$datetime = date('d-m-y h:i:s a');
 
-	   	  										if ($rows['start_day'] >= $datetime && $rows['end_day'] <= $datetime) {
-	   	  											
-	   	  											echo '<span class="badge bg-danger px-3 py-2" style="font-size:15px;">CLOSED</span>';
+	   	  										$life = date('d-m-y h:i:s a',strtotime($rows['start_day']));
+	   	  										$lifersss = date('d-m-y h:i:s a',strtotime($rows['end_day']));
+
+	   	  										$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$rows['test_id']}'");
+
+	   	  										$laws = mysqli_fetch_assoc($boast); 	  										
+	   	  										if (mysqli_num_rows($boast) ==0) {
+
+   	  												if ($lifersss <= $datetime) {
+   	  													
+   	  													echo '<button  type="button" data-id="'.$rows['test_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
+   	  												}
+   	  												elseif($life <= $datetime) {
+
+   	  													echo '<button  type="submit" name="submits" class="btn btn-success"><i class="fas fa-hourglass-start me-2"></i>Start</button>';
+   	  												}
 	   	  										}
-	   	  										else { 
+	   	  										elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) {
+
+   	  												echo '<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled="" style="font-size: 15px;"><i class="fas fa-check-circle me-2"></i>Done</button>';	
+	   	  										}
+
 	   	  										?>
-	   	  										<form action="take_exam_status.php" method="POST">
-	   	  											<!-- ddd-->
-   	  												<input type="hidden" name="time" value="<?php echo $rows['time_limit']; ?>">
-   	  												<!-- ccc -->
-   	  												<input type="hidden" name="test" value="<?php echo $rows['test_id']; ?>">
-   	  												<!-- aaa -->
-   	  												<input type="hidden" name="t_quest" value="<?php echo $rows['total_quest']; ?>">
-   	  												<input type="hidden" name="acc" value="<?php echo $_SESSION['acc_id']; ?>">
-
-	   	  											
-
-	   	  											<?php
-
-	   	  											$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$rows['test_id']}'");
-
-	   	  											$laws = mysqli_fetch_assoc($boast);
-
-	   	  											if (mysqli_num_rows($boast) ==0) { ?>
-
-	   	  												<button  type="submit" name="submits" class="btn btn-success"><i class="fas fa-hourglass-start me-2"></i>Start</button>
-
-	   	  											<?php
-	   	  											}
-	   	  											
-	   	  											elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) { ?>
-
-	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled="" style="font-size: 15px;"><i class="fas fa-check-circle me-2"></i>Done</button>
-	   	  												<?php
-	   	  												}
-	   	  											
-	   	  											?>
-
-
-	   	  										</form>
-	   	  									<?php 
-	   	  									}
-	   	  									?>
+	   	  									</form>
 	   	  									</td>
 	  									</tr>
 	  									<?php
@@ -253,56 +241,44 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  									<td><?php echo $rows['time_limit']/60;  ?> mins</td>
 	   	  									<td><?php echo $rows['first_name']." ".$rows['last_name'];?></td>
 	   	  									<td>
-	   	  										<?php
-
-	   	  										$datetime = date('d-m-y h:i:s a');
-
-	   	  										$life = $rows['start_day'];
-	   	  										$lifersss = date('d-m-y h:i:s a',strtotime($rows['end_day']));
-
-	   	  										$lifesss = date('d-m-y h:i:s a',strtotime($life));
-
-	   	  										if ($lifesss <= $datetime && $lifersss <= $datetime) {
-	   	  											
-	   	  											echo '<span class="badge bg-danger px-3 py-2" style="font-size:15px;">CLOSED</span>';
-	   	  										}
-	   	  										else { 
-	   	  										?>
 	   	  										<form action="take_exam_status.php" method="POST">
-	   	  											    <!-- ddd-->
+	   	  												<!-- ddd-->
 	   	  												<input type="hidden" name="time" value="<?php echo $rows['time_limit']; ?>">
 	   	  												<!-- ccc -->
 	   	  												<input type="hidden" name="test" value="<?php echo $rows['test_id']; ?>">
 	   	  												<!-- aaa -->
 	   	  												<input type="hidden" name="t_quest" value="<?php echo $rows['total_quest']; ?>">
 	   	  												<input type="hidden" name="acc" value="<?php echo $_SESSION['acc_id']; ?>">
-
-	   	  											
-
-	   	  											<?php
-
-	   	  											$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$rows['test_id']}'");
-
-	   	  											$laws = mysqli_fetch_assoc($boast);
-
-	   	  											if (mysqli_num_rows($boast) ==0) { ?>
-
-	   	  												<button  type="submit" name="submits" class="btn btn-success"><i class="fas fa-hourglass-start me-2"></i>Start</button>
-
-	   	  											<?php
-	   	  											}
-	   	  											
-	   	  												
-	   	  											elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) { ?>
-
-	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled="" style="font-size: 15px;"><i class="fas fa-check-circle me-2"></i>Done</button>
-	   	  												<?php
-	   	  												}
-	   	  											?>
-	   	  										</form>
 	   	  										<?php
-	   	  										} 
+
+	   	  										date_default_timezone_set('Asia/Manila');
+
+	   	  										$datetime = date('d-m-y h:i:s a');
+
+	   	  										$life = date('d-m-y h:i:s a',strtotime($rows['start_day']));
+	   	  										$lifersss = date('d-m-y h:i:s a',strtotime($rows['end_day']));
+
+	   	  										$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$rows['test_id']}'");
+
+	   	  										$laws = mysqli_fetch_assoc($boast); 	  										
+	   	  										if (mysqli_num_rows($boast) ==0) {
+
+   	  												if ($lifersss <= $datetime) {
+   	  													
+   	  													echo '<button  type="button" data-id="'.$rows['test_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
+   	  												}
+   	  												elseif($life <= $datetime) {
+
+   	  													echo '<button  type="submit" name="submits" class="btn btn-success"><i class="fas fa-hourglass-start me-2"></i>Start</button>';
+   	  												}
+	   	  										}
+	   	  										elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) {
+
+   	  												echo '<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled="" style="font-size: 15px;"><i class="fas fa-check-circle me-2"></i>Done</button>';	
+	   	  										}
+
 	   	  										?>
+	   	  									</form>
 	   	  									</td>
 	  									</tr>
 	  								<?php
@@ -341,25 +317,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  									<td><?php echo $rows['time_limit']/60;  ?> mins</td>
 	   	  									<td><?php echo $rows['first_name']." ".$rows['last_name'];?></td>
 	   	  									<td>
-	   	  										<?php
-
-	   	  										date_default_timezone_set('Asia/Manila');
-
-	   	  										$datetime = date('d-m-y h:i:s a');
-
-	   	  										$life = date('d-m-y h:i:s a',strtotime($rows['start_day']));;
-	   	  										$lifersss = date('d-m-y h:i:s a',strtotime($rows['end_day']));
-
-	   	  							
-
-	   	  										if ($life <= $datetime && $lifersss <= $datetime) {
-	   	  											
-	   	  											echo '<button data-id="'.$rows['test_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
-	   	  										}
-	   	  										else {
-	   	  											
-	   	  											?>
-	   	  											<form action="take_exam_status.php" method="POST">
+	   	  										<form action="take_exam_status.php" method="POST">
 	   	  												<!-- ddd-->
 	   	  												<input type="hidden" name="time" value="<?php echo $rows['time_limit']; ?>">
 	   	  												<!-- ccc -->
@@ -367,31 +325,36 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  												<!-- aaa -->
 	   	  												<input type="hidden" name="t_quest" value="<?php echo $rows['total_quest']; ?>">
 	   	  												<input type="hidden" name="acc" value="<?php echo $_SESSION['acc_id']; ?>">
-	   	  											<?php
-
-	   	  											$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$rows['test_id']}'");
-
-	   	  											$laws = mysqli_fetch_assoc($boast);
-
-	   	  											if (mysqli_num_rows($boast) ==0) { ?>
-
-	   	  												<button  type="submit" name="submits" class="btn btn-success"><i class="fas fa-hourglass-start me-2"></i>Start</button>
-
-	   	  											<?php
-	   	  											}
-	   	  											
-	   	  												
-	   	  											elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) { ?>
-
-	   	  													<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled="" style="font-size: 15px;"><i class="fas fa-check-circle me-2"></i>Done</button>
-	   	  												<?php
-	   	  												}
-	   	  											?>
-	   	  										</form>
 	   	  										<?php
+
+	   	  										date_default_timezone_set('Asia/Manila');
+
+	   	  										$datetime = date('d-m-y h:i:s a');
+
+	   	  										$life = date('d-m-y h:i:s a',strtotime($rows['start_day']));
+	   	  										$lifersss = date('d-m-y h:i:s a',strtotime($rows['end_day']));
+
+	   	  										$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$rows['test_id']}'");
+
+	   	  										$laws = mysqli_fetch_assoc($boast); 	  										
+	   	  										if (mysqli_num_rows($boast) ==0) {
+
+   	  												if ($lifersss <= $datetime) {
+   	  													
+   	  													echo '<button  type="button" data-id="'.$rows['test_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
+   	  												}
+   	  												elseif($life <= $datetime) {
+
+   	  													echo '<button  type="submit" name="submits" class="btn btn-success"><i class="fas fa-hourglass-start me-2"></i>Start</button>';
+   	  												}
 	   	  										}
+	   	  										elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) {
+
+   	  												echo '<button type="submit" class="btn btn-secondary badge px-2 py-2 " disabled="" style="font-size: 15px;"><i class="fas fa-check-circle me-2"></i>Done</button>';	
+	   	  										}
+
 	   	  										?>
-	   	  										
+	   	  									</form>
 	   	  									</td>
 	  									</tr>
 	  								<?php
@@ -413,11 +376,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 <div class="modal fade" id="close_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header border-0">
+            <div class="modal-header flex-column ">
             	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <p class="modal-title h3 mx-3 mt-3 fw-bold text-uppercase" style="color: #8C0000;">You need permission<br></p>
-            <p class="m-4 fs-6" style="text-indent: 20px;">This form can only be viewed by users in the owner's organization. Try to message the owner of the form if you think this is a mistake.</p>
+            <h3 class="modal-title mx-3 mt-3 fw-bold text-uppercase" style="color: #8C0000;">You need permission<br></h3>
+            <p class="m-4 fs-6">&nbsp;&nbsp;This form can only be viewed by users in the owner's organization.Try to message the owner of the form if you think this is a mistake.</p>
 
             <div class="modal-body">
             	<h4>Message</h4>

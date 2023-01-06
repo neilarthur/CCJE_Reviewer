@@ -157,21 +157,31 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 									<?php
 
+									date_default_timezone_set('Asia/Manila');
+
+									$datetime = date('d-m-y h:i:s a');
+
+									$start = date('d-m-y h:i:s a',strtotime($rows['start_date']));
+									$close = date('d-m-y h:i:s a',strtotime($rows['end_date']));
+
 									$board = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE acc_id='{$_SESSION['acc_id']}' AND pre_exam_id='{$rows['pre_exam_id']}'");
 
 									$drove = mysqli_fetch_assoc($board);
 
-									if (mysqli_num_rows($board) ==0) { ?>
+									if (mysqli_num_rows($board) ==0) {
 
-										<button class="btn btn-success text-uppercase px-2 py-1"><a href="#" data-id="<?php echo $rows['pre_exam_id'] ?>" class="text-white suc_code" data-bs-toggle="modal" style="text-decoration: none;"><i class='bx bxs-hourglass-top me-1'></i>Start</a></button>
-									
-									<?php
+										if ($close <= $datetime) {
+											
+											echo '<button type="button" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
+										}
+										elseif ($start <= $datetime) {
+											
+											echo '<button class="btn btn-success text-uppercase px-2 py-1"><a href="#" data-id="'.$rows['pre_exam_id'].'" class="text-white suc_code" data-bs-toggle="modal" style="text-decoration: none;"><i class="bx bxs-hourglass-top me-1"></i>Start</a></button>';
+										}
 									}
-									elseif ($drove['acc_id']==$_SESSION['acc_id'] AND $drove['pre_exam_id']==$shine['pre_exam_id']) { ?>
+									elseif ($drove['acc_id']==$_SESSION['acc_id'] AND $drove['pre_exam_id']==$shine['pre_exam_id']) {
 
-										<button type="button" class="btn btn-secondary badge px-2 py-2 " style="font-size:15px;" disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>
-
-									<?php
+										echo '<button type="button" class="btn btn-secondary badge px-2 py-2 " style="font-size:15px;" disabled=""><i class="fas fa-check-circle me-2"></i>Done</button>';
 									}
 									?>
 								</td>
