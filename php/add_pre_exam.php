@@ -20,6 +20,8 @@ if (isset($_POST['create'])) {
 
 	$acts = " Added an exam ";
 
+	$sta = 0;
+
 	$pre_exam_insert = "INSERT INTO tbl_pre_question(description,subjects,time_limit,total_question,sum_question,access_code,start_date,end_date,prepared_by,pre_board_status)VALUES('$description','$area_exam','$time_limit','$total_quest','$total_quest','$access_code','$start_d','$end_d','$prepared_by','$status')";
 
 	$query_pre_exam = mysqli_query($sqlcon,$pre_exam_insert);
@@ -31,7 +33,18 @@ if (isset($_POST['create'])) {
 
 		if ($logs_query) {
 
-			header("location: ../faculty/preboard.php");
+			$notif = "INSERT INTO tbl_notification(action,acc_id,date_created,notif_status)VALUES('$acts','$acc_ids',now(),'$sta')";
+
+			$notif_query = mysqli_query($sqlcon,$notif);
+
+			if ($notif_query) {
+
+				header("location: ../faculty/preboard.php");
+			}
+			else {
+
+				echo mysqli_error($sqlcon);
+			}
 		}
 		else {
 

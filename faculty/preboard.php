@@ -199,7 +199,7 @@ function getName($n) {
 	                                </div> 
 	                            </div>
 	                            <div class="fw-bold">
-	                                <div class="small text-gray-500"><?php  $life = date('M d, Y h:i:s a',strtotime($item['created']));
+	                                <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
 	                                 echo $life; ?></div>
 	                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." Message to you "; ?></span>
 	                            </div>
@@ -502,11 +502,11 @@ function getName($n) {
 					      					</div>
 					      					<div class="input-group mt-2">
 					      						<span class="input-group-text border-0 bg-white fw-bold">Open the quiz</span>
-					      					    <input type="date" name="start_d" class="form-control" >
+					      					    <input type="datetime-local" name="start_d" class="form-control" >
 					      					</div>
 					      					<div class="input-group mt-2">
 					      						<span class="input-group-text border-0 bg-white fw-bold">Close the quiz</span>
-					      					    <input type="date" name="end_d" class="form-control" >
+					      					    <input type="datetime-local" name="end_d" class="form-control" >
 					      					</div>
 					      					<div class="mt-2">
 					      						<div class="input-group">

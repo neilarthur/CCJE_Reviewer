@@ -148,11 +148,29 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 				<form class="d-flex">
 					<div class="dropdown dp mt-3">
 		                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
-		                    <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger">1</span>
-		                </a>
-		                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+		                    	                                                <?php 
+
+                            $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification  WHERE notif_status='0' ORDER BY notif_id DESC");
+                            ?>
+                            <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($comers); ?></span>
+	                    </a>
+	                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
 	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
 	                        <a class="dropdown-item d-flex align-items-center" href="#">
+	                        	<?php
+
+                                $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty')");
+
+                                if (mysqli_num_rows($comers)==0) {
+                                    
+                                    echo "<h5 class='text-center'>No notification Found</h5>";
+                                }
+
+                                if (mysqli_num_rows($comers) >= 0) {
+
+                                    foreach ($comers as $item) {
+
+                                ?>
 	                            <div class="me-4">
 	                                 <div class="fa-stack fa-1x">
 	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
@@ -160,9 +178,25 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                </div> 
 	                            </div>
 	                            <div class="fw-bold">
-	                                <div class="small text-gray-500">September 16, 2022</div>
-	                                <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
-	                            </div>
+	                                <div class="small text-gray-500"><?php echo date('F j, Y, g:i a',strtotime($item['date_created'])); ?></div>
+                                <span class="font-weight-bold"><?php
+
+                                if ($item['gender'] == 'Male') {
+                                    
+                                    echo " Sir ".$item['first_name']." ".$item['last_name']." ".$item['action'].".";
+                                }
+                                elseif($item['gender']== 'Female') {
+
+                                    echo " Ma'am ".$item['first_name']." ".$item['last_name']." ".$item['action'].".";
+                                }
+                                ?></span>
+                            </div>
+
+                            <?php
+
+                                }
+                            }
+                            ?>
 	                        </a>
 	                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
 	                    </div>
@@ -394,4 +428,17 @@ let arrow = document.querySelectorAll(".arrow");
  		}
  	}
  </script>
+ <script type="text/javascript">
+    $(document).ready(function(){
+        $("#navbarDropdownMenuLink").on("click",function(){
+            $.ajax({
+                url:"view_notification.php",
+                success: function(comers){
+                    console.log(comers);
+                }
+            });
+        });
+    });
+</script>
+
 </html>

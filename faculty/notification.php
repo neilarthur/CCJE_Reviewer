@@ -154,11 +154,27 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				<form class="d-flex">
 					<div class="dropdown dp mt-3">
 		                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
-		                    <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger">1</span>
+		                   <?php $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response  WHERE response_stat='0' ORDER BY response_id DESC");
+		                	?>
+		                    <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($come); ?></span>
 		                </a>
 		                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
 	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
 	                        <a class="dropdown-item d-flex align-items-center" href="#">
+	                        	<?php
+
+	                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
+
+	                            if (mysqli_num_rows($come)==0) {
+	                            	
+	                            	echo "<h5 class='text-center'>No notification Found</h5>";
+	                            }
+
+	                            if (mysqli_num_rows($come) >= 0) {
+
+	                            	foreach ($come as $item) {
+
+	                            ?>
 	                            <div class="me-4">
 	                                 <div class="fa-stack fa-1x">
 	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
@@ -166,9 +182,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                                </div> 
 	                            </div>
 	                            <div class="fw-bold">
-	                                <div class="small text-gray-500">September 16, 2022</div>
-	                                <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
+	                                 <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
+	                                 echo $life; ?></div>
+	                                <span class="fw-bold"><?php echo $item['first_name']." ".$item['last_name']."&nbsp;has a message from you"; ?></span>
 	                            </div>
+	                            	                            <?php
+			                        }
+			                    }
+	                            ?>
 	                        </a>
 	                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
 	                    </div>
@@ -198,36 +219,42 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				<div class="container col-lg-8">
 					<h4 class="m-b-50">Notifications <i class="fa fa-bell ms-2"></i></h4>
 					<div class="notification-ui_dd-content">
+						<?php
+
+	                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
+
+	                            if (mysqli_num_rows($come)==0) {
+	                            	
+	                            	echo "<h5 class='text-center'>No notification Found</h5>";
+	                            }
+
+	                            if (mysqli_num_rows($come) >= 0) {
+
+	                            	foreach ($come as $item) {
+
+	                            ?>
 						<div class="notification-list notification-list--unread">
 							<div class="notification-list_content">
 								<div class="notification-list_img">
 									<img src="../assets/pics/tempo.png" alt="user">
 								</div>
 								<div class="notification-list_detail">
-									<p><b>Ralph vincent Pagcaliwagan</b> added an exam</p>
-									<p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
+									<p><b><?php echo $item['first_name']." ".$item['last_name']."</b>&nbsp; has a message from you"; ?></p>
+									
+									<p class="text-muted"><?php echo $item['feedback']; ?></p>
 									<p class="text-muted"><small>10 mins ago</small></p>
 								</div>
 							</div>
 							<div class="notification-list_feature-img">
-								<div class="small text-gray-500 text-muted">September 16, 2022</div>
+								<div class="small text-gray-500 text-muted"><?php echo date('F j, Y',strtotime($item['created']));
+	                                  ?></div>
 							</div>
 						</div>
-						<div class="notification-list notification-list--unread">
-							<div class="notification-list_content">
-								<div class="notification-list_img">
-									<img src="../assets/pics/tempo.png" alt="user">
-								</div>
-								<div class="notification-list_detail">
-									<p><b>Ralph vincent Pagcaliwagan</b> added an exam</p>
-									<p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
-									<p class="text-muted"><small>10 mins ago</small></p>
-								</div>
-							</div>
-							<div class="notification-list_feature-img">
-								<div class="small text-gray-500 text-muted">September 16, 2022</div>
-							</div>
-						</div>
+
+	                            <?php
+			                        }
+			                    }
+	                            ?>
 					</div>
 				</div>
 			</div>
@@ -264,6 +291,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
@@ -278,5 +306,18 @@ let arrow = document.querySelectorAll(".arrow");
   sidebarBtn.addEventListener("click", ()=>{
     sidebar.classList.toggle("close");
   });
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#navbarDropdownMenuLink").on("click",function(){
+			$.ajax({
+				url:"readnotification.php",
+				success: function(come){
+					console.log(come);
+				}
+			});
+		});
+	});
 </script>
 </html>

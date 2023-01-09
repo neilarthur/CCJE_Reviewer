@@ -185,7 +185,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 	                            <div>
 
-	                                <div class="small text-gray-500"><?php  $life = date('M d, Y h:i:s a',strtotime($item['created']));
+	                                <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
 	                                 echo $life; ?></div>
 	                                <span class="fw-bold"><?php echo $item['first_name']." ".$item['last_name']."&nbsp;has a message from you"; ?></span>
 	                                
