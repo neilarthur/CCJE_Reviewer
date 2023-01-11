@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   $pass = 75;
 
+  $update_question_id = $_POST['update_question_id'];
   $selected = $_POST['quizcheck'];
 
   $result = 0;
@@ -53,8 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if ($res) {
 
-    foreach ($selected as $key => $value) {
-      $querys = "INSERT INTO tbl_student_answer(quiz_check,test_id,ans_id) VALUES ('".$value."','$update_id','$lastid')";
+    foreach ($update_question_id as $key => $value) {
+
+      $ccc = $_POST['quizcheck'][$value];
+
+      $querys = "INSERT INTO tbl_student_answer(quiz_check,test_id,ans_id,question_id) VALUES ('".$ccc."','$update_id','$lastid','".$value."')";
       mysqli_query($sqlcon,$querys);
     }
     header("Location:result.php?update_id");

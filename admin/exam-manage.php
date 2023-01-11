@@ -262,7 +262,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                <td hidden><?php echo $rows['access_code']; ?></td>
 	                                                <td><?php echo $rows['first_name'] ." ".$rows['last_name']; ?></td>
 	                                                <td><?php echo $rows['time_limit'] /60; ?> mins</td>
-	                                                <td><?php echo $rows['start_date']; ?></td>
+	                                                <td><?php echo date('F j, Y',strtotime($rows['start_date'])); ?></td>
 	                                               <?php 
 	                                                
 	                                                if ($rows['Approval'] =='approve') {

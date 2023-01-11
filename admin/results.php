@@ -246,7 +246,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<div class="col-lg-4">
 													<div class="input-group mt-2">
 														<span class="input-group-text custom-select mb-3 bg-white">Sort By</span>
-														<select class="form-select custom-select mb-3" name="subjects" id="subjects" required>
+														<select class="form-select custom-select mb-3" name="exam" id="exam" required>
 															<option selected value="">Select Category</option>
 															<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
 															<option value="Law Enforcement">Law Enforcement</option>
@@ -258,7 +258,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													</div>
 												</div>
 											</div>
-											<table class="table table-hover bg-light align-middle w-100" id="resultTab">
+											<div  class="table-responsive-xl" id="flex3">
+												<div class="table-wrapper-scroll-y my-custom-scrollbar">
+													<table class="table table-hover bg-light align-middle w-100" id="result2Tab">
 												<thead>
 													<tr>
 														<th scope="col" hidden>ID</th>
@@ -276,7 +278,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<?php
 
 													$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id)  AND(accounts.section='4A')"); 
-													$counter =1;
+													$counter = 1;
 													while ($row = mysqli_fetch_array($result)) {
 														if ($row['section']=='4A') { ?>
 															
@@ -290,7 +292,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					                                                <td><?php echo $row['time_limit'] /3600?> hr(s)</td>
 					                                                <td style="padding-left: 55px;"><?php echo $row['score'] ?></td>
 					                                                <td>
-					                                                	<div class="d-flex justify-content-center me-3">
+					                                                	<div class="d-flex justify-content-center me-3" >
 					                                                		<button data-id="<?php echo $row['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
@@ -300,8 +302,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<?php }
 													$counter++;  }
 												 ?>
+													
 		                                        </tbody>
 		                                    </table>
+												</div>
+											</div>
 		                                </div>
 		                            </div>
 		                        </div>
@@ -316,7 +321,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 												<div class="col-lg-4">
 													<div class="input-group mt-2">
 														<span class="input-group-text custom-select mb-3 bg-white">Sort By</span>
-														<select class="form-select custom-select mb-3" name="subjects" id="subjects" required>
+														<select class="form-select custom-select mb-3" name="area" id="area" required>
 															<option selected value="">Select Category</option>
 															<option value="Criminal Jurisprudence">Criminal Jurisprudence</option>
 															<option value="Law Enforcement">Law Enforcement</option>
@@ -328,7 +333,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													</div>
 												</div>
 											</div>
-											<table class="table table-hover bg-light align-middle w-100" id="result2Tab">
+											<div  class="table-responsive-xl" id="flex2">
+												<div class="table-wrapper-scroll-y my-custom-scrollbar">
+													<table class="table table-hover bg-light align-middle w-100" id="result2Tab">
 												<thead>
 													<tr>
 														<th scope="col" hidden>ID</th>
@@ -346,8 +353,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<?php
 
 													$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id)  AND(accounts.section='4B')"); 
-
-													$counter= 1;
+													$counter = 1;
 													while ($row = mysqli_fetch_array($result)) {
 														if ($row['section']=='4B') { ?>
 															
@@ -361,7 +367,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					                                                <td><?php echo $row['time_limit'] /3600?> hr(s)</td>
 					                                                <td style="padding-left: 55px;"><?php echo $row['score'] ?></td>
 					                                                <td>
-					                                                	<div class="d-flex justify-content-center me-3">
+					                                                	<div class="d-flex justify-content-center me-3" >
 					                                                		<button data-id="<?php echo $row['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
 					                                                	</div>
 					                                                </td>
@@ -374,11 +380,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													
 		                                        </tbody>
 		                                    </table>
+												</div>
+											</div>
 		                                </div>
 		                            </div>
 		                        </div>
 		                    </div>
 						</div>
+
 						<div class="tab-pane fade" id="nav-4C" role="tabpanel" aria-labelledby="nav-profile-tab">
 							<div class="row">
 								<div class="col ">
@@ -400,7 +409,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													</div>
 												</div>
 											</div>
-											<table class="table table-hover bg-light align-middle w-100" id="result3Tab">
+											<div  class="table-responsive-xl" id="flex">
+												<div class="table-wrapper-scroll-y my-custom-scrollbar">
+													<table class="table table-hover bg-light align-middle w-100" id="result3Tab">
 												<thead>
 													<tr>
 														<th scope="col" hidden>ID</th>
@@ -445,6 +456,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													
 		                                        </tbody>
 		                                    </table>
+												</div>
+											</div>
+											
 		                                </div>
 		                            </div>
 		                        </div>
@@ -568,9 +582,12 @@ let arrow = document.querySelectorAll(".arrow");
     sidebar.classList.toggle("close");
   });
 </script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function(){
         $("#navbarDropdownMenuLink").on("click",function(){
@@ -622,4 +639,135 @@ let arrow = document.querySelectorAll(".arrow");
     });
    });
  </script>
+
+
+  <script type="text/javascript">
+
+  // var of select input difficult
+
+  // var of select input subject
+
+
+ 
+  $('select').on('change', function() {
+    var name = this.name;
+    var subjects;
+
+       // alert(  name);
+
+       if (name=="subjects") {
+          subjects =  this.value;
+
+       }else{
+        return false;
+       }
+      
+
+      $.ajax({    //create an ajax request to load_page.php
+      type:"POST",
+      url: "result_filter.php",             
+      dataType: "text",   //expect html to be returned  
+      data:{subjects:subjects},               
+      success: function(data){     
+      $("#flex").hide();    
+      $("#flex").fadeIn();             
+      $("#flex").html(data); 
+        // alert(data);
+
+      }
+
+      });
+
+
+  });
+
+</script>
+
+
+
+
+  <script type="text/javascript">
+
+  // var of select input difficult
+
+  // var of select input subject
+
+
+ 
+  $('select').on('change', function() {
+    var name = this.name;
+    var area;
+
+       // alert(  name);
+
+       if (name=="area") {
+          area =  this.value;
+
+       }else{
+        return false;
+       }
+      
+
+      $.ajax({    //create an ajax request to load_page.php
+      type:"POST",
+      url: "result_filter2.php",             
+      dataType: "text",   //expect html to be returned  
+      data:{area:area},               
+      success: function(data){     
+      $("#flex2").hide();    
+      $("#flex2").fadeIn();             
+      $("#flex2").html(data); 
+        // alert(data);
+
+      }
+
+      });
+
+
+  });
+
+</script>
+
+
+  <script type="text/javascript">
+
+  // var of select input difficult
+
+  // var of select input subject
+
+
+ 
+  $('select').on('change', function() {
+    var name = this.name;
+    var exam;
+
+       // alert(  name);
+
+       if (name=="exam") {
+          exam =  this.value;
+
+       }else{
+        return false;
+       }
+      
+
+      $.ajax({    //create an ajax request to load_page.php
+      type:"POST",
+      url: "result_filter3.php",             
+      dataType: "text",   //expect html to be returned  
+      data:{exam:exam},               
+      success: function(data){     
+      $("#flex3").hide();    
+      $("#flex3").fadeIn();             
+      $("#flex3").html(data); 
+        // alert(data);
+
+      }
+
+      });
+
+
+  });
+
+</script>
 </html>

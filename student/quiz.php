@@ -231,20 +231,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                             </th>
                                         </tr>
                                         <tr>
-                                            <td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="A"> A. <?php echo $shows['option_a']; ?></span></td>
+                                            <td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="A" required> A. <?php echo $shows['option_a']; ?></span></td>
                                         </tr>
                                         <tr>
-                                          <td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="B"> B. <?php echo $shows['option_b']; ?></span></td>
+                                          <td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="B" required> B. <?php echo $shows['option_b']; ?></span></td>
                                         </tr>
                                         <tr>
-                                          <td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="C"> C. <?php echo $shows['option_c']; ?></span></td>
+                                          <td><span><input class="form-check-input pl-4 ms-5" type="radio"  name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="C" required> C. <?php echo $shows['option_c']; ?></span></td>
                                         </tr>
                                         <tr>
-                                          <td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="D"> D. <?php echo $shows['option_d']; ?></span></td>
+                                          <td><span><input class="form-check-input pl-4 ms-5" type="radio" name="quizcheck[<?php echo $shows['question_id']; ?>]" id="exampleRadios1" value="D" required> D. <?php echo $shows['option_d']; ?></span></td>
                                         </tr>
                                     </tbody>
                                     <tbody>
                                          <tr>
+                                            <input type="hidden" name="update_question_id[]" value="<?php echo $shows['question_id']; ?>">
                                             <input type="hidden" name="update_id" value="<?php echo $_GET['id']; ?>">
                                             <input type="hidden" name="update_acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
                                             <input type="hidden" name="total_quest" value="<?php echo $sad; ?>">
@@ -272,12 +273,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
             ?>
             <input type="submit" value="submit" class="btn btn-success rounded  mx-2 px-5 pb-2 text-uppercase btn-lg">
           </div>
+          <label id="resulted"></label>
+          <label id="error"></label>
     </form>
 </div>
 
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../TimeCircles-master/inc/TimeCircles.js"></script>
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(){
@@ -321,5 +325,4 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 
 </script>
-
 </html>

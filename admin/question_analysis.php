@@ -472,18 +472,43 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 												$quest = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_choose_quest WHERE (tbl_pre_choose_quest.question_id =test_question.question_id) AND tbl_pre_choose_quest.pre_exam_id ='$id' " );
 
+												$quested = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student'" );
+
 												$attp = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE pre_exam_id = '{$_GET['id']}'");
 												$row_count = mysqli_num_rows($attp);
 
+												$rows_boast = mysqli_num_rows($quested);
+
 												$count =1;
 												while ($rows= mysqli_fetch_array($quest)) {
+
+													$correct = 0;
+
+													$view2 = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_student_ans WHERE (test_question.question_id=tbl_pre_student_ans.question_id) AND (tbl_pre_student_ans.pre_exam_id='{$_GET['id']}') AND test_question.question_id='{$rows['question_id']}'");
+
+
+													while (list($question_id,$subject_name,$level_difficulty,$questions_title,$option_a,$option_b,$option_c,$option_d,$correct_ans,$acc_id,$status,$date_created,$student_ans_id,$exam_check) = mysqli_fetch_row($view2)) {
+
+														if ($correct_ans == $exam_check) {
+
+															$correct++;
+														}
+													}
 												 ?>
 												<tr>
 													<td><?php echo $count; ?></td>
 	                                                <td><?php echo $rows['questions_title']; ?></td>
 	                                                <td><?php echo $row_count; ?></td>
-	                                                <td>15</td>
-	                                                <td>100%</td>
+	                                                <td>
+	                                                	<?php
+
+	                                                	$counted = $rows_boast - $row_count;
+
+	                                                	echo $counted;
+
+	                                                	?>
+	                                                </td>
+	                                                <td><?php echo round(($correct/$row_count)*100)." % "; ?> </td>
 	                                                <td>
 	                                                	<div class="d-flex flex-row">
 	                                                		<?php
