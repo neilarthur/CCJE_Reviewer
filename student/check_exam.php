@@ -47,7 +47,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	    echo $remarks = "failed";
 	}
 
-	$final = "INSERT INTO tbl_exam_result(acc_id,pre_exam_id,score,score_percent,attempt,result)VALUES('$update_id','$pre_exam','$results','$percent','$total_quest','$remarks')";
+	$base2 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE pre_exam_id = '$pre_exam' AND acc_id ='$update_id'");
+  	$lack2= mysqli_fetch_assoc($base2);
+
+  date_default_timezone_set('Asia/Manila');
+
+  $currentTimeinSeconds  =$lack2['date_created'];
+
+  $sssl = time() - strtotime($currentTimeinSeconds);
+
+  $sssl2 = date('y-m-d H:i:s', $sssl);
+
+	$final = "INSERT INTO tbl_exam_result(acc_id,pre_exam_id,score,score_percent,attempt,result,date_exam_result)VALUES('$update_id','$pre_exam','$results','$percent','$total_quest','$remarks','$sssl2')";
 	$examinner = mysqli_query($sqlcon,$final);
 
 	$last_insert = mysqli_insert_id($sqlcon);

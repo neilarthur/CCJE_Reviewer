@@ -143,11 +143,51 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
                   ?>
                 </div>
-                <div class="p-2 bg-light border"><p class="card-text"><b>Started on:</b> </p></div>
+                <?php
+
+                $code2 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE pre_exam_id = '$id' AND acc_id = '{$_SESSION['acc_id']}' ");
+
+                $shws2 = mysqli_fetch_assoc($code2);
+
+                $sssl3 = strtotime($shws2['date_created']);
+
+
+                ?>
+                <div class="p-2 bg-light border"><p class="card-text"><b>Started on:</b><?php echo date('F j, Y g:i a, D',$sssl3);  ?></p></div>
+
+                <?php
+
+                $code = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,accounts WHERE (tbl_exam_result.acc_id=accounts.acc_id) AND (tbl_exam_result.pre_exam_id='$id') AND tbl_exam_result.acc_id = '{$_SESSION['acc_id']}' ");
+
+                while ($shws = mysqli_fetch_assoc($code)) {
+
+
+
+                date_default_timezone_set('Asia/Manila');
+
+
+                $sssl = strtotime($shws['date_exam_result']);
+
+                $sssl2 = strtotime($shws['date_created']);
+
+
+                if (date('i',$sssl) == '00') {
+                  
+                  $knock = "seconds";
+                }
+                elseif(date('i',$sssl)=='01') {
+
+                  $knock = "minutes";
+                }
+
+                ?>
                 <div class="p-2 bg-light border"><p class="card-text"><b>State:</b> Finished</p></div>
-                <div class="p-2 bg-light border"><p class="card-text"><b>Completed on:</b> </p></div>
-                <div class="p-2 bg-light border"><p class="card-text"><b>Time Taken:</b> 19 mins</p></div>
+                <div class="p-2 bg-light border"><p class="card-text"><b>Completed on:</b><?php echo date('F j, Y g:i a, D',$sssl2); ?></p></div>
+                <div class="p-2 bg-light border"><p class="card-text"><b>Time Taken:</b>&nbsp;<?php echo date('i:s',$sssl); ?>&nbsp;<?php echo $knock; ?></p></div>
                 <div class="p-2 bg-light border"><p class="card-text"><b>Grade:</b> <b>96.00</b> out of 100.00</p></div>
+                <?php
+                }
+                ?>
             </div>
           </div>
         </div>

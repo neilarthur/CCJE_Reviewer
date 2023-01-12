@@ -47,8 +47,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   else {
     echo $remarks = "failed";
   }
+
+  $base2 = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE test_id = '$update_id' AND acc_id ='$update'");
+  $lack2= mysqli_fetch_assoc($base2);
+
+  date_default_timezone_set('Asia/Manila');
+
+  $currentTimeinSeconds  =$lack2['date_marks'];
+
+  $sssl = time() - strtotime($currentTimeinSeconds);
+
+  $sssl2 = date('y-m-d H:i:s', $sssl);
+                        
+                        
     
-  $finalresult = "INSERT INTO tbl_quiz_result(acc_id,test_id,score,score_percent,attempt,result,res_status)VALUES('$update','$update_id','$result','$percentage','$tots','$remarks','$status')";
+  $finalresult = "INSERT INTO tbl_quiz_result(acc_id,test_id,score,score_percent,attempt,result,res_status,date_result)VALUES('$update','$update_id','$result','$percentage','$tots','$remarks','$status','$sssl2')";
   $res = mysqli_query($sqlcon,$finalresult);
   $lastid = mysqli_insert_id($sqlcon); 
 

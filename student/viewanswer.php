@@ -143,7 +143,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
             ?>
               </div>
-              <div class="p-2 bg-light border"><p class="card-text"><b>Started on:</b> </p></div>
+
+              <?php
+
+              $score2 = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question WHERE (choose_question.test_id=tbl_marks_done.test_id) AND tbl_marks_done.test_id='$id'");
+
+              $bac = mysqli_fetch_assoc($score2);
+
+              $kaf = strtotime($bac['date_marks']);
+
+              ?>
+              <div class="p-2 bg-light border"><p class="card-text"><b>Started on:<?php echo date('F j, Y g:i a, D',$kaf); ?></b> </p></div>
               <div class="p-2 bg-light border">
                 <?php 
                 
@@ -161,15 +171,35 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
                 if ($row['acc_id']==$_SESSION['acc_id'] AND $row['test_id']==$shine['test_id']) {
                   echo '<p class="card-text"><b>State:</b><span class="badge bg-light text-success" style="font-size: 18px;">Finished</span></p>';
+                }
 
-                  }
+
+                date_default_timezone_set('Asia/Manila');
+
+
+                $sssl = strtotime($rows['date_result']);
+
+                $sssl2 = strtotime($rows['date_created']);
+
+
+                if (date('i',$sssl) == '00') {
+                  
+                  $knock = "seconds";
+                }
+                elseif(date('i',$sssl)=='01') {
+
+                  $knock = "minutes";
+                }
+
+
+                echo '</div>
+              <div class="p-2 bg-light border"><p class="card-text"><b>Completed on: '. date('F j, Y g:i a, D',$sssl2).'</b> </p></div>
+              <div class="p-2 bg-light border"><p class="card-text"><b>Time Taken: ' . date('i:s',$sssl). ' '.$knock.'</b></p></div>';
+
                 }
                 ?>
                
-               
-              </div>
-              <div class="p-2 bg-light border"><p class="card-text"><b>Completed on:</b> </p></div>
-              <div class="p-2 bg-light border"><p class="card-text"><b>Time Taken:</b> 19 mins</p></div>
+              
               <div class="p-2 bg-light border">
                 <?php
 

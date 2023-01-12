@@ -334,16 +334,18 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  										$life = date('d-m-y h:i:s a',strtotime($rows['start_day']));
 	   	  										$lifersss = date('d-m-y h:i:s a',strtotime($rows['end_day']));
 
+
+
 	   	  										$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$rows['test_id']}'");
 
 	   	  										$laws = mysqli_fetch_assoc($boast); 	  										
 	   	  										if (mysqli_num_rows($boast) ==0) {
 
-   	  												if ($lifersss <= $datetime) {
+   	  												if ($lifersss < $datetime) {
    	  													
    	  													echo '<button  type="button" data-id="'.$rows['test_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
    	  												}
-   	  												elseif($life <= $datetime) {
+   	  												elseif($life > $datetime) {
 
    	  													echo '<button  type="submit" name="submits" class="btn btn-success"><i class="fas fa-hourglass-start me-2"></i>Start</button>';
    	  												}

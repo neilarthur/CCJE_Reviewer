@@ -218,6 +218,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
                       $shows = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,choose_question,accounts WHERE (tbl_quiz_result.test_id =choose_question.test_id) AND (tbl_quiz_result.acc_id = accounts.acc_id) AND tbl_quiz_result.acc_id = '{$_SESSION['acc_id']}' ORDER BY ans_id DESC");
 
+                      $lert= mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE (tbl_marks_done.test_id =choose_question.test_id) AND (tbl_marks_done.acc_id = accounts.acc_id) AND tbl_marks_done.acc_id = '{$_SESSION['acc_id']}'");
+
+                      $syt = mysqli_fetch_assoc($lert);
+
+
                        $rows = mysqli_fetch_assoc($shows);
 
                       ?>
