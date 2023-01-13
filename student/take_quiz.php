@@ -27,6 +27,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<!-- System Logo -->
     <link rel="icon" href="../assets/pics/system-ico.ico">
+     <style>
+       .dp .dropdown-toggle::after {
+            content: none;
+        }
+        .dp .dropdown-list{
+            left: -90px;
+        }
+         .navbar .breadcrumb li a{
+          color: #8C0000;
+        }
+    </style>
 </head>
 <body  style="background-color: rgb(229, 229, 229);">
 	<div class="header text-uppercase hd " >
@@ -56,7 +67,30 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 					<a class="nav-link " href="test_results.php">Results</a> 
 					</li>
 				</ul>
-				<div class="flex-shrink-0 dropdown px-4 text-center">
+				 <div class="flex-shrink-0 text-center">
+                     <div class="dropdown dp">
+                        <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg"></i>
+                            <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger">1</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+                            <h6 class="dropdown-header text-dark ">Notifications</h6>
+                            <a class="dropdown-item d-flex align-items-center" href="notification.php">
+                                <div class="me-4">
+                                     <div class="fa-stack fa-1x">
+                                      <i class="fa fa-circle fa-stack-2x ms-2"></i>
+                                      <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
+                                    </div> 
+                                </div>
+                                <div class="fw-bold">
+                                    <div class="small text-gray-500">September 16, 2022</div>
+                                    <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+				<div class="flex-shrink-0 dropdown pe-5 text-center">
 					<button class="btn  dropdown-toggle border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 			          <?php
 

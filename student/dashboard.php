@@ -77,7 +77,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                         </a>
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
                             <h6 class="dropdown-header text-dark ">Notifications</h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="notification.php">
                                 <div class="me-4">
                                      <div class="fa-stack fa-1x">
                                       <i class="fa fa-circle fa-stack-2x ms-2"></i>
@@ -89,11 +89,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                     <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
                                 </div>
                             </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+                            <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
                         </div>
                     </div>
                 </div>
-				<div class="flex-shrink-0 dropdown pe-3 text-center">
+				<div class="flex-shrink-0 dropdown pe-5 text-center">
 					<button class="btn  dropdown-toggle border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 			          <?php
 

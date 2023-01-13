@@ -34,6 +34,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         .tab-content .nav-pills .nav-link.active{
           background-color: #8C0000;
         }
+        .dp .dropdown-toggle::after {
+            content: none;
+        }
+        .dp .dropdown-list{
+            left: -90px;
+        }
+         .navbar .breadcrumb li a{
+          color: #8C0000;
+        }
     </style>
 </head>
 <body style="background-color: rgb(229, 229, 229);">
@@ -64,7 +73,30 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 					<a class="nav-link " href="test_results.php">Results</a> 
 					</li>
 				</ul>
-				<div class="flex-shrink-0 dropdown px-4 text-center">
+                <div class="flex-shrink-0 text-center">
+                     <div class="dropdown dp">
+                        <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg"></i>
+                            <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger">1</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+                            <h6 class="dropdown-header text-dark ">Notifications</h6>
+                            <a class="dropdown-item d-flex align-items-center" href="notification.php">
+                                <div class="me-4">
+                                     <div class="fa-stack fa-1x">
+                                      <i class="fa fa-circle fa-stack-2x ms-2"></i>
+                                      <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
+                                    </div> 
+                                </div>
+                                <div class="fw-bold">
+                                    <div class="small text-gray-500">September 16, 2022</div>
+                                    <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
+                        </div>
+                    </div>
+                </div>
+				<div class="flex-shrink-0 dropdown pe-5 text-center">
 					<button class="btn  dropdown-toggle border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 			          <?php
 
@@ -134,12 +166,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                             <thead>
                                 <tr class="text-center">
                                     <th class="fs-5">Name</th>
-                                    <th class="fs-5">Section</th>
                                     <th class="fs-5">Title</th>
                                     <th class="fs-5">Area of Examination</th>
                                     <th class="fs-5">Difficulty</th>
                                     <th class="fs-5">Total of Items</th>
                                     <th class="fs-5">Score</th>
+                                    <th class="fs-5">Time taken</th>
                                     <th class="fs-5">Remarks</th>
                                 </tr>
                             </thead>
@@ -164,16 +196,34 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                 <?php 
                                 }elseif (mysqli_num_rows($quiz_query)>0) {
 
-                                    while ($rows = mysqli_fetch_assoc($quiz_query)) { ?>
+                                    while ($rows = mysqli_fetch_assoc($quiz_query)) {
+                                         date_default_timezone_set('Asia/Manila');
+
+                                        $sssl = strtotime($rows['date_result']);
+
+                                        $sssl2 = strtotime($rows['date_created']);
+
+
+                                        if (date('i',$sssl) == '00') {
+                                          
+                                          $knock = "secs";
+                                        }
+                                        else {
+
+                                          $knock = "mins";
+                                        }
+
+
+                                     ?>
 
                                         <tr class="text-center">
                                             <th><?php echo $rows['first_name']." ".$rows['last_name']; ?></th>
-                                            <td><?php echo $rows['section']; ?></td>
                                             <td><?php echo $rows['quiz_title']; ?></td>
                                             <td><?php echo $rows['subject_name']; ?></td>
                                             <td><?php echo $rows['question_difficulty']; ?></td>
                                             <td><?php echo $rows['total_quest']; ?></td>
                                             <td><?php echo $rows['score']; ?></td>
+                                            <td><?php echo date('i:s',$sssl); ?>&nbsp;<?php echo $knock; ?></td>
 
                                             <?php if ($rows['result']=='passed') { ?>
                                                  <td class="text-success text-uppercase fw-bold"><?php echo $rows['result'] ?></td>
@@ -225,14 +275,33 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                 <?php 
                                 }elseif (mysqli_num_rows($quiz_query)>0) {
 
-                                     while ($rows = mysqli_fetch_assoc($exam_query)) { ?>
+                                     while ($rows = mysqli_fetch_assoc($exam_query)) { 
+                                         date_default_timezone_set('Asia/Manila');
+
+
+                                        $sssl = strtotime($rows['date_exam_result']);
+
+                                        $sssl2 = strtotime($rows['date_created']);
+
+
+                                        if (date('i',$sssl) == '00') {
+                                          
+                                          $knock = "secs";
+                                        }
+                                        elseif(date('i',$sssl)=='01') {
+
+                                          $knock = "min";
+                                        }
+
+
+                                        ?>
                                     <tr>
                                         <td><?php echo $rows['first_name']." ".$rows['last_name']; ?></td>
                                         <td><?php echo $rows['subjects']; ?></td>
                                         <td class="ps-5"><?php echo $rows['total_question']; ?></td>
                                         <td class="ps-4"><?php echo $rows['score']; ?></td>
                                         <td class="ps-4"><?php echo $rows['score_percent']; ?> %</td>
-                                        <td class="ps-4">1hr 30mins</td>
+                                        <td class="ps-4"><?php echo date('i:s',$sssl); ?>&nbsp;<?php echo $knock; ?></td>
                                         <?php if ($rows['result']=='passed') { ?>
                                                  <td class="text-success text-uppercase fw-bold ps-3"><?php echo $rows['result'] ?></td>
                                             <?php

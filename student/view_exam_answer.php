@@ -27,6 +27,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
   <!-- System Logo -->
   <link rel="icon" href="../assets/pics/system-ico.ico">
+  <style>
+       .dp .dropdown-toggle::after {
+            content: none;
+        }
+        .dp .dropdown-list{
+            left: -90px;
+        }
+         .navbar .breadcrumb li a{
+          color: #8C0000;
+        }
+    </style>
 
 </head>
 <body style="background-color: rgb(229, 229, 229);">
@@ -57,7 +68,30 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
             <a class="nav-link text-uppercase" href="test_results.php">Results</a>
           </li>
         </ul>
-        <div class="flex-shrink-0 dropdown px-4 text-center">
+        <div class="flex-shrink-0 text-center">
+             <div class="dropdown dp">
+                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg"></i>
+                    <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger">1</span>
+                </a>
+                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+                    <h6 class="dropdown-header text-dark ">Notifications</h6>
+                    <a class="dropdown-item d-flex align-items-center" href="notification.php">
+                        <div class="me-4">
+                             <div class="fa-stack fa-1x">
+                              <i class="fa fa-circle fa-stack-2x ms-2"></i>
+                              <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
+                            </div> 
+                        </div>
+                        <div class="fw-bold">
+                            <div class="small text-gray-500">September 16, 2022</div>
+                            <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
+                        </div>
+                    </a>
+                    <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
+                </div>
+            </div>
+        </div>
+        <div class="flex-shrink-0 dropdown pe-5 text-center">
           <button class="btn  dropdown-toggle border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           <?php
 
@@ -153,7 +187,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 
                 ?>
-                <div class="p-2 bg-light border"><p class="card-text"><b>Started on:</b><?php echo date('F j, Y g:i a, D',$sssl3);  ?></p></div>
+                <div class="p-2 bg-light border"><p class="card-text"><b>Started on:</b>
+                  <?php echo date('F j, Y g:i a, D',$sssl3);  ?></p></div>
 
                 <?php
 
@@ -181,10 +216,32 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 }
 
                 ?>
-                <div class="p-2 bg-light border"><p class="card-text"><b>State:</b> Finished</p></div>
-                <div class="p-2 bg-light border"><p class="card-text"><b>Completed on:</b><?php echo date('F j, Y g:i a, D',$sssl2); ?></p></div>
+                <div class="p-2 bg-light border">
+                  <?php 
+                
+                $id = $_GET['id'];
+                $code = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,accounts WHERE (tbl_exam_result.acc_id=accounts.acc_id) AND (tbl_exam_result.exam_result_id='$id') AND tbl_exam_result.acc_id = '{$_SESSION['acc_id']}' ");
+
+
+                while ($rows = mysqli_fetch_assoc($code)) {
+                $boast = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '{$rows['pre_exam_id']}'");
+                $shine = mysqli_fetch_array($boast);
+
+                $board = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE acc_id='{$_SESSION['acc_id']}' AND pre_exam_id='{$rows['pre_exam_id']}'");
+
+                $row= mysqli_fetch_assoc($board);
+
+                if ($row['acc_id']==$_SESSION['acc_id'] AND $row['pre_exam_id']==$shine['pre_exam_id']) {
+                  echo '<p class="card-text"><b>State:</b><span class="badge bg-light text-success" style="font-size: 18px;">Finished</span></p>';
+
+                  }
+                }
+                ?>
+                </div>
+                <div class="p-2 bg-light border"><p class="card-text"><b>Completed on:</b> <?php echo date('F j, Y g:i a, D',$sssl2); ?></p></div>
                 <div class="p-2 bg-light border"><p class="card-text"><b>Time Taken:</b>&nbsp;<?php echo date('i:s',$sssl); ?>&nbsp;<?php echo $knock; ?></p></div>
-                <div class="p-2 bg-light border"><p class="card-text"><b>Grade:</b> <b>96.00</b> out of 100.00</p></div>
+                <div class="p-2 bg-light border">
+                  <p class="card-text"><b>Grade:</b> <b><?php echo $shws['score_percent']; ?>.00</b> out of 100.00</p></div>
                 <?php
                 }
                 ?>

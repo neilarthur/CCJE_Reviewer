@@ -28,6 +28,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	<!-- Bootstrap CSS -->
 	<link href="../css/bootstrap5.0.1.min.css" rel="stylesheet" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="../css/datatables-1.10.25.min.css" />
+	<!-- JS Chart-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<!-- System Logo -->
     <link rel="icon" href="../assets/pics/system-ico.ico">
 	<style>
@@ -239,9 +241,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">No.</th>
 													<th scope="col">Area of Exam</th>
 													<th scope="col">Number of items</th>
+													<th scope="col" hidden>Access Code</th>
 													<th scope="col">Prepared By</th>
 													<th scope="col">Time Limit</th>
-													<th scope="col">Date</th>
+													<th scope="col">Date Created</th>
 													<th scope="col">Status</th>
 													<th scope="col" style="text-align: center;">Action</th>
 												</tr>
@@ -357,6 +360,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	    </div>
 
 </body>
+<script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+<script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
 <script>
 let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
@@ -372,9 +378,6 @@ let arrow = document.querySelectorAll(".arrow");
     sidebar.classList.toggle("close");
   });
 </script>
-<script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-<script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
   	 $('#examTab').DataTable({
