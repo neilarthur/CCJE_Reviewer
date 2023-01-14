@@ -158,8 +158,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 		                </a>
 		                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
 	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
-	                        <a class="dropdown-item d-flex align-items-center" href="#">
-	<?php
+	                        	<?php
 
 	                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
 
@@ -173,6 +172,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                            	foreach ($come as $item) {
 
 	                            ?>
+	                         <a class="dropdown-item d-flex align-items-center" href="notification.php">
 	                            <div class="me-4">
 	                                 <div class="fa-stack fa-1x">
 	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>

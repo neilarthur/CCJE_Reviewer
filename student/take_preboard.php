@@ -210,7 +210,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 										}
 										elseif ($start <= $datetime) {
 											
-											echo '<button class="btn btn-success text-uppercase px-2 py-1"><a href="#" data-id="'.$rows['pre_exam_id'].'" class="text-white suc_code" data-bs-toggle="modal" style="text-decoration: none;"><i class="bx bxs-hourglass-top me-1"></i>Start</a></button>';
+											echo '<button class="btn btn-success text-uppercase px-2 py-1"><a href="#" data-id="'.$rows['pre_exam_id'].'" class="text-white suc_code" data-bs-toggle="modal" style="text-decoration: none;"><i class="fas fa-hourglass-start me-2"></i>Start</a></button>';
 										}
 									}
 									elseif ($drove['acc_id']==$_SESSION['acc_id'] AND $drove['pre_exam_id']==$shine['pre_exam_id']) {

@@ -27,7 +27,7 @@ while ($row = mysqli_fetch_array($results)) { ?>
       			</div>
       		</div>
       		<div class="col-lg-6">
-      			<div class="card">
+      			<div class="card h-100">
       				<div class="card-body">
 						<div class="input-group mt-2">
 							<span class="input-group-text border-0 bg-white fw-bold">Area of Exam</span>
@@ -46,7 +46,7 @@ while ($row = mysqli_fetch_array($results)) { ?>
 							<select class="form-control" name="t_question" id="total_questions" required>
 								<option value="<?php echo $low['total_quest'] ?>" selected><?php echo $row['total_question'] ?></option>
 
-                          <?php
+                <?php
                 for($i = 100; $i >= 20; $i-=20){
 
                   echo ' <option>'.$i.'</option>';
@@ -60,17 +60,9 @@ while ($row = mysqli_fetch_array($results)) { ?>
 								<span class="input-group-text border-0 bg-white fw-bold me-3">Time limit</span>
 								<label id="btn-example4"  type="text" hidden  style="font-size: 13px;"></label>
 								<input name="time_limit" class="form-control" required value="<?php echo $row['time_limit']?>" />
-		                    </div>
-      					</div>
+		          </div>
+      			</div>
       					<input type="hidden" name="prepared_by" value="<?php echo $_SESSION['acc_id'] ?>">
-      					<div class="input-group mt-2">
-      						<span class="input-group-text border-0 bg-white fw-bold">Open the quiz</span>
-      					    <input type="date" name="start_time" class="form-control" required  value="<?php echo $row['start_date']?>">
-      					</div>
-      					<div class="input-group mt-2">
-      						<span class="input-group-text border-0 bg-white fw-bold">Close the quiz</span>
-      					    <input type="date" name="close_time" class="form-control" required value="<?php echo $row['end_date']?>" >
-      					</div>
       				</div>
       			</div>
       		</div>

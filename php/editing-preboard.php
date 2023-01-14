@@ -177,14 +177,14 @@ function getName($n) {
 				</div>
 				<form class="d-flex">
 					<div class="dropdown dp mt-3">
-		                    <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
-    <?php $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response  WHERE response_stat='0' ORDER BY response_id DESC");
-		                	?>
+		                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
+		                    	<?php 
+		                    	$come = mysqli_query($sqlcon,"SELECT * FROM tbl_response  WHERE response_stat='0' ORDER BY response_id DESC");
+		                    	?>
 		                    <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($come); ?></span>
 		                </a>
 		                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
 	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
-	                        <a class="dropdown-item d-flex align-items-center" href="#">
 	                        	<?php
 
 	                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
@@ -199,6 +199,7 @@ function getName($n) {
 	                            	foreach ($come as $item) {
 
 	                            ?>
+	                        <a class="dropdown-item d-flex align-items-center" href="../faculty/notification.php">
 	                            <div class="me-4">
 	                                 <div class="fa-stack fa-1x">
 	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
@@ -336,44 +337,55 @@ function getName($n) {
 										<div class="d-flex justify-content-between mb-3">
 											<button data-id="<?php echo $id; ?>"  class="btn btn-warning px-3 pb-2 editinfo"  data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i>
 											</button>
-											<div class="dropdown me-2">
-												<?php 
-											   $preboard= mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '$id'");
-											   $board = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_choose_quest WHERE pre_exam_id = '$id'");
+											<div class="d-flex">
+												<div class="dropdown me-2">
+													<?php 
+												   $preboard= mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '$id'");
+												   $board = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_choose_quest WHERE pre_exam_id = '$id'");
 
-											   $nums = mysqli_num_rows($board);
+												   $nums = mysqli_num_rows($board);
 
-											   while ($rows = mysqli_fetch_assoc($preboard)) { 
-											   	$total = $rows['total_question'];
+												   while ($rows = mysqli_fetch_assoc($preboard)) { 
+												   	$total = $rows['total_question'];
 
-											   	?>
+												   	?>
 
-												<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Add</a>
-											  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-											  	<?php
-											  	$tot = $_GET['total'];
+													<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Add</a>
+												  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+												  	<?php
+												  	$tot = $_GET['total'];
 
-											  	if ($total == $nums) {
-											  		echo "<li><a class='dropdown-item'><i class='fas fa-plus me-2'></i>a new Questions</a>
-											    	 	</li>
-											    	 	<div class='dropdown-divider'></div>
-											    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
-											    	 	<div class='dropdown-divider'></div>
-											    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>a random question</a></li>
-											    	 		";
-											  	}
-											  	else {
-											  		echo "<li><a class='dropdown-item' href='adding-preboard-question.php?id=$id&total=$tot'><i class='fas fa-plus me-2'></i>a new Questions </a></li>
-											    		<div class='dropdown-divider'></div>
-											    		<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#exampleModal2'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
-											    		<div class='dropdown-divider'></div>
-											    	 	<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#addRandom'><i class='fas fa-plus me-2'></i>a random question</a></li>";
+												  	if ($total == $nums) {
+												  		echo "<li><a class='dropdown-item'><i class='fas fa-plus me-2'></i>a new Questions</a>
+												    	 	</li>
+												    	 	<div class='dropdown-divider'></div>
+												    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
+												    	 	<div class='dropdown-divider'></div>
+												    	 	<li><a class='dropdown-item' data-bs-toggle='#' data-bs-target='#'><i class='fas fa-plus me-2'></i>a random question</a></li>
+												    	 		";
+												  	}
+												  	else {
+												  		echo "<li><a class='dropdown-item' href='adding-preboard-question.php?id=$id&total=$tot'><i class='fas fa-plus me-2'></i>a new Questions </a></li>
+												    		<div class='dropdown-divider'></div>
+												    		<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#exampleModal2'><i class='fas fa-plus me-2'></i>from Question Bank</a></li>
+												    		<div class='dropdown-divider'></div>
+												    	 	<li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#addRandom'><i class='fas fa-plus me-2'></i>a random question</a></li>";
 
-											  	}
+												  	}
 
-											  	 ?>
-											  </ul>
-											   <?php }  ?>
+												  	 ?>
+												  </ul>
+												   <?php }  ?>
+												</div>
+												<div class="dropdown">
+													<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i>
+													</a>
+													<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+														<li><a class="dropdown-item userbtn" data-bs-toggle='modal' data-bs-target="#userModal"><i class="fas fa-calendar-alt me-2"></i>Date & Time</a></li>
+														<div class='dropdown-divider'></div>
+														<li><a class="dropdown-item" data-bs-toggle='modal' data-bs-target='#resultModal'><i class="fas fa-chart-bar me-2"></i>Results</a></li>
+													</ul>
+												</div>
 											</div>
 										</div>
 										<div class="table-responsive">
@@ -733,6 +745,198 @@ function getName($n) {
 			</div>
 		</div>
 
+		<!-- Time And Date modal -->
+		<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<form action="user_override.php" method="POST">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title fw-bold" id="exampleModalLabel">Date and Time</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="card border-0">
+								<div class="card-body">
+									<div class="input-group mb-2">
+										<input type="hidden" name="userover_id" value="<?php echo $_GET['id'] ?>">
+										<span class="input-group-text bg-white fw-bold">Open Quiz</span>
+										<input type="datetime-local" name="start_time" class="form-control" required>
+									</div>
+									<div class="input-group mb-2">
+										<span class="input-group-text bg-white fw-bold">Close Quiz</span>
+										<input type="datetime-local" name="close_time" class="form-control" required >
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" name="sub" class="btn btn-success rounded px-4">Save</button>
+							<button type="button" class="btn btn-secondary rounded px-4" data-bs-dismiss="modal">Cancel</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!--Results Modal -->
+		<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title fw-bold" id="exampleModalLabel">Score Release</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="card border-0">
+							<div class="card-body">
+								<div class="table-responsive-xl">
+									<table class="table table-hover bg-light table-striped" id="resultTab">
+										<thead>
+											<tr>
+												<th scope="col">ID</th>
+												<th scope="col">Fullname</th>
+												<th scope="col">Section</th>
+												<th scope="col">Score</th>
+												<th scope="col">Percentage</th>
+												<th scope="col">Remarks</th>
+												<th scope="col">Date submitted</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+
+											$accounts = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE acc_id = '{$_SESSION['acc_id']}'AND (tbl_pre_question.pre_exam_id='$id')");
+
+											while ($row = mysqli_fetch_assoc($accounts)) {
+												if ($row['section']=='4A'){
+
+												  $id = $_GET['id'];
+												  $result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,accounts WHERE (tbl_exam_result.acc_id=accounts.acc_id) AND (tbl_exam_result.pre_exam_id='$id') AND(accounts.section='4A')");
+
+												  while ($hows= mysqli_fetch_array($result)) { ?>
+												  	<tr>
+														<td><?php echo $hows['user_id']?></td>
+														<td><?php echo $hows['last_name']." ".$hows['first_name']." ".$hows['middle_name']?></td>
+														<td><?php echo $hows['section']?></td>
+														<td><?php echo $hows['score']?></td>
+														<td><?php echo $hows['score_percent']?> %</td>
+
+														 <?php if ($hows['result']=='passed') { ?>
+		                                                 <td><span class="badge bg-success text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></td>
+			                                            <?php
+			                                            }elseif ($hows['result']=='failed') { ?>
+			                                                <td ><span class="badge bg-danger text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></span></td>
+			                                            <?php
+			                                            } 
+			                                            ?>
+
+														<?php 
+														$id = $_GET['id'];
+														$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,accounts WHERE (tbl_exam_result.acc_id=accounts.acc_id) AND (tbl_exam_result.pre_exam_id='$id') AND(accounts.section='4A')");
+
+														while ($rows= mysqli_fetch_assoc($result)) {
+															date_default_timezone_set('Asia/Manila');
+
+															 $submit = strtotime($rows['date_created']);
+
+															 echo'<td>'. date("m-d-Y",$submit).'</td>';
+														}
+														 ?>
+													</tr>
+
+												<?php  }
+											  }
+											  elseif ($row['section']=='4B') {
+											  	 $id = $_GET['id'];
+												  $result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,accounts WHERE (tbl_exam_result.acc_id=accounts.acc_id) AND (tbl_exam_result.pre_exam_id='$id') AND(accounts.section='4B')");
+
+												  while ($hows= mysqli_fetch_array($result)) { ?>
+												  	<tr>
+														<td><?php echo $hows['user_id']?></td>
+														<td><?php echo $hows['last_name']." ".$hows['first_name']." ".$hows['middle_name']?></td>
+														<td><?php echo $hows['section']?></td>
+														<td><?php echo $hows['score']?></td>
+														<td><?php echo $hows['score_percent']?> %</td>
+
+														 <?php if ($hows['result']=='passed') { ?>
+		                                                 <td><span class="badge bg-success text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></td>
+			                                            <?php
+			                                            }elseif ($hows['result']=='failed') { ?>
+			                                                <td ><span class="badge bg-danger text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></span></td>
+			                                            <?php
+			                                            } 
+			                                            ?>
+
+														<?php 
+														$id = $_GET['id'];
+														$result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND(accounts.section='4A')");
+
+														while ($rows= mysqli_fetch_assoc($result)) {
+															date_default_timezone_set('Asia/Manila');
+
+															 $submit = strtotime($rows['date_created']);
+
+															 echo'<td>'. date("m-d-Y",$submit).'</td>';
+														}
+														 ?>
+													</tr>
+
+												<?php  }
+											  		
+											  }
+											  elseif ($row['section']=='4C') {
+											  	  $id = $_GET['id'];
+												  $result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,accounts WHERE (tbl_exam_result.acc_id=accounts.acc_id) AND (tbl_exam_result.pre_exam_id='$id') AND(accounts.section='4C')");
+
+												  while ($hows= mysqli_fetch_assoc($result)) { ?>
+												  	<tr>
+														<td><?php echo $hows['user_id']?></td>
+														<td><?php echo $hows['last_name']." ".$hows['first_name']." ".$hows['middle_name']?></td>
+														<td><?php echo $hows['section']?></td>
+														<td><?php echo $hows['score']?></td>
+														<td><?php echo $hows['score_percent']?> %</td>
+
+														 <?php if ($hows['result']=='passed') { ?>
+		                                                 <td><span class="badge bg-success text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></td>
+			                                            <?php
+			                                            }elseif ($hows['result']=='failed') { ?>
+			                                                <td ><span class="badge bg-danger text-uppercase" style="font-size: 14px;"><?php echo $hows['result'] ?></span></td>
+			                                            <?php
+			                                            } 
+			                                            ?>
+
+
+														<?php 
+														$id = $_GET['id'];
+														$result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND(accounts.section='4C')");
+
+														while ($rows= mysqli_fetch_assoc($result)) {
+															date_default_timezone_set('Asia/Manila');
+
+															 $submit = strtotime($rows['date_created']);
+
+															 echo'<td>'. date("m-d-Y",$submit).'</td>';
+														}
+														 ?>
+													</tr>
+
+												<?php  }
+											  	}	
+											}		
+										?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -745,6 +949,13 @@ function getName($n) {
 			paging: true
 		});
 	});
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+  	 $('#resultTab').DataTable({
+  	 	paging: true
+  	 });
+  });
 </script>
 <script type="text/javascript">
  	$(document).ready(function() {

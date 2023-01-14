@@ -194,7 +194,6 @@ $suppd .= "</select>";
 		                </a>
 		                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
 	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
-	                        <a class="dropdown-item d-flex align-items-center" href="#">
 	                        	<?php
 
 	                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
@@ -209,6 +208,7 @@ $suppd .= "</select>";
 	                            	foreach ($come as $item) {
 
 	                            ?>
+	                        <a class="dropdown-item d-flex align-items-center" href="../faculty/notification.php">
 	                            <div class="me-4">
 	                                 <div class="fa-stack fa-1x">
 	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
@@ -813,33 +813,32 @@ $suppd .= "</select>";
 			<div class="modal-dialog modal-lg">
 				<form action="user_override.php" method="POST">
 					<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title fw-bold" id="exampleModalLabel">Date and Time</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="card border-0">
-							<div class="card-body">
-								<div class="input-group mb-2">
-
-									<input type="hidden" name="userover_id" value="<?php echo $_GET['id'] ?>">
-									<span class="input-group-text bg-white fw-bold">Open Quiz</span>
-									<input type="datetime-local" name="start_time" class="form-control" required>
-								</div>
-								<div class="input-group mb-2">
-									<span class="input-group-text bg-white fw-bold">Close Quiz</span>
-									<input type="datetime-local" name="close_time" class="form-control" required >
+						<div class="modal-header">
+							<h4 class="modal-title fw-bold" id="exampleModalLabel">Date and Time</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="card border-0">
+								<div class="card-body">
+									<div class="input-group mb-2">
+										<input type="hidden" name="userover_id" value="<?php echo $_GET['id'] ?>">
+										<span class="input-group-text bg-white fw-bold">Open Quiz</span>
+										<input type="datetime-local" name="start_time" class="form-control" required>
+									</div>
+									<div class="input-group mb-2">
+										<span class="input-group-text bg-white fw-bold">Close Quiz</span>
+										<input type="datetime-local" name="close_time" class="form-control" required >
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" name="sub" class="btn btn-success rounded px-4">Save</button>
-						<button type="button" class="btn btn-secondary rounded px-4" data-bs-dismiss="modal">Cancel</button>
+						<div class="modal-footer">
+							<button type="submit" name="sub" class="btn btn-success rounded px-4">Save</button>
+							<button type="button" class="btn btn-secondary rounded px-4" data-bs-dismiss="modal">Cancel</button>
+						</div>
 					</div>
 				</form>
 			</div>
-		</div>
 		</div>
 		
 		<!--Results Modal -->
@@ -861,7 +860,7 @@ $suppd .= "</select>";
 												<th scope="col">Fullname</th>
 												<th scope="col">Section</th>
 												<th scope="col">Score</th>
-												<th scope="col">Percent</th>
+												<th scope="col">Percentage</th>
 												<th scope="col">Remarks</th>
 												<th scope="col">Date submitted</th>
 											</tr>
@@ -893,7 +892,19 @@ $suppd .= "</select>";
 			                                            <?php
 			                                            } 
 			                                            ?>
-														<td>12/01/2022</td>
+
+														<?php 
+														$id = $_GET['id'];
+														$result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND(accounts.section='4A')");
+
+														while ($rows= mysqli_fetch_assoc($result)) {
+															date_default_timezone_set('Asia/Manila');
+
+															 $submit = strtotime($rows['date_created']);
+
+															 echo'<td>'. date("m-d-Y",$submit).'</td>';
+														}
+														 ?>
 													</tr>
 
 												<?php  }
@@ -918,7 +929,19 @@ $suppd .= "</select>";
 			                                            <?php
 			                                            } 
 			                                            ?>
-														<td>12/01/2022</td>
+
+														<?php 
+														$id = $_GET['id'];
+														$result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND(accounts.section='4B')");
+
+														while ($rows= mysqli_fetch_assoc($result)) {
+															date_default_timezone_set('Asia/Manila');
+
+															 $submit = strtotime($rows['date_created']);
+
+															 echo'<td>'. date("m-d-Y",$submit).'</td>';
+														}
+														 ?>
 													</tr>
 
 												<?php  }
@@ -944,7 +967,20 @@ $suppd .= "</select>";
 			                                            <?php
 			                                            } 
 			                                            ?>
-														<td>12/01/2022</td>
+
+
+														<?php 
+														$id = $_GET['id'];
+														$result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND(accounts.section='4C')");
+
+														while ($rows= mysqli_fetch_assoc($result)) {
+															date_default_timezone_set('Asia/Manila');
+
+															 $submit = strtotime($rows['date_created']);
+
+															 echo'<td>'. date("m-d-Y",$submit).'</td>';
+														}
+														 ?>
 													</tr>
 
 												<?php  }

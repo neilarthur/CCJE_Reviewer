@@ -375,13 +375,13 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  										$laws = mysqli_fetch_assoc($boast); 	  										
 	   	  										if (mysqli_num_rows($boast) ==0) {
 
-   	  												if ($lifersss < $datetime) {
+   	  												if ($lifersss <= $datetime) {
    	  													
    	  													echo '<button  type="button" data-id="'.$rows['test_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
    	  												}
-   	  												elseif($life > $datetime) {
+   	  												elseif($life <= $datetime) {
 
-   	  													echo '<button  type="submit" name="submits" class="btn btn-success"><i class="fas fa-hourglass-start me-2"></i>Start</button>';
+   	  													echo '<button  type="submit" name="submits" class="btn btn-success px-2 py-1 text-uppercase"><i class="fas fa-hourglass-start me-2"></i>Start</button>';
    	  												}
 	   	  										}
 	   	  										elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $sight['test_id']) {

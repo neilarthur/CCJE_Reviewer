@@ -161,7 +161,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 		                </a>
 		                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
 	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
-	                        <a class="dropdown-item d-flex align-items-center" href="#">
+	                        
 	                        	<?php
 
 	                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
@@ -176,6 +176,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                            	foreach ($come as $item) {
 
 	                            ?>
+	                        <a class="dropdown-item d-flex align-items-center" href="notification.php">
 	                            <div class="me-4">
 	                                 <div class="fa-stack fa-1x">
 	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
@@ -497,6 +498,184 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
                    <div class="col-lg-8">
                    	 <div class="card h-100">
                    	  	<div class="card-body">
+                   			<?php
+
+                   	  		 $acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}' AND role = 'faculty'");
+                   	  		 while ($rows =mysqli_fetch_assoc($acc)) {
+                   	  		 	if ($rows ['section'] == '4A') {
+                   	  		 		 // Criminal Sociology //
+		                            $query = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminal Sociology') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+
+		                            $fetch = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+		                            $percent = mysqli_num_rows($fetch);
+
+		                            // Criminal Jurisprudence//
+		                            $query1 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminal Jurisprudence')AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A') ");
+
+		                            $fetch1 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+
+		                            $percent1 = mysqli_num_rows($fetch1);
+
+		                            // Law Enforcement//
+		                            $query2 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Law Enforcement') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+
+		                            $fetch2 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+		                            $percent2 = mysqli_num_rows($fetch2);
+
+		                              // Criminalistics//
+		                            $query3 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminalistics') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+
+		                            $fetch3 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+		                            $percent3 = mysqli_num_rows($fetch3);
+
+		                               // Crime and Detection//
+		                            $query4 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Crime and Detection') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+
+		                            $fetch4 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Crime and Detection') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+		                            $percent4 = mysqli_num_rows($fetch4);
+
+		                              // Correctional Administration//
+		                            $query5 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Correctional Administration') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+
+		                            $fetch5 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4A')");
+		                            $percent5 = mysqli_num_rows($fetch5);
+                   	  		 	}
+                   	  		 	elseif ($rows ['section'] == '4B') {
+                   	  		 		 // Criminal Sociology //
+		                            $query = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminal Sociology') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+
+		                            $fetch = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+		                            $percent = mysqli_num_rows($fetch);
+
+		                            // Criminal Jurisprudence//
+		                            $query1 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminal Jurisprudence')AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B') ");
+
+		                            $fetch1 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+
+		                            $percent1 = mysqli_num_rows($fetch1);
+
+		                            // Law Enforcement//
+		                            $query2 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Law Enforcement') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+
+		                            $fetch2 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+		                            $percent2 = mysqli_num_rows($fetch2);
+
+		                              // Criminalistics//
+		                            $query3 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminalistics') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+
+		                            $fetch3 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+		                            $percent3 = mysqli_num_rows($fetch3);
+
+		                               // Crime and Detection//
+		                            $query4 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Crime and Detection') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+
+		                            $fetch4 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Crime and Detection') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+		                            $percent4 = mysqli_num_rows($fetch4);
+
+		                              // Correctional Administration//
+		                            $query5 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Correctional Administration') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+
+		                            $fetch5 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4B')");
+		                            $percent5 = mysqli_num_rows($fetch5);
+                   	  		 	}
+                   	  		 	elseif ($rows ['section'] == '4C') {
+                   	  		 		// Criminal Sociology //
+		                            $query = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminal Sociology') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+
+		                            $fetch = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+		                            $percent = mysqli_num_rows($fetch);
+
+		                            // Criminal Jurisprudence//
+		                            $query1 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminal Jurisprudence')AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C') ");
+
+		                            $fetch1 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+
+		                            $percent1 = mysqli_num_rows($fetch1);
+
+		                            // Law Enforcement//
+		                            $query2 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Law Enforcement') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+
+		                            $fetch2 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+		                            $percent2 = mysqli_num_rows($fetch2);
+
+		                              // Criminalistics//
+		                            $query3 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Criminalistics') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+
+		                            $fetch3 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+		                            $percent3 = mysqli_num_rows($fetch3);
+
+		                               // Crime and Detection//
+		                            $query4 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Crime and Detection') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+
+		                            $fetch4 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Crime and Detection') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+		                            $percent4 = mysqli_num_rows($fetch4);
+
+		                              // Correctional Administration//
+		                            $query5 = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id)  AND(tbl_pre_question.subjects = 'Correctional Administration') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+
+		                            $fetch5 = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.section='4C')");
+		                            $percent5 = mysqli_num_rows($fetch5);
+                   	  		 	}
+                   	  		 }
+
+                           
+
+                            while ($row= mysqli_fetch_assoc($query) ) {
+                                 if ($percent == 0) {
+                                    $percent =1;
+                                    $per [] = $row['num'] /$percent;
+                                }
+                                else{
+                                    $per [] = $row['num'] /$percent;
+                                }
+                                
+                            }
+                            while ($row1= mysqli_fetch_assoc($query1)) {
+                                if ($percent1 == 0) {
+                                    $percent1 =1;
+                                    $per1 [] = $row1['num'] /$percent1;
+                                }
+                                else{
+                                    $per1 [] = $row1['num'] /$percent1;
+                                }
+                            }
+                             while ($row2= mysqli_fetch_assoc($query2)) {
+                                if ($percent2 == 0) {
+                                    $percent2 =1;
+                                    $per2 [] = $row2['num'] /$percent2;
+                                }
+                                else{
+                                    $per2 [] = $row2['num'] /$percent2;
+                                }
+                            }
+                             while ($row3= mysqli_fetch_assoc($query3)) {
+                                if ($percent3 == 0) {
+                                    $percent3 =1;
+                                    $per3 [] = $row3['num'] /$percent3;
+                                }
+                                else{
+                                    $per3 [] = $row3['num'] /$percent3;
+                                }
+                            }
+                            while ($row4= mysqli_fetch_assoc($query4)) {
+                                if ($percent4 == 0) {
+                                    $percent4 =1;
+                                    $per4 [] = $row4['num'] /$percent4;
+                                }
+                                else{
+                                    $per4 [] = $row4['num'] /$percent4;
+                                }
+                            }
+                             while ($row5= mysqli_fetch_assoc($query5)) {
+                                if ($percent5 == 0) {
+                                    $percent5 =1;
+                                    $per5 [] = $row5['num'] /$percent5;
+                                }
+                                else{
+                                    $per5 [] = $row5['num'] /$percent5;
+                                }
+                            }
+                             ?>
                    			<canvas id="myChart" style="position: relative; height:40px; width:80px"></canvas>
                    			<script type="text/javascript">
                    				const ctx = document.getElementById('myChart').getContext('2d');
@@ -507,36 +686,43 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 								        datasets: [{
 								             label: "Criminal Jurisprudence ",
 									         backgroundColor: "#3e95cd",
-									         data: [80],
+									         data: <?php echo json_encode($per1) ?>,
 									      },{
 									         label: "Law Enforcement",
 									         backgroundColor: "#8e5ea2",
-									         data: [100],
+									         data: <?php echo json_encode($per2) ?>,
 									      },{
 									         label: "Criminalistics",
 									         backgroundColor: "#3cba9f",
-									         data: [90],
+									         data: <?php echo json_encode($per3) ?>,
 									      },{
 									         label: "Crime Detection and Investigation",
 									         backgroundColor: "#775FEC",
-									         data: [85],
+									         data: <?php echo json_encode($per4) ?>,
 									      },{
 									         label: "Criminal Sociology",
 									         backgroundColor: "#FF6666",
-									         data: [95],
+									         data: <?php echo json_encode($per) ?>,
 									      },{
 									         label: "Correctional Administration",
 									         backgroundColor: "#FFAA00",
-									         data: [82],
+									         data: <?php echo json_encode($per5) ?>,
 
 								        }]
 								    },
 								    options: {
 								        scales: {
-								            y: {
-								                beginAtZero: true
-								            }
-								        }
+                                            y: {
+                                                min: 0,
+                                                max: 100,
+                                                ticks: {
+                                                    stepSize: 20,
+                                                    callback: function(value, index, values) {
+                                                        return value + " %";
+                                                    }            
+                                                }
+                                            }
+                                        }
 								    }
 								});
 

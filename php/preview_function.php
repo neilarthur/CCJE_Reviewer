@@ -237,23 +237,45 @@ if (isset($_POST['trial_quiz'])) {
 		        <form class="d-flex">
 		          <div class="dropdown dp mt-3">
 		                    <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
-		                        <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger">1</span>
+		                    <?php 
+		                    $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response  WHERE response_stat='0' ORDER BY response_id DESC");
+		                	?>
+		                    <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($come); ?></span>
 		                    </a>
 		                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
 		                          <h6 class="dropdown-header text-dark ">Notifications</h6>
-		                          <a class="dropdown-item d-flex align-items-center" href="#">
-		                              <div class="me-4">
-		                                   <div class="fa-stack fa-1x">
-		                                    <i class="fa fa-circle fa-stack-2x ms-2"></i>
-		                                    <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
-		                                  </div> 
-		                              </div>
-		                              <div class="fw-bold">
-		                                  <div class="small text-gray-500">September 16, 2022</div>
-		                                  <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
-		                              </div>
-		                          </a>
-		                          <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+		                           <?php
+
+		                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
+
+		                            if (mysqli_num_rows($come)==0) {
+		                            	
+		                            	echo "<h5 class='text-center'>No notification Found</h5>";
+		                            }
+
+		                            if (mysqli_num_rows($come) >= 0) {
+
+		                            	foreach ($come as $item) {
+
+		                            ?>
+		                        <a class="dropdown-item d-flex align-items-center" href="../faculty/notification.php">
+		                            <div class="me-4">
+		                                 <div class="fa-stack fa-1x">
+		                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
+		                                  <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
+		                                </div> 
+		                            </div>
+		                            <div class="fw-bold">
+		                                <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
+		                                 echo $life; ?></div>
+		                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." Message to you "; ?></span>
+		                            </div>
+		                            <?php
+				                        }
+				                    }
+		                            ?>
+		                        </a>
+		                        <a class="dropdown-item text-center small text-gray-500" href="../faculty/notification.php">Show All Notifications</a>
 		                      </div>
 		                </div>
 		                <div class="dropdown me-3">
@@ -279,7 +301,7 @@ if (isset($_POST['trial_quiz'])) {
 				<!-- Main Content-->
 				<div class="col py-3 overflow-auto mx-2">
 					<div class="container-fluid">
-						<div class="col-lg-12">
+						<div class="col-lg-10 mx-auto">
 							<?php
 							 $id = $_GET['id'];
 
@@ -289,6 +311,7 @@ if (isset($_POST['trial_quiz'])) {
 								<div class="card-header" style="background-color: rgb(43, 43, 43);">
 									<p class="h2 fw-bold text-uppercase text-white"> <?php echo $show['quiz_title']; ?></p>
 									<p class="h5  text-uppercase text-white"><?php echo $show['subject_name']; ?></p>
+									<p class="card-text text-white h5">Total points:<b class="badge bg-success ms-2 " style="font-size: 18px;">5 / 5</b></p>
 								</div>
 								<div class="card-body">
 									<p class=" h5 text-dark fw-bold" > <?php echo $show['description']; ?> </p>
@@ -297,7 +320,7 @@ if (isset($_POST['trial_quiz'])) {
 						<?php }?>
 						</div>
 						<form action="preview_function.php" id="form1" method="POST">
-							<div class="col-lg-12">
+							<div class="col-lg-10 mx-auto">
 								<?php
 								 $c = 0;
 								 $ids = $_GET['id'];
@@ -324,9 +347,8 @@ if (isset($_POST['trial_quiz'])) {
 								                                if ($clear['trial_ans']== $shows['correct_ans']) { ?>
 								                                  <tr>
 								                                    <th>
-								                                     <b><span class="text-success"><?php echo $number.". &nbsp;". $shows['questions_title']; ?></i></span></b>
+								                                     <b><span class="text-success"><?php echo $number.". &nbsp;". $shows['questions_title']; ?><i class="fas fa-check ms-2 fa-lg"></i></span></b>
 								                                    </th>
-								                                    <th><span><p class="d-flex justify-content-end"><span><i class="fas fa-asterisk fa-xs text-danger me-1"></i></span> 1 point</p></span></th>
 								                                  </tr>
 								                                  <?php 
 
@@ -334,9 +356,8 @@ if (isset($_POST['trial_quiz'])) {
 								                                elseif ($clear['trial_ans']!= $shows['correct_ans']) { ?>
 								                                  <tr>
 								                                    <th>
-								                                     <b><span class="text-danger"><?php echo $number.". &nbsp;". $shows['questions_title']; ?></span></b>
+								                                     <b><span class="text-danger"><?php echo $number.". &nbsp;". $shows['questions_title']; ?><i class="fas fa-times text-danger ms-2 fa-lg"></i></span></b>
 								                                    </th>
-								                                    <th><span><p class="d-flex justify-content-end"><span><i class="fas fa-asterisk fa-xs text-danger me-1"></i></span> 1 point</p></span></th>
 								                                  </tr>
 								                                  <?php
 								                                }
@@ -372,7 +393,7 @@ if (isset($_POST['trial_quiz'])) {
 									</div>
 								</div>
 								 <?php $number++; } ?>
-								<div class="d-flex justify-content-center mt-3">
+								<div class="d-flex justify-content-end mt-3">
 				                <?php
 
 					            $ter = mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id = '$ids'");
@@ -384,7 +405,7 @@ if (isset($_POST['trial_quiz'])) {
 					              <?php
 					            }
 					            ?>
-					            <a href="../faculty/testyourself.php" class="btn btn-danger px-4 pb-2 mx-2 text-uppercase btn-lg">BACK</a>
+					            <a href="../faculty/testyourself.php" class="btn btn-secondary px-4 pb-2 mx-2 text-uppercase btn-lg"><i class="fas fa-backward me-2"></i>BACK</a>
 					          </div>
 							</div>
 						</form>
