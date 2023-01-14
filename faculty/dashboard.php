@@ -151,8 +151,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					</nav>
 				</div>
 				<form class="d-flex">
-
-					<!--- notification -->
+					<!--- Notification -->
 					<div class="dropdown dp mt-3">
 		                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
 		                	<?php $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response  WHERE response_stat='0' ORDER BY response_id DESC");
