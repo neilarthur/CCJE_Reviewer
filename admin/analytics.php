@@ -262,7 +262,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                <td>
 	                                                	<div class= "d-flex justify-content-center">
 	                                                		<a href="question_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="btn btn-secondary mx-2"><i class="fas fa-file-alt"></i></a>
-	                                                		<button class="btn btn-primary"><i class="fas fa-download"></i></button>
+
+	                                                		<div class="btn-group dropdown">
+	                                                			<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-download"></i></button>
+
+	                                                			<div class="dropdown-menu">
+	                                                				<form action="export_file.php" method="POST">
+	                                                					<input type="hidden" name="excel_id" value="<?php echo $rows['pre_exam_id']; ?>">
+	                                                					<input type="hidden" name="file_type" value="xlsx">
+	                                                					<input type="submit" class="dropdown-item" value="Download Result Exam" name="export_excel_btn">
+	                                                				</form>
+	                                                				<div class="dropdown-divider"></div>
+	                                                				<a href="print_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item">Print</a>
+	                                                			</div>
+	                                                		</div>
 	                                                	</div>
 	                                                </td>
 	                                            </tr>
