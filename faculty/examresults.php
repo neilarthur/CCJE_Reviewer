@@ -281,7 +281,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -303,7 +310,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['section'] ?></td>
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
-					                                                <td><?php echo $rows['score_percent'] ?>%</td>
+					                                                <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
@@ -324,9 +338,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
 				                                                <td><?php echo $rows['section'] ?></td>
 				                                                <td><?php echo $rows['subjects'] ?></td>
-				                                                 <td><?php echo $rows['score'] ?></td>
+				                                                <td><?php echo $rows['score'] ?></td>
 				                                                <td><?php echo $rows['score_percent'] ?>%</td>
-				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <?php
+					                                                $remarks = $rows['result'];
+					                                                if ($remarks =="passed") { ?>
+					                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }
+					                                                elseif ($remarks =="failed") { ?>
+					                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }  ?>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
 				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -377,7 +398,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -400,7 +428,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -422,7 +457,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td><?php echo $rows['subjects'] ?></td>
 				                                                 <td><?php echo $rows['score'] ?></td>
 				                                                <td><?php echo $rows['score_percent'] ?>%</td>
-				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <?php
+					                                                $remarks = $rows['result'];
+					                                                if ($remarks =="passed") { ?>
+					                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }
+					                                                elseif ($remarks =="failed") { ?>
+					                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }  ?>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
 				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -473,7 +515,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -494,9 +543,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['last_name']." ".$rows['first_name']." ".$rows['middle_name']?></td>
 					                                                <td><?php echo $rows['section'] ?></td>
 					                                                <td><?php echo $rows['subjects'] ?></td>
-					                                                 <td><?php echo $rows['score'] ?></td>
+					                                                <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                               <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -518,7 +574,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td><?php echo $rows['subjects'] ?></td>
 				                                                 <td><?php echo $rows['score'] ?></td>
 				                                                <td><?php echo $rows['score_percent'] ?>%</td>
-				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                               <?php
+					                                                $remarks = $rows['result'];
+					                                                if ($remarks =="passed") { ?>
+					                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }
+					                                                elseif ($remarks =="failed") { ?>
+					                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }  ?>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
 				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -569,7 +632,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -592,7 +662,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                               <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -614,7 +691,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td><?php echo $rows['subjects'] ?></td>
 				                                                 <td><?php echo $rows['score'] ?></td>
 				                                                <td><?php echo $rows['score_percent'] ?>%</td>
-				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <?php
+					                                                $remarks = $rows['result'];
+					                                                if ($remarks =="passed") { ?>
+					                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }
+					                                                elseif ($remarks =="failed") { ?>
+					                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }  ?>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
 				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -665,7 +749,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -688,7 +779,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -710,7 +808,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td><?php echo $rows['subjects'] ?></td>
 				                                                 <td><?php echo $rows['score'] ?></td>
 				                                                <td><?php echo $rows['score_percent'] ?>%</td>
-				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <?php
+					                                                $remarks = $rows['result'];
+					                                                if ($remarks =="passed") { ?>
+					                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }
+					                                                elseif ($remarks =="failed") { ?>
+					                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }  ?>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
 				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -761,7 +866,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -784,7 +896,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					                                                <td><?php echo $rows['subjects'] ?></td>
 					                                                 <td><?php echo $rows['score'] ?></td>
 					                                                <td><?php echo $rows['score_percent'] ?>%</td>
-					                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+					                                                <?php
+						                                                $remarks = $rows['result'];
+						                                                if ($remarks =="passed") { ?>
+						                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }
+						                                                elseif ($remarks =="failed") { ?>
+						                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+						                                            <?php }  ?>
 					                                                <td>
 					                                                	<div class="d-flex flex-row">
 					                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>
@@ -806,7 +925,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 				                                                <td><?php echo $rows['subjects'] ?></td>
 				                                                 <td><?php echo $rows['score'] ?></td>
 				                                                <td><?php echo $rows['score_percent'] ?>%</td>
-				                                                <td class="text-uppercase text-success fw-bold"><?php echo $rows['result'] ?></td>
+				                                                <?php
+					                                                $remarks = $rows['result'];
+					                                                if ($remarks =="passed") { ?>
+					                                                <td class="text-uppercase text-success fw-bold"><h5><span class="badge bg-success"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }
+					                                                elseif ($remarks =="failed") { ?>
+					                                                <td class="text-uppercase text-danger fw-bold"><h5><span class="badge bg-danger"><?php echo $rows['result'] ?></span></h5></td>
+					                                            <?php }  ?>
 				                                                <td>
 				                                                	<div class="d-flex flex-row">
 				                                                		<button data-id="<?php echo $rows['exam_result_id']; ?>" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-eye"></i></button>

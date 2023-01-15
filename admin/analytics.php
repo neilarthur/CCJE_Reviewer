@@ -39,6 +39,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
         .navbar .breadcrumb li a{
           color: #8C0000;
         }
+        .drop .dropdown-toggle::after {
+            content: none;
+        }
     </style>
 </head>
 <body style="background: rgb(230, 230, 230);">
@@ -121,7 +124,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                     ?>
 						<div class="name-job">
 							<div class="profile_name"><a class="profile text-warning" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><?php echo $_SESSION["first_name"];?></a></div>
-							<div class="job"><?php echo $_SESSION["role"];  ?></div>
+							<div class="job text-capitalize"><?php echo $_SESSION["role"];  ?></div>
 						</div>
 					</div>
 				</li>
@@ -155,7 +158,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                    </a>
 	                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
 	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
-	                        <a class="dropdown-item d-flex align-items-center" href="#">
 	                        	<?php
 
                                 $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty')");
@@ -170,6 +172,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                                     foreach ($comers as $item) {
 
                                 ?>
+                            <a class="dropdown-item d-flex align-items-center" href="notification.php">
 	                            <div class="me-4">
 	                                 <div class="fa-stack fa-1x">
 	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
@@ -241,7 +244,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 													<th scope="col">Total of items</th>
 													<th scope="col">Time Limit</th>
 													<th scope="col">Prepared by</th>
-													<th scope="col" class="d-flex justify-content-center">Action</th>
+													<th scope="col" class="text-center">Action</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -261,19 +264,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                <td><?php echo $rows['first_name'] ." ".$rows['last_name']; ?></td>
 	                                                <td>
 	                                                	<div class= "d-flex justify-content-center">
-	                                                		<a href="question_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="btn btn-secondary mx-2"><i class="fas fa-file-alt"></i></a>
+	                                                		<a href="question_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="btn btn-secondary mx-2"><i class="fas fa-file-signature"></i></a>
 
-	                                                		<div class="btn-group dropdown">
-	                                                			<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-download"></i></button>
+	                                                		<div class="btn-group dropdown drop">
+	                                                			<button type="button" class="btn btn-primary dropdown-toggle " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-download"></i></button>
 
 	                                                			<div class="dropdown-menu">
 	                                                				<form action="export_file.php" method="POST">
 	                                                					<input type="hidden" name="excel_id" value="<?php echo $rows['pre_exam_id']; ?>">
 	                                                					<input type="hidden" name="file_type" value="xlsx">
-	                                                					<input type="submit" class="dropdown-item" value="Download Result Exam" name="export_excel_btn">
+	                                                					<button type="submit" class="dropdown-item" name="export_excel_btn"><i class="fas fa-file-download me-2"></i></i>Download Results</button>
 	                                                				</form>
 	                                                				<div class="dropdown-divider"></div>
-	                                                				<a href="print_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item">Print</a>
+	                                                				<li>
+	                                                					<a href="print_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item"><i class="fas fa-print me-2"></i>Print Results</a>
+	                                                				</li>
 	                                                			</div>
 	                                                		</div>
 	                                                	</div>

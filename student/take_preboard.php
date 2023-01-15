@@ -160,7 +160,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 						<tbody>
 							<?php
 
-							$code = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question,accounts WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND Approval='approve'");
+							$code = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question,accounts WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND Approval='approve' AND(tbl_pre_question.stat_exam='Ready')");
 
 							if (mysqli_num_rows($code) == 0) {
 
@@ -177,7 +177,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 								while ($rows = mysqli_fetch_assoc($code)) {
 
-								$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '{$rows['pre_exam_id']}' AND Approval='approve'");
+								$boast = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '{$rows['pre_exam_id']}' AND Approval='approve' AND(tbl_pre_question.stat_exam='Ready')");
 
 								$shine = mysqli_fetch_array($boast);
 								?>

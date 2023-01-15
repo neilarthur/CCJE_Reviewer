@@ -273,8 +273,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
+																	<?php
+																		$approve = $rows['status'];
+																		if ($approve == "pending") { ?>
 																		<button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-success mx-2 approvebtn" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
-
+																	<?php }
+																	   elseif ($approve == "active") {
+																	 ?>
+																	 <button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-secondary mx-2 approvebtn" data-bs-toggle="modal" type="button" disabled ><i class="fas fa-check-circle"></i></button>
+																	<?php } ?>
 																		<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
 
 																	</div>
@@ -304,7 +311,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
+																	<?php
+																		$approve = $rows['status'];
+																		if ($approve == "pending") { ?>
 																		<button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-success mx-2 approvebtn" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
+																	<?php }
+																	   elseif ($approve == "active") {
+																	 ?>
+																	 <button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-secondary mx-2 approvebtn" data-bs-toggle="modal" type="button" disabled ><i class="fas fa-check-circle"></i></button>
+																	<?php } ?>
 
 																		<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
 
@@ -336,7 +351,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
+																	<?php
+																		$approve = $rows['status'];
+																		if ($approve == "pending") { ?>
 																		<button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-success mx-2 approvebtn" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
+																	<?php }
+																	   elseif ($approve == "active") {
+																	 ?>
+																	 <button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-secondary mx-2 approvebtn" data-bs-toggle="modal" type="button" disabled ><i class="fas fa-check-circle"></i></button>
+																	<?php } ?>
 
 																		<a href="../php/facul_archive_account.php?id=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
 
@@ -711,7 +734,7 @@ elseif (isset($_GET['upsucer'])) {
 	</script>';
 }
 elseif (isset($_GET['approvescc'])) {
-	echo ' <script> swal("approve account has been success!", " clicked the okay!", "success");
+	echo ' <script> swal("Approve successfully!", " clicked the okay!", "success");
 	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/faculty/accounts_manage.php");
 	</script>';
 }

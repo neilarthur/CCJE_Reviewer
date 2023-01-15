@@ -155,20 +155,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
                                     while ($course = mysqli_fetch_assoc($based)) {
                                         if ($course['section'] == '4A') {
-                                             $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A') AND(choose_question.type_test='Quiz')");
+                                             $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A') AND(choose_question.type_test='Quiz') AND (choose_question.stat_question='Ready')");
 
                                             $row = mysqli_num_rows($query);
                                             echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
                                         }
                                         elseif ($course['section'] == '4B') {
-                                             $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B') AND(choose_question.type_test='Quiz')");
+                                             $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B') AND(choose_question.type_test='Quiz') AND (choose_question.stat_question='Ready')");
                                              
 
                                              $row = mysqli_num_rows($query);
                                              echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
                                         }
                                         elseif ($course['section'] == '4C') {
-                                              $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C') AND(choose_question.type_test='Quiz')");
+                                              $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C') AND(choose_question.type_test='Quiz') AND (choose_question.stat_question='Ready')");
                                              
 
                                              $row = mysqli_num_rows($query);
@@ -196,17 +196,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                     $based = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
                                     while ($course = mysqli_fetch_assoc($based)) {
                                         if ($course['section'] == '4A') {
-                                            $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A') AND(choose_question.type_test='LongQuiz')");
+                                            $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A') AND(choose_question.type_test='LongQuiz') AND (choose_question.stat_question='Ready')");
                                              $row = mysqli_num_rows($query);
                                              echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
                                         }
                                         elseif ($course['section'] == '4B') {
-                                            $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B') AND(choose_question.type_test='LongQuiz')");
+                                            $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B') AND(choose_question.type_test='LongQuiz') AND (choose_question.stat_question='Ready')");
                                              $row = mysqli_num_rows($query);
                                              echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
                                         }
                                         elseif ($course['section'] == '4C') {
-                                            $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C') AND(choose_question.type_test='LongQuiz')");
+                                            $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C') AND(choose_question.type_test='LongQuiz') AND (choose_question.stat_question='Ready')");
                                              $row = mysqli_num_rows($query);
                                              echo'<h1  class="mb-2 fw-bold"><b>'.$row.' </b></h1>';
                                         }
@@ -229,7 +229,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         				<div class="row no-gutters align-items-center">
         					<div class="col mr-2">
         						<div class="text-xs font-weight-bold text-white text-uppercase mb-1">
-                                    <?php $query = "SELECT * FROM tbl_pre_question,accounts WHERE (accounts.acc_id= '{$_SESSION['acc_id']}') ";
+                                    <?php $query = "SELECT * FROM tbl_pre_question,accounts WHERE (accounts.acc_id= '{$_SESSION['acc_id']}') AND(tbl_pre_question.pre_board_status='active') AND(tbl_pre_question.Approval='approve') AND(tbl_pre_question.stat_exam='Ready')";
                                         $query_result = mysqli_query($sqlcon,$query);
 
                                         $row = mysqli_num_rows($query_result);
@@ -458,17 +458,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                         $based = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
                         while ($course = mysqli_fetch_assoc($based)) {
                             if ($course['section'] == '4A') {
-                                $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A')");
+                                $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A') AND (choose_question.stat_question='Ready')");
                                 $row = mysqli_num_rows($query);
                                 echo'<p class="fw-bold">Total of Quizzes: '.$row.'</p>';
                             }
                             elseif ($course['section'] == '4B') {
-                                $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B')");
+                                $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B') AND (choose_question.stat_question='Ready')");
                                 $row = mysqli_num_rows($query);
                                 echo'<p class="fw-bold">Total of Quizzes: '.$row.'</p>';
                             }
                             elseif ($course['section'] == '4C') {
-                                $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C')");
+                                $query =  mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C') AND (choose_question.stat_question='Ready')");
                                 $row = mysqli_num_rows($query);
                                 echo'<p class="fw-bold">Total of Quizzes: '.$row.'</p>';
                             }

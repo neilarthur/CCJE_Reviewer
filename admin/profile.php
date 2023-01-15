@@ -122,7 +122,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                         ?>
 						<div class="name-job">
 						    <div class="profile_name"><a class="profile text-warning" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><?php echo $_SESSION["first_name"];?></a></div>
-							<div class="job"><?php echo $_SESSION["role"];  ?></div>
+							<div class="job text-capitalize"><?php echo $_SESSION["role"];  ?></div>
 						</div>
 					</div>
 				</li>
@@ -156,7 +156,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                    </a>
 	                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
 	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
-	                        <a class="dropdown-item d-flex align-items-center" href="#">
 	                        	<?php
 
                                 $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty')");
@@ -171,6 +170,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                                     foreach ($comers as $item) {
 
                                 ?>
+                            <a class="dropdown-item d-flex align-items-center" href="notification.php">
 	                            <div class="me-4">
 	                                 <div class="fa-stack fa-1x">
 	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>

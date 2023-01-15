@@ -62,6 +62,14 @@ while ($rows = mysqli_fetch_assoc($viewer)) {
 
 	<h4 class="d-flex ps-1 fw-bold justify-content-start">Question:</h4>
 		<textarea type="text" name="last_name" class="form-control mt-3 ps-2 mb-3 bg-white" rows="3" readonly=""><?php echo $rows['questions_title']; ?></textarea> 
+		<div class="row " style="font-size: 18px;">
+			<div class="col">
+				<p class="d-flex fw-bold justify-content-start">Answers</p>
+			</div>
+			<div class="col">
+				<p class="d-flex fw-bold">Percentage answered correctly</p>
+			</div>
+		</div>
 		<div class="row mb-2">
 			<div class="col-md-6">
 				<label class="d-flex ps-1 justify-content-start fw-bold">Option A</label>
