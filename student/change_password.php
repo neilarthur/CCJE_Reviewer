@@ -24,7 +24,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<!-- Box Icons-->
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
 	<!-- System Logo -->
     <link rel="icon" href="../assets/pics/system-ico.ico">
     <style>
@@ -177,7 +177,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 							<div class="form-group fs-5 mb-4 row">
 								<label for="password" class="col-md-4 fw-bold col-form-label text-md-right">New Password</label>
 								<div class="col-md-6">
-									<input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password">
+									<div class="input-group">
+										<input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password" id="id_password">
+									    <span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i></span>
+									</div>
 								</div>
 							</div>
 							<div class="form-group fs-5 mb-4 row">
@@ -265,9 +268,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
    
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(){
   window.addEventListener('scroll', function() {
@@ -283,6 +288,18 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
       } 
   });
 }); 
+</script>
+<script type="text/javascript">
+	const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#id_password');
+
+  togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
 </script>
 
 <?php 

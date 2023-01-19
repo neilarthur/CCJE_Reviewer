@@ -175,7 +175,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                            	foreach ($come as $item) {
 
 	                            ?>
-	                        <a class="dropdown-item d-flex align-items-center" href="#">
+	                        <a class="dropdown-item d-flex align-items-center" href="notification.php">
 	                            <div class="me-4">
 	                                 <div class="fa-stack fa-1x">
 	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
@@ -404,12 +404,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
     								</div>
     								<div class="col-xl-7 col-lg-6 col-md-12 col-sm-6 py-2">
     									<label for="user-last" class="d-flex justify-content-center ps-1">Last Name</label>
-    									<input type="text" name="last_name" class="form-control text-center"required>
+    									<input type="text" name="last_name" class="form-control text-center text-capitalize"required>
 
     									<label for="user-first" class="d-flex justify-content-center ps-1">First Name</label>
-    									<input type="text" name="first_name" class="form-control text-center" required>
+    									<input type="text" name="first_name" class="form-control text-center text-capitalize" required>
     									<label for="user-middle" class="d-flex justify-content-center ps-1">Middle Name</label>
-    									<input type="text" name="middle_name"  class="form-control text-center" required>
+    									<input type="text" name="middle_name"  class="form-control text-center text-capitalize" required>
     								</div>
     							</div>
     							<div class="row">

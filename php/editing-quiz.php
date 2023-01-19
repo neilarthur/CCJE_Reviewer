@@ -404,9 +404,6 @@ $suppd .= "</select>";
 											</div>
 										</div>
 										<div class="table-responsive-xl">
-											<style type="text/css">
-												
-											</style>
 											<table class="table bg-light table-hover w-100 " id="#">
 												<thead>
 													<tr>

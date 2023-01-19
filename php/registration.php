@@ -525,19 +525,19 @@
 	            				<div class="col-sm-4">
 	            					<div class="input-div">
 	            						<label class="fieldlabels ms-2">First name</label>
-	            						<input type="text" required require name="f_name"  id="user_name" placeholder="First Name">
+	            						<input type="text" required require name="f_name"  id="user_name" placeholder="First Name" class="text-capitalize">
 	            					</div>
 	            				</div>
 	            				<div class="col-sm-4">
 	            					<div class="input-div">
 	            						<label class="fieldlabels ms-2">Middle name</label> 
-			                            <input type="text" require required name="m_name" placeholder="Middle Name">
+			                            <input type="text" require required name="m_name" placeholder="Middle Name" class="text-capitalize">
 			                        </div>
 	            				</div>
 	            				<div class="col-sm-4">
 	            					<div class="input-div">
 	            						<label class="fieldlabels ms-2">Last name</label>
-			                            <input type="text" required require name="l_name" placeholder="Last Name">
+			                            <input type="text" required require name="l_name" placeholder="Last Name" class="text-capitalize">
 			                        </div>
 	            				</div>
 	            			</div>

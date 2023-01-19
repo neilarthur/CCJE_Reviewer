@@ -39,6 +39,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
          .navbar .breadcrumb li a{
           color: #8C0000;
         }
+        .my-custom-scrollbar {
+        position: relative;
+        height: 450px;
+        overflow: auto;
+        }
+        .table-wrapper-scroll-y {
+        display: block;
+        }
     </style>
 
 </head>
@@ -272,31 +280,61 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
              <div class="col-lg-4 col-md-6">
                 <div class="card h-100">
                     <div class="card-header pb-0">
-                        <h4 class="fw-bold">Upcoming</h4>
+                        <p class="fw-bold text-primary h3">Upcoming</p>
                     </div>
-                    <div class="card-body p-3">
-                        <div class="timeline timeline-one-side">
-                            <div class="timeline-block mb-3">
-                                <div class="timeline-content">
-                                    <h6 class="text-dark text-sm font-weight-bold mb-0"><i class="fas fa-sticky-note text-primary me-2 fa-lg"></i>Ouiz #1 Criminal Jurisprudence</h6>
-                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="timeline-block mb-3">
-                                <div class="timeline-content">
-                                    <h6 class="text-dark text-sm font-weight-bold mb-0"><i class="fas fa-sticky-note me-2 fa-lg text-primary"></i>Ouiz #1 Criminal Jurisprudence</h6>
-                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="timeline-block mb-3">
-                                <div class="timeline-content">
-                                    <h6 class="text-dark text-sm font-weight-bold mb-0"><i class="fas fa-sticky-note me-2 fa-lg text-primary"></i>Ouiz #1 Criminal Jurisprudence</h6>
-                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                                </div>
-                            </div>
-                            <hr>
+                    <div class="card-body">
+                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                            <table class="table table-hover table-light">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                <?php 
+                                $acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+
+                                while ($upcoming= mysqli_fetch_assoc($acc)) {
+                                    if ($upcoming ['section'] == '4C') {
+                                         $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4C') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
+                                         while ($marks=mysqli_fetch_assoc($done)) {
+                                             ?>
+                                            <tr>
+                                                <a href="">
+                                                    <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
+                                                    <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
+                                                </a>
+                                            </tr> 
+                                        <?php 
+                                             
+                                         }
+                                    } elseif ($upcoming ['section'] == '4B') {
+                                        $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4B') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
+                                        while ($marks=mysqli_fetch_assoc($done)) { ?>
+                                            <tr>
+                                                <a href="">
+                                                    <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
+                                                    <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
+                                                </a>
+                                            </tr> 
+                                    <?php
+                                        }
+                                    } elseif ($upcoming ['section'] == '4A') {
+                                        $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4A') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
+                                        while ($marks=mysqli_fetch_assoc($done)) { ?>
+                                            <tr>
+                                                <a href="">
+                                                    <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
+                                                    <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
+                                                </a>
+                                            </tr> 
+                                   <?php          
+                                        }
+                                    }
+                                }
+
+                                ?>
+
+                                    
+                                </tbody>
+                            </table> 
                         </div>
                     </div>
                    <div class="card-footer text-muted bg-white border-0">
@@ -451,9 +489,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         <div class="row mx-4 mt-4">
            <div class="col-lg-4">
                 <div class="card h-100">
+                    <div class="card-header pb-0">
+                        <p class="fw-bold text-primary h3">My Status</p>
+                    </div>
                     <div class="card-body " style="font-size: 18px;">
-                        <h4 class="fw-bold">My Status</h4>
-                        <hr>
+                        
                         <?php 
                         $based = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
                         while ($course = mysqli_fetch_assoc($based)) {
@@ -485,14 +525,44 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                         ?>
                         <hr>
 
-                        <?php
-                       // $best = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,choose_question,accounts ")
+                         <?php
+                         $best =mysqli_query($sqlcon,"SELECT MAX(score) as result FROM tbl_quiz_result,accounts,choose_question WHERE(accounts.acc_id=tbl_quiz_result.acc_id)AND(accounts.acc_id= '{$_SESSION['acc_id']}') AND(choose_question.test_id=tbl_quiz_result.test_id)");
 
-                         ?>
+                         $aws = mysqli_fetch_array($best);
 
-                        <p class="fw-bold">Best score in Quiz: Criminal jurisdinance</p>
+                         $bow= $aws['result'];
+                         $subject = mysqli_query($sqlcon,"SELECT * FROM choose_question,tbl_quiz_result,accounts WHERE(choose_question.test_id=tbl_quiz_result.test_id) AND(accounts.acc_id=tbl_quiz_result.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}') AND(tbl_quiz_result.score=$bow)");
+
+                         if ($bow == 0) {
+                             echo '<p class="fw-bold">Best score in Quiz: </p>';
+                         }
+                         elseif ($bow > 0) {
+                             while ($heh= mysqli_fetch_assoc($subject)) {
+                               echo '<p class="fw-bold">Best score in Quiz: '.$heh['subject_name'].'</p>';  
+                             }
+                         }
+
+
+                        ?>
                         <hr>
-                        <p class="fw-bold">Lowest score in Quiz: Criminal jurisdinance</p>
+                        <?php 
+                        $best =mysqli_query($sqlcon,"SELECT MIN(score) as result FROM tbl_quiz_result,accounts,choose_question WHERE(accounts.acc_id=tbl_quiz_result.acc_id)AND(accounts.acc_id= '{$_SESSION['acc_id']}') AND(choose_question.test_id=tbl_quiz_result.test_id)");
+                         $aws = mysqli_fetch_array($best);
+
+                         $bow= $aws['result'];
+                         $subject = mysqli_query($sqlcon,"SELECT * FROM choose_question,tbl_quiz_result,accounts WHERE(choose_question.test_id=tbl_quiz_result.test_id) AND(accounts.acc_id=tbl_quiz_result.acc_id) AND(accounts.acc_id= '{$_SESSION['acc_id']}') AND(tbl_quiz_result.score=$bow)");
+
+                         
+                         if ($bow == 0) {
+                             echo '<p class="fw-bold">Lowest score in Quiz: </p>';
+                         }
+                         elseif ($bow > 0) {
+                             while ($heh= mysqli_fetch_assoc($subject)) {
+                               echo '<p class="fw-bold">Lowest score in Quiz: '.$heh['subject_name'].'</p>';  
+                             }
+                         }
+
+                        ?>
                         <hr>
                         <?php
                          $query = $sqlcon->query("SELECT SUM(score_percent) AS 'num' FROM  tbl_exam_result, tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id= tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id= accounts.acc_id) AND (accounts.acc_id= '{$_SESSION['acc_id']}') ");
@@ -501,14 +571,19 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
                           $percent = mysqli_num_rows($fetch);
 
-                          while ($rows = mysqli_fetch_assoc($query)) {
-
-                             /// $ave ['ave'] = $rows['num'] / $percent;   
+                          while ($rows = mysqli_fetch_assoc($query)) { 
+                            if ($percent == 0) {
+                                $percent =1;
+                                $ave  = round($rows['num'] / $percent);
+                                echo '<p class="fw-bold">Preboard general average:</p>';
+                            }
+                            else{
+                                $ave = round($rows['num'] / $percent);
+                                echo '<p class="fw-bold">Preboard general average: '.$ave.'%</p>';
+                            } 
                           }
 
-                         ?>
-                         <!--- <?php echo $ave['ave'] ?> -->
-                         <p class="fw-bold">Preboard general average:  %</p>
+                         ?> 
                         
                     </div>
                 </div>

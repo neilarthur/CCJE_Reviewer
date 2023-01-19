@@ -261,13 +261,13 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
 									<div class="form-group">
 										<label for="user-email">Email Address</label>
-										<input type="email" class="form-control" name="email_address" value="<?php  echo $rows['email_address'] ?>">
+										<input type="email" class="form-control" name="email_address" readonly value="<?php  echo $rows['email_address'] ?>">
 									</div>
 								</div>
 								<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 mb-2">
 									<div class="form-group">
 										<label for="user-section">Section</label>
-										<input type="text" class="form-control" name="section" value="<?php  echo $rows['section'] ?>">
+										<input type="text" class="form-control" name="section" value="<?php  echo $rows['section'] ?>" readonly>
 									</div>
 								</div>
 							</div>

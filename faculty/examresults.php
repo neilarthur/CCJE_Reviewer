@@ -251,6 +251,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					    		<div class="tab-pane fade show active" id="nav-criminal" role="tabpanel" aria-labelledby="nav-criminal-jurisprudence-tab">
 						    		<div class="card mt-2">
 							    		<div class="card-body rounded-3 table-responsive-xl">
+							    			<div class="dropdown mb-2 d-flex justify-content-end">
+							    				<button class="btn btn text-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
+							    					Download
+							    				</button>
+							    				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-download me-2"></i>Download Results</a></li>
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+							    				</ul>
+							    			</div>
 						    				<table class="table table-hover align-middle" width="100%" id="resultTab">
 												<thead>
 													<tr>
@@ -270,7 +279,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													while ($row = mysqli_fetch_assoc($accounts)) {
 														if ($row['section']=='4C') {
-															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND(accounts.section='4C')");
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND(accounts.section='4C') ORDER BY accounts.last_name ASC");
 
 															$counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
@@ -301,7 +310,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													  <?php	}
 													  elseif ($row['section']=='4B') {
 
-													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND(accounts.section='4B')");
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND(accounts.section='4B') ORDER BY accounts.last_name ASC");
 													  	    $counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
 																<tr>
@@ -330,7 +339,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													 <?php }
 													 elseif ($row['section']=='4A') {
-													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND(accounts.section='4A')");
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Jurisprudence') AND(accounts.section='4A') ORDER BY accounts.last_name ASC");
 													 	 $counter = 1;
 														while ($rows = mysqli_fetch_assoc($result)) { ?>
 															<tr>
@@ -368,6 +377,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 						    	<div class="tab-pane fade" id="nav-law-enforcement" role="tabpanel" aria-labelledby="nav-law-enforcement">
 					    		<div class="card mt-2">
 							    		<div class="card-body rounded-3 table-responsive-xl">
+							    			<div class="dropdown mb-2 d-flex justify-content-end">
+							    				<button class="btn btn text-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
+							    					Download
+							    				</button>
+							    				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-download me-2"></i>Download Results</a></li>
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+							    				</ul>
+							    			</div>
 						    				<table class="table table-hover align-middle" width="100%" id="lawTab">
 												<thead>
 													<tr>
@@ -387,7 +405,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													while ($row = mysqli_fetch_assoc($accounts)) {
 														if ($row['section']=='4C') {
-															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND(accounts.section='4C')");
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND(accounts.section='4C') ORDER BY accounts.last_name ASC");
 
 															$counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
@@ -418,7 +436,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													  <?php	}
 													  elseif ($row['section']=='4B') {
 
-													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND(accounts.section='4B')");
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND(accounts.section='4B') ORDER BY accounts.last_name ASC");
 													  	    $counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
 																<tr>
@@ -447,7 +465,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													 <?php }
 													 elseif ($row['section']=='4A') {
-													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND(accounts.section='4A')");
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Law Enforcement') AND(accounts.section='4A') ORDER BY accounts.last_name ASC");
 													 	 $counter = 1;
 														while ($rows = mysqli_fetch_assoc($result)) { ?>
 															<tr>
@@ -485,6 +503,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					    	   <div class="tab-pane fade" id="nav-criminalistics" role="tabpanel" aria-labelledby="nav-criminalistics">
 					    		    <div class="card mt-2">
 							    		<div class="card-body rounded-3 table-responsive-xl">
+							    			<div class="dropdown mb-2 d-flex justify-content-end">
+							    				<button class="btn btn text-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
+							    					Download
+							    				</button>
+							    				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-download me-2"></i>Download Results</a></li>
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+							    				</ul>
+							    			</div>
 						    				<table class="table table-hover align-middle" width="100%" id="criminalTab">
 												<thead>
 													<tr>
@@ -504,7 +531,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													while ($row = mysqli_fetch_assoc($accounts)) {
 														if ($row['section']=='4C') {
-															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND(accounts.section='4C')");
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND(accounts.section='4C') ORDER BY accounts.last_name ASC");
 
 															$counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
@@ -535,7 +562,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													  <?php	}
 													  elseif ($row['section']=='4B') {
 
-													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND(accounts.section='4B')");
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND(accounts.section='4B') ORDER BY accounts.last_name ASC");
 													  	    $counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
 																<tr>
@@ -564,7 +591,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													 <?php }
 													 elseif ($row['section']=='4A') {
-													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND(accounts.section='4A')");
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminalistics') AND(accounts.section='4A') ORDER BY accounts.last_name ASC");
 													 	 $counter = 1;
 														while ($rows = mysqli_fetch_assoc($result)) { ?>
 															<tr>
@@ -602,6 +629,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					    	    <div class="tab-pane fade" id="nav-crime" role="tabpanel" aria-labelledby="nav-crime">
 					    		    <div class="card mt-2">
 							    		<div class="card-body rounded-3 table-responsive-xl">
+							    			<div class="dropdown mb-2 d-flex justify-content-end">
+							    				<button class="btn btn text-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
+							    					Download
+							    				</button>
+							    				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-download me-2"></i>Download Results</a></li>
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+							    				</ul>
+							    			</div>
 						    				<table class="table table-hover align-middle" width="100%" id="crimeTab">
 												<thead>
 													<tr>
@@ -621,7 +657,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													while ($row = mysqli_fetch_assoc($accounts)) {
 														if ($row['section']=='4C') {
-															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Crime Detection and Investigation') AND(accounts.section='4C')");
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Crime Detection and Investigation') AND(accounts.section='4C') ORDER BY accounts.last_name ASC");
 
 															$counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
@@ -652,7 +688,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													  <?php	}
 													  elseif ($row['section']=='4B') {
 
-													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Crime Detection and Investigation') AND(accounts.section='4B')");
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Crime Detection and Investigation') AND(accounts.section='4B') ORDER BY accounts.last_name ASC");
 													  	    $counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
 																<tr>
@@ -681,7 +717,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													 <?php }
 													 elseif ($row['section']=='4A') {
-													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Crime Detection and Investigation') AND(accounts.section='4A')");
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Crime Detection and Investigation') AND(accounts.section='4A') ORDER BY accounts.last_name ASC");
 													 	 $counter = 1;
 														while ($rows = mysqli_fetch_assoc($result)) { ?>
 															<tr>
@@ -719,6 +755,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					    	    <div class="tab-pane fade" id="nav-sociology" role="tabpanel" aria-labelledby="nav-sociology">
 					    		    <div class="card mt-2">
 							    		<div class="card-body rounded-3 table-responsive-xl">
+							    			<div class="dropdown mb-2 d-flex justify-content-end">
+							    				<button class="btn btn text-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
+							    					Download
+							    				</button>
+							    				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-download me-2"></i>Download Results</a></li>
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+							    				</ul>
+							    			</div>
 						    				<table class="table table-hover align-middle" width="100%" id="socTab">
 												<thead>
 													<tr>
@@ -738,7 +783,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													while ($row = mysqli_fetch_assoc($accounts)) {
 														if ($row['section']=='4C') {
-															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND(accounts.section='4C')");
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND(accounts.section='4C') ORDER BY accounts.last_name ASC");
 
 															$counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
@@ -769,7 +814,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													  <?php	}
 													  elseif ($row['section']=='4B') {
 
-													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND(accounts.section='4B')");
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND(accounts.section='4B') ORDER BY accounts.last_name ASC");
 													  	    $counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
 																<tr>
@@ -798,7 +843,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													 <?php }
 													 elseif ($row['section']=='4A') {
-													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND(accounts.section='4A')");
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Criminal Sociology') AND(accounts.section='4A') ORDER BY accounts.last_name ASC");
 													 	 $counter = 1;
 														while ($rows = mysqli_fetch_assoc($result)) { ?>
 															<tr>
@@ -836,6 +881,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					    	    <div class="tab-pane fade" id="nav-correctional" role="tabpanel" aria-labelledby="nav-correctional">
 					    		    <div class="card mt-2">
 							    		<div class="card-body rounded-3 table-responsive-xl">
+							    			<div class="dropdown mb-2 d-flex justify-content-end">
+							    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
+							    					Download
+							    				</button>
+							    				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-download me-2"></i>Download Results</a></li>
+							    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+							    				</ul>
+							    			</div>
 						    				<table class="table table-hover align-middle" width="100%" id="corrTab">
 												<thead>
 													<tr>
@@ -855,7 +909,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													while ($row = mysqli_fetch_assoc($accounts)) {
 														if ($row['section']=='4C') {
-															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND(accounts.section='4C')");
+															$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND(accounts.section='4C') ORDER BY accounts.last_name ASC");
 
 															$counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
@@ -886,7 +940,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													  <?php	}
 													  elseif ($row['section']=='4B') {
 
-													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND(accounts.section='4B')");
+													  	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND(accounts.section='4B') ORDER BY accounts.last_name ASC");
 													  	    $counter = 1;
 															while ($rows = mysqli_fetch_assoc($result)) { ?>
 																<tr>
@@ -915,7 +969,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 													 <?php }
 													 elseif ($row['section']=='4A') {
-													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND(accounts.section='4A')");
+													 	$result = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,tbl_pre_question,accounts WHERE (tbl_exam_result.pre_exam_id =tbl_pre_question.pre_exam_id) AND (tbl_exam_result.acc_id = accounts.acc_id) AND(tbl_pre_question.subjects = 'Correctional Administration') AND(accounts.section='4A') ORDER BY accounts.last_name ASC");
 													 	 $counter = 1;
 														while ($rows = mysqli_fetch_assoc($result)) { ?>
 															<tr>
