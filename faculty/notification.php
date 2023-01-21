@@ -184,7 +184,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                            <div class="fw-bold">
 	                                 <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
 	                                 echo $life; ?></div>
-	                                <span class="fw-bold"><?php echo $item['first_name']." ".$item['last_name']."&nbsp;has a message from you"; ?></span>
+	                                <span class="fw-bold"><?php echo $item['first_name']." ".$item['last_name']."&nbsp;has a message for you"; ?></span>
 	                            </div>
 	                            	                            <?php
 			                        }
@@ -216,7 +216,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 			</div>
 			<!-- Main Content-->
 			<div class="container-fluid py-3 px-4">
-				<div class="container col-lg-8">
+				<div class="container col-lg-7">
 					<h4 class="m-b-50">Notifications <i class="fa fa-bell ms-2"></i></h4>
 					<div class="notification-ui_dd-content">
 						<?php
@@ -239,7 +239,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 									<img src="../assets/pics/tempo.png" alt="user">
 								</div>
 								<div class="notification-list_detail">
-									<p><b><?php echo $item['first_name']." ".$item['last_name']."</b>&nbsp; has a message from you"; ?></p>
+									<p><b><?php echo $item['first_name']." ".$item['last_name']."</b>&nbsp; has a message for you"; ?></p>
 									
 									<p class="text-muted"><?php echo $item['feedback']; ?></p>
 									<p class="text-muted"><small>10 mins ago</small></p>

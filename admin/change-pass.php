@@ -271,11 +271,17 @@ if (isset($_POST['submit'])) {
 											</div>
 											<div class="mb-3">
 												<label for="password" class="fw-bold mb-2">Enter New Password:</label>
-												<input type="password" class="pr-password form-control" id="Password" placeholder="Enter New Password" name="new_password">
+												<div class="input-group">
+													<input type="password" class="pr-password form-control" id="Password" placeholder="Enter New Password" name="new_password" >
+													<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i></span>
+												</div>
 											</div>
 											<div class="mb-3">
 												<label for="user" class="fw-bold mb-2">Confirm New Password:</label>
-												<input type="password" class="form-control" id="ConfirmPassword" placeholder="Enter Confirm Password" name="conf_password">
+												<div class="input-group">
+													<input type="password" class="form-control" id="ConfirmPassword" placeholder="Enter Confirm Password" name="conf_password">
+													<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePass" style="margin-left: -30px; cursor: pointer;"></i></span>
+												</div>
 											</div>
 											<div style="margin-top: 7px;" id="CheckPasswordMatch" class="fw-bold mb-2 ms-3"></div>
 											<div class="d-flex justify-content-center ">
@@ -337,6 +343,30 @@ let arrow = document.querySelectorAll(".arrow");
 
         });
     });
+</script>
+<script type="text/javascript">
+	const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#Password');
+
+  togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+<script type="text/javascript">
+  const togglePass = document.querySelector('#togglePass');
+  const pass = document.querySelector('#ConfirmPassword');
+
+  togglePass.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const set = pass.getAttribute('type') === 'password' ? 'text' : 'password';
+    pass.setAttribute('type', set);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
 </script>
 <script>
 $(document).ready(function () {

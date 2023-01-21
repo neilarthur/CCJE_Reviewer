@@ -24,7 +24,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<!-- Box Icons-->
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<!-- System Logo -->
     <link rel="icon" href="../assets/pics/system-ico.ico">
     <style>
@@ -178,7 +178,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 								<label for="password" class="col-md-4 fw-bold col-form-label text-md-right">New Password</label>
 								<div class="col-md-6">
 									<div class="input-group">
-										<input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password" id="id_password">
+										<input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password" >
 									    <span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i></span>
 									</div>
 								</div>
@@ -186,7 +186,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 							<div class="form-group fs-5 mb-4 row">
 								<label for="password" class="col-md-4 fw-bold col-form-label text-md-right">New Confirm Password</label>
 								<div class="col-md-6 mb-4">
-									<input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password">
+									<div class="input-group">
+										<input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password">
+										<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePass" style="margin-left: -30px; cursor: pointer;"></i></span>
+									</div>
 								</div>
 							</div>
 							<div class="form-group row mb-0">
@@ -271,7 +274,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
 	
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(){
@@ -291,7 +294,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 </script>
 <script type="text/javascript">
 	const togglePassword = document.querySelector('#togglePassword');
-  const password = document.querySelector('#id_password');
+  const password = document.querySelector('#new_password');
 
   togglePassword.addEventListener('click', function (e) {
     // toggle the type attribute
@@ -301,17 +304,29 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
     this.classList.toggle('fa-eye-slash');
 });
 </script>
+<script type="text/javascript">
+  const togglePass = document.querySelector('#togglePass');
+  const pass = document.querySelector('#new_confirm_password');
+
+  togglePass.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const set = pass.getAttribute('type') === 'password' ? 'text' : 'password';
+    pass.setAttribute('type', set);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
 
 <?php 
 #add accounts
 if (isset($_GET['adsuccess'])) {
-	echo ' <script> swal("Account has been Saved!", " clicked the okay!", "success");
-	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/faculty/change_password.php");
+	echo ' <script> swal("Password Changed!", " clicked the okay!", "success");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/student/change_password.php");
 	</script>';
 }
 elseif (isset($_GET['aderror'])) {
-	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
-	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/faculty/change_password.php");
+	echo ' <script> swal("Error Password. Please try again!", " clicked the okay!", "error");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/student/change_password.php");
 	</script>';
 }
 

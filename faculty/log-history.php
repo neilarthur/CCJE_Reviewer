@@ -184,7 +184,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                            <div class="fw-bold">
 	                                <div class="small text-gray-500"><?php  $life = date('M d, Y h:i:s a',strtotime($item['created']));
 	                                 echo $life; ?></div>
-	                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." Message to you "; ?></span>
+	                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." has a message for you "; ?></span>
 	                            </div>
 	                            <?php
 			                        }
@@ -231,9 +231,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 											<thead>
 												<tr>
 													
-													<th scope="col">Firstname</th>
-													<th scope="col">Middlename</th>
-													<th scope="col">Username</th>
+													<th scope="col">Fullname</th>
+													<th scope="col">ID Number</th>
 													<th scope="col">Email Address</th>
 													<th scope="col">Position</th>
 													<th scope="col">Log In</th>
@@ -250,8 +249,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														$base = mysqli_query($sqlcon, "SELECT * FROM logs,accounts WHERE (accounts.acc_id=logs.acc_id) AND role='student' AND(accounts.section='4A') ");
 														while ($rows = mysqli_fetch_assoc($base)) {?>
 															<tr>
-																<td><?php echo $rows['first_name'];  ?></td>
-																<td><?php echo $rows['middle_name'];  ?></td>
+																<td class="text-capitalize"><?php echo $rows['last_name']; ?>&nbsp;<?php echo $rows['middle_name']; ?>&nbsp;<?php echo $rows['first_name'];  ?></td>
 																<td><?php echo $rows['user_id'];  ?></td>
 				                                                <td><?php echo $rows['email_address'];  ?></td>
 				                                                <td><?php echo $rows['role'];  ?></td>
@@ -263,8 +261,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														$base = mysqli_query($sqlcon, "SELECT * FROM logs,accounts WHERE (accounts.acc_id=logs.acc_id) AND role='student' AND(accounts.section='4B') ");
 														while ($rows = mysqli_fetch_assoc($base)) { ?>
 															<tr>
-																<td><?php echo $rows['first_name'];  ?></td>
-																<td><?php echo $rows['middle_name'];  ?></td>
+																<td class="text-capitalize"><?php echo $rows['last_name']; ?>&nbsp;<?php echo $rows['middle_name']; ?>&nbsp;<?php echo $rows['first_name'];  ?></td>
 																<td><?php echo $rows['user_id'];  ?></td>
 				                                                <td><?php echo $rows['email_address'];  ?></td>
 				                                                <td><?php echo $rows['role'];  ?></td>
@@ -276,8 +273,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 												  	$base = mysqli_query($sqlcon, "SELECT * FROM logs,accounts WHERE (accounts.acc_id=logs.acc_id) AND role='student' AND(accounts.section='4C') ");
 												  	while ($rows = mysqli_fetch_assoc($base)) { ?>
 												  		    <tr>
-																<td><?php echo $rows['first_name'];  ?></td>
-																<td><?php echo $rows['middle_name'];  ?></td>
+																<td class="text-capitalize"><?php echo $rows['last_name']; ?>&nbsp;<?php echo $rows['middle_name']; ?>&nbsp;<?php echo $rows['first_name'];  ?></td>
 																<td><?php echo $rows['user_id'];  ?></td>
 				                                                <td><?php echo $rows['email_address'];  ?></td>
 				                                                <td><?php echo $rows['role'];  ?></td>
