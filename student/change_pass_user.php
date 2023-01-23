@@ -26,7 +26,7 @@ if (isset($_POST['save'])) {
 
 			if ($update_pwd_run) {
 				
-				header("Location:change_password.php?adsuccess");
+				header("Location:dashboard.php?adsuccess");
 
 			}
 			else{

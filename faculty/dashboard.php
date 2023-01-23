@@ -800,5 +800,18 @@ if (isset($_GET['loginsuccess'])) {
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/faculty/dashboard.php");
   </script>';
 }
+#Change Pass
+ 
+if (isset($_GET['changesuc'])) {
+	echo ' <script> swal("Password Changed!", " clicked the okay!", "success");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/faculty/dashboard.php");
+	</script>';
+}
+elseif (isset($_GET['changeerror'])) {
+	echo ' <script> swal("Error Password. Please try again!", " clicked the okay!", "error");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/faculty/change-pass.php");
+	</script>';
+}
+
 ?>
 </html>

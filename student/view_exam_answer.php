@@ -190,37 +190,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 <div class="p-2 bg-light border"><p class="card-text"><b>Started on:</b>
                   <?php echo date('F j, Y g:i a, D',$sssl3);  ?></p></div>
 
-                <?php
-
-                $code = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,accounts WHERE (tbl_exam_result.acc_id=accounts.acc_id) AND (tbl_exam_result.pre_exam_id='$id') AND tbl_exam_result.acc_id = '{$_SESSION['acc_id']}' ");
-
-                while ($shws = mysqli_fetch_assoc($code)) {
-
-
-
-                date_default_timezone_set('Asia/Manila');
-
-
-                $sssl = strtotime($shws['date_exam_result']);
-
-                $sssl2 = strtotime($shws['date_created']);
-
-
-                if (date('i',$sssl) == '00') {
-                  
-                  $knock = "seconds";
-                }
-                elseif(date('i',$sssl)=='01') {
-
-                  $knock = "minutes";
-                }
-
-                ?>
-                <div class="p-2 bg-light border">
-                  <?php 
+                <?php 
                 
                 $id = $_GET['id'];
-                $code = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,accounts WHERE (tbl_exam_result.acc_id=accounts.acc_id) AND (tbl_exam_result.exam_result_id='$id') AND tbl_exam_result.acc_id = '{$_SESSION['acc_id']}' ");
+                $code = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,accounts WHERE (tbl_exam_result.acc_id=accounts.acc_id) AND (tbl_exam_result.pre_exam_id='$id') AND tbl_exam_result.acc_id = '{$_SESSION['acc_id']}' ");
 
 
                 while ($rows = mysqli_fetch_assoc($code)) {
@@ -232,19 +205,44 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 $row= mysqli_fetch_assoc($board);
 
                 if ($row['acc_id']==$_SESSION['acc_id'] AND $row['pre_exam_id']==$shine['pre_exam_id']) {
-                  echo '<p class="card-text"><b>State:</b><span class="badge bg-light text-success" style="font-size: 18px;">Finished</span></p>';
+                  echo '<div class="p-2 bg-light border"><p class="card-text"><b>State:</b><span class="badge bg-light text-success" style="font-size: 18px;">Finished</span></p></div>';
+                }
 
-                  }
+
+                date_default_timezone_set('Asia/Manila');
+
+
+                $sssl = strtotime($rows['date_exam_result']);
+
+                $sssl2 = strtotime($rows['date_created']);
+
+
+                if (date('i',$sssl) == '00') {
+                  
+                  $knock = "seconds";
+                }
+                else {
+
+                  $knock = "minutes";
+                }
+
+
+                echo '<div class="p-2 bg-light border"><p class="card-text"><b>Completed on: '. date('F j, Y g:i a, D',$sssl2).'</b> </p></div>
+              <div class="p-2 bg-light border"><p class="card-text"><b>Time Taken: ' . date('i:s',$sssl). ' '.$knock.'</b></p></div>';
+
                 }
                 ?>
-                </div>
-                <div class="p-2 bg-light border"><p class="card-text"><b>Completed on:</b> <?php echo date('F j, Y g:i a, D',$sssl2); ?></p></div>
-                <div class="p-2 bg-light border"><p class="card-text"><b>Time Taken:</b>&nbsp;<?php echo date('i:s',$sssl); ?>&nbsp;<?php echo $knock; ?></p></div>
                 <div class="p-2 bg-light border">
-                  <p class="card-text"><b>Grade:</b> <b><?php echo $shws['score_percent']; ?>.00</b> out of 100.00</p></div>
                 <?php
-                }
-                ?>
+
+                $id = $_GET['id'];
+                $quiz_query = mysqli_query($sqlcon,"SELECT * FROM tbl_exam_result,accounts WHERE (tbl_exam_result.acc_id=accounts.acc_id) AND (tbl_exam_result.pre_exam_id='$id')  AND tbl_exam_result.acc_id = '{$_SESSION['acc_id']}'");
+
+                 while ($rows = mysqli_fetch_assoc($quiz_query)) {?>
+                   <p class="card-text"><b>Grade:</b> <b><?php echo $rows['score_percent']; ?>.00</b> out of 100.00</p>
+
+                <?php } ?>
+              </div>
             </div>
           </div>
         </div>

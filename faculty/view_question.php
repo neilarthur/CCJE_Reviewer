@@ -48,6 +48,9 @@ $suppd .= "</select>";
        .dp .dropdown-toggle::after {
             content: none;
         }
+         .navbar .breadcrumb li a{
+		  color: #8C0000;
+		}
   </style>
 </head>
 <body style="background-color: rgb(229, 229, 229);">
@@ -147,49 +150,84 @@ $suppd .= "</select>";
 		</div>
 		<section class="home-section float-start" >
 			<div class="home-content d-flex justify-content-between" style="background: white;">
-				<button style="border-style: none; background: white;">
-					<i class='bx bx-menu' ></i>
-				</button>
+				<div class="d-flex">
+					<button style="border-style: none; background: white; height: 60px;" class="mt-1">
+						<i class='bx bx-menu' ></i>
+					</button>
+					<nav class="navbar navbar-expand-lg navbar-light" style="margin-top: 10px;">
+						<div class="container-fluid">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
+									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Manage Test</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Questionnaire</li>
+								</ol>
+							</nav>
+						</div>
+					</nav>
+				</div>
 		        <form class="d-flex">
-		          <div class="dropdown dp mt-3">
-		                    <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
-		                        <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger">1</span>
-		                    </a>
-		                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
-		                          <h6 class="dropdown-header text-dark ">Notifications</h6>
-		                          <a class="dropdown-item d-flex align-items-center" href="#">
-		                              <div class="me-4">
-		                                   <div class="fa-stack fa-1x">
-		                                    <i class="fa fa-circle fa-stack-2x ms-2"></i>
-		                                    <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
-		                                  </div> 
-		                              </div>
-		                              <div class="fw-bold">
-		                                  <div class="small text-gray-500">September 16, 2022</div>
-		                                  <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
-		                              </div>
-		                          </a>
-		                          <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
-		                      </div>
-		                </div>
-		                <div class="dropdown me-3">
-		                    <button class="btn  dropdown-toggle border border-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-		                    <?php
+			         <div class="dropdown dp mt-3">
+			                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
+			                    <?php 
+			                    $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response  WHERE response_stat='0' ORDER BY response_id DESC");
+			                	?>
+			                    <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($come); ?></span>
+			                </a>
+			                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+		                        <h6 class="dropdown-header text-dark ">Notifications</h6>
+		                        	<?php
 
-		                        $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
-		                         while ($rows = mysqli_fetch_assoc($query_row)) {
-		                      echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;"></span>';
-		                      ?>
-		                   <?php }
+		                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
 
-		                    ?>
-		                    </button>
-		                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-		                        <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
-		                        <li><a class="dropdown-item" href="change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
-		                        <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
-		                    </ul>
-		                </div>
+		                            if (mysqli_num_rows($come)==0) {
+		                            	
+		                            	echo "<h5 class='text-center'>No notification Found</h5>";
+		                            }
+
+		                            if (mysqli_num_rows($come) >= 0) {
+
+		                            	foreach ($come as $item) {
+
+		                            ?>
+		                        <a class="dropdown-item d-flex align-items-center" href="notification.php">
+		                            <div class="me-4">
+		                                 <div class="fa-stack fa-1x">
+		                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
+		                                  <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
+		                                </div> 
+		                            </div>
+		                            <div class="fw-bold">
+		                                <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
+		                                 echo $life; ?></div>
+		                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." has a message for you "; ?></span>
+		                            </div>
+		                            <?php
+				                        }
+				                    }
+		                            ?>
+		                        </a>
+		                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
+		                    </div>
+			            </div>
+			            <div class="dropdown me-3">
+			                <button class="btn  dropdown-toggle border border-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+			                <?php
+
+			                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
+			                     while ($rows = mysqli_fetch_assoc($query_row)) {
+			                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"></span>';
+			                  ?>
+			               <?php }
+
+			                ?>
+			                </button>
+			                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+			                    <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
+			                    <li><a class="dropdown-item" href="change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+			                    <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
+			                </ul>
+			            </div>
 		            </form>
 		         </div>
 				<!-- Main Content-->

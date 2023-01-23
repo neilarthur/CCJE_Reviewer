@@ -280,66 +280,61 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
              <div class="col-lg-4 col-md-6">
                 <div class="card h-100">
                     <div class="card-header pb-0">
-                        <p class="fw-bold text-primary h3">Upcoming</p>
+                        <p  class="fw-bold text-primary h3">Upcoming</p>
                     </div>
-                    <div class="card-body">
-                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                            <table class="table table-hover table-light">
-                                <thead>
-                                </thead>
-                                <tbody>
-                                <?php 
-                                $acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+                    <div class="card-body p-3">
+                        <table class="table table-hover table-light">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <?php 
+                            $acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
 
-                                while ($upcoming= mysqli_fetch_assoc($acc)) {
-                                    if ($upcoming ['section'] == '4C') {
-                                         $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4C') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
-                                         while ($marks=mysqli_fetch_assoc($done)) {
-                                             ?>
-                                            <tr>
-                                                <a href="">
-                                                    <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
-                                                    <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
-                                                </a>
-                                            </tr> 
-                                        <?php 
-                                             
-                                         }
-                                    } elseif ($upcoming ['section'] == '4B') {
-                                        $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4B') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
-                                        while ($marks=mysqli_fetch_assoc($done)) { ?>
-                                            <tr>
-                                                <a href="">
-                                                    <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
-                                                    <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
-                                                </a>
-                                            </tr> 
-                                    <?php
-                                        }
-                                    } elseif ($upcoming ['section'] == '4A') {
-                                        $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4A') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
-                                        while ($marks=mysqli_fetch_assoc($done)) { ?>
-                                            <tr>
-                                                <a href="">
-                                                    <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
-                                                    <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
-                                                </a>
-                                            </tr> 
-                                   <?php          
-                                        }
+                            while ($upcoming= mysqli_fetch_assoc($acc)) {
+                                if ($upcoming ['section'] == '4C') {
+                                     $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4C') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
+                                     while ($marks=mysqli_fetch_assoc($done)) {
+                                         ?>
+                                        <tr>
+                                            <a href="">
+                                                <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
+                                                <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
+                                            </a>
+                                        </tr> 
+                                    <?php 
+                                         
+                                     }
+                                } elseif ($upcoming ['section'] == '4B') {
+                                    $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4B') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
+                                    while ($marks=mysqli_fetch_assoc($done)) { ?>
+                                        <tr>
+                                            <a href="">
+                                                <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
+                                                <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
+                                            </a>
+                                        </tr> 
+                                <?php
+                                    }
+                                } elseif ($upcoming ['section'] == '4A') {
+                                    $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4A') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
+                                    while ($marks=mysqli_fetch_assoc($done)) { ?>
+                                        <tr>
+                                            <a href="">
+                                                <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
+                                                <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
+                                            </a>
+                                        </tr> 
+                               <?php          
                                     }
                                 }
+                            }
 
-                                ?>
+                            ?>
 
-                                    
-                                </tbody>
-                            </table> 
-                        </div>
+                                
+                            </tbody>
+                        </table> 
                     </div>
-                   <div class="card-footer text-muted bg-white border-0">
-                    <a href="" class="d-flex justify-content-center" style="text-decoration: none; font-size: 18px;">View All</a>
-                   </div>
                 </div>
             </div>
             <div class="col-lg-8">
@@ -750,6 +745,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   <!-- Footer -->
     
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(){
@@ -767,4 +763,18 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
   });
 }); 
 </script>
+<?php 
+#Change Pass
+if (isset($_GET['adsuccess'])) {
+    echo ' <script> swal("Password Changed!", " clicked the okay!", "success");
+    window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/student/dashboard.php");
+    </script>';
+}
+elseif (isset($_GET['aderror'])) {
+    echo ' <script> swal("Error Password. Please try again!", " clicked the okay!", "error");
+    window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/student/change_password.php");
+    </script>';
+}
+
+?>
 </html>

@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 
 			if ($update_1) {
 				
-				header("Location:change-pass.php?changesuc");
+				header("Location:dashboard.php?changesuc");
 			}
 			else{
 				header("location:change-pass.php?changeerror");

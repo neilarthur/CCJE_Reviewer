@@ -190,6 +190,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 										<input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password">
 										<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePass" style="margin-left: -30px; cursor: pointer;"></i></span>
 									</div>
+									<div id="CheckPasswordMatch" class="fw-bold fs-6 mt-3 text-center"></div>
 								</div>
 							</div>
 							<div class="form-group row mb-0">
@@ -314,6 +315,29 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
     pass.setAttribute('type', set);
     // toggle the eye slash icon
     this.classList.toggle('fa-eye-slash');
+});
+</script>
+<script>
+$(document).ready(function () {
+	$("#new_confirm_password").on('keyup', function(){
+		var password = $("#new_password").val();
+		var confirmPassword = $("#new_confirm_password").val();
+		if (password == confirmPassword) {
+			$("#CheckPasswordMatch").html("Password match!").css("color","green");
+		}
+		else if (password != confirmPassword){
+			$("#CheckPasswordMatch").html("Password does not match!").css("color","red");
+		}
+		else if (  confirmPassword == " "){
+			$("#CheckPasswordMatch").html("!").css("color","red");
+		}
+		else if ( password == "") {
+			$("#CheckPasswordMatch").html("!").css("color","red");
+		}
+		else {
+			return false;
+		}
+	});
 });
 </script>
 
