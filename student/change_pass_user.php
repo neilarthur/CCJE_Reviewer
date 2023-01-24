@@ -38,7 +38,7 @@ if (isset($_POST['save'])) {
 		}
 	}
 	else{
-		echo mysqli_error($sqlcon);
+		header("Location:change_password.php?aderror");
 	}
 }
 ?>

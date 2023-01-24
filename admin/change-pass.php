@@ -36,17 +36,19 @@ if (isset($_POST['submit'])) {
 			$update_1 = mysqli_query($sqlcon,$update_password);
 
 			if ($update_1) {
-				
 				header("Location:dashboard.php?changesuc");
 			}
 			else{
-				header("location:dashboard.php?changeerror");
+				header("location:change-pass.php?changeerror");
 			}
 		}
 		else{
 			
 			echo mysqli_error($sqlcon);
 		}
+	}
+	else{
+		header("location:change-pass.php?changeerror");
 	}
 
 
@@ -276,7 +278,10 @@ if (isset($_POST['submit'])) {
 											<div class="mb-3">
 												<input type="hidden" name="acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
 												<label for="password" class="fw-bold mb-2">Enter Current Password:</label>
-												<input type="password" class=" form-control" placeholder="Enter Current Password" name="c_password">
+												<div class="input-group">
+													<input type="password" class=" form-control" placeholder="Enter Current Password" id="Current_password" name="c_password">
+													<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="toggle" style="margin-left: -30px; cursor: pointer;"></i></span>
+												</div>
 											</div>
 											<div class="mb-3">
 												<label for="password" class="fw-bold mb-2">Enter New Password:</label>
@@ -377,6 +382,18 @@ let arrow = document.querySelectorAll(".arrow");
     this.classList.toggle('fa-eye-slash');
 });
 </script>
+<script type="text/javascript">
+  const toggle = document.querySelector('#toggle');
+  const c_password = document.querySelector('#Current_password');
+
+  toggle.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = c_password.getAttribute('type') === 'password' ? 'text' : 'password';
+    c_password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
 <script>
 $(document).ready(function () {
 	$("#ConfirmPassword").on('keyup', function(){
@@ -412,4 +429,21 @@ $(document).ready(function () {
         });
     });
 </script>
+ <?php
+
+#Change Pass
+ 
+if (isset($_GET['changesuc'])) {
+	echo ' <script> swal("Password Changed!", " clicked the okay!", "success");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/change-pass.php");
+	</script>';
+}
+elseif (isset($_GET['changeerror'])) {
+	echo ' <script> swal("Error Password. Please try again!", " clicked the okay!", "error");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/change-pass.php");
+	</script>';
+}
+
+ 
+?>
 </html>

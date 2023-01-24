@@ -24,7 +24,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	<!-- Box Icons-->
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Font Awesome-->
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
 	<!-- System Logo -->
     <link rel="icon" href="../assets/pics/system-ico.ico">
     <style>
@@ -171,7 +171,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 								<label for="password" class="col-md-4 fw-bold col-form-label text-md-right">Current Password</label>
 								<div class="col-md-6">
 									<input type="hidden" name="acc_id" value="<?php echo $_SESSION['acc_id']; ?>">
-									<input id="password" type="password" class="form-control" name="current_password" autocomplete="current-password">
+									<div class="input-group">
+										<input id="password" type="password" class="form-control" name="current_password" autocomplete="current-password">
+										<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="toggle" style="margin-left: -30px; cursor: pointer;"></i></span>
+									</div>
 								 </div>
 							</div>
 							<div class="form-group fs-5 mb-4 row">
@@ -317,6 +320,19 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
     this.classList.toggle('fa-eye-slash');
 });
 </script>
+<script type="text/javascript">
+  const toggle = document.querySelector('#toggle');
+  const c_password = document.querySelector('#password');
+
+  toggle.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = c_password.getAttribute('type') === 'password' ? 'text' : 'password';
+    c_password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+<i class="fa-solid fa-eye-slash"></i>
 <script>
 $(document).ready(function () {
 	$("#new_confirm_password").on('keyup', function(){

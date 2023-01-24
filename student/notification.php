@@ -94,7 +94,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                         </div>
                     </div>
                 </div>
-				<div class="flex-shrink-0 dropdown pe-3 text-center">
+				<div class="flex-shrink-0 dropdown pe-5 text-center">
 					<button class="btn  dropdown-toggle border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 			          <?php
 

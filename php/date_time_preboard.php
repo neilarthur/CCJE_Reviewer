@@ -10,13 +10,13 @@ if (isset($_POST['sub'])) {
 	$total = $_POST['t_question'];
 
 
-	$wert = "UPDATE choose_question SET start_day='$start_time', end_day='$close_time' WHERE test_id ='$userover_id'";
+	$wert = "UPDATE tbl_pre_question SET start_date='$start_time', end_date='$close_time' WHERE pre_exam_id ='$userover_id'";
 
 	$wert_query = mysqli_query($sqlcon,$wert);
 
 	if ($wert_query) {
 		
-		header("location: editing-quiz.php?id=$userover_id&total=$total");
+		header("location: editing-preboard.php?id=$userover_id&total=$total");
 	}
 	else {
 		mysqli_error($sqlcon);

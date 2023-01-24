@@ -34,9 +34,11 @@ if (isset($_POST['submit'])) {
 			}
 		}
 		else{
-			
 			echo mysqli_error($sqlcon);
 		}
+	}
+	else{
+		header("location:change-pass.php?changeerror");
 	}
 
 

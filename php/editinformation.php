@@ -106,7 +106,7 @@ while ($row = mysqli_fetch_array($results)) { ?>
 						<div class="input-group mt-2">
 							<span class="input-group-text border-0 bg-white fw-bold">Total of questions</span>
 							<select class="form-control" name="t_question" id="total_questions" required>
-								<option value="<?php echo $low['total_quest'] ?>" selected><?php echo $row['total_quest'] ?></option>
+								<option><?php echo $row['total_quest'] ?></option>
 								<?php
   								for($i = 5; $i <= 50; $i+=5){
 

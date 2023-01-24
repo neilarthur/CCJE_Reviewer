@@ -820,11 +820,19 @@ $suppd .= "</select>";
 									<div class="input-group mb-2">
 										<input type="hidden" name="userover_id" value="<?php echo $_GET['id'] ?>">
 										<span class="input-group-text bg-white fw-bold">Open Quiz</span>
-										<input type="datetime-local" name="start_time" class="form-control" required>
+										<?php
+										$date = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE acc_id = '{$_SESSION['acc_id']}'AND (choose_question.test_id='$id')");
+										$get = mysqli_fetch_assoc($date);
+										$open = strtotime($get['start_day']);
+										$end = strtotime($get['end_day']);
+										$total =($get['total_quest']);
+										 ?>
+										<input type="hidden" name="t_question" value="<?php echo $total ?>">
+										<input type="datetime-local" name="start_time" class="form-control" required value="<?php echo date('Y-m-d\TH:i',$open); ?>">
 									</div>
 									<div class="input-group mb-2">
 										<span class="input-group-text bg-white fw-bold">Close Quiz</span>
-										<input type="datetime-local" name="close_time" class="form-control" required >
+										<input type="datetime-local" name="close_time" class="form-control" required value="<?php echo date("Y-m-d\TH:i:s",$end); ?>">
 									</div>
 								</div>
 							</div>

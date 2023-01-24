@@ -12,6 +12,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
     exit;
 }
 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -232,7 +233,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 											<div class="mb-3">
 												<input type="hidden" name="acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
 												<label for="password" class="fw-bold mb-2">Enter Current Password:</label>
-												<input type="password" class=" form-control" placeholder="Enter Current Password" name="c_password">
+												<div class="input-group">
+													<input type="password" class=" form-control" placeholder="Enter Current Password" id="Current_password"name="c_password">
+													<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="toggle" style="margin-left: -30px; cursor: pointer;"></i></span>
+												</div>
 											</div>
 											<div class="mb-3">
 												<label for="password" class="fw-bold mb-2">Enter New Password:</label>
@@ -329,6 +333,18 @@ let arrow = document.querySelectorAll(".arrow");
     // toggle the type attribute
     const set = pass.getAttribute('type') === 'password' ? 'text' : 'password';
     pass.setAttribute('type', set);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+<script type="text/javascript">
+  const toggle = document.querySelector('#toggle');
+  const c_password = document.querySelector('#Current_password');
+
+  toggle.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = c_password.getAttribute('type') === 'password' ? 'text' : 'password';
+    c_password.setAttribute('type', type);
     // toggle the eye slash icon
     this.classList.toggle('fa-eye-slash');
 });

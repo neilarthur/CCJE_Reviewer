@@ -225,7 +225,7 @@ if (isset($_GET['verified'])) {
  <?php 
 #Login error
 if (isset($_GET['loginerror'])) {
-  echo ' <script> swal("Invalid Password!", " Try again", "error");
+  echo ' <script> swal("Incorrect username or password.", " Please try again", "error");
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
   </script>';
 }

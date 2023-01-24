@@ -748,7 +748,7 @@ function getName($n) {
 		<!-- Time And Date modal -->
 		<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
-				<form action="user_override.php" method="POST">
+				<form action="date_time_preboard.php" method="POST">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h4 class="modal-title fw-bold" id="exampleModalLabel">Date and Time</h4>
@@ -759,12 +759,20 @@ function getName($n) {
 								<div class="card-body">
 									<div class="input-group mb-2">
 										<input type="hidden" name="userover_id" value="<?php echo $_GET['id'] ?>">
+										<input type="hidden" name="t_question" value="<?php echo $total ?>">
 										<span class="input-group-text bg-white fw-bold">Open Quiz</span>
-										<input type="datetime-local" name="start_time" class="form-control" required>
+										<?php
+										$date = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE acc_id = '{$_SESSION['acc_id']}'AND (tbl_pre_question.pre_exam_id='$id')");
+										$get = mysqli_fetch_assoc($date);
+										$open = strtotime($get['start_date']);
+										$end = strtotime($get['end_date']);
+										$total =($get['total_question']);
+										 ?>
+										<input type="datetime-local" name="start_time" class="form-control" required value="<?php echo date('Y-m-d\TH:i',$open); ?>">
 									</div>
 									<div class="input-group mb-2">
 										<span class="input-group-text bg-white fw-bold">Close Quiz</span>
-										<input type="datetime-local" name="close_time" class="form-control" required >
+										<input type="datetime-local" name="close_time" class="form-control" required value="<?php echo date('Y-m-d\TH:i',$end); ?>">
 									</div>
 								</div>
 							</div>
