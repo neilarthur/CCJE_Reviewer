@@ -302,10 +302,29 @@ $suppd .= "</select>";
 
 													            ?>
 																<td>
-																	<div class="d-flex flex-row justify-content-center">
+																 <?php
 
-																		<a href="view_question.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>
+													            $trials_done = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_done,accounts,choose_question WHERE (tbl_trial_done.acc_id=accounts.acc_id) AND (tbl_trial_done.test_id = choose_question.test_id) AND (tbl_trial_done.acc_id='{$_SESSION['acc_id']}') AND (tbl_trial_done.test_id='{$rows['test_id']}')");
 
+													            if (mysqli_num_rows($trials_done) == 0) {
+													            	
+													            	echo '																	<div class="d-flex flex-row justify-content-center">
+																	<form action="trials_done.php" method="POST">
+																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
+																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
+																		
+																		<button type="submit" name="submit" class="btn btn-primary mx-2"<i class="fas fa-eye" ></i></button>
+																	</form>';
+													            }
+													            elseif (mysqli_num_rows($trials_done) >= 0) {
+
+													            	$corner = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_result,accounts,choose_question WHERE (tbl_trial_result.acc_id= accounts.acc_id) AND (tbl_trial_result.test_id=choose_question.test_id) AND tbl_trial_result.acc_id='{$_SESSION['acc_id']}' AND tbl_trial_result.test_id='{$rows['test_id']}'");
+
+													            	$curl = mysqli_fetch_assoc($corner);
+
+													            	echo '<a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-eye" ></i></a>';
+													            }
+													            ?>
 																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>&total=<?php echo $rows['total_quest']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
 
 																		<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
@@ -346,10 +365,29 @@ $suppd .= "</select>";
 
 													            ?>
 																<td>
-																	<div class="d-flex flex-row justify-content-center">
+																 <?php
 
-																		<a href="view_question.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>
+													            $trials_done = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_done,accounts,choose_question WHERE (tbl_trial_done.acc_id=accounts.acc_id) AND (tbl_trial_done.test_id = choose_question.test_id) AND (tbl_trial_done.acc_id='{$_SESSION['acc_id']}') AND (tbl_trial_done.test_id='{$rows['test_id']}')");
 
+													            if (mysqli_num_rows($trials_done) == 0) {
+													            	
+													            	echo '																	<div class="d-flex flex-row justify-content-center">
+																	<form action="trials_done.php" method="POST">
+																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
+																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
+																		
+																		<button type="submit" name="submit" class="btn btn-primary mx-2"<i class="fas fa-eye" ></i></button>
+																	</form>';
+													            }
+													            elseif (mysqli_num_rows($trials_done) >= 0) {
+
+													            	$corner = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_result,accounts,choose_question WHERE (tbl_trial_result.acc_id= accounts.acc_id) AND (tbl_trial_result.test_id=choose_question.test_id) AND tbl_trial_result.acc_id='{$_SESSION['acc_id']}' AND tbl_trial_result.test_id='{$rows['test_id']}'");
+
+													            	$curl = mysqli_fetch_assoc($corner);
+
+													            	echo '<a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-eye" ></i></a>';
+													            }
+													            ?>
 																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
 
 																		<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
@@ -391,8 +429,29 @@ $suppd .= "</select>";
 
 													            ?>
 																<td>
-																	<div class="d-flex flex-row justify-content-center">
-																		<a href="../php/preview.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>
+													            <?php
+
+													            $trials_done = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_done,accounts,choose_question WHERE (tbl_trial_done.acc_id=accounts.acc_id) AND (tbl_trial_done.test_id = choose_question.test_id) AND (tbl_trial_done.acc_id='{$_SESSION['acc_id']}') AND (tbl_trial_done.test_id='{$rows['test_id']}')");
+
+													            if (mysqli_num_rows($trials_done) == 0) {
+													            	
+													            	echo '																	<div class="d-flex flex-row justify-content-center">
+																	<form action="trials_done.php" method="POST">
+																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
+																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
+
+																		<button type="submit" name="submit" class="btn btn-primary mx-2"<i class="fas fa-eye"></i></button>
+																	</form>';
+													            }
+													            elseif (mysqli_num_rows($trials_done) >= 0) {
+
+													            	$corner = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_result,accounts,choose_question WHERE (tbl_trial_result.acc_id= accounts.acc_id) AND (tbl_trial_result.test_id=choose_question.test_id) AND tbl_trial_result.acc_id='{$_SESSION['acc_id']}' AND tbl_trial_result.test_id='{$rows['test_id']}'");
+
+													            	$curl = mysqli_fetch_assoc($corner);
+
+													            	echo '<a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-pen"></i></a>';
+													            }
+													            ?>
 																		
 																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>&total=<?php echo $rows['total_quest']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
 

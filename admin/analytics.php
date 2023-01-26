@@ -277,7 +277,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                				</form>
 	                                                				<div class="dropdown-divider"></div>
 	                                                				<li>
-	                                                					<a href="print_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item"><i class="fas fa-print me-2"></i>Print Results</a>
+	                                                					<a target='_blank' href="print_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item"><i class="fas fa-print me-2"></i>Print Results</a>
 	                                                				</li>
 	                                                			</div>
 	                                                		</div>

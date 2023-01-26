@@ -287,44 +287,51 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                             <thead>
                             </thead>
                             <tbody>
-                            <?php 
+                            <?php
+
+                            $date = date('d-m-y h:i:s a');
+
                             $acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
 
                             while ($upcoming= mysqli_fetch_assoc($acc)) {
                                 if ($upcoming ['section'] == '4C') {
-                                     $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4C') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
-                                     while ($marks=mysqli_fetch_assoc($done)) {
-                                         ?>
-                                        <tr>
+
+
+                                    $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND accounts.acc_id = '{$_SESSION['acc_id']}'");
+
+                                    if (mysqli_num_rows($done) >0) {
+                                        
+                                        echo '<tr>
                                             <a href="">
-                                                <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
-                                                <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
+                                                <td class="text-capitalize"><b class="me-1">No Upcomming Schedule 1</b></td>
                                             </a>
-                                        </tr> 
-                                    <?php 
-                                         
-                                     }
-                                } elseif ($upcoming ['section'] == '4B') {
-                                    $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4B') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
-                                    while ($marks=mysqli_fetch_assoc($done)) { ?>
-                                        <tr>
-                                            <a href="">
-                                                <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
-                                                <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
-                                            </a>
-                                        </tr> 
-                                <?php
+                                        </tr> ';
                                     }
-                                } elseif ($upcoming ['section'] == '4A') {
-                                    $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id!=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND (choose_question.section ='4A') AND accounts.acc_id = '{$_SESSION['acc_id']}' ");
-                                    while ($marks=mysqli_fetch_assoc($done)) { ?>
-                                        <tr>
+                                    elseif (mysqli_num_rows($done) == 0) {
+
+                                        $quiz1cs = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE  (choose_question.prepared_by = accounts.acc_id) AND (choose_question.section='4C')");
+
+                                        while ($quiz_query = mysqli_fetch_assoc($quiz1cs)) {
+
+                                            $date1 = date('d-m-y g:i a ', strtotime($quiz_query['end_day']));
+
+
+                                            if ($date1 <= $date) {
+
+
+                                            }
+                                            else {
+
+                                                echo '<tr>
                                             <a href="">
-                                                <td class="text-capitalize"><b class="me-1"><?php echo $marks['quiz_title']?></b>&nbsp;<?php echo $marks['subject_name']?></td>
-                                                <td class=""><?php echo date('F j, Y, g:i a',strtotime($marks['end_day'])); ?></td>
+                                                <td class="text-capitalize"><b class="me-1">'.$quiz_query['quiz_title'].'</b>&nbsp;'.$quiz_query['subject_name'].'</td>
+                                                <td class="">'.$date1.'</td>
                                             </a>
-                                        </tr> 
-                               <?php          
+                                        </tr> ';
+                                            }
+                                            
+                                        }
+
                                     }
                                 }
                             }
