@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
 	$acc_id = $_POST['update_acc_id'];
 
 
-	$trial_marks = "INSERT INTO tbl_trial_done(acc_id,test_id)VALUES('$id','$acc_id')";
+	$trial_marks = "INSERT INTO tbl_trial_done(acc_id,test_id)VALUES('$acc_id','$id')";
 
 	$trial_marks_query = mysqli_query($sqlcon,$trial_marks);
 

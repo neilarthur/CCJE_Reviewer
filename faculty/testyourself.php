@@ -313,7 +313,7 @@ $suppd .= "</select>";
 																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
 																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
 																		
-																		<button type="submit" name="submit" class="btn btn-primary mx-2"<i class="fas fa-eye" ></i></button>
+																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye" ></i></button>
 																	</form>';
 													            }
 													            elseif (mysqli_num_rows($trials_done) >= 0) {
@@ -322,7 +322,7 @@ $suppd .= "</select>";
 
 													            	$curl = mysqli_fetch_assoc($corner);
 
-													            	echo '<a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-eye" ></i></a>';
+													            	echo '<a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2"><i class="fas fa-eye" ></i></a>';
 													            }
 													            ?>
 																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>&total=<?php echo $rows['total_quest']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
@@ -376,7 +376,7 @@ $suppd .= "</select>";
 																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
 																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
 																		
-																		<button type="submit" name="submit" class="btn btn-primary mx-2"<i class="fas fa-eye" ></i></button>
+																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye" ></i></button>
 																	</form>';
 													            }
 													            elseif (mysqli_num_rows($trials_done) >= 0) {
@@ -440,7 +440,7 @@ $suppd .= "</select>";
 																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
 																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
 
-																		<button type="submit" name="submit" class="btn btn-primary mx-2"<i class="fas fa-eye"></i></button>
+																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye"></i></button>
 																	</form>';
 													            }
 													            elseif (mysqli_num_rows($trials_done) >= 0) {
@@ -449,7 +449,7 @@ $suppd .= "</select>";
 
 													            	$curl = mysqli_fetch_assoc($corner);
 
-													            	echo '<a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-pen"></i></a>';
+													            	echo '<a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>';
 													            }
 													            ?>
 																		
