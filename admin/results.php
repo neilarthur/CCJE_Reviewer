@@ -256,15 +256,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														</select>
 													</div>
 												</div>
-												<div class="d-flex dropdown mb-2 mt-3">
-								    				<button class="btn btn text-white dropdown-toggle px-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
-								    					Download
-								    				</button>
-								    				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								    					<li><a class="dropdown-item" href="#"><i class="fas fa-download me-2"></i>Download Results</a></li>
-								    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
-								    				</ul>
-								    			</div>
 											</div>
 											<div  class="table-responsive-xl" id="flex3">
 												<div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -340,15 +331,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														</select>
 													</div>
 												</div>
-												<div class="d-flex dropdown mb-2 mt-3">
-								    				<button class="btn btn text-white dropdown-toggle px-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
-								    					Download
-								    				</button>
-								    				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								    					<li><a class="dropdown-item" href="#"><i class="fas fa-download me-2"></i>Download Results</a></li>
-								    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
-								    				</ul>
-								    			</div>
 											</div>
 											<div  class="table-responsive-xl" id="flex2">
 												<div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -425,15 +407,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														</select>
 													</div>
 												</div>
-												<div class="d-flex dropdown mb-2 mt-3">
-								    				<button class="btn btn text-white dropdown-toggle px-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;" >
-								    					Download
-								    				</button>
-								    				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								    					<li><a class="dropdown-item" onClick="window.print()"><i class="fas fa-download me-2"></i>Download Results</a></li>
-								    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
-								    				</ul>
-								    			</div>
 											</div>
 											<div  class="table-responsive-xl" id="flex">
 												<div class="table-wrapper-scroll-y my-custom-scrollbar">

@@ -17,6 +17,8 @@ if (isset($_POST["create"])) {
 	$close_time = $_POST['close_time'];
 	$history_acc = $_POST['history_acc'];
 	$acs = "Added an quiz";
+	$acs2 = "Posted an Quiz";
+	$not_stat = 0;
 
 	$stat_question = "No question";
 
@@ -33,7 +35,8 @@ if (isset($_POST["create"])) {
 
 		if ($logs_history) {
 
-			header("location:../faculty/testyourself.php?testsuccess");	
+			header("Location:../faculty/testyourself.php?testsuccess");
+
 		}
 		else {
 			

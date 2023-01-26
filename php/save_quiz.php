@@ -13,7 +13,18 @@ if (isset($_POST['save'])) {
 
     if ($query_run) {
 
-  		header("Location:../faculty/testyourself.php");
+      $notif_student = "INSERT INTO tbl_notification(action,acc_id,notif_status)VALUES ('$acs2','$history_acc','$not_stat')";
+      $notif_student_query = mysqli_query($sqlcon,$notif_student);
+
+      if ($notif_student_query) {
+        
+        header("location:../faculty/testyourself.php");
+
+      }
+      else {
+
+        header("location:../faculty/testyourself.php"); 
+      } 
   	}
   	else {
 

@@ -272,7 +272,7 @@ $suppd .= "</select>";
 														<td><?php echo $rows['questions_title'];?></td>
 														<td>
 															<div class="d-flex flex-row justify-content-center">
-																<button class="btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#ViewModal"  type="button"><i class="fas fa-chart-bar"></i></button>
+																<button class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" data-id="<?php echo $rows['question_id']; ?>" type="button"><i class="fas fa-chart-bar"></i></button>
 															</div>
 														</td>
 													</tr>
@@ -297,58 +297,10 @@ $suppd .= "</select>";
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<!-- Horizantal graph Chart-->
-							<canvas id="myChart" style="height: 100px; width: 250px;"></canvas>
-							<script>
-								const ctx = document.getElementById('myChart').getContext('2d');
-								const myChart = new Chart(ctx, {
-								    type: 'bar',
-								    data: {
-								        labels: ['A. Murder','B.  Parricide','C. Homicide','D. Qualified Homicide'],
-								        datasets: [{
-								            label: 'Correct Response',
-								            data: [10,9,8,6],
-								            backgroundColor: [
-								            'rgba(15, 157, 88)',
-								            'rgba(204, 204, 204)',
-								            'rgba(204, 204, 204)',
-								            'rgba(204, 204, 204)',
-								                
-								                
-								            ],
-								            borderColor: [
-								            'rgb(15, 157, 88)',
-								            'rgb(204, 204, 204)',
-								            'rgb(204, 204, 204)',
-								            'rgb(204, 204, 204)',
-								                
-								            ],
-								            borderWidth: 1
-								        }]
-								    },
-								    options: {
-								    	indexAxis: 'y',
-								        scales: {
-								            y: {
-								               ticks: { color: '##000000', beginAtZero: true , precision: 0 }
-								            }
-								        }
-								    },
-								});
-							</script>
-						</div>
-						<div class="card mt-3 m-4 border-0">
-							<div class="card-body">
-								<label class="d-flex ps-1 justify-content-start">Question</label>
-								<textarea type="text" name="last_name" class="form-control"readonly="">Berto, with evident premeditation and treachery killed his father. What was the crime committed?</textarea> 
-								<label class="d-flex ps-1 mt-2 justify-content-start" >Area of Exam</label>
-								<input type="text" name="last_name" class="form-control" value="Criminal Jurisprudence " readonly="">
-								<label class="d-flex ps-1 mt-2 justify-content-start">Level of diffculty</label>
-								<input type="text" name="last_name" class="form-control" value="EASY" readonly="">
-								<label  class="d-flex ps-1 mt-2 justify-content-start">Percentage</label>
-								<input type="text" name="last_name" class="form-control" value="100%" readonly="">
-							</div>		
-						</div>
+
+							<div class="muts">
+								
+							</div>
 						<div class="modal-footer border-0">
 							<button type="button" class="btn btn-danger mx-2" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
 						</div>
@@ -449,6 +401,26 @@ let arrow = document.querySelectorAll(".arrow");
         })
  	});
 </script>
+
+<!-- preview modal --->
+ <script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.view_btn').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: 'view_facul_analy_quest.php?id=<?php echo $_GET['id']; ?>',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.muts').html(response);
+          $('#ViewModal').modal('show');
+        }
+      });
+    });
+   });
+ </script>
 <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
