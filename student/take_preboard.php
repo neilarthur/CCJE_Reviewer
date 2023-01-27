@@ -240,7 +240,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 										if ($close <= $datetime) {
 											
-											echo '<button type="button" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
+											echo '<button type="button"  data-id="'.$rows['pre_exam_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
 										}
 										elseif ($start <= $datetime) {
 											
@@ -279,6 +279,24 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
             </div>
         </div>
     </div>
+
+    <!-- Permission to Open  Modal-->
+	<div class="modal fade" id="close_modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+	    <div class="modal-dialog modal-lg">
+	        <div class="modal-content">
+	            <div class="modal-header flex-column border-0 ">
+	            	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	            </div>
+	            <p class="modal-title mx-3 mt-3 fw-bold text-uppercase h3" style="color: #8C0000;">You need permission</p>
+	            <p class="m-4 fs-6">&nbsp;&nbsp;If the examination is closed. Please message your instructor in the given text box below in order to open the examination again.</p>
+	            <div class="modal-body">
+	            	<div class="pre">
+	            		
+	            	</div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 
   
 
@@ -319,6 +337,25 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
         success: function(response){
           $('.pre').html(response);
           $('#access').modal('show');
+        }
+      });
+    });
+   });
+ </script>
+ <!-- Close modal --->
+ <script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.btn_closer').click(function(){
+      var exam_id = $(this).data('id');
+
+      $.ajax({
+        url: 'close_preboard.php',
+        type: 'post',
+        data: {exam_id: exam_id},
+        success: function(response){
+          $('.pre').html(response);
+          $('#close_modal').modal('show');
         }
       });
     });

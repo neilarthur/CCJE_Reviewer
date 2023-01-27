@@ -448,7 +448,7 @@ function getName($n) {
 			</div>
 		</section>
 		<!--ADD Modal -->
-	    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	    <div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	    	<div class="modal-dialog modal-xl">
 	    		<form action="../php/add_pre_exam.php" id="form1" method="POST" >
 				    <div class="modal-content">

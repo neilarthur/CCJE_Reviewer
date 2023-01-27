@@ -47,7 +47,7 @@ if (isset($_POST['trial_quiz'])) {
 
 			if ($corrects_query) {
 			
-				header("location: ../faculty/testyourself.php?id=$update_id&last=$last_id");
+				header("location: view_trial_result.php?id=$update_id&last=$last_id");
 			}
 			else {
 

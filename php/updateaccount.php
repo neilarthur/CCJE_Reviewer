@@ -69,28 +69,27 @@ if (isset($_POST['save'])) {
 
     $queries_run = mysqli_query($sqlcon,$queries);
 
-    if ($type='student') {
+    if ($type='faculty') {
 
       if ($query_run) {
-
-        header("Location:../admin/accounts.php?upsuc&tab-accounts=students");
+        header("location: ../admin/accounts.php?error&tab-accounts=faculty");
 
       }
       else {
-
-        header("location: ../admin/accounts.php?upsucer&tab-accounts=students");
+        header("Location:../admin/accounts.php?suc&tab-accounts=faculty");
+        
       }
     }
-    elseif ($type='faculty') {
+    elseif ($type='student') {
 
       if ($query_run) {
 
-        header("location:../admin/accounts.php?upsuc&tab-accounts=faculty");
+        header("location:../admin/accounts.php?upsuc&tab-accounts=students");
 
       }
       else {
 
-        header("Location: ../admin/accounts.php?upsucer&tab-accounts=faculty");
+        header("Location: ../admin/accounts.php?upsucer&tab-accounts=students");
 
       }
     }

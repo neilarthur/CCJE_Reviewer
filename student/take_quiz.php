@@ -440,20 +440,17 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	</div>
 </div>
 
-
-
 <!-- permission to open quiz  Modal-->
-<div class="modal fade" id="close_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div class="modal fade" id="close_modal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header flex-column ">
+            <div class="modal-header flex-column border-0">
             	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <h3 class="modal-title mx-3 mt-3 fw-bold text-uppercase" style="color: #8C0000;">You need permission<br></h3>
-            <p class="m-4 fs-6">&nbsp;&nbsp;This form can only be viewed by users in the owner's organization.Try to message the owner of the form if you think this is a mistake.</p>
+            <p class="modal-title mx-3 mt-3 fw-bold text-uppercase h3" style="color: #8C0000;">You need permission</p>
+            <p class="m-4 fs-6">&nbsp;&nbsp;If the quiz or long quiz is closed. Please message your instructor in the given text box below in order to open the quiz again.</p>
 
             <div class="modal-body">
-            	<h4>Message</h4>
             	<div class="pre">
             		
             	</div>

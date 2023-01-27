@@ -566,7 +566,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 
         <!--ADD Faculty Account-->
-        <div class="modal fade" id="AddFaculty" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="AddFaculty"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         	<div class="modal-dialog modal-lg">
         		<div class="modal-content">
         			<div class="modal-header">
@@ -946,14 +946,25 @@ elseif (isset($_GET['adderror'])) {
 #update accounts
 if (isset($_GET['upsuc'])) {
 	echo ' <script> swal("Account has been Changed!", " clicked the okay!", "success");
-	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/accounts.php");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/accounts.php?tab-accounts=students");
 	</script>';
 }
 elseif (isset($_GET['upsucer'])) {
 	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
-	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/accounts.php");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/accounts.php?tab-accounts=students");
 	</script>';
 }
+elseif (isset($_GET['suc'])) {
+	echo ' <script> swal("Account has been Changed!", " clicked the okay!", "success");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/accounts.php?tab-accounts=faculty");
+	</script>';
+}
+elseif (isset($_GET['error'])) {
+	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/accounts.php?tab-accounts=faculty");
+	</script>';
+}
+
  
 ?> 
 </html>
