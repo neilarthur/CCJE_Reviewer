@@ -201,14 +201,14 @@ function getName($n) {
 	                            <div class="fw-bold">
 	                                <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
 	                                 echo $life; ?></div>
-	                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." Message to you "; ?></span>
+	                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." has a message for you "; ?></span>
 	                            </div>
 	                            <?php
 			                        }
 			                    }
 	                            ?>
 	                        </a>
-	                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+	                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
 	                    </div>
 		            </div>
 		            <div class="dropdown me-3">
@@ -302,7 +302,7 @@ function getName($n) {
 				                                                <?php
 
 				                                                if ($rows['stat_exam']=='Ready') {
-				                                                	echo '<span class="badge bg-success text-white text-center p-2 px-2" style="font-size:15px;">Ready</span>';
+				                                                	echo '<span class="badge bg-success text-white text-center ms-4 p-2 px-2" style="font-size:15px;">Ready</span>';
 				                                                }
 				                                                elseif ($rows['stat_exam']=='No question') {
 				                                                	
@@ -356,7 +356,7 @@ function getName($n) {
 				                                                	<?php
 
 				                                                if ($rows['stat_exam']=='Ready') {
-				                                                	echo '<span class="badge bg-success text-white text-center p-2 px-2" style="font-size:15px;">Ready</span>';
+				                                                	echo '<span class="badge bg-success text-white text-center ms-4 p-2 px-2" style="font-size:15px;">Ready</span>';
 				                                                }
 				                                                elseif ($rows['stat_exam']=='No question') {
 				                                                	
@@ -412,7 +412,7 @@ function getName($n) {
 				                                                <?php
 
 				                                                if ($rows['stat_exam']=='Ready') {
-				                                                	echo '<span class="badge bg-success text-white ms-3 p-2 px-2" style="font-size:15px;">Ready</span>';
+				                                                	echo '<span class="badge bg-success text-white ms-4 p-2 px-2" style="font-size:15px;">Ready</span>';
 				                                                }
 				                                                elseif ($rows['stat_exam']=='No question') {
 				                                                	

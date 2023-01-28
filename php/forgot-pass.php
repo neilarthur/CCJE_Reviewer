@@ -87,13 +87,15 @@ require_once 'conn.php';
 			<div class="avatar mt-2">
 				<img src="../assets/pics/CCJE.png" alt="">
 			</div>
-			<h4 class="modal-title mt-3 fw-bold">Email Address</h4>
+			<h4 class="modal-title mt-3 fw-bold">Forgot your password?</h4>
+			<p class="ms-2">Please enter your email that you use to sign in.</p>
 			<div class="input-group mb-4">
-				<span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-				<input type="text" name="email_address" class="form-control" placeholder="Enter your email address" required="required" autocomplete="off">
+				<span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
+				<input type="text" name="email_address" class="form-control" placeholder="Email address" required="required" autocomplete="off">
 			</div>
 			<div class="d-grid gap-2 mt-2 mb-4">
-				<input type="submit" name="reset_pass" class="btn btn-primary btn-lg rounded-pill" value="Send Password Reset Link">
+				<input type="submit" name="reset_pass" class="btn btn-primary btn-lg rounded" value="Request password reset">
+				<a href="index.php" class="text-center mt-2">Back to Login</a>
 			</div>
 		</form>
 	</div>

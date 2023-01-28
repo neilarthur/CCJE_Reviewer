@@ -203,7 +203,7 @@ $suppd .= "</select>";
 	                            <div class="fw-bold">
 	                                <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
 	                                 echo $life; ?></div>
-	                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." Message to you "; ?></span>
+	                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." has a message for you "; ?></span>
 	                            </div>
 	                            <?php
 			                        }
@@ -322,7 +322,7 @@ $suppd .= "</select>";
 
 													            	$curl = mysqli_fetch_assoc($corner);
 
-													            	echo '<a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2"><i class="fas fa-eye" ></i></a>';
+													            	echo '<div class="d-flex flex-row justify-content-center"><a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2"><i class="fas fa-eye" ></i></a>';
 													            }
 													            ?>
 																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>&total=<?php echo $rows['total_quest']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
@@ -385,7 +385,7 @@ $suppd .= "</select>";
 
 													            	$curl = mysqli_fetch_assoc($corner);
 
-													            	echo '<a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-eye" ></i></a>';
+													            	echo '<div class="d-flex flex-row justify-content-center"><a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-eye" ></i></a>';
 													            }
 													            ?>
 																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
@@ -435,7 +435,8 @@ $suppd .= "</select>";
 
 													            if (mysqli_num_rows($trials_done) == 0) {
 													            	
-													            	echo '																	<div class="d-flex flex-row justify-content-center">
+													            	echo '													
+													            	<div class="d-flex flex-row justify-content-center">
 																	<form action="trials_done.php" method="POST">
 																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
 																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
@@ -449,7 +450,7 @@ $suppd .= "</select>";
 
 													            	$curl = mysqli_fetch_assoc($corner);
 
-													            	echo '<a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>';
+													            	echo '<div class="d-flex flex-row justify-content-center"><a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>';
 													            }
 													            ?>
 																		

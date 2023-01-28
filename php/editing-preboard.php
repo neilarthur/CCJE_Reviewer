@@ -339,6 +339,7 @@ function getName($n) {
 											</button>
 											<div class="d-flex">
 												<div class="dropdown me-2">
+													<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Add</a>
 													<?php 
 												   $preboard= mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id = '$id'");
 												   $board = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_choose_quest WHERE pre_exam_id = '$id'");
@@ -349,8 +350,6 @@ function getName($n) {
 												   	$total = $rows['total_question'];
 
 												   	?>
-
-													<a class="btn btn-outline-white border-0 bg-white text-dark fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Add</a>
 												  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 												  	<?php
 												  	$tot = $_GET['total'];
@@ -425,7 +424,21 @@ function getName($n) {
 												    	<td>
 												    		<div class="d-flex flex-row">
 													      		<button data-id="<?php echo $rows['question_id']; ?>" type="button" class="btn btn-primary  mx-2 prev_btn" data-bs-toggle="modal"><i class="fas fa-search-plus"></i></button>
-		                                                		<button type="button" class="btn btn-secondary deletebtn  mx-2" data-bs-toggle="modal" ><i class="fas fa-trash-alt"></i></button>
+													      		<?php
+													      		$del_quer = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id='{$_GET['id']}'");
+													      		while ($qwer = mysqli_fetch_assoc($del_quer)) {
+													      		
+														      		if ($qwer['stat_exam']=='No question') {
+														      			
+														      			echo '<button type="button" class="btn btn-secondary deletebtn  mx-2" data-bs-toggle="modal" ><i class="fas fa-trash-alt"></i></button>';
+														      		}
+														      		else {
+
+														      			echo '<button type="button" class="btn btn-secondary  mx-2"><i class="fas fa-trash-alt"></i></button>';
+														      		}
+													      		}
+
+													      		 ?>
 		                                                	</div>
 		                                                </td>
 												    </tr>

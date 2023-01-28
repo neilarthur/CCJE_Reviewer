@@ -519,10 +519,10 @@ $suppd .= "</select>";
 	    			<form class="form" action="../php/delete_test_yourself.php" method="POST">
 	    				<div class="modal-body">
 	    					<div class="container d-flex justify-content-center">
-	    						<input type="text" name="update_id" id="delete_id">
+	    						<input type="hidden" name="update_id" id="delete_id">
 	    						<input type="hidden" name="total" value="<?php echo $_GET['total']?>">
 	    						<input type="hidden" name="lets" value="<?php echo $_GET['id']?>">
-	    						<p>Do you really want to delete these question?</p>
+	    						<p>Do you really want to delete these question</p>
 	    					</div>
 	    					<div class="modal-footer border-0 d-flex justify-content-center">
 	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="Yes">

@@ -249,7 +249,7 @@ $suppd .= "</select>";
 												<thead>
 													<tr>
 														<th hidden="">Id</th>
-														<th>No.</th>
+														<th hidden="">Exam id</th>
 														<th scope="col">Areas of Exam</th>
 														<th scope="col">Question</th>
 														<th scope="col" class="ps-4">Action</th>
@@ -261,14 +261,14 @@ $suppd .= "</select>";
 													$let = $_GET['id'];
 
 													$exams = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_question,tbl_pre_choose_quest WHERE (test_question.question_id=tbl_pre_choose_quest.question_id) AND (tbl_pre_question.pre_exam_id=tbl_pre_choose_quest.pre_exam_id) AND tbl_pre_choose_quest.pre_exam_id='$let' AND pre_choose_status='active'");
-													$counter = 1;
+													
 													while ($rows = mysqli_fetch_assoc($exams)) {
 														
 													?>
 													<tr>
 														<td hidden=""><?php echo $rows['question_id']; ?></td>
 														<td hidden=""><?php echo $rows['exam_choose_id'] ?></td>
-														<td><?php echo $counter ;?></td>
+														
 														<td scope="row"><?php echo $rows['subjects'];?></td>
 														<td><?php echo $rows['questions_title'];?></td>
 														<td>
@@ -295,7 +295,7 @@ $suppd .= "</select>";
 
 														</td>
 													</tr>
-													<?php $counter++; }  ?>
+													<?php  }  ?>
 												</tbody>
 											</table>
 										</div>
@@ -308,24 +308,24 @@ $suppd .= "</select>";
 			</section>
 
 		    <!--Question analysis Modal -->
-		<div class="modal fade" id="viewToggle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-xl">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title fw-bold">Question analysis</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="mugs">
-							
-						</div>					           
-					</div>
-					<div class="modal-footer border-0">
-						<button type="button" class="btn btn-danger pb-2 px-4" data-bs-dismiss="modal">Close</button>
+			<div class="modal fade" id="viewToggle" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title fw-bold">Question analysis</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mugs">
+								
+							</div>					           
+						</div>
+						<div class="modal-footer border-0">
+							<button type="button" class="btn btn-danger pb-2 px-4" data-bs-dismiss="modal">Close</button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 			<!-- Delete Question -->
 		    <div class="modal fade" id="ArchiveAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 		    	<div class="modal-dialog">
@@ -440,10 +440,15 @@ let arrow = document.querySelectorAll(".arrow");
     });
    });
  </script>
+ <script type="text/javascript">
+  $(document).ready(function() {
+  	 $('#examTab').DataTable({
+  	 	paging: true
+  	 });
+  });
+</script>
 <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
-<script type="text/javascript">
-  var table = $('#examTab').DataTable();
-</script>
+
 </html>

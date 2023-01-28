@@ -74,23 +74,57 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                 <div class="flex-shrink-0 text-center">
                      <div class="dropdown dp">
                         <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg"></i>
-                            <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger">1</span>
+                            <?php 
+
+                            $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification  WHERE notif_status='0' AND action='Posted an Quiz'  ORDER BY notif_id DESC");
+                            ?>
+                            <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($comers); ?></span>
                         </a>
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
                             <h6 class="dropdown-header text-dark ">Notifications</h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="me-4">
-                                     <div class="fa-stack fa-1x">
-                                      <i class="fa fa-circle fa-stack-2x ms-2"></i>
-                                      <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
-                                    </div> 
-                                </div>
-                                <div class="fw-bold">
-                                    <div class="small text-gray-500">September 16, 2022</div>
-                                    <span class="font-weight-bold">Sir pagcaliwagan added an exam</span>
-                                </div>
-                            </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+                            <?php
+
+                                $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty') AND (tbl_notification.action='Posted an Quiz')");
+
+                                if (mysqli_num_rows($comers)==0) {
+                                    
+                                    echo "<h5 class='text-center'>No notification Found</h5>";
+                                }
+
+                                if (mysqli_num_rows($comers) >= 0) {
+
+                                    foreach ($comers as $item) {
+
+                                ?>
+                        <a class="dropdown-item d-flex align-items-center" href="notification.php">
+                            <div class="me-4">
+                                 <div class="fa-stack fa-1x">
+                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
+                                  <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
+                                </div> 
+                            </div>
+                            <div class="fw-bold">
+                                <div class="small text-gray-500"><?php echo date('F j, Y, g:i a',strtotime($item['date_created'])); ?></div>
+                                <span class="font-weight-bold"><?php
+
+                                if ($item['gender'] == 'Male') {
+                                    
+                                    echo " Sir ".$item['first_name']." ".$item['last_name']." ".$item['action'].".";
+                                }
+                                elseif($item['gender']== 'Female') {
+
+                                    echo " Ma'am ".$item['first_name']." ".$item['last_name']." ".$item['action'].".";
+                                }
+                                ?></span>
+                            </div>
+
+                            <?php
+
+                                }
+                            }
+                            ?>
+                        </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
                         </div>
                     </div>
                 </div>
@@ -145,7 +179,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
     <div class="container-fluid mt-3 pb-5">
     	<div class="container col-lg-8">
     		<p class="m-b-50 h3">Notifications <i class="fa fa-bell ms-2"></i></p>
-			
+			 <?php
+
+            $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty') AND (tbl_notification.action='Posted an Quiz')");
+
+            if (mysqli_num_rows($comers)==0) {
+                
+                echo "<h5 class='text-center text-dark'>No notification Found</h5>";
+            }
+
+            if (mysqli_num_rows($comers) >= 0) {
+
+                foreach ($comers as $item) {
+
+            ?>
 			<div class="notification-ui_dd-content">
 				<div class="notification-list notification-list--unread">
 					<div class="notification-list_content">
@@ -153,30 +200,20 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 							<img src="../assets/pics/tempo.png" alt="user">
 						</div>
 						<div class="notification-list_detail">
-							<p><b>Ralph vincent Pagcaliwagan</b> added an exam</p>
-							<p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
+							<p><b><?php echo $item['first_name']." ".$item['last_name']."</b>&nbsp; has posted a quiz"; ?>
+							<p class="text-muted"><?php echo $item['feedback']; ?></p>
 							<p class="text-muted"><small>10 mins ago</small></p>
 						</div>
 					</div>
 					<div class="notification-list_feature-img">
-						<div class="small text-gray-500 text-muted">September 16, 2022</div>
+						<div class="small text-gray-500 text-muted"><?php echo date('F j, Y',strtotime($item['created'])); ?></div>
 					</div>
 				</div>
-				<div class="notification-list notification-list--unread">
-					<div class="notification-list_content">
-						<div class="notification-list_img">
-							<img src="../assets/pics/tempo.png" alt="user">
-						</div>
-						<div class="notification-list_detail">
-							<p><b>Ralph vincent Pagcaliwagan</b> added an exam</p>
-							<p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
-							<p class="text-muted"><small>10 mins ago</small></p>
-						</div>
-					</div>
-					<div class="notification-list_feature-img">
-						<div class="small text-gray-500 text-muted">September 16, 2022</div>
-					</div>
-				</div>
+			</div>
+             <?php
+                    }
+                }
+            ?>
 			</div>
 		</div>
     </div>
