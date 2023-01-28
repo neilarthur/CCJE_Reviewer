@@ -266,14 +266,33 @@ $suppd .= "</select>";
 														
 													?>
 													<tr>
+														<td hidden=""><?php echo $rows['question_id']; ?></td>
 														<td hidden=""><?php echo $rows['exam_choose_id'] ?></td>
 														<td><?php echo $counter ;?></td>
 														<td scope="row"><?php echo $rows['subjects'];?></td>
 														<td><?php echo $rows['questions_title'];?></td>
 														<td>
-															<div class="d-flex flex-row justify-content-center">
-																<button class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" data-id="<?php echo $rows['question_id']; ?>" type="button"><i class="fas fa-chart-bar"></i></button>
-															</div>
+															<?php
+
+															$display = mysqli_query($sqlcon,"SELECT * FROM test_question,tbl_pre_question,tbl_pre_student_ans WHERE (test_question.question_id= tbl_pre_student_ans.question_id) AND (tbl_pre_question.pre_exam_id=tbl_pre_student_ans.pre_exam_id) AND tbl_pre_student_ans.pre_exam_id={$_GET['id']}");
+
+															if (mysqli_num_rows($display) == 0) {
+																
+																echo "<div class='d-flex flex-row justify-content-center'>
+
+																<button type='button' class='btn btn-secondary mx-2' disabled><i class='fas fa-chart-bar'></i></button>
+																</div>
+																" ;
+															}
+															elseif (mysqli_num_rows($display) >=0) {
+																
+																echo '															<div class="d-flex flex-row justify-content-center">
+
+																<button data-id="'.$rows['question_id'].'" type="button" class="btn btn-primary  mx-2 view_btn" data-bs-toggle="modal" ><i class="fas fa-chart-bar"></i></button>
+															</div>';
+															}
+															?>
+
 														</td>
 													</tr>
 													<?php $counter++; }  ?>
@@ -288,25 +307,25 @@ $suppd .= "</select>";
 				</div>
 			</section>
 
-			<!-- Analytics Modal-->
-			<div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title"></h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-
-							<div class="muts">
-								
-							</div>
-						<div class="modal-footer border-0">
-							<button type="button" class="btn btn-danger mx-2" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
-						</div>
+		    <!--Question analysis Modal -->
+		<div class="modal fade" id="viewToggle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title fw-bold">Question analysis</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mugs">
+							
+						</div>					           
+					</div>
+					<div class="modal-footer border-0">
+						<button type="button" class="btn btn-danger pb-2 px-4" data-bs-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
+		</div>
 			<!-- Delete Question -->
 		    <div class="modal fade" id="ArchiveAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 		    	<div class="modal-dialog">
@@ -410,12 +429,12 @@ let arrow = document.querySelectorAll(".arrow");
       var userid = $(this).data('id');
 
       $.ajax({
-        url: 'view_facul_analy_quest.php?id=<?php echo $_GET['id']; ?>',
+        url: '../php/view__facul_analy_quest.php?id=<?php echo $_GET['id']; ?>',
         type: 'post',
         data: {userid: userid},
         success: function(response){
-          $('.muts').html(response);
-          $('#ViewModal').modal('show');
+          $('.mugs').html(response);
+          $('#viewToggle').modal('show');
         }
       });
     });

@@ -507,7 +507,22 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 	                                                	?>
 	                                                </td>
-	                                                <td><?php echo round(($correct/$row_count)*100)." % "; ?> </td>
+	                                                <td><?php
+
+	                                                $perc = mysqli_num_rows($attp);
+
+	                                                if ($perc == 0) {
+	                                                	
+	                                                	$perc=1;
+
+	                                                	echo round(($correct/$perc)*100)." % ";
+	                                                }
+	                                                elseif ($perc >0) {
+	                                                	
+	                                                	echo round(($correct/$perc)*100)." % ";
+
+	                                                }
+	                                                 ?> </td>
 	                                                <td>
 	                                                	<div class="d-flex flex-row">
 	                                                		<?php
@@ -518,7 +533,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 	                                                		if ($num_law == 0) {
 	                                                			
-	                                                			echo '<button type="button"class="btn btn-primary  mx-2"><i class="fas fa-eye"></i></button>';
+	                                                			echo '<button type="button"class="btn btn-secondary  mx-2"><i class="fas fa-eye"></i></button>';
 	                                                		}
 	                                                		else {
 
