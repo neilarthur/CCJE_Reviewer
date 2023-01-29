@@ -277,6 +277,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record6) > 0) {
 
+
+															$recs6 = mysqli_fetch_assoc($record6);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -288,7 +291,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_juris.php?id='.$recs6['pre_exam_id'].'&sec='.$block6['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -317,6 +320,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record6) > 0) {
 
+															$recs6 = mysqli_fetch_assoc($record6);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -328,7 +333,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_juris.php?id='.$recs6['pre_exam_id'].'&sec='.$block6['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -357,6 +362,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record6) > 0) {
 
+															$recs6 = mysqli_fetch_assoc($record6);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -368,7 +375,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_juris.php?id='.$recs6['pre_exam_id'].'&sec='.$block6['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -517,6 +524,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record5) > 0) {
 
+															$recs5 = mysqli_fetch_assoc($record5);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -528,7 +537,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_law.php?id='.$recs5['pre_exam_id'].'&sec='.$block5['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -552,6 +561,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record5) > 0) {
 
+															$recs5 = mysqli_fetch_assoc($record5);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -563,7 +574,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_law.php?id='.$recs5['pre_exam_id'].'&sec='.$block5['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -589,6 +600,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record5) > 0) {
 
+															$recs5 = mysqli_fetch_assoc($record5);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -600,7 +613,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_law.php?id='.$recs5['pre_exam_id'].'&sec='.$block5['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -749,6 +762,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record4) > 0) {
 
+															$recs4 = mysqli_fetch_assoc($record4);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -760,7 +775,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_crimanalist.php?id='.$recs4['pre_exam_id'].'&sec='.$block4['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -785,6 +800,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record4) > 0) {
 
+															$recs4 = mysqli_fetch_assoc($record4);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -796,7 +813,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_criminalist.php?id='.$recs4['pre_exam_id'].'&sec='.$block4['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -821,6 +838,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record4) > 0) {
 
+
+															$recs4 = mysqli_fetch_assoc($record4);
+
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -832,7 +853,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_criminalist.php?id='.$recs4['pre_exam_id'].'&sec='.$block4['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -981,6 +1002,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record3) > 0) {
 
+															$recs3 = mysqli_fetch_assoc($record3);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -992,7 +1015,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_crime_detect.php?id='.$recs3['pre_exam_id'].'&sec='.$block3['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -1017,6 +1040,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record3) > 0) {
 
+															$recs3 = mysqli_fetch_assoc($record3);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -1028,7 +1053,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_crime_detect.php?id='.$recs3['pre_exam_id'].'&sec='.$block3['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -1053,6 +1078,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record3) > 0) {
 
+
+															$recs3 = mysqli_fetch_assoc($record3);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -1064,7 +1092,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+
+													    					<li><a class="dropdown-item" href="print_crime_detect.php?id='.$recs3['pre_exam_id'].'&sec='.$block3['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -1215,6 +1244,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record2) > 0) {
 
+															$recs1 = mysqli_fetch_assoc($record2);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -1226,7 +1257,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_crim_juris.php?id='.$recs1['pre_exam_id'].'&sec='.$block2['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -1251,6 +1282,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record2) > 0) {
 
+															$recs1 = mysqli_fetch_assoc($record2);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -1262,7 +1295,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_crim_juris.php?id='.$recs1['pre_exam_id'].'&sec='.$block2['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -1287,6 +1320,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record2) > 0) {
 
+															$recs1 = mysqli_fetch_assoc($record2);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -1298,7 +1333,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_crim_juris.php?id='.$recs1['pre_exam_id'].'&sec='.$block2['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -1448,6 +1483,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record1) > 0) {
 
+															$recs2 = mysqli_fetch_assoc($record1);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -1459,7 +1496,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_facul_res.php?id='.$recs2['pre_exam_id'].'&sec='.$block1['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -1484,6 +1521,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record1) > 0) {
 
+															$recs2 = mysqli_fetch_assoc($record1);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -1495,7 +1534,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_facul_res.php?id='.$recs2['pre_exam_id'].'&sec='.$block1['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
@@ -1520,6 +1559,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 														}
 														elseif (mysqli_num_rows($record1) > 0) {
 
+
+															$recs2 = mysqli_fetch_assoc($record1);
+
 															echo '<div class="dropdown mb-2 d-flex justify-content-end">
 
 													    				<button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8C0000;">
@@ -1531,7 +1573,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 													    						<input type="hidden" name="file_type" value="xlsx">
 													    						<li><button type="submit" name="export_excel_btn" class="dropdown-item"><i class="fas fa-download me-2"></i>Download Results</button></li>
 													    					</form>
-													    					<li><a class="dropdown-item" href="#"><i class="fas fa-print me-2"></i>Print Results</a></li>
+													    					<li><a class="dropdown-item" href="print_facul_res.php?id='.$recs2['pre_exam_id'].'&sec='.$block1['section'].'" target="_blank"><i class="fas fa-print me-2"></i>Print Results</a></li>
 													    				</ul>
 													    			</div>';
 														}
