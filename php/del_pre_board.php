@@ -18,7 +18,26 @@ if (isset($_POST["save"])) {
 
 		if ($query_run) {
 
-			header("Location:../faculty/preboard.php");
+			$exam_res = "UPDATE tbl_exam_result SET status='$status' WHERE pre_exam_id='$update_id'";
+
+			$exam_res1 = mysqli_query($sqlcon,$exam_res);
+
+			if ($exam_res1) {
+
+				$student_ans = "UPDATE tbl_pre_student_ans SET status='$status' WHERE pre_exam_id='$update_id'";
+				$student_ans1 = mysqli_query($sqlcon,$student_ans);
+
+				if ($student_ans1) {
+					
+					header("Location:../faculty/preboard.php");
+				}
+				else {
+
+					echo mysqli_error($sqlcon);
+				}
+				
+			}
+			
 		}
 		else{
 

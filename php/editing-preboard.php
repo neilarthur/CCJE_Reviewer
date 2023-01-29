@@ -926,19 +926,13 @@ function getName($n) {
 			                                            } 
 			                                            ?>
 
+			                                            
+			                                            <td>
+			                                            	<?php
 
-														<?php 
-														$id = $_GET['id'];
-														$result = mysqli_query($sqlcon,"SELECT * FROM tbl_quiz_result,accounts WHERE (tbl_quiz_result.acc_id=accounts.acc_id) AND (tbl_quiz_result.test_id='$id') AND(accounts.section='4C')");
-
-														while ($rows= mysqli_fetch_assoc($result)) {
-															date_default_timezone_set('Asia/Manila');
-
-															 $submit = strtotime($rows['date_created']);
-
-															 echo'<td>'. date("m-d-Y",$submit).'</td>';
-														}
-														 ?>
+			                                            	echo date('M d, Y h:i:s a',strtotime($hows['date_created']));
+			                                            	?>
+			                                            </td>
 													</tr>
 
 												<?php  }
