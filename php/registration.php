@@ -611,13 +611,13 @@
                             <label class="fieldlabels ms-2">Password</label>
                             <div class="input-group">
                             	<input type="password" required require name="pass_word" id="id_password" class="form-control">
-                            	<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i></span>
+                            	<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2" minlength="8"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i></span>
                             </div>
                         </div>
                         <div class="input-div mt-4">
                             <label class="fieldlabels ms-2">Confirm Password</label>
                             <div class="input-group">
-                            	<input type="password" required require name="conf_pass" id="confirm_password" class="form-control">
+                            	<input type="password" required require name="conf_pass" id="confirm_password" class="form-control" minlength="8">
                             	<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePass" style="margin-left: -30px; cursor: pointer;"></i></span>
                             </div>
                         </div>

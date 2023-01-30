@@ -350,7 +350,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                             $date1 = date('d-m-y g:i a ', strtotime($quiz_query['end_day']));
 
 
-                                            if ($date1 <= $date) {
+                                            if ($date1 >= $date) {
 
 
                                             }

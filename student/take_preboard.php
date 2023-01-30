@@ -238,7 +238,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 									if (mysqli_num_rows($board) ==0) {
 
-										if ($close <= $datetime) {
+										if ($close >= $datetime) {
 											
 											echo '<button type="button"  data-id="'.$rows['pre_exam_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
 										}
@@ -264,13 +264,13 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	</div>
 
 	<!-- Access code Modal-->
-	<div class="modal fade" id="access" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+	<div class="modal fade" id="access" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div class="modal-dialog modal-confirm">
             <div class="modal-content">
-                <div class="modal-header flex-column ">
+                <div class="modal-header bg-light">
+                	<p class="modal-title fw-bold h3">Enter Access Code</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <h4 class="modal-title mx-3 mt-3 fw-bold">Access code</h4>
                 <div class="modal-body">
                 	<div class="pre">
                 		
