@@ -409,7 +409,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 	   	  										$laws = mysqli_fetch_assoc($boast); 	  										
 	   	  										if (mysqli_num_rows($boast) ==0) {
 
-   	  												if ($lifersss >= $datetime) {
+   	  												if ($lifersss <= $datetime) {
    	  													
    	  													echo '<button  type="button" data-id="'.$rows['test_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
    	  												}

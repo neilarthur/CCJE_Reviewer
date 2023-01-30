@@ -238,7 +238,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
 									if (mysqli_num_rows($board) ==0) {
 
-										if ($close >= $datetime) {
+										if ($close <= $datetime) {
 											
 											echo '<button type="button"  data-id="'.$rows['pre_exam_id'].'" class="badge bg-danger px-3 py-2 border-0 btn_closer" data-bs-toggle="modal" style="font-size:15px;">CLOSED</button>';
 										}

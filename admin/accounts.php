@@ -275,7 +275,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+															<a href="../php/archiveaccount.php?id=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del"><i class="fas fa-archive"></i></a>
 														</div>
 													</td>
 												</tr>
@@ -325,7 +325,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+															<a href="../php/archiveaccount.php?id=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del"><i class="fas fa-archive"></i></a>
 														</div>
 													</td>
 												</tr>
@@ -386,7 +386,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+															<a href="../php/archiveaccount.php?id=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
 														</div>
 													</td>
 												</tr>
@@ -436,7 +436,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+															<a href="../php/archiveaccount.php?id=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
 
 														</div>
 													</td>
@@ -668,7 +668,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 
         <!-- View  Account -->
-        <div class="modal fade" id="ViewAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal fade" id="ViewAccount" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         	<div class="modal-dialog modal-lg">
         		<div class="modal-content">
         			<div class="modal-header">
@@ -686,7 +686,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 
         <!-- Edit Account -->
-        <div class="modal fade" id="EditAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal fade" id="EditAccount" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         	<div class="modal-dialog modal-lg">
         		<div class="modal-content">
         			<div class="modal-header">
@@ -807,7 +807,7 @@ let arrow = document.querySelectorAll(".arrow");
  		Swal.fire({
 
  			title: 'Are you Sure?',
- 			text: 'Record will be deleted',
+ 			text: 'Record will be archive',
  			icon: "warning",
  			type:'Warning',
  			showCancelButton:true,
