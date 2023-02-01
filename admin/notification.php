@@ -102,6 +102,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					<li><a class="link_name" href="login-history.php">Log History</a></li>
 				</ul>
 			</li>
+            <li class="navigation-list-item">
+                <a href="archive_users.php?tab-accounts=students" >
+                    <i class="fas fa-archive"></i>
+                    <span class="link_name">Archived</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="archive_users.php?tab-accounts=students">Archived</a></li>
+                </ul>
+            </li>
 			<li class="navigation-list">
                 <div class="profile-details">
                     <?php

@@ -101,6 +101,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					<li><a class="link_name" href="login-history.php">Log History</a></li>
 				</ul>
 			</li>
+			<li class="navigation-list-item">
+                <a href="archive_users.php?tab-accounts=students" >
+                    <i class="fas fa-archive"></i>
+                    <span class="link_name">Archived</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="archive_users.php?tab-accounts=students">Archived</a></li>
+                </ul>
+            </li>
 			<li class="navigation-list">
 				<div class="profile-details">
 					<?php
@@ -159,7 +168,18 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
                                 if (mysqli_num_rows($comers)==0) {
                                     
-                                    echo "<h5 class='text-center'>No notification Found</h5>";
+                                    echo "<a class='dropdown-item d-flex align-items-center' >
+                                <div class='me-4'>
+                                     <div class='fa-stack fa-1x'>
+                                      <i class='fa fa-circle fa-stack-2x ms-2'></i>
+                                      <i class='fas fa-bell-slash fa-stack-1x ms-2 text-white'></i>
+                                    </div> 
+                                </div>
+                                <div class=''>
+                                    <div class='fw-bold h5 ms-4'>No notifications  yet</div>
+                                    <p class='small text-gray-500' >When get notifications, they'll show up here</p>
+                                </div>
+                            </a>";
                                 }
 
                                 if (mysqli_num_rows($comers) >= 0) {
@@ -246,7 +266,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 						<div class="row">
 							<div class="col ">
 								<div class="card">
-									<div class="card-body rounded-3 m-4 table-responsive-xl">
+									<div class="card-body rounded-3 mx-4 table-responsive-xl">
 										<div class="position-left d-flex justify-content-end mb-3">
 										</div>
 										<table class="table table-striped align-middle bg-light" id="student">
@@ -275,7 +295,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del"><i class="fas fa-archive"></i></a>
+															<a href="../php/archiveaccount.php?disabled=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del"><i class="fas fa-archive"></i></a>
 														</div>
 													</td>
 												</tr>
@@ -325,7 +345,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del"><i class="fas fa-archive"></i></a>
+															<a href="../php/archiveaccount.php?disabled=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del"><i class="fas fa-archive"></i></a>
 														</div>
 													</td>
 												</tr>
@@ -357,7 +377,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 						<div class="row">
 							<div class="col ">
 								<div class="card">
-									<div class="card-body rounded-3 m-4 table-responsive-lg">
+									<div class="card-body rounded-3 mx-4 table-responsive-lg">
 										<div class="position-left d-flex justify-content-end mb-3">
 										</div>
 										<table class="table table-striped align-middle bg-light" id="student">
@@ -386,7 +406,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
+															<a href="../php/archiveaccount.php?disabled=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
 														</div>
 													</td>
 												</tr>
@@ -436,7 +456,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
+															<a href="../php/archiveaccount.php?disabled=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
 
 														</div>
 													</td>

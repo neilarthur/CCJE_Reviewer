@@ -101,7 +101,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					<li><a class="link_name" href="login-history.php">Log History</a></li>
 				</ul>
 			</li>
-			<li class="navigation-list">
+            <li class="navigation-list-item">
+                <a href="archive_users.php?tab-accounts=students" >
+                    <i class="fas fa-archive"></i>
+                    <span class="link_name">Archived</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="archive_users.php?tab-accounts=students">Archived</a></li>
+                </ul>
+            </li>
+			<li>
                 <div class="profile-details">
                     <?php
 
@@ -151,14 +160,25 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                             <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($comers); ?></span>
                     </a>
                     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
-                        <h6 class="dropdown-header text-dark ">Notifications</h6>
+                        <h6 class="dropdown-header text-dark">Notifications</h6>
                             <?php
 
                                 $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty') AND (tbl_notification.action='Added an exam')");
 
                                 if (mysqli_num_rows($comers)==0) {
                                     
-                                    echo "<h5 class='text-center'>No notification Found</h5>";
+                                    echo "<a class='dropdown-item d-flex align-items-center' >
+                                <div class='me-4'>
+                                     <div class='fa-stack fa-1x'>
+                                      <i class='fa fa-circle fa-stack-2x ms-2'></i>
+                                      <i class='fas fa-bell-slash fa-stack-1x ms-2 text-white'></i>
+                                    </div> 
+                                </div>
+                                <div class=''>
+                                    <div class='fw-bold h5 ms-4'>No notifications  yet</div>
+                                    <p class='small text-gray-500' >When get notifications, they'll show up here</p>
+                                </div>
+                            </a>";
                                 }
 
                                 if (mysqli_num_rows($comers) >= 0) {

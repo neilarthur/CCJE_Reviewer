@@ -68,11 +68,8 @@ body{
   list-style: none;
   transition: all 0.4s ease;
 }
-.sidebar .nav-links li a:hover{
+.sidebar .nav-links .navigation-list-item:hover{
   background: rgb(204, 204, 204);
-}
-.sidebar .nav-links .navigation-list .profile-details a:hover{
-  background:  #1d1b31;
 }
 
 .sidebar .navigation-list-item:hover .link_name {
@@ -81,13 +78,6 @@ body{
 
 .sidebar .navigation-list-item:hover i {
   color: #8C0000; 
-}
-.sidebar .navigation-list .profile_name:hover a {
-  color: white;
-}
-
-.sidebar .navigation-list .profile_name:hover a {
- background: #1d1b31;
 }
 
 .sidebar .nav-links li .icon-link{
@@ -108,9 +98,7 @@ body{
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.sidebar .nav-links li.showMenu i.arrow{
-  transform: rotate(-180deg);
-}
+
 .sidebar.close .nav-links i.arrow{
   display: none;
 }

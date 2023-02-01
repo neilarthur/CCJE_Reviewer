@@ -84,7 +84,6 @@ while ($row = mysqli_fetch_array($results)) {
 					<textarea class="form-control" name="address" rows="1"><?php echo $row['address']; ?></textarea>
 				</div>
 			</div>
-			
 			<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 py-2">
 				<label for="user-password" class="d-flex ps-1 fw-bold">Current Password</label>
 				<input type="password" name="password" class="form-control" value="<?php echo $row['password']; ?>">
