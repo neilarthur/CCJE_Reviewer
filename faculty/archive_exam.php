@@ -31,7 +31,7 @@ function getName($n) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Preboard Examination</title>
+	<title>Archive Examination</title>
 	<!-- Boostrap 5.2 -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<!-- CSS -->
@@ -177,7 +177,7 @@ function getName($n) {
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Preboard Examination</li>
+									<li class="breadcrumb-item active" aria-current="page">Archived Examination</li>
 								</ol>
 							</nav>
 						</div>
@@ -263,7 +263,7 @@ function getName($n) {
 					<div class="row">
 						<div class="col d-flex justify-content">
 							<div class="w-50">
-								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Preboard Examination</h2>
+								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Archived Examination</h2>
 							</div>
 						</div>
 						<div class="row">
@@ -271,7 +271,6 @@ function getName($n) {
 								<div class="card">
 									<div class="card-body rounded-3  table-responsive-xl">
 										<div class="d-flex justify-content-end mb-3">
-											<button type="button" class="btn px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #8C0000;"><i class="fas fa-plus me-1"></i>ADD</button>
 										</div>
 										<table class="table align-middle bg-light m-2" width="100%" id="preboardTab">
 											<thead>
@@ -295,7 +294,7 @@ function getName($n) {
 												 	
 												 	if ($bows['section']=='4A') {
 												 		
-												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4A') AND tbl_pre_question.pre_board_status='active'");
+												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4A') AND tbl_pre_question.pre_board_status='archive'");
 
 												 		while ($rows = mysqli_fetch_assoc($locks)) {
 												 			
@@ -339,20 +338,14 @@ function getName($n) {
 				                                                	
 				                                                </td>
 																<td>
-																	<div class="d-flex flex-row justify-content-center">
-																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
-
-																		<a href="../php/editing-preboard.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen pt-1"></i></a>
-																		
-																		<a href="../php/del_pre_board.php?disabled=<?= $rows['pre_exam_id']; ?>" class="btn btn-secondary btn-del" style="padding-bottom: 10px; padding-top: 10px; padding-left: 12px; padding-right: 12px;" ><i class="fas fa-archive"></i></a>
-																	</div>
+																	<a href="../php/del_pre_board.php?enabled=<?= $rows['pre_exam_id']; ?>" class="btn btn-success mx-3 btn-del py-2" ><i class="fas fa-trash-restore"></i></a>
 																</td>
 															</tr>
 														<?php
 												 		}
 												 	}elseif ($bows['section']=='4B') {
 												 		
-												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4B') AND tbl_pre_question.pre_board_status='active'");
+												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4B') AND tbl_pre_question.pre_board_status='archive'");
 
 												 		while ($rows = mysqli_fetch_assoc($locks)) {
 												 			$socs = $rows['time_limit'];
@@ -393,20 +386,14 @@ function getName($n) {
 				                                                	
 				                                                </td>
 																<td>
-																	<div class="d-flex flex-row justify-content-center">
-																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
-
-																		<a href="../php/editing-preboard.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen pt-1"></i></a>
-																		
-																		<a href="../php/del_pre_board.php?disabled=<?= $rows['pre_exam_id']; ?>" class="btn btn-secondary btn-del" style="padding-bottom: 10px; padding-top: 10px; padding-left: 12px; padding-right: 12px;" ><i class="fas fa-archive"></i></a>
-																	</div>
+																	<a href="../php/del_pre_board.php?enabled=<?= $rows['pre_exam_id']; ?>" class="btn btn-success mx-3 btn-del py-2" ><i class="fas fa-trash-restore"></i></a>
 																</td>
 															</tr>
 														<?php
 												 		}
 												 	}elseif ($bows['section']=='4C') {
 
-												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4C') AND tbl_pre_question.pre_board_status='active'");
+												 		$locks = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by) AND (accounts.section='4C') AND tbl_pre_question.pre_board_status='archive'");
 
 												 		while ($rows = mysqli_fetch_assoc($locks)) {
 												 			$socs = $rows['time_limit'];
@@ -438,24 +425,18 @@ function getName($n) {
 				                                                <?php
 
 				                                                if ($rows['stat_exam']=='Ready') {
-				                                                	echo '<span class="badge bg-success text-white ms-4 p-2 px-2" style="font-size:15px;">Ready</span>';
+				                                                	echo '<span class="badge bg-success text-white p-2 px-2" style="font-size:15px; margin-left: 42px;">Ready</span>';
 				                                                }
 				                                                elseif ($rows['stat_exam']=='No question') {
 				                                                	
-				                                                	echo '<span class="badge bg-danger  text-white p-2 px-2" style="font-size:15px;">No question</span>';
+				                                                	echo '<span class="badge bg-danger ms-3 text-white p-2 px-2" style="font-size:15px;">No question</span>';
 				                                                }
 
 				                                                ?>
 				                                                	
 				                                                </td>
 																<td>
-																	<div class="d-flex flex-row justify-content-center">
-																		<a href="view_pre_board.php?id=<?php echo $rows['pre_exam_id'];?>&descript=<?php echo $rows['description']; ?>&time=<?php echo $totals; ?>&access=<?php echo $rows['access_code']; ?>&total=<?php echo $rows['total_question']; ?>&safd=<?php echo $rows['total_question'] - $rows['sum_question']; ?>" class="btn btn-primary mx-2" ><i class="fas fa-search-plus pt-1"></i></a>
-
-																		<a href="../php/editing-preboard.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen pt-1"></i></a>
-																		
-																		<a href="../php/del_pre_board.php?disabled=<?= $rows['pre_exam_id']; ?>" class="btn btn-secondary btn-del" style="padding-bottom: 10px; padding-top: 10px; padding-left: 12px; padding-right: 12px;" ><i class="fas fa-archive"></i></a>
-																	</div>
+																	<a href="../php/del_pre_board.php?enabled=<?= $rows['pre_exam_id']; ?>" class="btn btn-success mx-3 btn-del py-2" ><i class="fas fa-trash-restore"></i></a>
 																</td>
 															</tr>
 														<?php
@@ -691,22 +672,6 @@ $(document).ready(function() {
 
 });
 </script>
- <script type="text/javascript">
- 	$(document).ready(function() {
- 		$('.deletebtn').on('click', function() {
-
- 			$('#ArchiveAccount').modal('show');
-
-            $tr = $(this).closest('tr');
-
-            var data = $tr.children("td").map(function() {
-                return $(this).text();
-            }).get();
-            console.log(data);
-            $('#delete_id').val(data[0]);
-        })
- 	});
-</script>
 <script type="text/javascript">
  	$('.btn-del').on('click',function(e){
 
@@ -717,7 +682,7 @@ $(document).ready(function() {
  		Swal.fire({
 
  			title: 'Are you Sure?',
- 			text: 'Record will be archived',
+ 			text: 'Record will be restore',
  			icon: "warning",
  			type:'Warning',
  			showCancelButton:true,
@@ -739,11 +704,27 @@ $(document).ready(function() {
  		Swal.fire({
  			type: 'success',
  			icon: "success",
- 			title: 'Record Archive',
- 			text: 'Record has been archive!',
+ 			title: 'Record Restored',
+ 			text: 'Record has been restored!',
  		})
  	}
  </script>
+ <script type="text/javascript">
+ 	$(document).ready(function() {
+ 		$('.deletebtn').on('click', function() {
+
+ 			$('#ArchiveAccount').modal('show');
+
+            $tr = $(this).closest('tr');
+
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+            console.log(data);
+            $('#delete_id').val(data[0]);
+        })
+ 	});
+</script>
  <?php 
 #Add Exam
 if (isset($_GET['examsuccess'])) {

@@ -3,10 +3,10 @@
 require_once 'conn.php';
 
 
-if (isset($_POST['save'])) {
+if ($_GET['enabled']) {
 
-	$id = $_POST['update_id'];
-  $status = "archive";
+	$id = $_GET['enabled'];
+  $status = "active";
 
 
     $sql = "UPDATE choose_question SET status = '$status' WHERE test_id = '$id'";
@@ -18,7 +18,7 @@ if (isset($_POST['save'])) {
       $query = mysqli_query($sqlcon, $data);
 
     	if ($query) {
-    		header("Location:../faculty/testyourself.php");
+    		header("Location:../faculty/archive_quizzes.php?m=1");
     	}
     	else{
     		echo mysqli_error($sqlcon);
@@ -29,5 +29,30 @@ if (isset($_POST['save'])) {
 
   		echo mysqli_error($sqlcon);
   	}
+}elseif ($_GET['disabled']) {
+  $id = $_GET['disabled'];
+  $status = "archive";
+
+
+    $sql = "UPDATE choose_question SET status = '$status' WHERE test_id = '$id'";
+    $query_run = mysqli_query($sqlcon, $sql);
+
+    if ($query_run) {
+
+      $data = "UPDATE student_choice SET question_stat = '$status' WHERE test_id ='$id'";
+      $query = mysqli_query($sqlcon, $data);
+
+      if ($query) {
+        header("Location:../faculty/testyourself.php?m=1");
+      }
+      else{
+        echo mysqli_error($sqlcon);
+      }
+
+    }
+    else {
+
+      echo mysqli_error($sqlcon);
+    }
 }    
 ?>

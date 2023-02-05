@@ -143,6 +143,21 @@ $suppd .= "</select>";
 					<li><a class="link_name" href="../faculty/log-history.php">Logs History</a></li>
 				</ul>
 			</li>
+			 <li class="navigation-list-item">
+                <div class="icon-link">
+                    <a href="#">
+                        <i class="fas fa-archive"></i>
+                        <span class="link_name">Archived</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow drop' ></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Archived</a></li>
+                    <li><a href="../faculty/archive_quizzes.php">Quiz & Longquiz</a></li>
+                    <li><a href="../faculty/archive_exam.php">Preboard exam</a></li>
+                    <li><a href="../faculty/archived_user_accounts.php">User Accounts</a></li>
+                </ul>
+            </li>
 			<li class="navigation-list">
 				<div class="profile-details">
 					 <?php
@@ -200,7 +215,18 @@ $suppd .= "</select>";
 
 	                            if (mysqli_num_rows($come)==0) {
 	                            	
-	                            	echo "<h5 class='text-center'>No notification Found</h5>";
+	                            	echo "<a class='dropdown-item d-flex align-items-center' >
+                                <div class='me-4'>
+                                     <div class='fa-stack fa-1x'>
+                                      <i class='fa fa-circle fa-stack-2x ms-2'></i>
+                                      <i class='fas fa-bell-slash fa-stack-1x ms-2 text-white'></i>
+                                    </div> 
+                                </div>
+                                <div class=''>
+                                    <div class='fw-bold h5 ms-4'>No notifications  yet</div>
+                                    <p class='small text-gray-500' >When get notifications, they'll show up here</p>
+                                </div>
+                            </a>";
 	                            }
 
 	                            if (mysqli_num_rows($come) >= 0) {

@@ -16,7 +16,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Accounts</title>
+	<title>Archived User Accounts</title>
 	<!-- Boostrap 5.2 -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<!-- CSS -->
@@ -160,7 +160,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Account Management</li>
+									<li class="breadcrumb-item active" aria-current="page">Archived Accounts</li>
 								</ol>
 							</nav>
 						</div>
@@ -247,7 +247,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					<div class="row">
 						<div class="col d-flex justify-content">
 							<div class="w-50">
-								<h2 class="text-dark text-start ps-3 fw-bold mt-4 "> Account Management</h2>
+								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ">Archived Accounts</h2>
 							</div>
 						</div>
 						<div class="row">
@@ -276,7 +276,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 
 												while ($row = mysqli_fetch_assoc($accounts)) { 
 													if ($row['section']=='4A') {
-														$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student' AND(accounts.section='4A') AND (accounts.status='active') OR (accounts.status='pending')");
+														$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student' AND(accounts.section='4A')  AND status = 'archive'");
 
 														while ($rows = mysqli_fetch_assoc($acc)) {?>
 															<tr>
@@ -292,13 +292,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	}
 																	elseif ($rows['status']=='pending') {
 																		echo '<span class="badge bg-warning text-dark p-2 px-2" style="font-size: 15px;">Pending</span>';
+																	}elseif ($rows['status']=='archive') {
+																		echo '<span class="badge bg-secondary text-white p-2 px-2" style="font-size: 15px;">Archived</span>';
 																	}
 																	?>
 																</td>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
 																	<?php
 																		$approve = $rows['status'];
 																		if ($approve == "pending") { ?>
@@ -308,14 +309,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	 ?>
 																	 <button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-secondary mx-2 approvebtn" data-bs-toggle="modal" type="button" disabled ><i class="fas fa-check-circle"></i></button>
 																	<?php } ?>
-																		<a href="../php/facul_archive_account.php?disabled=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
+																		<a href="../php/facul_archive_account.php?enabled=<?= $rows['acc_id']; ?>" class="btn btn-success mx-2 btn-del" ><i class="fas fa-trash-restore"></i></a>
 
 																	</div>
 																</td>
 															</tr>
 													<?php }
 												}elseif ($row['section']=='4B') {
-													$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student' AND(accounts.section='4B') AND (accounts.status='active') OR (accounts.status='pending')");
+													$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student' AND(accounts.section='4B')  AND status = 'archive'");
 													while ( $rows = mysqli_fetch_assoc($acc)) { ?>
 														   <tr>
 																<td><?php echo $rows['user_id'];  ?></td>
@@ -330,13 +331,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	}
 																	elseif ($rows['status']=='pending') {
 																		echo '<span class="badge bg-warning text-dark p-2 px-2" style="font-size: 15px;">Pending</span>';
+																	}elseif ($rows['status']=='archive') {
+																		echo '<span class="badge bg-secondary text-white p-2 px-2" style="font-size: 15px;">Archived</span>';
 																	}
 																	?>
 																</td>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
 																	<?php
 																		$approve = $rows['status'];
 																		if ($approve == "pending") { ?>
@@ -347,14 +349,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	 <button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-secondary mx-2 approvebtn" data-bs-toggle="modal" type="button" disabled ><i class="fas fa-check-circle"></i></button>
 																	<?php } ?>
 
-																		<a href="../php/facul_archive_account.php?disabled=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
+																		<a href="../php/facul_archive_account.php?enabled=<?= $rows['acc_id']; ?>" class="btn btn-success mx-2 btn-del" ><i class="fas fa-trash-restore"></i></a>
 
 																	</div>
 																</td>
 															</tr>
 													<?php }
 												}elseif ($row['section']=='4C') {
-													$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student'  AND (accounts.section='4C') AND (accounts.status='active') OR (accounts.status='pending')");
+													$acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student'  AND (accounts.section='4C')  AND status = 'archive'");
 													while ( $rows = mysqli_fetch_assoc($acc)) { ?>
 														 <tr>
 														 		<!---- ---- ----->
@@ -370,13 +372,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	}
 																	elseif ($rows['status']=='pending') {
 																		echo '<span class="badge bg-warning text-dark p-2 px-2" style="font-size: 15px;">Pending</span>';
+																	}elseif ($rows['status']=='archive') {
+																		echo '<span class="badge bg-secondary text-white p-2 px-2" style="font-size: 15px;">Archived</span>';
 																	}
 																	?>
 																</td>
 																<td>
 																	<div class="d-flex flex-row justify-content-center">
 																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-																		<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
 																	<?php
 																		$approve = $rows['status'];
 																		if ($approve == "pending") { ?>
@@ -387,7 +390,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 																	 <button data-id='<?php echo $rows['acc_id']; ?>' class="btn btn-secondary mx-2 approvebtn" data-bs-toggle="modal" type="button" disabled ><i class="fas fa-check-circle"></i></button>
 																	<?php } ?>
 
-																		<a href="../php/facul_archive_account.php?disabled=<?= $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
+																		<a href="../php/facul_archive_account.php?enabled=<?= $rows['acc_id']; ?>" class="btn btn-success mx-2 btn-del" ><i class="fas fa-trash-restore"></i></a>
 
 																	</div>
 																</td>
@@ -411,7 +414,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 		</div>
 	</section>
 	 <!-- ADD Student Account -->
-    <div class="modal fade" id="AddModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     	<div class="modal-dialog modal-lg">
     		<div class="modal-content">
     			<div class="modal-header">
@@ -511,7 +514,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
     </div>
 
     <!-- View  Account -->
-    <div class="modal fade" id="ViewAccount"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal fade" id="ViewAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     	<div class="modal-dialog modal-lg">
     		<div class="modal-content">
     			<div class="modal-header">
@@ -528,7 +531,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
     </div>
 
     <!-- Edit Account -->
-    <div class="modal fade" id="EditAccount" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal fade" id="EditAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     	<div class="modal-dialog modal-lg">
     		<div class="modal-content">
     			<div class="modal-header">
@@ -685,7 +688,7 @@ let arrow = document.querySelectorAll(".arrow");
  		Swal.fire({
 
  			title: 'Are you Sure?',
- 			text: 'Record will be archived',
+ 			text: 'Record will be restore',
  			icon: "warning",
  			type:'Warning',
  			showCancelButton:true,
@@ -707,8 +710,8 @@ let arrow = document.querySelectorAll(".arrow");
  		Swal.fire({
  			type: 'success',
  			icon: "success",
- 			title: 'Record Archive',
- 			text: 'Record has been archive!',
+ 			title: 'Record Restored',
+ 			text: 'Record has been restored!',
  		})
  	}
  </script>

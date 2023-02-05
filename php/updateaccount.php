@@ -16,7 +16,9 @@ if (isset($_POST['save'])) {
   $email_address = $_POST['email_address'];
   $mobile_no = $_POST['mobile_no'];
   $address = $_POST['address'];
-  $password = $_POST['password'];
+  $c_password = $_POST['c_password'];
+  $new_password = $_POST['new_password'];
+  $conf_password = $_POST['conf_password'];
   $type = $_POST['type'];
 
 
@@ -29,7 +31,7 @@ if (isset($_POST['save'])) {
 
     if (substr($image_type,0,5)=="image") {
 
-      $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', password='$password', image='$image_name',image_size='$image_Data' WHERE acc_id = '$update_id' ";
+      $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', password='$new_password', image='$image_name',image_size='$image_Data' WHERE acc_id = '$update_id' ";
 
       $query_run = mysqli_query($sqlcon,$query);
 
@@ -65,7 +67,7 @@ if (isset($_POST['save'])) {
   }
   else {
 
-    $queries= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', password='$password' WHERE acc_id = '$update_id' ";
+    $queries= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', password='$new_password' WHERE acc_id = '$update_id' ";
 
     $queries_run = mysqli_query($sqlcon,$queries);
 

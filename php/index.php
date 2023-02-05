@@ -230,7 +230,7 @@ if (isset($_GET['loginerror'])) {
 }
 #add accounts
 elseif (isset($_GET['registersucc'])) {
-  echo ' <script> swal("Check your email to verified your account and wait for approval.", " clicked the okay!", "success");
+  echo ' <script> swal("Check your email to verified your account.", " clicked the okay!", "success");
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
   </script>';
 }
@@ -251,7 +251,7 @@ elseif (isset($_GET['verifiedfailed'])) {
 }
 
 elseif (isset($_GET['already_exists'])) {
-  echo ' <script> swal("Email has already verified.please login", " clicked the okay!", "success");
+  echo ' <script> swal("Vefirication complete! Please wait for your account to be approve.", " clicked the okay!", "success");
   window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/php/index.php");
   </script>';
 }

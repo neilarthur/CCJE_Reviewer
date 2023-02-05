@@ -86,16 +86,26 @@ while ($row = mysqli_fetch_array($results)) {
 			</div>
 			<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 py-2">
 				<label for="user-password" class="d-flex ps-1 fw-bold">Current Password</label>
-				<input type="password" name="password" class="form-control" value="<?php echo $row['password']; ?>">
+				<div  class="input-group">
+					<input type="password" name="c_password" class="form-control" id="Current_password" value="<?php echo $row['password']; ?>">
+					<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="toggle" style="margin-left: -30px; cursor: pointer;"></i></span>
+				</div>
 			</div>
 			<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 py-2">
 				<label for="user-password" class="d-flex ps-1 fw-bold">New Password</label>
-				<input type="password" name="password" class="form-control" value="">
+				<div class="input-group">
+					<input type="password" name="new_password" class="form-control" id="Password"  value="">
+					<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i></span>
+				</div>
 			</div>
 			<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 py-2">
 				<label for="user-password" class="d-flex ps-1 fw-bold">Confirm Password</label>
-				<input type="password" name="password" class="form-control" value="">
+				<div class="input-group">
+					<input type="password" name="conf_password" class="form-control"  id="ConfirmPassword" value="">
+					<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePass" style="margin-left: -30px; cursor: pointer;"></i></span>
+					</div>
 			</div>
+			<div style="margin-top: 7px;" id="CheckPasswordMatch" class="fw-bold mb-2 ms-3"></div>
 		</div>
 		<div class="modal-footer border-0 d-flex justify-content-center mt-4">
 			<?php 
@@ -123,5 +133,64 @@ while ($row = mysqli_fetch_array($results)) {
  		}
  	}
  </script>
+ <script>
+$(document).ready(function () {
+	$("#ConfirmPassword").on('keyup', function(){
+		var password = $("#Password").val();
+		var confirmPassword = $("#ConfirmPassword").val();
+		if (password == confirmPassword) {
+			$("#CheckPasswordMatch").html("Password match!").css("color","green");
+		}
+		else if (password != confirmPassword){
+			$("#CheckPasswordMatch").html("Password does not match!").css("color","red");
+		}
+		else if (  confirmPassword == " "){
+			$("#CheckPasswordMatch").html("!").css("color","red");
+		}
+		else if ( password == "") {
+			$("#CheckPasswordMatch").html("!").css("color","red");
+		}
+		else {
+			return false;
+		}
+	});
+});
+</script>
+<script type="text/javascript">
+	const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#Password');
+
+  togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+<script type="text/javascript">
+  const togglePass = document.querySelector('#togglePass');
+  const pass = document.querySelector('#ConfirmPassword');
+
+  togglePass.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const set = pass.getAttribute('type') === 'password' ? 'text' : 'password';
+    pass.setAttribute('type', set);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+<script type="text/javascript">
+  const toggle = document.querySelector('#toggle');
+  const c_password = document.querySelector('#Current_password');
+
+  toggle.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = c_password.getAttribute('type') === 'password' ? 'text' : 'password';
+    c_password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
 
 <?php } ?>

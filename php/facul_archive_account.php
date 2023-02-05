@@ -4,30 +4,59 @@ session_start();
 
 require_once 'conn.php';
 
-$log = $_SESSION['acc_id'];
-$user_del = "Account has been delete";
-$id = $_GET['id'];
-$status = 'archive';
+if ($_GET['disabled']) {
+	$log = $_SESSION['acc_id'];
+	$user_del = "Account has been delete";
+	$id = $_GET['disabled'];
+	$status = 'archive';
 
-$sql= "UPDATE accounts SET status = '$status' WHERE acc_id='$id' ";
-$query_run = mysqli_query($sqlcon, $sql);
+	$sql= "UPDATE accounts SET status = '$status' WHERE acc_id='$id' ";
+	$query_run = mysqli_query($sqlcon, $sql);
 
-if ($query_run) {
+	if ($query_run) {
 
-	$log_activity = "INSERT INTO logs (acc_id,login_time,action)VALUES('$log',now(),'$user_del')";
-	$log_run = mysqli_query($sqlcon,$log_activity);
+		$log_activity = "INSERT INTO logs (acc_id,login_time,action)VALUES('$log',now(),'$user_del')";
+		$log_run = mysqli_query($sqlcon,$log_activity);
 
-	if ($log_run) {
+		if ($log_run) {
 
-		header("Location:../faculty/accounts_manage.php?m=1");
+			header("Location:../faculty/accounts_manage.php?m=1");
+		}
+		else{
+			
+			echo mysqli_error($sqlcon);
+		}
 	}
-	else{
-		
+	else {
+
 		echo mysqli_error($sqlcon);
-	}
-}
-else {
+	}   
+}elseif ($_GET['enabled']) {
+	$log = $_SESSION['acc_id'];
+	$user_del = "Account has been restored";
+	$id = $_GET['enabled'];
+	$status = 'active';
 
-	echo mysqli_error($sqlcon);
-}   
+	$sql= "UPDATE accounts SET status = '$status' WHERE acc_id='$id' ";
+	$query_run = mysqli_query($sqlcon, $sql);
+
+	if ($query_run) {
+
+		$log_activity = "INSERT INTO logs (acc_id,login_time,action)VALUES('$log',now(),'$user_del')";
+		$log_run = mysqli_query($sqlcon,$log_activity);
+
+		if ($log_run) {
+
+			header("Location:../faculty/archived_user_accounts.php?m=1");
+		}
+		else{
+			
+			echo mysqli_error($sqlcon);
+		}
+	}
+	else {
+
+		echo mysqli_error($sqlcon);
+	} 
+}
 ?>

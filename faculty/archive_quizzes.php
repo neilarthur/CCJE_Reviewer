@@ -32,7 +32,7 @@ $suppd .= "</select>";
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Test Yourself</title>
+	<title>Archived Quizzes</title>
 	<!-- Boostrap 5.2 -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<!-- CSS -->
@@ -178,7 +178,7 @@ $suppd .= "</select>";
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Manage Test</li>
+									<li class="breadcrumb-item active" aria-current="page">Archive Test</li>
 								</ol>
 							</nav>
 						</div>
@@ -265,16 +265,13 @@ $suppd .= "</select>";
 					<div class="row">
 						<div class="col d-flex justify-content">
 							<div class="w-50">
-								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Test Management</h2>
+								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Archived Test</h2>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col ">
 								<div class="card">
 									<div class="card-body rounded-3 table-responsive-xl">
-										<div class="d-flex justify-content-end mb-3">
-											<button type="button" class="btn px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #8C0000;"><i class="fas fa-plus me-1"></i>ADD</button>
-										</div>
 										<table class="table table-hover align-items-middle bg-light m-2" width="100%" id="examTab">
 												<thead>
 												<tr>
@@ -298,7 +295,7 @@ $suppd .= "</select>";
 
 													if ($lows['section']=='4A') {
 														
-														$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND(accounts.section='4A') AND (choose_question.status='active')");
+														$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND(accounts.section='4A') AND (choose_question.status='archive')");
 
 														while ($rows = mysqli_fetch_assoc($exams)) {
 
@@ -328,40 +325,14 @@ $suppd .= "</select>";
 
 													            ?>
 																<td>
-																 <?php
-
-													            $trials_done = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_done,accounts,choose_question WHERE (tbl_trial_done.acc_id=accounts.acc_id) AND (tbl_trial_done.test_id = choose_question.test_id) AND (tbl_trial_done.acc_id='{$_SESSION['acc_id']}') AND (tbl_trial_done.test_id='{$rows['test_id']}')");
-
-													            if (mysqli_num_rows($trials_done) == 0) {
-													            	
-													            	echo '																	<div class="d-flex flex-row justify-content-center">
-																	<form action="trials_done.php" method="POST">
-																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
-																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
-																		
-																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye" ></i></button>
-																	</form>';
-													            }
-													            elseif (mysqli_num_rows($trials_done) >= 0) {
-
-													            	$corner = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_result,accounts,choose_question WHERE (tbl_trial_result.acc_id= accounts.acc_id) AND (tbl_trial_result.test_id=choose_question.test_id) AND tbl_trial_result.acc_id='{$_SESSION['acc_id']}' AND tbl_trial_result.test_id='{$rows['test_id']}'");
-
-													            	$curl = mysqli_fetch_assoc($corner);
-
-													            	echo '<div class="d-flex flex-row justify-content-center"><a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2"><i class="fas fa-eye" ></i></a>';
-													            }
-													            ?>
-																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>&total=<?php echo $rows['total_quest']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
-
-																		<a href="../php/del_test.php?disabled=<?= $rows['test_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
-																	</div>
+																	<a href="../php/del_test.php?enabled=<?= $rows['test_id']; ?>" class="btn btn-success mx-3 btn-del ms-5" ><i class="fas fa-trash-restore"></i></a>
 																</td>
 															</tr>
 															<?php
 														}
 													}elseif ($lows['section']=='4B') {
 
-														$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND (accounts.section='4B') AND (choose_question.status='active')");
+														$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND (accounts.section='4B') AND (choose_question.status='archive')");
 
 														while ($rows = mysqli_fetch_assoc($exams)) {
 
@@ -391,40 +362,14 @@ $suppd .= "</select>";
 
 													            ?>
 																<td>
-																 <?php
-
-													            $trials_done = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_done,accounts,choose_question WHERE (tbl_trial_done.acc_id=accounts.acc_id) AND (tbl_trial_done.test_id = choose_question.test_id) AND (tbl_trial_done.acc_id='{$_SESSION['acc_id']}') AND (tbl_trial_done.test_id='{$rows['test_id']}')");
-
-													            if (mysqli_num_rows($trials_done) == 0) {
-													            	
-													            	echo '																	<div class="d-flex flex-row justify-content-center">
-																	<form action="trials_done.php" method="POST">
-																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
-																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
-																		
-																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye" ></i></button>
-																	</form>';
-													            }
-													            elseif (mysqli_num_rows($trials_done) >= 0) {
-
-													            	$corner = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_result,accounts,choose_question WHERE (tbl_trial_result.acc_id= accounts.acc_id) AND (tbl_trial_result.test_id=choose_question.test_id) AND tbl_trial_result.acc_id='{$_SESSION['acc_id']}' AND tbl_trial_result.test_id='{$rows['test_id']}'");
-
-													            	$curl = mysqli_fetch_assoc($corner);
-
-													            	echo '<div class="d-flex flex-row justify-content-center"><a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-eye" ></i></a>';
-													            }
-													            ?>
-																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
-
-																		<a href="../php/del_test.php?disabled=<?= $rows['test_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
-																	</div>
+																	<a href="../php/del_test.php?enabled=<?= $rows['test_id']; ?>" class="btn btn-success mx-3 btn-del ms-5" ><i class="fas fa-trash-restore"></i></a>
 																</td>
 															</tr>
 															<?php
 														}
 													}elseif ($lows['section']=='4C') {
 
-														$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND (accounts.section='4C') AND (choose_question.status='active')");
+														$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND (accounts.section='4C') AND (choose_question.status='archive')");
 
 														while ($rows = mysqli_fetch_assoc($exams)) {
 
@@ -455,35 +400,7 @@ $suppd .= "</select>";
 
 													            ?>
 																<td>
-													            <?php
-
-													            $trials_done = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_done,accounts,choose_question WHERE (tbl_trial_done.acc_id=accounts.acc_id) AND (tbl_trial_done.test_id = choose_question.test_id) AND (tbl_trial_done.acc_id='{$_SESSION['acc_id']}') AND (tbl_trial_done.test_id='{$rows['test_id']}')");
-
-													            if (mysqli_num_rows($trials_done) == 0) {
-													            	
-													            	echo '													
-													            	<div class="d-flex flex-row justify-content-center">
-																	<form action="trials_done.php" method="POST">
-																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
-																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
-
-																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye"></i></button>
-																	</form>';
-													            }
-													            elseif (mysqli_num_rows($trials_done) >= 0) {
-
-													            	$corner = mysqli_query($sqlcon,"SELECT * FROM tbl_trial_result,accounts,choose_question WHERE (tbl_trial_result.acc_id= accounts.acc_id) AND (tbl_trial_result.test_id=choose_question.test_id) AND tbl_trial_result.acc_id='{$_SESSION['acc_id']}' AND tbl_trial_result.test_id='{$rows['test_id']}'");
-
-													            	$curl = mysqli_fetch_assoc($corner);
-
-													            	echo '<div class="d-flex flex-row justify-content-center"><a href="../php/view_trial_result.php?id='.$curl['test_id'].'&last='.$curl['trial_result_id'].'" class="btn btn-primary mx-2" ><i class="fas fa-eye"></i></a>';
-													            }
-													            ?>
-																		
-																		<a href="../php/editing-quiz.php?id=<?php echo $rows['test_id']?>&total=<?php echo $rows['total_quest']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
-
-																		<a href="../php/del_test.php?disabled=<?= $rows['test_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
-																	</div>
+																	<a href="../php/del_test.php?enabled=<?= $rows['test_id']; ?>" class="btn btn-success mx-3 btn-del ms-5" ><i class="fas fa-trash-restore"></i></a>
 																</td>
 															</tr>
 														<?php
@@ -505,7 +422,7 @@ $suppd .= "</select>";
 			</div>
 		</section>
 		<!-- Archive Account -->
-		<div class="modal fade" id="ArchiveAccount" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+		<div class="modal fade" id="ArchiveAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 			<div class="modal-dialog">
 	    		<div class="modal-content">
 	    			<div class="modal-header flex-column border-0">
@@ -513,7 +430,7 @@ $suppd .= "</select>";
         				<div class="icon-box mt-3">
         					<i class="far fa-times-circle fa-5x text-danger"></i>
         				</div>
-        				<h3 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h3>
+        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h4>
 	    			</div>
 	    			<form class="form" action="../php/del_test.php" method="POST">
 	    				<div class="modal-body">
@@ -700,22 +617,6 @@ let arrow = document.querySelectorAll(".arrow");
   });
 </script>
 <script type="text/javascript">
- 	$(document).ready(function() {
- 		$('.deletebtn').on('click', function() {
-
- 			$('#ArchiveAccount').modal('show');
-
-            $tr = $(this).closest('tr');
-
-            var data = $tr.children("td").map(function() {
-                return $(this).text();
-            }).get();
-            console.log(data);
-            $('#delete_id').val(data[0]);
-        })
- 	});
-</script>
-<script type="text/javascript">
  	$('.btn-del').on('click',function(e){
 
  		e.preventDefault();
@@ -725,7 +626,7 @@ let arrow = document.querySelectorAll(".arrow");
  		Swal.fire({
 
  			title: 'Are you Sure?',
- 			text: 'Record will be archived',
+ 			text: 'Record will be restore',
  			icon: "warning",
  			type:'Warning',
  			showCancelButton:true,
@@ -747,11 +648,27 @@ let arrow = document.querySelectorAll(".arrow");
  		Swal.fire({
  			type: 'success',
  			icon: "success",
- 			title: 'Record Archive',
- 			text: 'Record has been archive!',
+ 			title: 'Record Restored',
+ 			text: 'Record has been restored!',
  		})
  	}
  </script>
+<script type="text/javascript">
+ 	$(document).ready(function() {
+ 		$('.deletebtn').on('click', function() {
+
+ 			$('#ArchiveAccount').modal('show');
+
+            $tr = $(this).closest('tr');
+
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+            console.log(data);
+            $('#delete_id').val(data[0]);
+        })
+ 	});
+</script>
  <!-- Edit modal --->
  <script type="text/javascript">
 

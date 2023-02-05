@@ -24,7 +24,7 @@ function send_code($access,$sound) {
 	//Set the hostname of the mail server
 	$mail->Host = 'smtp.gmail.com';
 
-	$mail->SMTPDebug  = 1;
+	$mail->SMTPDebug  = false;
 	//Use `$mail->Host = gethostbyname('smtp.gmail.com');`
 	//if your network does not support SMTP over IPv6,
 	//though this may cause issues with TLS
@@ -78,7 +78,77 @@ function send_code($access,$sound) {
 
 	//Set the subject line
 	$mail->Subject = "CCJELSPU BOARD EXAMINATION LICENSURE";
-	$mail->Body = $access;
+	$mail->Body = "<html>
+  <body style='background-color: #f6f6f6;font-family: sans-serif;-webkit-font-smoothing: antialiased;font-size: 14px;line-height: 1.4;margin: 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+    <span style='color: transparent;display: none;height: 0;max-height: 0;max-width: 0;opacity: 0;overflow: hidden;mso-hide: all;visibility: hidden;width: 0;'>This is preheader text. Some clients will show this text as a preview.</span>
+    <table style='border-collapse: separate;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;background-color: #f6f6f6;''>
+      <tr>
+        <td style='font-family: sans-serif;font-size: 14px;vertical-align: top;'>&nbsp;</td>
+        <td  style='font-family: sans-serif;font-size: 14px;vertical-align: top;display: block;max-width: 580px;padding: 10px;width: 580px;margin: 0 auto !important;'>
+          <div  style='font-family: sans-serif;font-size: 14px;vertical-align: top;display: block;max-width: 580px;padding: 10px;width: 580px;margin: 0 auto !important;'>
+
+            <!-- START CENTERED WHITE CONTAINER -->
+            <table  style='border-collapse: separate;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;background: #ffffff;border-radius: 3px;'>
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td style='font-family: sans-serif;font-size: 14px;vertical-align: top;box-sizing: border-box;padding: 20px;'>
+                  <table role='presentation' border='0' cellpadding='0' cellspacing='0' style='border-collapse: separate;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;'>
+                    <tr>
+                      <td style='font-family: sans-serif;font-size: 14px;vertical-align: top;'>
+                        <h1 style='font-weight: bold;color: #000000;font-family: sans-serif;line-height: 1.4;margin: 0;margin-bottom: 30px;font-size: 35px;text-align: center;text-transform: capitalize;'>CCJE Automated Licensure Reviewer</h1>
+                        <p style='font-family: sans-serif;font-size: 14px;font-weight: normal;margin: 0;margin-bottom: 15px;'>Hello there,</p>
+                        <p style='justify-content: justify;font-family: sans-serif;font-size: 14px;font-weight: normal;margin: 0;margin-bottom: 15px;'>You're receiving this message because you are trying to access the examination.</p>
+                        <p style='justify-content: justify;font-family: sans-serif;font-size: 14px;font-weight: normal;margin: 0;margin-bottom: 15px;'>Please enter the code below to proceed answering the examination.</p>
+                        <p style='justify-content: justify;font-family: sans-serif;font-size: 14px;font-weight: normal;margin: 0;margin-bottom: 15px;'>Thank you! Enjoy answering.</p>
+                        <table style='margin-top: 50px;margin-bottom: 50px;border-collapse: separate;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;box-sizing: border-box;'>
+                          <tbody>
+                            <tr>
+                              <td align='center' style='font-family: sans-serif;font-size: 14px;vertical-align: top;padding-bottom: 15px;'>
+                                <table style='border-collapse: separate;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: auto;'>
+                                  <tbody>
+                                    <tr>
+	                                  <td><p style='font-weight: bold;color: #000000;font-family: sans-serif;line-height: 1.4;margin: 0;margin-bottom: 10px; font-size:25px;text-align: center;'>Access Code:</p></td>
+	                                  </tr>
+                                    <tr>
+                                      <td><h3 style='font-weight: bold;color: #000000;font-family: sans-serif;line-height: 1.4;margin: 0;margin-bottom: 30px;font-size: 35px;text-align: center;'>$access</h3></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+            <!-- END MAIN CONTENT AREA -->
+            </table>
+            <!-- END CENTERED WHITE CONTAINER -->
+
+            <!-- START FOOTER -->
+            <div class='footer' style='clear: both;margin-top: 10px;text-align: center;width: 100%;'>
+              <table style='border-collapse: separate;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;'>
+                <tr>
+                  <td  style='font-family: sans-serif;font-size: 12px;vertical-align: top;padding-bottom: 10px;padding-top: 10px;color: #999999;text-align: center;'>
+                    <span class='apple-link' style='color: #999999;font-size: 12px;text-align: center;'> © 2022 Copyright: College of Criminal Justice and Education LSPU Sta. Cruz Campus</span>
+                    <br> Ask further question message me at <a style='color: #999999;text-decoration: underline;font-size: 12px;text-align: center;'>marklito.repugia@lspu.edu.ph</a>.
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- END FOOTER -->
+
+          </div>
+        </td>
+        <td style='font-family: sans-serif;font-size: 14px;vertical-align: top;'>&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</html>";
 
 	$mail->send();
 }
