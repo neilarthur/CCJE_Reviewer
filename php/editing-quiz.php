@@ -333,8 +333,24 @@ $suppd .= "</select>";
 												</span>
 												 <?php }  ?>
 											</div>
-											<input type="hidden" name="update" value="<?php echo $_GET['id']; ?>">
-											<input class="btn btn-success px-4 pb-2" type="submit" name="save" value="Save">
+
+											<?php
+
+											$clerks= mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE stat_question='Ready' AND test_id = '$id'");
+
+											if (mysqli_num_rows($clerks) == 0) {
+												
+												echo '<input type="hidden" name="update" value="'.$_GET['id'].'">
+											<input class="btn btn-success px-4 pb-2" type="submit" name="save" value="Save">';
+											}
+											elseif (mysqli_num_rows($clerks)>=0) {
+												
+												echo '<input type="hidden" name="update" value="'.$_GET['id'].'">
+											<input class="btn btn-secondary px-4 pb-2" type="submit" name="save" value="Save" disabled>';
+											}
+
+											?>
+
 											
 										</div>
 										

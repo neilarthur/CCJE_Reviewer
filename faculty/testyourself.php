@@ -334,13 +334,27 @@ $suppd .= "</select>";
 
 													            if (mysqli_num_rows($trials_done) == 0) {
 													            	
-													            	echo '																	<div class="d-flex flex-row justify-content-center">
+													            	if ($rows['stat_question']=='Ready') {
+													            		
+													            		echo '													
+													            		<div class="d-flex flex-row justify-content-center">
 																	<form action="trials_done.php" method="POST">
 																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
 																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
-																		
-																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye" ></i></button>
+
+																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye"></i></button>
 																	</form>';
+													            	}
+													            	elseif ($rows['stat_question']=='No question') {
+													            		
+													            		echo '<div class="d-flex flex-row justify-content-center">
+																	<form action="trials_done.php" method="POST">
+																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
+																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
+
+																		<button type="submit" name="submit" class="btn btn-secondary mx-2" disabled><i class="fas fa-eye"></i></button>
+																	</form>';
+													            	}
 													            }
 													            elseif (mysqli_num_rows($trials_done) >= 0) {
 
@@ -397,13 +411,27 @@ $suppd .= "</select>";
 
 													            if (mysqli_num_rows($trials_done) == 0) {
 													            	
-													            	echo '																	<div class="d-flex flex-row justify-content-center">
+													            	if ($rows['stat_question']=='Ready') {
+													            		
+													            		echo '													
+													            		<div class="d-flex flex-row justify-content-center">
 																	<form action="trials_done.php" method="POST">
 																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
 																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
-																		
-																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye" ></i></button>
+
+																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye"></i></button>
 																	</form>';
+													            	}
+													            	elseif ($rows['stat_question']=='No question') {
+													            		
+													            		echo '<div class="d-flex flex-row justify-content-center">
+																	<form action="trials_done.php" method="POST">
+																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
+																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
+
+																		<button type="submit" name="submit" class="btn btn-secondary mx-2" disabled><i class="fas fa-eye"></i></button>
+																	</form>';
+													            	}
 													            }
 													            elseif (mysqli_num_rows($trials_done) >= 0) {
 
@@ -461,14 +489,27 @@ $suppd .= "</select>";
 
 													            if (mysqli_num_rows($trials_done) == 0) {
 													            	
-													            	echo '													
-													            	<div class="d-flex flex-row justify-content-center">
+													            	if ($rows['stat_question']=='Ready') {
+													            		
+													            		echo '													
+													            		<div class="d-flex flex-row justify-content-center">
 																	<form action="trials_done.php" method="POST">
 																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
 																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
 
 																		<button type="submit" name="submit" class="btn btn-primary mx-2"><i class="fas fa-eye"></i></button>
 																	</form>';
+													            	}
+													            	elseif ($rows['stat_question']=='No question') {
+													            		
+													            		echo '<div class="d-flex flex-row justify-content-center">
+																	<form action="trials_done.php" method="POST">
+																		<input type="hidden" name="update_id" value="'.$rows['test_id'] .'">
+																		<input type="hidden" name="update_acc_id" value="'. $_SESSION['acc_id'].'">
+
+																		<button type="submit" name="submit" class="btn btn-secondary mx-2" disabled><i class="fas fa-eye"></i></button>
+																	</form>';
+													            	}
 													            }
 													            elseif (mysqli_num_rows($trials_done) >= 0) {
 

@@ -316,6 +316,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                     <div class="card-header pb-0">
                         <p  class="fw-bold text-primary h3">Upcoming</p>
                     </div>
+                                        <p  class="fw-bold text-primary mx-3 ">Quiz and Long Quiz</p>
                     <div class="card-body p-3">
                         <table class="table table-hover table-light">
                             <thead>
@@ -323,56 +324,291 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                             <tbody>
                             <?php
 
+                            
                             $date = date('d-m-y h:i:s a');
 
-                            $acc = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}'");
+                            $accounted = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = {$_SESSION['acc_id']}");
 
-                            while ($upcoming= mysqli_fetch_assoc($acc)) {
-                                if ($upcoming ['section'] == '4C') {
+                            while ($blokeed = mysqli_fetch_assoc($accounted)) {
+                                
 
-
-                                    $done = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done,choose_question,accounts WHERE(tbl_marks_done.test_id=choose_question.test_id) AND(accounts.acc_id=tbl_marks_done.acc_id) AND accounts.acc_id = '{$_SESSION['acc_id']}'");
-
-                                    if (mysqli_num_rows($done) >0) {
-                                        
-                                        echo '<tr>
-                                            <a href="">
-                                                <td class="text-capitalize"><b class="me-1">No Upcomming Schedule 1</b></td>
-                                            </a>
-                                        </tr> ';
-                                    }
-                                    elseif (mysqli_num_rows($done) == 0) {
-
-                                        $quiz1cs = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE  (choose_question.prepared_by = accounts.acc_id) AND (choose_question.section='4C')");
-
-                                        while ($quiz_query = mysqli_fetch_assoc($quiz1cs)) {
-
-                                            $date1 = date('d-m-y g:i a ', strtotime($quiz_query['end_day']));
+                                if ($blokeed['section'] == '4C') {
+                                    
+                                    $query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4C') AND (stat_question='Ready')");
 
 
-                                            if ($date1 >= $date) {
+                                    while ($sched = mysqli_fetch_assoc($query)) {
+
+                                        $left = mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id='{$sched['test_id']}'");
+
+                                        $follow = mysqli_fetch_array($left);
+
+                                        $boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$sched['test_id']}'");
+
+                                        $laws = mysqli_fetch_assoc($boast);
+
+                                        $night = date('d-m-y h:i:s a',strtotime($sched['end_day']));
+
+                                        $night2 = date('d-m-y h:i:s a',strtotime($follow['end_day']));
+
+                                        if (mysqli_num_rows($boast) == 0) {
 
 
+                                            if ($night2 <= $date) {
+                                                
                                             }
                                             else {
 
-                                                echo '<tr>
-                                            <a href="">
-                                                <td class="text-capitalize"><b class="me-1">'.$quiz_query['quiz_title'].'</b>&nbsp;'.$quiz_query['subject_name'].'</td>
-                                                <td class="">'.$date1.'</td>
-                                            </a>
-                                        </tr> ';
+                                                 echo '<tr>
+                                                <a href="">
+                                                    <td class="text-capitalize"><b class="me-1">'.$sched['quiz_title'].'</b>&nbsp;'.$sched['subject_name'].'</td>
+                                                    <td class="">'.$night.'</td>
+                                                </a>
+                                            </tr> ';
                                             }
+                                        }
+                                        elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $follow['test_id']) {
                                             
                                         }
-
+                                        
                                     }
+
+                                }
+                                elseif ($blokeed['section'] == '4B') {
+                                    
+                                    $query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4B') AND (stat_question='Ready')");
+
+
+                                    while ($sched = mysqli_fetch_assoc($query)) {
+
+                                        $left = mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id='{$sched['test_id']}'");
+
+                                        $follow = mysqli_fetch_array($left);
+
+                                        $boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$sched['test_id']}'");
+
+                                        $laws = mysqli_fetch_assoc($boast);
+
+                                        $night = date('d-m-y h:i:s a',strtotime($sched['end_day']));
+
+                                        $night2 = date('d-m-y h:i:s a',strtotime($follow['end_day']));
+
+                                        if (mysqli_num_rows($boast) == 0) {
+
+
+                                            if ($night2 <= $date) {
+                                                
+                                            }
+                                            else {
+
+                                                 echo '<tr>
+                                                <a href="">
+                                                    <td class="text-capitalize"><b class="me-1">'.$sched['quiz_title'].'</b>&nbsp;'.$sched['subject_name'].'</td>
+                                                    <td class="">'.$night.'</td>
+                                                </a>
+                                            </tr> ';
+                                            }
+                                        }
+                                        elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $follow['test_id']) {
+                                            
+                                        }
+                                        
+                                    }
+
+                                }
+                                elseif ($blokeed['section'] == '4A') {
+                                    
+                                    $query = mysqli_query($sqlcon,"SELECT * FROM accounts, choose_question WHERE (accounts.acc_id=choose_question.prepared_by) AND (choose_question.status='active') AND (choose_question.section ='4A') AND (stat_question='Ready')");
+
+
+                                    while ($sched = mysqli_fetch_assoc($query)) {
+
+                                        $left = mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id='{$sched['test_id']}'");
+
+                                        $follow = mysqli_fetch_array($left);
+
+                                        $boast = mysqli_query($sqlcon,"SELECT * FROM tbl_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND test_id = '{$sched['test_id']}'");
+
+                                        $laws = mysqli_fetch_assoc($boast);
+
+                                        $night = date('d-m-y h:i:s a',strtotime($sched['end_day']));
+
+                                        $night2 = date('d-m-y h:i:s a',strtotime($follow['end_day']));
+
+                                        if (mysqli_num_rows($boast) == 0) {
+
+
+                                            if ($night2 <= $date) {
+                                                
+                                            }
+                                            else {
+
+                                                 echo '<tr>
+                                                <a href="">
+                                                    <td class="text-capitalize"><b class="me-1">'.$sched['quiz_title'].'</b>&nbsp;'.$sched['subject_name'].'</td>
+                                                    <td class="">'.$night.'</td>
+                                                </a>
+                                            </tr> ';
+                                            }
+                                        }
+                                        elseif ($laws['acc_id'] == $_SESSION['acc_id'] AND $laws['test_id'] == $follow['test_id']) {
+                                            
+                                        }
+                                        
+                                    }
+
                                 }
                             }
-
                             ?>
 
+                            </tbody>
+                        </table>
+
+                        <p  class="fw-bold text-primary">Pre Board Exam</p>
+                        <table class="table table-hover table-light">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            
+                            $date1 = date('d-m-y h:i:s a');
+
+                            $accounted1 = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = {$_SESSION['acc_id']}");
+
+                            while ($blokeed1 = mysqli_fetch_assoc($accounted1)) {
                                 
+
+                                if ($blokeed1['section'] == '4C') {
+                                    
+                                    $query1 = mysqli_query($sqlcon,"SELECT * FROM accounts, tbl_pre_question WHERE (accounts.acc_id=tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='active') AND (stat_exam='Ready')");
+
+
+                                    while ($sched1 = mysqli_fetch_assoc($query1)) {
+
+                                        $left1 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id='{$sched1['pre_exam_id']}'");
+
+                                        $follow1 = mysqli_fetch_array($left1);
+
+                                        $boast1 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND pre_exam_id = '{$sched1['pre_exam_id']}'");
+
+                                        $laws1 = mysqli_fetch_assoc($boast1);
+
+                                        $night1 = date('d-m-y h:i:s a',strtotime($sched1['end_date']));
+
+                                        $night21 = date('d-m-y h:i:s a',strtotime($follow1['start_date']));
+
+                                        if (mysqli_num_rows($boast1) == 0) {
+
+
+                                            if ($night1 <= $date1) {
+                                                
+                                            }
+                                            else {
+
+                                                 echo '<tr>
+                                                <a href="">
+                                                    <td class="text-capitalize"><b class="me-1">'.$sched1['subjects'].'</b>&nbsp;</td>
+                                                    <td class="">'.$night1.'</td>
+                                                </a>
+                                            </tr> ';
+                                            }
+                                        }
+                                        elseif ($laws1['acc_id'] == $_SESSION['acc_id'] AND $laws1['pre_exam_id'] == $follow1['pre_exam_id']) {
+                                            
+                                        }
+                                        
+                                    }
+
+                                }
+                                elseif ($blokeed1['section'] == '4B') {
+                                    
+                                     
+                                    $query1 = mysqli_query($sqlcon,"SELECT * FROM accounts, tbl_pre_question WHERE (accounts.acc_id=tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='active') AND (stat_exam='Ready')");
+
+
+                                    while ($sched1 = mysqli_fetch_assoc($query1)) {
+
+                                        $left1 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id='{$sched1['pre_exam_id']}'");
+
+                                        $follow = mysqli_fetch_array($left);
+
+                                        $boast = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND pre_exam_id = '{$sched1['pre_exam_id']}'");
+
+                                        $laws1 = mysqli_fetch_assoc($boast1);
+
+                                        $night1 = date('d-m-y h:i:s a',strtotime($sched1['end_date']));
+
+                                        $night21 = date('d-m-y h:i:s a',strtotime($follow1['start_date']));
+
+                                        if (mysqli_num_rows($boast1) == 0) {
+
+
+                                            if ($night1 <= $date1) {
+                                                
+                                            }
+                                            else {
+
+                                                 echo '<tr>
+                                                <a href="">
+                                                    <td class="text-capitalize"><b class="me-1">'.$sched1['quiz_title'].'</b>&nbsp;'.$sched1['subject_name'].'</td>
+                                                    <td class="">'.$night1.'</td>
+                                                </a>
+                                            </tr> ';
+                                            }
+                                        }
+                                        elseif ($laws1['acc_id'] == $_SESSION['acc_id'] AND $laws1['pre_exam_id'] == $follow1['pre_exam_id']) {
+                                            
+                                        }
+                                        
+                                    }
+
+                                }
+                                elseif ($blokeed['section'] == '4A') {
+                                    
+                                    $query1 = mysqli_query($sqlcon,"SELECT * FROM accounts, tbl_pre_question WHERE (accounts.acc_id=tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='active') AND (stat_exam='Ready')");
+
+
+                                    while ($sched1 = mysqli_fetch_assoc($query1)) {
+
+                                        $left1 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id='{$sched1['pre_exam_id']}'");
+
+                                        $follow = mysqli_fetch_array($left);
+
+                                        $boast = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_marks_done WHERE acc_id = '{$_SESSION['acc_id']}' AND pre_exam_id = '{$sched1['pre_exam_id']}'");
+
+                                        $laws1 = mysqli_fetch_assoc($boast1);
+
+                                        $night1 = date('d-m-y h:i:s a',strtotime($sched1['end_date']));
+
+                                        $night21 = date('d-m-y h:i:s a',strtotime($follow1['start_date']));
+
+                                        if (mysqli_num_rows($boast1) == 0) {
+
+
+                                            if ($night1 <= $date1) {
+                                                
+                                            }
+                                            else {
+
+                                                 echo '<tr>
+                                                <a href="">
+                                                    <td class="text-capitalize"><b class="me-1">'.$sched1['quiz_title'].'</b>&nbsp;'.$sched1['subject_name'].'</td>
+                                                    <td class="">'.$night1.'</td>
+                                                </a>
+                                            </tr> ';
+                                            }
+                                        }
+                                        elseif ($laws1['acc_id'] == $_SESSION['acc_id'] AND $laws1['pre_exam_id'] == $follow1['pre_exam_id']) {
+                                            
+                                        }
+                                        
+                                    }
+
+                                }
+                            }
+                            ?>
+
                             </tbody>
                         </table> 
                     </div>

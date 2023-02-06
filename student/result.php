@@ -336,13 +336,22 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                        $wrong =  $sac - $res;
                        $wrong_t =  $wrong / $sac * 100;
 
+                       if ($rows['score_percent'] <= 75) {
+                          
+                          $progress_bar = "border-danger";
+                       }
+                       elseif ($rows['score_percent'] >= 75) {
+                         
+                         $progress_bar = "border-success";
+                       }
+
                       ?>
             <div class="progress mx-auto" data-value='<?php echo $total; ?>'>
               <span class="progress-left">
-                <span class="progress-bar border-success"></span>
+                <span class="progress-bar <?php echo $progress_bar; ?>"></span>
               </span>
               <span class="progress-right">
-                <span class="progress-bar border-success"></span>
+                <span class="progress-bar <?php echo $progress_bar; ?>"></span>
               </span>
               <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                 <div class="h2 font-weight-bold"><?php echo $total; ?><sup class="small">%</sup></div>
