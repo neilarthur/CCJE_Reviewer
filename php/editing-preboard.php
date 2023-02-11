@@ -323,8 +323,23 @@ function getName($n) {
 													   ?>   
 												</span>
 											</div>
-											<input type="hidden" name="pre_boards" value="<?php echo $_GET['id']; ?>">
-											<input class="btn btn-success px-4 pb-2" type="submit" name="save" value="Save">
+											<?php 
+
+											$save= mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE stat_exam='Ready' AND pre_exam_id = '$id'");
+
+											if (mysqli_num_rows($save) == 0) {
+												
+												echo '<input type="hidden" name="update" value="'.$_GET['id'].'">
+											<input class="btn btn-success px-4 pb-2" type="submit" name="save" value="Save">';
+											}
+											elseif (mysqli_num_rows($save)>=0) {
+												
+												echo '<input type="hidden" name="update" value="'.$_GET['id'].'">
+											<input class="btn btn-secondary px-4 pb-2" type="submit" name="save" value="Save" disabled>';
+											}
+
+
+											?>
 										</div>
 									</div>
 								</div>
@@ -413,8 +428,8 @@ function getName($n) {
 												</div>
 											</div>
 										</div>
-										<div class="table-responsive">
-											<table class="table bg-light table-hover" id="#">
+										<div class="table-responsive-xl">
+											<table class="table bg-light table-hover" id="question">
 												<thead>
 													<tr>
 														<th hidden="">ID</th>
@@ -768,7 +783,7 @@ function getName($n) {
 		</div>
 
 		<!-- Edit Information Modal -->
-		<div class="modal fade" id="editinformation" data-bs-backdrop="true"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+		<div class="modal fade" id="editinformation" data-bs-backdrop="static"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
 			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -985,20 +1000,6 @@ function getName($n) {
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
 <script src="../js/jquery.durationpicker.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#question').DataTable({
-			paging: true
-		});
-	});
-</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-  	 $('#resultTab').DataTable({
-  	 	paging: true
-  	 });
-  });
-</script>
-<script type="text/javascript">
  	$(document).ready(function() {
  		$('.deletebtn').on('click', function() {
 
@@ -1014,9 +1015,6 @@ function getName($n) {
         })
  	});
 </script>
-
-
- 
  <script type="text/javascript">
 
   // var of select input difficult
@@ -1065,9 +1063,6 @@ function getName($n) {
   });
 
 </script>
-
-
- 
  <script type="text/javascript">
 
   // var of select input difficult
@@ -1168,6 +1163,13 @@ function getName($n) {
           });
     	});
    	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#question').DataTable({
+			paging: true
+		});
+	});
 </script>
 <script>
 let arrow = document.querySelectorAll(".arrow");

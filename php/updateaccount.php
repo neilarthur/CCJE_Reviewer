@@ -1,4 +1,4 @@
-<?php
+w<?php
 
 session_start();
 
@@ -31,9 +31,14 @@ if (isset($_POST['save'])) {
 
     if (substr($image_type,0,5)=="image") {
 
-      $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', password='$new_password', image='$image_name',image_size='$image_Data' WHERE acc_id = '$update_id' ";
-
-      $query_run = mysqli_query($sqlcon,$query);
+      if ($new_password =="") {
+           $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address',image='$image_name',image_size='$image_Data' WHERE acc_id = '$update_id' ";
+           $query_run = mysqli_query($sqlcon,$query);
+      }
+      else{
+         $query= "UPDATE accounts SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name', user_id='$user_id', gender='$gender', age='$age', section='$section', email_address='$email_address', mobile_no='$mobile_no', address='$address', password='$new_password', image='$image_name',image_size='$image_Data' WHERE acc_id = '$update_id' ";
+           $query_run = mysqli_query($sqlcon,$query);
+      }
 
       if ($type='student') {
         

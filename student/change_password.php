@@ -206,7 +206,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 								<div class="col-md-6">
 									<input type="hidden" name="acc_id" value="<?php echo $_SESSION['acc_id']; ?>">
 									<div class="input-group">
-										<input id="password" type="password" class="form-control" name="current_password" autocomplete="current-password">
+										<input id="password" type="password" class="form-control" name="current_password" autocomplete="current-password" required>
 										<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="toggle" style="margin-left: -30px; cursor: pointer;"></i></span>
 									</div>
 								 </div>
@@ -215,7 +215,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 								<label for="password" class="col-md-4 fw-bold col-form-label text-md-right">New Password</label>
 								<div class="col-md-6">
 									<div class="input-group">
-										<input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password" >
+										<input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password" required>
 									    <span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i></span>
 									</div>
 								</div>
@@ -224,7 +224,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 								<label for="password" class="col-md-4 fw-bold col-form-label text-md-right">New Confirm Password</label>
 								<div class="col-md-6 mb-4">
 									<div class="input-group">
-										<input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password">
+										<input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password" required>
 										<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePass" style="margin-left: -30px; cursor: pointer;"></i></span>
 									</div>
 									<div id="CheckPasswordMatch" class="fw-bold fs-6 mt-3 text-center"></div>

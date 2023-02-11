@@ -224,7 +224,7 @@ $suppd .= "</select>";
                                 </div>
                                 <div class=''>
                                     <div class='fw-bold h5 ms-4'>No notifications  yet</div>
-                                    <p class='small text-gray-500' >When get notifications, they'll show up here</p>
+                                    <p class='small text-gray-500' >When you get notifications, they'll show up here</p>
                                 </div>
                             </a>";
 	                            }
@@ -446,7 +446,7 @@ $suppd .= "</select>";
 											</div>
 										</div>
 										<div class="table-responsive-xl">
-											<table class="table bg-light table-hover w-100 " id="#">
+											<table class="table bg-light table-hover w-100 " id="question">
 												<thead>
 													<tr>
 														<th hidden="">ID</th>
@@ -831,7 +831,7 @@ $suppd .= "</select>";
 
 
 		<!-- Edit Information Modal -->
-		<div class="modal fade" id="editinformation" data-bs-backdrop="true"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+		<div class="modal fade" id="editinformation" data-bs-backdrop="static"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
 			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -1070,13 +1070,6 @@ $suppd .= "</select>";
         })
  	});
  </script>
-  <script type="text/javascript">
-  $(document).ready(function() {
-  	 $('#resultTab').DataTable({
-  	 	paging: true
-  	 });
-  });
-</script>
  <script type="text/javascript">
 
   // var of select input difficult
@@ -1236,7 +1229,20 @@ $suppd .= "</select>";
   });
 
 </script>
-
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#question').DataTable({
+			paging: true
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#resultTab').DataTable({
+			paging: true
+		});
+	});
+</script>
 <script>
 let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {

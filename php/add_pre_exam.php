@@ -18,7 +18,7 @@ if (isset($_POST['create'])) {
 
 	$acc_ids = $_POST['acc_ids'];
 
-	$acts = " Added an exam ";
+	$acts = "added an exam ";
 
 	$sta = 0;
 

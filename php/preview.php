@@ -117,69 +117,84 @@ $suppd .= "</select>";
 		<hr style="color:rgb(255, 255, 255);">
 		<ul class="nav-links fw-bolder">
 			<li class="navigation-list-item">
-				<a href="../faculty/dashboard.php">
+				<a href="../faculty/dashboard.php"  style="pointer-events: none;">
 					<i class="fas fa-tachometer-alt"></i>
 					<span class="link_name">Dashboard</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="../faculty/dashboard.php">Dashboard</a></li>
+					<li><a class="link_name" href="../faculty/dashboard.php"  style="pointer-events: none;">Dashboard</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="../faculty/testbank.php">
+				<a href="../faculty/testbank.php" style="pointer-events: none;">
 					<i class="fas fa-list-ol"></i>
 					<span class="link_name">Question Bank</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="../faculty/testbank.php">Question Bank</a></li>
+					<li><a class="link_name" href="../faculty/testbank.php"  style="pointer-events: none;">Question Bank</a></li>
 				</ul>
 			</li>
 			<li>
 			<li class="../faculty/navigation-list-item">
-				<a href="../faculty/testyourself.php">
+				<a href="../faculty/testyourself.php"  style="pointer-events: none;">
 					<i class="fas fa-sticky-note"></i>
 					<span class="link_name">Manage Test</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="../faculty/testyourself.php">Manage Test</a></li>
+					<li><a class="link_name" href="../faculty/testyourself.php"  style="pointer-events: none;">Manage Test</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="../faculty/preboard.php">
+				<a href="../faculty/preboard.php"  style="pointer-events: none;">
 					<i class="fas fa-list-alt"></i>
 					<span class="link_name">Pre-Board Examination</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="../faculty/preboard.php">Pre-Board Examination</a></li>
+					<li><a class="link_name" href="../faculty/preboard.php"  style="pointer-events: none;">Pre-Board Examination</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="../faculty/examresults.php">
+				<a href="../faculty/examresults.php"  style="pointer-events: none;">
 					<i class="fas fa-poll"></i>
 					<span class="link_name">Exam Results</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="../faculty/examresults.php">Exam Results</a></li>
+					<li><a class="link_name" href="../faculty/examresults.php"  style="pointer-events: none;">Exam Results</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="../faculty/accounts_manage.php">
+				<a href="../faculty/accounts_manage.php"  style="pointer-events: none;">
 					<i class='bx bxs-user-account bx-sm' ></i>
 					<span class="link_name">Accounts</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="../faculty/accounts_manage.php">Accounts</a></li>
+					<li><a class="link_name" href="../faculty/accounts_manage.php"  style="pointer-events: none;">Accounts</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="../faculty/log-history.php">
+				<a href="../faculty/log-history.php"  style="pointer-events: none;">
 					<i class="fas fa-history"></i>
 					<span class="link_name">Log History</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="../faculty/log-history.php">Logs History</a></li>
+					<li><a class="link_name" href="../faculty/log-history.php" style="pointer-events: none;">Logs History</a></li>
 				</ul>
 			</li>
+			<li class="navigation-list-item">
+                <div class="icon-link">
+                    <a href="#">
+                        <i class="fas fa-archive"></i>
+                        <span class="link_name">Archived</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow drop' ></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Archived</a></li>
+                    <li><a href="../faculty/archive_quizzes.php" style="pointer-events: none;">Quiz & Longquiz</a></li>
+                    <li><a href="../faculty/archive_exam.php" style="pointer-events: none;">Preboard exam</a></li>
+                    <li><a href="../faculty/archived_user_accounts.php" style="pointer-events: none;">User Accounts</a></li>
+                </ul>
+            </li>
 			<li class="navigation-list">
 				<div class="profile-details">
 					 <?php
@@ -210,12 +225,13 @@ $suppd .= "</select>";
 					<button style="border-style: none; background: white; height: 60px;" class="mt-1">
 						<i class='bx bx-menu' ></i>
 					</button>
+					
 					<nav class="navbar navbar-expand-lg navbar-light" style="margin-top: 10px;">
 						<div class="container-fluid">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="../faculty/dashboard.php" style="text-decoration: none;">Home</a></li>
-									<li class="breadcrumb-item"><a href="../faculty/testyourself.php" style="text-decoration: none;">Manage Test</a></li>
+									<li class="breadcrumb-item"><a href="../faculty/dashboard.php" class="disable" style="text-decoration: none;  pointer-events: none;">Home</a></li>
+									<li class="breadcrumb-item"><a href="../faculty/dashboard.php" class="disable" style="text-decoration: none;  pointer-events: none;">Manage Test</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Preview Quiz</li>
 								</ol>
 							</nav>
@@ -238,7 +254,18 @@ $suppd .= "</select>";
 
 		                            if (mysqli_num_rows($come)==0) {
 		                            	
-		                            	echo "<h5 class='text-center'>No notification Found</h5>";
+		                            	echo "<a class='dropdown-item d-flex align-items-center' >
+                                <div class='me-4'>
+                                     <div class='fa-stack fa-1x'>
+                                      <i class='fa fa-circle fa-stack-2x ms-2'></i>
+                                      <i class='fas fa-bell-slash fa-stack-1x ms-2 text-white'></i>
+                                    </div> 
+                                </div>
+                                <div class=''>
+                                    <div class='fw-bold h5 ms-4'>No notifications  yet</div>
+                                    <p class='small text-gray-500' >When you get notifications, they'll show up here</p>
+                                </div>
+                            </a>";
 		                            }
 
 		                            if (mysqli_num_rows($come) >= 0) {
@@ -246,7 +273,7 @@ $suppd .= "</select>";
 		                            	foreach ($come as $item) {
 
 		                            ?>
-		                        <a class="dropdown-item d-flex align-items-center" href="../faculty/notification.php">
+		                        <a class="dropdown-item d-flex align-items-center" href="../faculty/notification.php" style="pointer-events: none;">
 		                            <div class="me-4">
 		                                 <div class="fa-stack fa-1x">
 		                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
@@ -263,7 +290,7 @@ $suppd .= "</select>";
 				                    }
 		                            ?>
 		                        </a>
-		                        <a class="dropdown-item text-center small text-gray-500" href="../faculty/notification.php">Show All Notifications</a>
+		                        <a class="dropdown-item text-center small text-gray-500" href="../faculty/notification.php"  style="pointer-events: none;">Show All Notifications</a>
 		                      </div>
 		                </div>
 		                <div class="dropdown me-3">
@@ -279,8 +306,8 @@ $suppd .= "</select>";
 		                    ?>
 		                    </button>
 		                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-		                        <li><a class="dropdown-item" href="../faculty/profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
-		                        <li><a class="dropdown-item" href="../faculty/change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+		                        <li><a class="dropdown-item" href="../faculty/profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>" style="pointer-events: none;"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
+		                        <li><a class="dropdown-item" href="../faculty/change-pass.php" style="pointer-events: none;"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
 		                        <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
 		                    </ul>
 		                </div>

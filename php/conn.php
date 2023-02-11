@@ -1,9 +1,9 @@
 <?php
 
-$hostname = "sql110.epizy.com";
-$username = "epiz_33536061";
-$password = "DvTdJ96CKnDx";
-$dbname = "epiz_33536061_ccjeexam";
+$hostname = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ccjeexam";
 
 $sqlcon = mysqli_connect($hostname,$username,$password,$dbname);
 

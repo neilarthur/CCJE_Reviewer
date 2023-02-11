@@ -70,7 +70,7 @@ while ($row = mysqli_fetch_array($results)) { ?>
       </div>
       <div class="modal-footer d-flex justify-content-center border-0 mt-3 mb-2">
       	<button type="submit" name="create" onclick="getInputValue();"  class="btn btn-success" ><i class="fas fa-save me-2"></i>Save and Display</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-times me-2"></i>Cancel</button>
+        <button type="button" class="btn btn-danger px-4" data-bs-dismiss="modal"><i class="fas fa-times me-2"></i>Cancel</button>
       </div>
   </form>
 

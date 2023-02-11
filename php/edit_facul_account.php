@@ -89,8 +89,9 @@ while ($row = mysqli_fetch_array($results)) {
   </form>
 </div>
 
+<?php } ?>
 
- <script type="text/javascript">
+<script type="text/javascript">
   file_namew.onchange = evt => {
     const [file] = file_namew.files;
     if (file) {
@@ -99,17 +100,3 @@ while ($row = mysqli_fetch_array($results)) {
     }
   }
  </script>
- <script type="text/javascript">
-  const togglePassword = document.querySelector('#togglePassword');
-  const password = document.querySelector('#id_password');
-
-  togglePassword.addEventListener('click', function (e) {
-    // toggle the type attribute
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    // toggle the eye slash icon
-    this.classList.toggle('fa-eye-slash');
-});
-</script>
-
-<?php } ?>

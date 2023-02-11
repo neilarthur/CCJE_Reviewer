@@ -260,21 +260,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 												<input type="hidden" name="acc_id" value="<?php echo $_SESSION['acc_id'] ?>">
 												<label for="password" class="fw-bold mb-2">Enter Current Password:</label>
 												<div class="input-group">
-													<input type="password" class=" form-control" placeholder="Enter Current Password" id="Current_password"name="c_password">
+													<input type="password" class=" form-control" placeholder="Enter Current Password" id="Current_password"name="c_password" required>
 													<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="toggle" style="margin-left: -30px; cursor: pointer;"></i></span>
 												</div>
 											</div>
 											<div class="mb-3">
 												<label for="password" class="fw-bold mb-2">Enter New Password:</label>
 												<div class="input-group">
-													<input type="password" class="pr-password form-control" id="Password" placeholder="Enter New Password" name="new_password">
+													<input type="password" class="pr-password form-control" id="Password" placeholder="Enter New Password" name="new_password" required>
 													<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i></span>
 												</div>
 											</div>
 											<div class="mb-3">
 												<label for="user" class="fw-bold mb-2">Confirm New Password:</label>
 												<div class="input-group">
-													<input type="password" class="form-control" id="ConfirmPassword" placeholder="Enter Confirm Password" name="conf_password">
+													<input type="password" class="form-control" id="ConfirmPassword" placeholder="Enter Confirm Password" name="conf_password" required>
 													<span class="input-group-text ps-5 mx-auto bg-white" id="basic-addon2"><i class="far fa-eye" id="togglePass" style="margin-left: -30px; cursor: pointer;"></i></span>
 												</div>
 											</div>
