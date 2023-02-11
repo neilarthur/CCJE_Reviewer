@@ -329,7 +329,8 @@ function getName($n) {
 
 											if (mysqli_num_rows($save) == 0) {
 												
-												echo '<input type="hidden" name="update" value="'.$_GET['id'].'">
+												echo '
+												<input type="hidden" name="update" value="'.$_GET['id'].'">
 											<input class="btn btn-success px-4 pb-2" type="submit" name="save" value="Save">';
 											}
 											elseif (mysqli_num_rows($save)>=0) {

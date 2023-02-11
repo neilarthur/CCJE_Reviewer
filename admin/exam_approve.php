@@ -157,41 +157,84 @@ if (isset($_POST['save'])) {
 
 	$update_id = $_POST['update_id'];
 	$access = $_POST['access'];
-	$status ="Approve";
-
+	$status ="approve";
+	$act = "posted an exam.";
+	$act2 = " has been approved.";
 
 	$sql_query = "UPDATE tbl_pre_question SET approval='$status' WHERE pre_exam_id ='$update_id'";
 	$sql_run = mysqli_query($sqlcon,$sql_query);
 
+
 	if ($sql_run) {
 
-		$wonder = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student'");
 
-		while ($rows = mysqli_fetch_assoc($wonder)) {
-			
-			$sound = $rows['email_address']; 
+		$local = "INSERT INTO tbl_notification(action,acc_id,notif_status) VALUES ('$act','$prepared_by','$act_stat')";
+		$base = mysqli_query($sqlcon,$local);
 
-			send_code("$access","$sound");
+		if ($base) {
 
-			header("location: exam-manage.php");
+
+			$let = "INSERT INTO tbl_notification (action,acc_id,notif_status) VALUES ('$act2','$prepared_by','$act_stat')";
+
+			$let_query = mysqli_query($sqlcon,$let);
+
+
+			if ($let_query) {
+				
+				$wonder = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE role='student'");
+
+				while ($rows = mysqli_fetch_assoc($wonder)) {
+					
+					$sound = $rows['email_address']; 
+
+					send_code("$access","$sound");
+
+					header("location: exam-manage.php");
+				}
+			}
+			else {
+
+				echo mysqli_error($sqlcon);
+			}
+		}
+		else {
+
+			echo mysqli_error($sqlcon);
 		}
 	}
 	else{
 		echo mysqli_error($sqlcon);
 	}
 }
+
+
 elseif (isset($_POST['reject'])) {
-	
-	$update_id = $_POST['update_id'];
-	$status ="Decline";
+
+	$comment = $_POST['comment'];
+	$basic = $_SESSION['acc_id'];
+	$act_stat2 = 0;
+
+	$borders = "decline";
+	$update_ids = $_POST['update_id'];
 
 
-	$sql_query = "UPDATE tbl_pre_question SET approval='$status' WHERE pre_exam_id ='$update_id'";
+	$sql_query = "INSERT INTO tbl_notification (action,acc_id,notif_status) VALUES ('$comment','$basic','$act_stat2')";
 	$sql_run = mysqli_query($sqlcon,$sql_query);
 
 	if ($sql_run) {
 		
-		header("location: exam-manage.php");
+		$sql_query2 = "UPDATE tbl_pre_question SET Approval='$borders' WHERE pre_exam_id = '$update_ids'";
+		$sql_run2 = mysqli_query($sqlcon,$sql_query2);
+
+		if ($sql_run2) {
+			
+			header("location: exam-manage.php");
+		}
+		else {
+
+			echo mysqli_error($sqlcon);
+		}
+		
 	}
 	else{
 		echo mysqli_error($sqlcon);

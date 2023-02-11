@@ -298,7 +298,13 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                					
 	                                                				</div>
 	                                                				<li>
-	                                                					<a target='_blank' href="print_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item"><i class="fas fa-print me-2"></i>Print Results</a>
+	                                                					<a target='_blank' href="section_a_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item"><i class="fas fa-print me-2"></i>Section 4A</a>
+	                                                				</li>
+	                                                				<li>
+	                                                					<a target='_blank' href="section_b_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item"><i class="fas fa-print me-2"></i>Section 4B</a>
+	                                                				</li>
+	                                                				<li>
+	                                                					<a target='_blank' href="section_c_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item"><i class="fas fa-print me-2"></i>Section 4C</a>
 	                                                				</li>
 	                                                			</div>
 	                                                		</div>

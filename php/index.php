@@ -11,6 +11,15 @@ if (isset($_SESSION["role"]) && $_SESSION["role"]=='admin') {
 elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='faculty') {
 	header("location: ../faculty/dashboard.php");
 }
+elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='student') {
+    header("location: ../student/dashboard.php");
+}
+elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='systemadmin') {
+   header("location: ../system_admin/dashboard.php");
+}
+elseif (isset($_SESSION["role"]) && $_SESSION['role'] == 'secretary') {
+    header("location: ../secretary/dashboard.php");
+}
 
 if (isset($_GET['verified'])) {
 

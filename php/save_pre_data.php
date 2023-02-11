@@ -4,7 +4,7 @@ require_once 'conn.php';
 
 if (isset($_POST['save'])) {
 
-	$preboards = $_POST['pre_boards'];
+	$preboards = $_POST['update'];
 
 	$action = "Ready";
 

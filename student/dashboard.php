@@ -316,7 +316,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                     <div class="card-header pb-0">
                         <p  class="fw-bold text-primary h3">Upcoming</p>
                     </div>
-                                        <p  class="fw-bold text-primary mx-3 ">Quiz and Long Quiz</p>
                     <div class="card-body p-3">
                         <table class="table table-hover table-light">
                             <thead>
@@ -339,7 +338,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
                                     while ($sched = mysqli_fetch_assoc($query)) {
 
-                                        $left = mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id='{$sched['test_id']}'");
+                                        $left = mysqli_query($sqlcon,"SELECT * FROM choose_question WHERE test_id='{$sched['test_id']}' AND stat_question='Ready' ");
 
                                         $follow = mysqli_fetch_array($left);
 
@@ -463,8 +462,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
                             </tbody>
                         </table>
-
-                        <p  class="fw-bold text-primary">Pre Board Exam</p>
                         <table class="table table-hover table-light">
                             <thead>
                             </thead>
@@ -476,17 +473,19 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 
                             $accounted1 = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = {$_SESSION['acc_id']}");
 
+
+
                             while ($blokeed1 = mysqli_fetch_assoc($accounted1)) {
                                 
 
                                 if ($blokeed1['section'] == '4C') {
                                     
-                                    $query1 = mysqli_query($sqlcon,"SELECT * FROM accounts, tbl_pre_question WHERE (accounts.acc_id=tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='active') AND (stat_exam='Ready')");
+                                    $query1 = mysqli_query($sqlcon,"SELECT * FROM accounts, tbl_pre_question WHERE (accounts.acc_id=tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='active') AND (tbl_pre_question.stat_exam='Ready') AND (tbl_pre_question.Approval='approve')");
 
 
                                     while ($sched1 = mysqli_fetch_assoc($query1)) {
 
-                                        $left1 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id='{$sched1['pre_exam_id']}'");
+                                        $left1 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id='{$sched1['pre_exam_id']}'AND Approval='approve' AND stat_exam='Ready'");
 
                                         $follow1 = mysqli_fetch_array($left1);
 
@@ -524,12 +523,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                 elseif ($blokeed1['section'] == '4B') {
                                     
                                      
-                                    $query1 = mysqli_query($sqlcon,"SELECT * FROM accounts, tbl_pre_question WHERE (accounts.acc_id=tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='active') AND (stat_exam='Ready')");
+                                    $query1 = mysqli_query($sqlcon,"SELECT * FROM accounts, tbl_pre_question WHERE (accounts.acc_id=tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='active') AND (tbl_pre_question.stat_exam='Ready') AND (tbl_pre_question.Approval='approve')");
 
 
                                     while ($sched1 = mysqli_fetch_assoc($query1)) {
 
-                                        $left1 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id='{$sched1['pre_exam_id']}'");
+                                        $left1 = mysqli_query($sqlcon,"SELECT * FROM tbl_pre_question WHERE pre_exam_id='{$sched1['pre_exam_id']}' AND Approval='approve' AND stat_exam='Ready'");
 
                                         $follow = mysqli_fetch_array($left);
 
@@ -566,7 +565,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
                                 }
                                 elseif ($blokeed['section'] == '4A') {
                                     
-                                    $query1 = mysqli_query($sqlcon,"SELECT * FROM accounts, tbl_pre_question WHERE (accounts.acc_id=tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='active') AND (stat_exam='Ready')");
+                                    $query1 = mysqli_query($sqlcon,"SELECT * FROM accounts, tbl_pre_question WHERE (accounts.acc_id=tbl_pre_question.prepared_by) AND (tbl_pre_question.pre_board_status='active') AND (tbl_pre_question.stat_exam='Ready') AND (tbl_pre_question.Approval='approve') AND Approval='approve' AND stat_exam='Ready'");
 
 
                                     while ($sched1 = mysqli_fetch_assoc($query1)) {

@@ -85,6 +85,42 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 			header("Location:index.php?loginerror");
 		}		
 	}
+	elseif ($sql_rows['role']=='systemadmin') {
+		
+		if ($sql_rows['verify_status']=='verified' && $sql_rows['status']=='active') {
+
+			$_SESSION["acc_id"] = $sql_rows['acc_id'];
+			$_SESSION["role"] = $sql_rows['role'];
+			$_SESSION["first_name"] = $sql_rows['first_name'];
+			$_SESSION["login"]=true;
+
+			header("Location:../system_admin/dashboard.php?loginsuccess");
+		}
+		else {
+
+			header("Location:index.php?loginerror");
+		}
+	}
+
+	elseif ($sql_rows['role']=='secretary') {
+		
+		if ($sql_rows['verify_status']=='verified' && $sql_rows['status']=='active') {
+			
+			$_SESSION["role"] == $sql_rows['role'];
+			$_SESSION["login"]=true;
+			$_SESSION["first_name"] = $sql_rows['first_name'];
+			$_SESSION["acc_id"]==$sql_rows['acc_id'];
+
+			$validate3 = $_SESSION['acc_id'];
+
+
+			header("location:../Secretary/dashboard.php?acc_id=$validate3");
+		}
+		else {
+
+			header("Location:index.php?loginerror");
+		}
+	}
 	else{
 		header("Location:index.php?loginerror");
 		exit();

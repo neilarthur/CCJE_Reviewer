@@ -258,10 +258,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                		<button class="btn btn-secondary ms-3"type="button" disabled><i class="fas fa-check-circle"></i></button>
 	                                                	</div>';
 	                                                	}
+                                                        elseif ($rows['Approval']=='decline') {
+                                                           
+                                                           echo '<div class="d-flex text-center">
+                                                            <button class="btn btn-secondary ms-3"type="button" disabled><i class="fas fa-check-circle"></i></button>
+                                                        </div>';
+                                                        }
 	                                                	else {
 
 	                                                	echo '<div class="d-flex text-center">
-	                                                		<button class="btn btn-success editbtn ms-3" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
+	                                                		<button data-id='.$rows['pre_exam_id'].' class="btn btn-success  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
 	                                                	</div>'; 
 	                                                		
 	                                                	}
@@ -313,42 +319,22 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
                     <h3 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h3>
                     <p class="h5 modal-title text-center mt-2">Do want to approve these exam</p>
                 </div>
-                <form class="form" action="exam_approve.php" method="POST">
-                    <div class="modal-body">
-                        <div class="container d-flex justify-content-center">
-                            <input type="hidden" name="update_id" id="pre_exam_id">
-                            <input type="hidden" name="access" id="access">
-
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center border-0">
-                            <input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">
-                            <button class="btn btn-danger px-5 pb-2 text-white" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">NO</button>
-                            <button type="button" class="btn btn-secondary  px-4 pb-2 text-white" data-bs-dismiss="modal">CANCEL</button>
-                        </div>
-                    </div>
-                </form>
+                <div class="views">
+                    
+                </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+
+
+    <div class="modal fade" id="editer" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-0">
-                	<p class="modal-title h5 fw-bold">Reason for rejection:</p>
+                    <p class="modal-title h5 fw-bold">Reason for rejection:</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form class="form" action="exam_approve.php" method="POST">
-                	 <div class="modal-body">
-                	 	<div class="form-floating">
-                	 		<textarea class="form-control"  placeholder="Leave a comment here" id="floatingTextarea"  style="height: 120px"></textarea>
-                	 		<label for="floatingTextarea">Leave a comment here:</label>
-                	 	</div>
-	                </div>
-	                <div class="modal-footer border-0">
-	                	<input type="submit" name="reject" class="btn btn-success px-5 pb-2 text-white" value="SEND">
-	                    <button class="btn btn-secondary px-5 pb-2" data-bs-target="#edit" data-bs-toggle="modal" data-bs-dismiss="modal">BACK</button>
-	                </div>
-                </form>
+                <div class="viewser"></div>
             </div>
         </div>
     </div>
@@ -356,6 +342,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 </body>
 <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="../js/dt-1.10.25datatables.min.js"></script>
 <script>
     let arrow = document.querySelectorAll(".arrow");
@@ -382,24 +369,50 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.editbtn').on('click', function() {
 
-            $('#edit').modal('show');
 
-            $tr = $(this).closest('tr');
 
-            var data = $tr.children("td").map(function() {
-                return $(this).text();
-            }).get();
-            console.log(data);
-            $('#pre_exam_id').val(data[0]);
-            $('#access').val(data[4]);
-        })
+ <!-- View modal --->
+ <script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.editbtn').click(function(){
+      var userid = $(this).data('id');
+
+      $.ajax({
+        url: '../php/approve_modal_examine.php',
+        type: 'post',
+        data: {userid: userid},
+        success: function(response){
+          $('.views').html(response);
+          $('#edit').modal('show');
+        }
+      });
     });
+   });
+ </script>
 
-</script>
+
+  <!-- View modal --->
+ <script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.nobtn').click(function(){
+      var userids = $(this).data('id');
+
+      $.ajax({
+        url: '../php/reject_modal_examine.php',
+        type: 'post',
+        data: {userids: userids},
+        success: function(response){
+          $('.viewser').html(response);
+          $('#editer').modal('show');
+        }
+      });
+    });
+   });
+ </script>
+
 
 
 
