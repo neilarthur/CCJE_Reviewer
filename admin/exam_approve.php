@@ -218,7 +218,7 @@ elseif (isset($_POST['reject'])) {
 	$update_ids = $_POST['update_id'];
 
 
-	$sql_query = "INSERT INTO tbl_notification (action,acc_id,notif_status) VALUES ('$comment','$basic','$act_stat2')";
+	$sql_query = "INSERT INTO tbl_admin_response (response_sender,acc_id,pre_exam_id,notif_stat_student) VALUES ('$comment','$basic','$update_ids','$act_stat2')";
 	$sql_run = mysqli_query($sqlcon,$sql_query);
 
 	if ($sql_run) {
