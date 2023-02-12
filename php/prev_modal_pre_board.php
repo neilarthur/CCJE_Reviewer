@@ -7,7 +7,7 @@ $userid =  $_POST['userid'];
 
 $view_quiz = mysqli_query($sqlcon, "SELECT * FROM test_question,tbl_pre_choose_quest WHERE (test_question.question_id = tbl_pre_choose_quest.question_id) AND test_question.question_id = '$userid'");
 
-while ($rows = mysqli_fetch_assoc($view_quiz)) { ?>
+$rows = mysqli_fetch_assoc($view_quiz); ?>
 	<div class="card">
 	<div class="card-body bg-white">
 		<div class="card m-2">
@@ -103,7 +103,3 @@ while ($rows = mysqli_fetch_assoc($view_quiz)) { ?>
         </div>
     </div>
 </div>
-<?php }
-
-
-?>

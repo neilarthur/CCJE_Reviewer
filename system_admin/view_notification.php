@@ -2,7 +2,7 @@
 
 require_once '../php/conn.php';
 
-$sql = "UPDATE tbl_response SET response_stat='1'";
+$sql = "UPDATE tbl_notification SET notif_status='1'";
 
 $res = mysqli_query($sqlcon,$sql);
 
@@ -12,5 +12,4 @@ if ($res) {
 else {
 	echo "Failed";
 }
-
 ?>
