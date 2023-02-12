@@ -17,6 +17,7 @@ elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='student') {
 elseif (isset($_SESSION["role"]) && $_SESSION["role"]=='systemadmin') {
    header("location: ../system_admin/dashboard.php");
 }
+
 elseif (isset($_SESSION["role"]) && $_SESSION['role'] == 'secretary') {
     header("location: ../secretary/dashboard.php");
 }

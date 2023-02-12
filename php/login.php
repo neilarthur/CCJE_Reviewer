@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 			$validate3 = $_SESSION['acc_id'];
 
 
-			header("location:../Secretary/dashboard.php?acc_id=$validate3");
+			header("location:../secretary/dashboard.php?acc_id=$validate3");
 		}
 		else {
 

@@ -271,64 +271,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 					<div class="row">
 						<div class="col d-flex justify-content">
 							<div class="w-50">
-								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Examination Analytics</h2>
+								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Backup Database</h2>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col ">
 								<div class="card">
 									<div class="card-body rounded-3 m-3 table-responsive-lg">
-										<table class="table table-hover align-middle" id="resultTab">
-											<thead>
-												<tr>
-													<th scope="col">No.</th>
-													<th scope="col">Area of Examination</th>
-													<th scope="col">Total of items</th>
-													<th scope="col">Time Limit</th>
-													<th scope="col">Prepared by</th>
-													<th scope="col" class="text-center">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-
-												$manage = mysqli_query($sqlcon,"SELECT * FROM accounts,tbl_pre_question WHERE (accounts.acc_id = tbl_pre_question.prepared_by)");
-
-												$counter = 1;
-												while ($rows= mysqli_fetch_assoc($manage)) {
-													
-												 ?>
-												<tr>
-													<td><?php echo $counter; ?></td>
-	                                                <td><?php echo $rows['subjects']; ?></td>
-	                                                <td class="ps-5"><?php echo $rows['total_question']; ?></td>
-	                                                <td><?php echo $rows['time_limit'] /3600 ; ?>hr(s)</td>
-	                                                <td><?php echo $rows['first_name'] ." ".$rows['last_name']; ?></td>
-	                                                <td>
-	                                                	<div class= "d-flex justify-content-center">
-	                                                		<a href="question_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="btn btn-secondary mx-2"><i class="fas fa-file-signature"></i></a>
-
-	                                                		<div class="btn-group dropdown drop">
-	                                                			<button type="button" class="btn btn-primary dropdown-toggle " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-download"></i></button>
-
-	                                                			<div class="dropdown-menu">
-	                                                				<form action="export_file.php" method="POST">
-	                                                					<input type="hidden" name="excel_id" value="<?php echo $rows['pre_exam_id']; ?>">
-	                                                					<input type="hidden" name="file_type" value="xlsx">
-	                                                					<button type="submit" class="dropdown-item" name="export_excel_btn"><i class="fas fa-file-download me-2"></i></i>Download Results</button>
-	                                                				</form>
-	                                                				<div class="dropdown-divider"></div>
-	                                                				<li>
-	                                                					<a href="print_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item"><i class="fas fa-print me-2"></i>Print Results</a>
-	                                                				</li>
-	                                                			</div>
-	                                                		</div>
-	                                                	</div>
-	                                                </td>
-	                                            </tr>
-	                                        <?php $counter ++; } ?>
-	                                        </tbody>
-	                                    </table>
+										
+										<a href="backup.php" target="_blank" class="btn btn-success">Backup Database</a>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -337,73 +288,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 				</div>
 			</div>
 		</section>
-		<!-- View Modal-->
-		<div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<!-- Horizantal graph Chart-->
-						<canvas id="myChart" style="height: 100px; width: 250px;"></canvas>
-						<script>
-							const ctx = document.getElementById('myChart').getContext('2d');
-							const myChart = new Chart(ctx, {
-							    type: 'bar',
-							    data: {
-							        labels: ['A. Murder','B.  Parricide','C. Homicide','D. Qualified Homicide'],
-							        datasets: [{
-							            label: 'Correct Response',
-							            data: [10,9,8,6],
-							            backgroundColor: [
-							            'rgba(15, 157, 88)',
-							            'rgba(204, 204, 204)',
-							            'rgba(204, 204, 204)',
-							            'rgba(204, 204, 204)',
-							                
-							                
-							            ],
-							            borderColor: [
-							            'rgb(15, 157, 88)',
-							            'rgb(204, 204, 204)',
-							            'rgb(204, 204, 204)',
-							            'rgb(204, 204, 204)',
-							                
-							            ],
-							            borderWidth: 1
-							        }]
-							    },
-							    options: {
-							    	indexAxis: 'y',
-							        scales: {
-							            y: {
-							               ticks: { color: '##000000', beginAtZero: true , precision: 0 }
-							            }
-							        }
-							    },
-							});
-						</script>
-					</div>
-					<div class="card mt-3 m-4 border-0">
-						<div class="card-body">
-							<label class="d-flex ps-1 justify-content-start">Question</label>
-							<textarea type="text" name="last_name" class="form-control"readonly="">Berto, with evident premeditation and treachery killed his father. What was the crime committed?</textarea> 
-							<label class="d-flex ps-1 mt-2 justify-content-start" >Area of Exam</label>
-							<input type="text" name="last_name" class="form-control" value="Criminal Jurisprudence " readonly="">
-							<label class="d-flex ps-1 mt-2 justify-content-start">Level of diffculty</label>
-							<input type="text" name="last_name" class="form-control" value="EASY" readonly="">
-							<label  class="d-flex ps-1 mt-2 justify-content-start">Percentage</label>
-							<input type="text" name="last_name" class="form-control" value="100%" readonly="">
-						</div>		
-					</div>
-					<div class="modal-footer border-0">
-						<button type="button" class="btn btn-danger mx-2" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		<!-- Logout Modal-->
 	    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	        <div class="modal-dialog">
@@ -426,33 +311,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 	            </div>
 	        </div>
 	    </div>
-	    <!-- Delete Record -->
-		<div class="modal fade" id="Delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-			<div class="modal-dialog">
-	    		<div class="modal-content">
-	    			<div class="modal-header flex-column border-0">
-	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        				<div class="icon-box mt-3">
-        					<i class="far fa-times-circle fa-5x text-danger"></i>
-        				</div>
-        				<h4 class="modal-title text-align-center mt-3 fw-bold">Are you sure?</h4>
-	    			</div>
-	    			<form class="form" action="#" method="POST">
-	    				<div class="modal-body">
-	    					<div class="container d-flex justify-content-center">
-	    						<input type="hidden" name="update_id" id="delete_id">
-	    						<p>Do you really want to delete these record?</p>
-	    					</div>
-	    					<div class="modal-footer d-flex justify-content-center border-0">
-	        					<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">
-	        					<button type="button" class="btn btn-danger  px-5 pb-2 text-white" data-bs-dismiss="modal">NO</button>
-							</div>
-	    				</div>
-	    			</form>
-	    		</div>
-	    	</div>
-	    </div>
-
 
 </body>
 <script src="https://code.highcharts.com/stock/highstock.js"></script>

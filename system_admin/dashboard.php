@@ -7,7 +7,7 @@ if (!isset($_SESSION["login"]) || $_SESSION['login'] !=true) {
     header("location: ../php/index.php");
      exit;
 }
-elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='system admin') {
+elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
     header("location: ../php/index.php");
     exit;
 }
@@ -102,12 +102,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='system admin') {
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="results.php">
-					<i class="fas fa-poll"></i>
-					<span class="link_name">Results</span>
+				<a href="database.php">
+					<i class='bx bxs-data'></i>
+					<span class="link_name">Database</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="results.php">Results</a></li>
+					<li><a class="link_name" href="database.php">Database</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
@@ -642,7 +642,7 @@ let arrow = document.querySelectorAll(".arrow");
 #Login success
 if (isset($_GET['loginsuccess'])) {
   echo ' <script> swal("Login succesful!", " clicked the okay!", "success");
-  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/dashboard.php");
+  window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/system_admin/dashboard.php");
   </script>';
 }
 ?>

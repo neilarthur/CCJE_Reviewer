@@ -7,7 +7,7 @@ if (!isset($_SESSION["login"]) || $_SESSION['login'] !=true) {
     header("location: ../php/index.php");
      exit;
 }
-elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='system admin') {
+elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
     header("location: ../php/index.php");
     exit;
 }
@@ -74,6 +74,24 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='system admin') {
                     <li><a class="link_name" href="exam-manage.php">Question Bank</a></li>
                 </ul>
             </li>
+            <li class="navigation-list-item">
+                <a href="testyourself.php">
+                    <i class="fas fa-sticky-note"></i>
+                    <span class="link_name">Manage Test </span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="testyourself.php">Manage Test</a></li>
+                </ul>
+            </li>
+            <li class="navigation-list-item">
+                <a href="preboard.php">
+                    <i class="fas fa-list-alt"></i>
+                    <span class="link_name">Pre-Board Examination</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="preboard.php">Pre-Board Examination</a></li>
+                </ul>
+            </li>
 			<li class="navigation-list-item">
 				<a href="exam-manage.php">
 					<i class='bx bx-spreadsheet bx-sm'></i>
@@ -101,6 +119,21 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='system admin') {
 					<li><a class="link_name" href="accounts.php?tab-accounts=students">Accounts</a></li>
 				</ul>
 			</li>
+            <li class="navigation-list-item">
+                <div class="icon-link">
+                    <a href="#">
+                        <i class="fas fa-archive"></i>
+                        <span class="link_name">Archived</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow drop' ></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Archived</a></li>
+                    <li><a href="#">Quiz & Longquiz</a></li>
+                    <li><a href="#">Preboard exam</a></li>
+                    <li><a href="#">User Accounts</a></li>
+                </ul>
+            </li>
 			<li class="navigation-list-item">
 				<a href="login-history.php" >
 					<i class="fas fa-history"></i>
@@ -110,6 +143,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='system admin') {
 					<li><a class="link_name" href="login-history.php">Log History</a></li>
 				</ul>
 			</li>
+            
 			<li class="navigation-list">
                 <div class="profile-details">
                     <?php
