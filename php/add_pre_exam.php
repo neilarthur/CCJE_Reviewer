@@ -27,13 +27,13 @@ if (isset($_POST['create'])) {
 	$query_pre_exam = mysqli_query($sqlcon,$pre_exam_insert);
 
 	if ($query_pre_exam) {
-
+		$id = mysqli_insert_id($sqlcon);
 		$logs_run = "INSERT INTO logs(acc_id,login_time,action) VALUES ('$acc_ids',now(),'$acts')";
 		$logs_query = mysqli_query($sqlcon,$logs_run);
 
 		if ($logs_query) {
 
-			$notif = "INSERT INTO tbl_notification(action,acc_id,date_created,notif_status)VALUES('$acts','$acc_ids',now(),'$sta')";
+			$notif = "INSERT INTO tbl_notification(action,acc_id,date_created,notif_status,test_id)VALUES('$acts','$acc_ids',now(),'$sta','$id')";
 
 			$notif_query = mysqli_query($sqlcon,$notif);
 

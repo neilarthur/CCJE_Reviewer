@@ -14,7 +14,7 @@ while ($row = mysqli_fetch_assoc($prep)) { ?>
         <div class="container d-flex justify-content-center">
             <input type="hidden" name="update_id" value="<?php echo $row['pre_exam_id']; ?>">
             <input type="hidden" name="access" value="<?php echo $row['access_code']; ?>">
-
+            <input type="hidden" name="prepared_by" value="<?php echo $row['prepared_by']; ?> ">
         </div>
         <div class="modal-footer d-flex justify-content-center border-0">
             <input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="YES">

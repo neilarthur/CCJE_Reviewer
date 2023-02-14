@@ -102,30 +102,30 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					<li><a class="link_name" href="login-history.php">Log History</a></li>
 				</ul>
 			</li>
-            <li class="navigation-list-item">
-                <a href="archive_users.php?tab-accounts=students" >
-                    <i class="fas fa-archive"></i>
-                    <span class="link_name">Archived</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="archive_users.php?tab-accounts=students">Archived</a></li>
-                </ul>
-            </li>
-			<li class="navigation-list">
-                <div class="profile-details">
-                    <?php
+      <li class="navigation-list-item">
+          <a href="archive_users.php?tab-accounts=students" >
+              <i class="fas fa-archive"></i>
+              <span class="link_name">Archived</span>
+          </a>
+          <ul class="sub-menu blank">
+              <li><a class="link_name" href="archive_users.php?tab-accounts=students">Archived</a></li>
+          </ul>
+      </li>
+      <li class="navigation-list">
+          <div class="profile-details">
+              <?php
 
-                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
-                     while ($rows = mysqli_fetch_assoc($query_row)) {
-                        echo '
-                         <div class="profile-content">
-                        <img class="rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" alt="profileImg">
-                    </div>';
-                        ?>
+              $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
+               while ($rows = mysqli_fetch_assoc($query_row)) {
+                  echo '
+                   <div class="profile-content">
+                  <img class="rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" alt="profileImg">
+              </div>';
+                  ?>
 
-                    <?php }
+              <?php }
 
-                    ?>
+              ?>
 					<div class="name-job">
 						<div class="profile_name"><a class="profile text-warning" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><?php echo $_SESSION["first_name"];?></a></div>
 						<div class="job"><?php echo $_SESSION["role"];  ?></div>
@@ -136,57 +136,57 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
     </div>
 	<section class="home-section" >
 		<div class="home-content d-flex justify-content-between " style="background: white;">
-             <div class="d-flex">
-                <button style="border-style: none; background: white; height: 20px; margin-top: 15px;" class="btn-sm">
-                    <i class='bx bx-menu' ></i>
-                </button>
-                <nav class="navbar navbar-expand-lg navbar-light ms-3" style="margin-top: 10px;">
-                    <div class="container-fluid">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                            </ol>
-                        </nav>
+         <div class="d-flex">
+            <button style="border-style: none; background: white; height: 20px; margin-top: 15px;" class="btn-sm">
+                <i class='bx bx-menu' ></i>
+            </button>
+            <nav class="navbar navbar-expand-lg navbar-light ms-3" style="margin-top: 10px;">
+                <div class="container-fluid">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Notification</li>
+                        </ol>
+                    </nav>
+                </div>
+            </nav>
+        </div>
+        <form class="d-flex">
+            <div class="dropdown dp mt-3 me-2">
+                <a class="text-reset dropdown-toggle text-decoration-none position-relative" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg mx-2"></i>
+                    <div id="count_wrapper">
+                        
                     </div>
-                </nav>
+                </a>
+                <div class="dropdown-list bg-light dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+                    <p class="h5 dropdown-header text-dark ">Notifications</p>
+                      <div style="overflow-y: auto; white-space: nowrap; height: auto; max-height: 300px;" class="bg-white">
+                         <div id="wrapper">
+                             
+                         </div> 
+                      </div>
+                    <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
+                </div>
             </div>
-            <form class="d-flex">
-                <div class="dropdown dp mt-3 me-2">
-                    <a class="text-reset dropdown-toggle text-decoration-none position-relative" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg mx-2"></i>
-                        <div id="count_wrapper">
-                            
-                        </div>
-                    </a>
-                    <div class="dropdown-list bg-light dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
-                        <p class="h5 dropdown-header text-dark ">Notifications</p>
-                          <div style="overflow-y: auto; white-space: nowrap; height: auto; max-height: 300px;" class="bg-white">
-                             <div id="wrapper">
-                                 
-                             </div> 
-                          </div>
-                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
-                    </div>
-                </div>
-                <div class="dropdown mx-2">
-                    <button class="btn  dropdown-toggle border border-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php
+            <div class="dropdown mx-2">
+                <button class="btn  dropdown-toggle border border-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <?php
 
-                        $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
-                         while ($rows = mysqli_fetch_assoc($query_row)) {
-                      echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"></span>';
-                      ?>
-                   <?php }
+                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
+                     while ($rows = mysqli_fetch_assoc($query_row)) {
+                  echo'<span><img class="me-2 rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" height="40px;" width="40px;"></span>';
+                  ?>
+               <?php }
 
-                    ?>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
-                        <li><a class="dropdown-item" href="change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
-                        <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
-                    </ul>
-                </div>
-            </form>
+                ?>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><i class="fas fa-user-circle fa-lg me-2" style="color: #8C0000;"></i> Profile</a></li>
+                    <li><a class="dropdown-item" href="change-pass.php"><i class="fas fa-lock fa-lg me-2" style="color: #8C0000;"></i> Change Password</a></li>
+                    <li><a class="dropdown-item" href=""data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt fa-lg me-2" style="color: #8C0000;"></i> Log out</a></li>
+                </ul>
+            </div>
+        </form>
 		</div>
 		<!-- Main Content-->
 		<div class="container-fluid mt-3">
@@ -195,26 +195,26 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 					<div class="notification-ui_dd-content">
 						<?php
 
-	                            $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty')");
+              $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty') AND (tbl_notification.action='added an exam')  ORDER BY notif_id DESC");
 
-	                            if (mysqli_num_rows($comers)==0) {
-	                            	
-	                            	echo "<h5 class='text-center'>No notification Found</h5>";
-	                            }
+              if (mysqli_num_rows($comers)==0) {
+              	
+              	echo "<h5 class='text-center'>No notification Found</h5>";
+              }
 
-	                            if (mysqli_num_rows($comers) >= 0) {
+              if (mysqli_num_rows($comers) >= 0) {
 
-	                            	foreach ($comers as $item) {
+              	foreach ($comers as $item) {
 
-	                            ?>
+              ?>
 						<div class="notification-list notification-list--unread">
 							<div class="notification-list_content">
 								<div class="notification-list_img">
-                                    <?php 
-                                    $pic= $item['image_size'];
-                                    echo '<img class="mx-2 rounded-circle" src="data:image;base64,'.base64_encode($pic).'" height="40px;" width="40px;">'
+                  <?php 
+                  $pic= $item['image_size'];
+                  echo '<img class="mx-2 rounded-circle" src="data:image;base64,'.base64_encode($pic).'" height="40px;" width="40px;">'
 
-                                    ?>
+                  ?>
 								</div>
 								<div class="notification-list_detail ms-2 mt-1">
 									<p><b class="text-capitalize"><?php echo $item['first_name']." ".$item['last_name']."</b>&nbsp;".$item['action']; ?></p>
@@ -223,14 +223,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 							</div>
 							<div class="notification-list_feature-img">
 								<div class="small text-gray-500 text-muted"><?php echo date('F j, Y',strtotime($item['date_created']));
-	                                  ?></div>
+	               ?></div>
 							</div>
 						</div>
 
-	                            <?php
-			                        }
-			                    }
-	                            ?>
+                <?php
+                }
+            }
+                ?>
 					</div>
 				</div>
 		</div>

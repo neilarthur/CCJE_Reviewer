@@ -69,58 +69,19 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='student') {
 					</li>
 				</ul>
 				<div class="flex-shrink-0 text-center">
-                     <div class="dropdown dp">
-                        <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg"></i>
-                                                       <?php 
-
-                            $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification  WHERE notif_status='0' AND action='Posted an Quiz'  ORDER BY notif_id DESC");
-                            ?>
-                            <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($comers); ?></span>
+                     <div class="dropdown dp mx-2">
+                        <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg mx-1"></i>
+                           <div id="count_wrapper">
+                                
+                           </div>
                         </a>
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
                             <h6 class="dropdown-header text-dark ">Notifications</h6>
-                           <?php
-
-                                $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty') AND (tbl_notification.action='Posted an Quiz')");
-
-                                if (mysqli_num_rows($comers)==0) {
-                                    
-                                    echo "<h5 class='text-center'>No notification Found</h5>";
-                                }
-
-                                if (mysqli_num_rows($comers) >= 0) {
-
-                                    foreach ($comers as $item) {
-
-                                ?>
-                        <a class="dropdown-item d-flex align-items-center" href="notification.php">
-                            <div class="me-4">
-                                 <div class="fa-stack fa-1x">
-                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
-                                  <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
+                            <div style="overflow-y: auto; white-space: nowrap; height: auto; max-height: 300px;" class="bg-white">
+                                <div id="wrapper">
+                                     
                                 </div> 
-                            </div>
-                            <div class="fw-bold">
-                                <div class="small text-gray-500"><?php echo date('F j, Y, g:i a',strtotime($item['date_created'])); ?></div>
-                                <span class="font-weight-bold"><?php
-
-                                if ($item['gender'] == 'Male') {
-                                    
-                                    echo " Sir ".$item['first_name']." ".$item['last_name']." ".$item['action'].".";
-                                }
-                                elseif($item['gender']== 'Female') {
-
-                                    echo " Ma'am ".$item['first_name']." ".$item['last_name']." ".$item['action'].".";
-                                }
-                                ?></span>
-                            </div>
-
-                            <?php
-
-                                }
-                            }
-                            ?>
-                        </a>
+                            </div> 
                             <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
                         </div>
                     </div>
@@ -403,7 +364,45 @@ $(document).ready(function () {
         });
     });
 </script>
+<script>
+  function loadXMLDocs() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("count_wrapper").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "notif_num.php", true);
+  xhttp.send();
+}
+setInterval(function(){
+    loadXMLDocs();
+    // 1sec
+},100);
 
+window.onload = loadXMLDocs;
+
+</script>
+<script >
+    function load() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("wrapper").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "notif_wrapper.php", true);
+  xhttp.send();
+}
+setInterval(function(){
+    load();
+    // 1sec
+},100);
+
+window.onload = load;
+</script>
 <?php 
 #add accounts
 if (isset($_GET['adsuccess'])) {

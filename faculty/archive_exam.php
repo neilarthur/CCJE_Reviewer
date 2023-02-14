@@ -181,61 +181,24 @@ function getName($n) {
                     </nav>
                 </div>
                 <form class="d-flex">
-                    <div class="dropdown dp mt-3">
-                        <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
-                            <?php 
-                             $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response  WHERE response_stat='0' ORDER BY response_id DESC");
-                            ?>
-                            <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($come); ?></span>
+                    <!--- Notification -->
+                     <div class="dropdown dp mt-3 me-2">
+                        <a class="text-reset dropdown-toggle text-decoration-none position-relative" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg mx-2"></i>
+                            <div id="count_wrapper">
+                                
+                            </div>
                         </a>
-                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
-                            <h6 class="dropdown-header text-dark ">Notifications</h6>
-                                <?php
-
-                                $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
-
-                                if (mysqli_num_rows($come)==0) {
-                                    
-                                    echo "<a class='dropdown-item d-flex align-items-center' >
-                                <div class='me-4'>
-                                     <div class='fa-stack fa-1x'>
-                                      <i class='fa fa-circle fa-stack-2x ms-2'></i>
-                                      <i class='fas fa-bell-slash fa-stack-1x ms-2 text-white'></i>
-                                    </div> 
-                                </div>
-                                <div class=''>
-                                    <div class='fw-bold h5 ms-4'>No notifications  yet</div>
-                                    <p class='small text-gray-500' >When get notifications, they'll show up here</p>
-                                </div>
-                            </a>";
-                                }
-
-                                if (mysqli_num_rows($come) >= 0) {
-
-                                    foreach ($come as $item) {
-
-                                ?>
-                            <a class="dropdown-item d-flex align-items-center" href="notification.php">
-                                <div class="me-4">
-                                     <div class="fa-stack fa-1x">
-                                      <i class="fa fa-circle fa-stack-2x ms-2"></i>
-                                      <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
-                                    </div> 
-                                </div>
-                                <div class="fw-bold">
-                                    <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
-                                     echo $life; ?></div>
-                                    <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." has a message for you "; ?></span>
-                                </div>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </a>
+                        <div class="dropdown-list bg-light dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+                            <p class="h5 dropdown-header text-dark ">Notifications</p>
+                              <div style="overflow-y: auto; white-space: nowrap; height: auto; max-height: 300px;" class="bg-white">
+                                 <div id="wrapper">
+                                     
+                                 </div> 
+                              </div>
                             <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
                         </div>
                     </div>
-                    <div class="dropdown me-3">
+                    <div class="dropdown mx-2">
                         <button class="btn  dropdown-toggle border border-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
 
@@ -713,6 +676,69 @@ $(document).ready(function() {
         })
     }
  </script>
+ <script type="text/javascript">
+    $(document).ready(function(){
+        $("#navbarDropdownMenuLink").on("click",function(){
+            $.ajax({
+                url:"readnotification.php",
+                success: function(come){
+                    console.log(come);
+                }
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#navbarDropdownMenuLink").on("click",function(){
+            $.ajax({
+                url:"readnotif.php",
+                success: function(come){
+                    console.log(come);
+                }
+            });
+        });
+    });
+</script>
+ <script>
+  function loadXMLDocs() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("count_wrapper").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "notif_num.php", true);
+  xhttp.send();
+}
+setInterval(function(){
+    loadXMLDocs();
+    // 1sec
+},100);
+
+window.onload = loadXMLDocs;
+
+</script>
+<script >
+    function load() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("wrapper").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "notif_wrapper.php", true);
+  xhttp.send();
+}
+setInterval(function(){
+    load();
+    // 1sec
+},100);
+
+window.onload = load;
+</script>
  <script src="../js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="../js/jquery.durationpicker.js"></script>

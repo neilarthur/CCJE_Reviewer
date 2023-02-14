@@ -255,19 +255,19 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='admin') {
 	                                                	if ($rows['Approval']=='approve') {
 	                                                		
 	                                                		echo '<div class="d-flex text-center">
-	                                                		<button class="btn btn-secondary ms-3"type="button" disabled><i class="fas fa-check-circle"></i></button>
+	                                                		<button class="btn btn-secondary mx-3"type="button" disabled><i class="fas fa-check-circle"></i></button>
 	                                                	</div>';
 	                                                	}
                                                         elseif ($rows['Approval']=='decline') {
                                                            
                                                            echo '<div class="d-flex text-center">
-                                                            <button class="btn btn-secondary ms-3"type="button" disabled><i class="fas fa-check-circle"></i></button>
+                                                            <button class="btn btn-secondary mx-3"type="button" disabled><i class="fas fa-check-circle"></i></button>
                                                         </div>';
                                                         }
 	                                                	else {
 
 	                                                	echo '<div class="d-flex text-center">
-	                                                		<button data-id='.$rows['pre_exam_id'].' class="btn btn-success  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
+	                                                		<button data-id='.$rows['pre_exam_id'].' class="btn btn-success  mx-3 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
 	                                                	</div>'; 
 	                                                		
 	                                                	}

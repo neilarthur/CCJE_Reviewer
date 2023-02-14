@@ -152,49 +152,24 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 					</nav>
 				</div>
 				<form class="d-flex">
-					<div class="dropdown dp mt-3">
-		                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
-		                   <?php $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response  WHERE response_stat='0' ORDER BY response_id DESC");
-		                	?>
-		                    <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($come); ?></span>
-		                </a>
-		                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
-	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
-	                        <a class="dropdown-item d-flex align-items-center" href="#">
-	                        	<?php
-
-	                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
-
-	                            if (mysqli_num_rows($come)==0) {
-	                            	
-	                            	echo "<h5 class='text-center'>No notification Found</h5>";
-	                            }
-
-	                            if (mysqli_num_rows($come) >= 0) {
-
-	                            	foreach ($come as $item) {
-
-	                            ?>
-	                            <div class="me-4">
-	                                 <div class="fa-stack fa-1x">
-	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
-	                                  <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
-	                                </div> 
-	                            </div>
-	                            <div class="fw-bold">
-	                                 <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
-	                                 echo $life; ?></div>
-	                                <span class="fw-bold"><?php echo $item['first_name']." ".$item['last_name']."&nbsp;has a message for you"; ?></span>
-	                            </div>
-	                            	                            <?php
-			                        }
-			                    }
-	                            ?>
-	                        </a>
+					<!--- Notification -->
+					 <div class="dropdown dp mt-3 me-2">
+	                    <a class="text-reset dropdown-toggle text-decoration-none position-relative" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg mx-2"></i>
+	                        <div id="count_wrapper">
+	                            
+	                        </div>
+	                    </a>
+	                    <div class="dropdown-list bg-light dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+	                        <p class="h5 dropdown-header text-dark ">Notifications</p>
+	                          <div style="overflow-y: auto; white-space: nowrap; height: auto; max-height: 300px;" class="bg-white">
+	                             <div id="wrapper">
+	                                 
+	                             </div> 
+	                          </div>
 	                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
 	                    </div>
-		            </div>
-		            <div class="dropdown me-3">
+	                </div>
+		            <div class="dropdown mx-2">
 		                <button class="btn  dropdown-toggle border border-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 		                <?php
 
@@ -216,32 +191,39 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 			</div>
 			<!-- Main Content-->
 			<div class="container-fluid py-3 px-4">
-				<div class="container col-lg-7">
+				<div class="container col-lg-8">
 					<h4 class="m-b-50">Notifications <i class="fa fa-bell ms-2"></i></h4>
 					<div class="notification-ui_dd-content">
 						<?php
 
 	                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
 
+
 	                            if (mysqli_num_rows($come)==0) {
 	                            	
 	                            	echo "<h5 class='text-center'>No notification Found</h5>";
-	                            }
+
+	                            } 
 
 	                            if (mysqli_num_rows($come) >= 0) {
 
-	                            	foreach ($come as $item) {
+	                            	 while ($item = mysqli_fetch_array($come)) {
 
 	                            ?>
 						<div class="notification-list notification-list--unread">
 							<div class="notification-list_content">
 								<div class="notification-list_img">
-									<img src="../assets/pics/tempo.png" alt="user">
+									<?php
+						            $pic = $item['image_size'];
+						            echo '<div class="fa-stack fa-1x">
+						            <img class="me-4 rounded-circle" src="data:image;base64,'.base64_encode($pic).'" height="40px;" width="40px;">
+						            </div> ';
+						             ?>
 								</div>
-								<div class="notification-list_detail">
+								<div class="notification-list_detail ms-4">
 									<p><b><?php echo $item['first_name']." ".$item['last_name']."</b>&nbsp; has a message for you"; ?></p>
-									
-									<p class="text-muted"><?php echo $item['feedback']; ?></p>
+									 
+									<p class="fw-bold"><?php echo $item['feedback']; ?></p>
 									<p class="text-muted"><small>10 mins ago</small></p>
 								</div>
 							</div>
@@ -250,11 +232,45 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='faculty') {
 	                                  ?></div>
 							</div>
 						</div>
+						<?php
+		                        }
+		                    }
 
-	                            <?php
-			                        }
-			                    }
-	                            ?>
+		                  $reponsed = mysqli_query($sqlcon,"SELECT * FROM tbl_admin_response,accounts,tbl_pre_question WHERE (tbl_admin_response.acc_id= accounts.acc_id) AND (tbl_admin_response.pre_exam_id =tbl_pre_question.pre_exam_id) AND tbl_pre_question.prepared_by = '{$_SESSION['acc_id']}' ORDER BY tbl_res_id_ad DESC");
+
+
+	                            if (mysqli_num_rows($reponsed) >= 0) {
+
+	                            	 while ($row = mysqli_fetch_array($reponsed)) {
+
+	                     ?>
+
+	                     
+	                      <div class="notification-list notification-list--unread">
+							<div class="notification-list_content">
+								<div class="notification-list_img">
+									<?php
+						            $pic = $row['image_size'];
+						            echo '<div class="fa-stack fa-1x">
+						            <img class="me-4 rounded-circle" src="data:image;base64,'.base64_encode($pic).'" height="40px;" width="40px;">
+						            </div> ';
+						             ?>
+								</div>
+								<div class="notification-list_detail ms-4">
+									<p><b> Sir <?php echo $row['first_name']." ".$row['last_name']."</b>&nbsp; provided a feedback regarding "; ?></p>
+									<p>on the <?php $row['subjects']; ?>exam that you created</p>
+									 
+									<p class="fw-bold"><?php echo $row['response_sender']; ?></p>
+									<p class="text-muted"><small>10 mins ago</small></p>
+								</div>
+							</div>
+							<div class="notification-list_feature-img">
+								<div class="small text-gray-500 text-muted"><?php echo date('F j, Y',strtotime($row['date_created']));
+	                                  ?></div>
+							</div>
+						</div>
+							<?php } 
+						} ?>
 					</div>
 				</div>
 			</div>
@@ -319,5 +335,44 @@ let arrow = document.querySelectorAll(".arrow");
 			});
 		});
 	});
+</script>
+<script>
+  function loadXMLDocs() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("count_wrapper").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "notif_num.php", true);
+  xhttp.send();
+}
+setInterval(function(){
+    loadXMLDocs();
+    // 1sec
+},100);
+
+window.onload = loadXMLDocs;
+
+</script>
+<script >
+    function load() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("wrapper").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "notif_wrapper.php", true);
+  xhttp.send();
+}
+setInterval(function(){
+    load();
+    // 1sec
+},100);
+
+window.onload = load;
 </script>
 </html>

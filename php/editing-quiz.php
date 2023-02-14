@@ -201,60 +201,24 @@ $suppd .= "</select>";
 					</nav>
 				</div>
 				<form class="d-flex">
-					<div class="dropdown dp mt-3">
-		                    <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
-		                        <?php $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response  WHERE response_stat='0' ORDER BY response_id DESC");
-		                	?>
-		                    <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($come); ?></span>
-		                </a>
-		                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
-	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
-	                        	<?php
+					<!--- Notification -->
+			            <div class="dropdown dp mt-3 me-2">
+			                <a class="text-reset dropdown-toggle text-decoration-none position-relative" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg mx-2"></i>
+			                    <div id="count_wrapper">
 
-	                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
+			                    </div>
+			                </a>
+			                <div class="dropdown-list bg-light dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+			                    <p class="h5 dropdown-header text-dark ">Notifications</p>
+			                    <div style="overflow-y: auto; white-space: nowrap; height: auto; max-height: 300px;" class="bg-white">
+			                        <div id="wrapper">
 
-	                            if (mysqli_num_rows($come)==0) {
-	                            	
-	                            	echo "<a class='dropdown-item d-flex align-items-center' >
-                                <div class='me-4'>
-                                     <div class='fa-stack fa-1x'>
-                                      <i class='fa fa-circle fa-stack-2x ms-2'></i>
-                                      <i class='fas fa-bell-slash fa-stack-1x ms-2 text-white'></i>
-                                    </div> 
-                                </div>
-                                <div class=''>
-                                    <div class='fw-bold h5 ms-4'>No notifications  yet</div>
-                                    <p class='small text-gray-500' >When you get notifications, they'll show up here</p>
-                                </div>
-                            </a>";
-	                            }
-
-	                            if (mysqli_num_rows($come) >= 0) {
-
-	                            	foreach ($come as $item) {
-
-	                            ?>
-	                        <a class="dropdown-item d-flex align-items-center" href="../faculty/notification.php">
-	                            <div class="me-4">
-	                                 <div class="fa-stack fa-1x">
-	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
-	                                  <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
-	                                </div> 
-	                            </div>
-	                            <div class="fw-bold">
-	                                <div class="small text-gray-500"><?php  $life = date('M d, Y h:i:s a',strtotime($item['created']));
-	                                 echo $life; ?></div>
-	                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." has a message for you "; ?></span>
-	                            </div>
-	                            <?php
-			                        }
-			                    }
-	                            ?>
-		                          </a>
-		                          <a class="dropdown-item text-center small text-gray-500" href="../faculty/notification.php">Show All Notifications</a>
-		                      </div>
-		                </div>
-		                <div class="dropdown me-3">
+			                        </div>
+			                    </div>
+			                    <a class="dropdown-item text-center small text-gray-500" href="../faculty/notification.php">Show All Notifications</a>
+			                </div>
+			            </div>
+		                <div class="dropdown mx-2">
 		                    <button class="btn  dropdown-toggle border border-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 		                    <?php
 
@@ -577,7 +541,7 @@ $suppd .= "</select>";
 	    </div>
 
 		<!--Add Question from Question bank modal-->
-		<div class="modal fade " data-bs-backdrop="true"  id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade "  data-bs-backdrop="static" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-xl  ">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -675,7 +639,7 @@ $suppd .= "</select>";
 		</div>
 
 		<!-- Add Ramdom question Modal -->
-		<div class="modal fade" id="addRandom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="addRandom"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -783,7 +747,7 @@ $suppd .= "</select>";
 		</div>
 
 		<!-- View Action Modal -->
-		<div class="modal fade" id="question_bank_prev" data-bs-backdrop="true"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+		<div class="modal fade" id="question_bank_prev" data-bs-backdrop="static"  aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
 			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -803,7 +767,7 @@ $suppd .= "</select>";
 		</div>
 		
 		<!--Preview Question Modal -->
-		<div class="modal fade" id="viewToggle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="viewToggle"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header border-0">
@@ -848,7 +812,7 @@ $suppd .= "</select>";
 		</div>
 
 		<!-- Time And Date modal -->
-		<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="userModal" tabindex="-1"  data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<form action="user_override.php" method="POST">
 					<div class="modal-content">
@@ -889,7 +853,7 @@ $suppd .= "</select>";
 		</div>
 		
 		<!--Results Modal -->
-		<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="resultModal"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -1287,5 +1251,69 @@ let arrow = document.querySelectorAll(".arrow");
     });
 
 });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#navbarDropdownMenuLink").on("click",function(){
+            $.ajax({
+                url:"../faculty/readnotification.php",
+                success: function(come){
+                    console.log(come);
+                }
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#navbarDropdownMenuLink").on("click",function(){
+            $.ajax({
+                url:"../faculty/readnotif.php",
+                success: function(come){
+                    console.log(come);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    function loadXMLDocs() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("count_wrapper").innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "../faculty/notif_num.php", true);
+        xhttp.send();
+    }
+    setInterval(function() {
+        loadXMLDocs();
+        // 1sec
+    }, 100);
+
+    window.onload = loadXMLDocs;
+
+</script>
+<script>
+    function load() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("wrapper").innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "../faculty/notif_wrapper.php", true);
+        xhttp.send();
+    }
+    setInterval(function() {
+        load();
+        // 1sec
+    }, 100);
+
+    window.onload = load;
+
 </script>
 </html>

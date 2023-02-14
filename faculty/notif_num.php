@@ -9,13 +9,13 @@ $response = mysqli_query($sqlcon,"SELECT * FROM tbl_admin_response,accounts WHER
 
 $count = mysqli_num_rows($notif);
 $counted = mysqli_num_rows($response);
+$total_count= $count + $counted;
 
-while ($row = mysqli_fetch_array($notif)) {
-	while ($raw = mysqli_fetch_assoc($response)) { ?>
-		 <span class= "position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $count; ?></span>
-		 <span class= "position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $counted; ?></span>
-		 
-		<?php
-	}
-}
+
+while ($row = mysqli_fetch_array($notif)  OR $ror =mysqli_fetch_array($response)) { ?>
+	<span class= "position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $total_count;
+		?></span>
+<?php }
 ?>
+
+
