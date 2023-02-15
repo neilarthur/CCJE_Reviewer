@@ -129,9 +129,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Archived</a></li>
-                    <li><a href="#">Quiz & Longquiz</a></li>
-                    <li><a href="#">Preboard exam</a></li>
-                    <li><a href="#">User Accounts</a></li>
+                    <li><a href="archive_quizzes.php">Quiz & Longquiz</a></li>
+                    <li><a href="archive_exam.php">Preboard exam</a></li>
+                    <li><a href="archive_users.php?tab-accounts=students">User Accounts</a></li>
                 </ul>
             </li>
 			<li class="navigation-list-item">

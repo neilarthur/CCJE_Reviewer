@@ -102,12 +102,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="results.php">
-					<i class="fas fa-poll"></i>
-					<span class="link_name">Results</span>
+				<a href="database.php">
+					<i class='bx bxs-data'></i>
+					<span class="link_name">Database</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="results.php">Results</a></li>
+					<li><a class="link_name" href="database.php">Database</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
@@ -129,9 +129,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Archived</a></li>
-                    <li><a href="#">Quiz & Longquiz</a></li>
-                    <li><a href="#">Preboard exam</a></li>
-                    <li><a href="#">User Accounts</a></li>
+                    <li><a href="archive_quizzes.php">Quiz & Longquiz</a></li>
+                    <li><a href="archive_exam.php">Preboard exam</a></li>
+                    <li><a href="archive_users.php?tab-accounts=students">User Accounts</a></li>
                 </ul>
             </li>
 			<li class="navigation-list-item">
@@ -185,62 +185,23 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 				</nav>
 			</div>
 			<form class="d-flex">
-				<div class="dropdown dp mt-3">
-                    <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
-                        <?php 
-
-                            $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification  WHERE notif_status='0' ORDER BY notif_id DESC");
-                            ?>
-                            <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($comers); ?></span>
-                        </a>
-	                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
-	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
-	                        	<?php
-
-                                $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty')");
-
-                                if (mysqli_num_rows($comers)==0) {
-                                    
-                                    echo "<h5 class='text-center'>No notification Found</h5>";
-                                }
-
-                                if (mysqli_num_rows($comers) >= 0) {
-
-                                    foreach ($comers as $item) {
-
-                                ?>
-                             <a class="dropdown-item d-flex align-items-center" href="notification.php">
-	                            <div class="me-4">
-	                                 <div class="fa-stack fa-1x">
-	                                  <i class="fa fa-circle fa-stack-2x ms-2"></i>
-	                                  <i class="fas fa-user fa-stack-1x ms-2 text-white" ></i>
-	                                </div> 
-	                            </div>
-	                            <div class="fw-bold">
-	                                <div class="small text-gray-500"><?php echo date('F j, Y, g:i a',strtotime($item['date_created'])); ?></div>
-                                <span class="font-weight-bold"><?php
-
-                                if ($item['gender'] == 'Male') {
-                                    
-                                    echo " Sir ".$item['first_name']." ".$item['last_name']." ".$item['action'].".";
-                                }
-                                elseif($item['gender']== 'Female') {
-
-                                    echo " Ma'am ".$item['first_name']." ".$item['last_name']." ".$item['action'].".";
-                                }
-                                ?></span>
-                            </div>
-
-                            <?php
-
-                                }
-                            }
-                            ?>
-	                     </a>
-	                     <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
-	                </div>
+				<div class="dropdown dp mt-3 me-2">
+                    <a class="text-reset dropdown-toggle text-decoration-none position-relative" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg mx-2"></i>
+                        <div id="count_wrapper">
+                            
+                        </div>
+                    </a>
+                    <div class="dropdown-list bg-light dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+                        <p class="h5 dropdown-header text-dark ">Notifications</p>
+                          <div style="overflow-y: auto; white-space: nowrap; height: auto; max-height: 300px;" class="bg-white">
+                             <div id="wrapper">
+                                 
+                             </div> 
+                          </div>
+                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
+                    </div>
                 </div>
-                <div class="dropdown me-3">
+                <div class="dropdown mx-2">
                     <button class="btn  dropdown-toggle border border-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <?php
 
@@ -265,9 +226,10 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 			<div class="container-fluid">
 				<div class="row">
 				  	<div class="col d-flex justify-content">
-                        <div class="w-50">
-                            <h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2 ">Account  Management</h2>
-                        </div> 
+                        <div class="col d-flex justify-content-between">
+				  		<h2 class="text-dark text-start ps-3 fw-bold mt-4 ">Account  Management</h2>
+				  		<button type="button" class="btn  mt-4 px-3 text-white" data-bs-toggle="modal" data-bs-target="#AddFaculty" style=" background-color: #8C0000;"><b><i class="fas fa-plus-circle"></i></b> ADD</button>
+                    </div>
                     </div>
                 </div>
 				<div class="tab-content" id="nav-tabContent">
@@ -288,9 +250,8 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 						<div class="row">
 							<div class="col ">
 								<div class="card">
-									<div class="card-body rounded-3 m-4 table-responsive-xl">
+									<div class="card-body rounded-3 mx-4 table-responsive-xl">
 										<div class="position-left d-flex justify-content-end mb-3">
-											<button type="button" class="btn  px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#AddModal" style="margin-left: 55%; background-color: #8C0000;"><b><i class="fas fa-plus-circle"></i></b> ADD</button>
 										</div>
 										<table class="table table-striped align-middle bg-light" id="student">
 											<thead>
@@ -318,7 +279,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+															<a href="../php/archiveaccount.php?disabled=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del"><i class="fas fa-archive"></i></a>
 														</div>
 													</td>
 												</tr>
@@ -338,9 +299,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 							<div class="col ">
 								<div class="card">
 									<div class="card-body rounded-3 m-4 table-responsive-lg">
-										<div class="position-left d-flex justify-content-end  mb-3">
-											<button type="button" class="btn  px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#AddFaculty" style="margin-left: 55%; background-color: #8C0000;"><b><i class="fas fa-plus-circle"></i></b> ADD</button>
-										</div>
 										<table class="table table-striped align-middle bg-light text-align-middle" id="faculty">
 											<thead>
 												<tr>
@@ -368,7 +326,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+															<a href="../php/archiveaccount.php?disabled=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del"><i class="fas fa-archive"></i></a>
 														</div>
 													</td>
 												</tr>
@@ -400,9 +358,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 						<div class="row">
 							<div class="col ">
 								<div class="card">
-									<div class="card-body rounded-3 m-4 table-responsive-lg">
-										<div class="position-left d-flex justify-content-end mb-3">
-										</div>
+									<div class="card-body rounded-3 mx-4 table-responsive-lg">
 										<table class="table table-striped align-middle bg-light" id="student">
 											<thead>
 												<tr>
@@ -429,7 +385,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $rows['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+															<a href="../php/archiveaccount.php?disabled=<?php echo $rows['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
 														</div>
 													</td>
 												</tr>
@@ -449,9 +405,6 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 							<div class="col ">
 								<div class="card">
 									<div class="card-body rounded-3 m-4 table-responsive-lg">
-										<div class="position-left d-flex justify-content-end  mb-3">
-											<button type="button" class="btn  px-3 pb-2 text-white" data-bs-toggle="modal" data-bs-target="#AddFaculty" style="margin-left: 55%; background-color: #8C0000;"><b><i class="fas fa-plus-circle"></i></b> ADD</button>
-										</div>
 										<table class="table table-striped align-middle bg-light text-align-middle" id="faculty">
 											<thead>
 												<tr>
@@ -479,7 +432,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 														<div class="d-flex flex-row justify-content-center">
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-target="#ViewAccount" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
 															<button data-id='<?php echo $raws['acc_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-target="#EditAccount" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-															<a href="../php/archiveaccount.php?id=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-trash"></i></a>
+															<a href="../php/archiveaccount.php?disabled=<?php echo $raws['acc_id']; ?>" class="btn btn-secondary mx-2 btn-del" ><i class="fas fa-archive"></i></a>
 
 														</div>
 													</td>
@@ -505,7 +458,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 		</div>
     </section>
 
-        <!-- ADD Student Account -->
+<!-- ADD Student Account -->
         <div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         	<div class="modal-dialog modal-lg">
         		<div class="modal-content">
@@ -609,16 +562,16 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 
 
         <!--ADD Faculty Account-->
-        <div class="modal fade" id="AddFaculty" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="AddFaculty"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         	<div class="modal-dialog modal-lg">
         		<div class="modal-content">
         			<div class="modal-header">
-        				<h5 class="modal-title fw-bold fs-3" id="exampleModalLabel">Add Faculty Account</h5>
+        				<h5 class="modal-title fw-bold fs-3" id="exampleModalLabel">Add User Account</h5>
         				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         			</div>
         			<div class="modal-body">
         				<div class="container">
-        					<form class="form" method="post" action="../php/add_account.php" enctype="multipart/form-data">
+        					<form class="form" method="post" action="../php/add_account_systemadmin.php" enctype="multipart/form-data">
         						<div class="col">
         							<div class="row">
         								<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 py-2 me-5">
@@ -640,7 +593,15 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
         							<div class="row">
         								<div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 py-2">
 											<label for="user-id" class="d-flex justify-content-start ps-1">Role</label>
-											<input type="text" name="role" value="Faculty" class="form-control" readonly="">
+											<div class="input-group">
+												<select class="form-select" required="" name="role">
+													<option selected></option>
+													<option value="admin">Admin</option>
+													<option value="secretary">Secretary</option>
+													<option value="faculty">Faculty</option>
+													<option value="student">Student</option>
+												</select>
+											</div>
 										</div>
         								<div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 py-2">
 											<label for="user-bday" class="d-flex justify-content-start ps-1">Birth Date</label>
@@ -674,6 +635,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 													<option value="4A">4A</option>
 													<option value="4B">4B</option>
 													<option value="4C">4C</option>
+													<option value="none">None</option>
 												</select>
 											</div>
 										</div>
@@ -699,7 +661,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 									</div>
 								</div>
 								<div class="modal-footer d-flex justify-content-center">
-									<input type="submit" name="save" class="btn btn-success px-5 pb-2 text-white" value="Submit">
+									<input type="submit" name="save" class="btn btn-outline-success px-5 pb-2" value="Submit">
 									<button type="button" class="btn btn-secondary btn  px-5 pb-2 text-white" data-bs-dismiss="modal">Close</button>
 								</div>
 							</form>
@@ -711,7 +673,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 
 
         <!-- View  Account -->
-        <div class="modal fade" id="ViewAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal fade" id="ViewAccount" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         	<div class="modal-dialog modal-lg">
         		<div class="modal-content">
         			<div class="modal-header">
@@ -729,7 +691,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 
 
         <!-- Edit Account -->
-        <div class="modal fade" id="EditAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal fade" id="EditAccount" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         	<div class="modal-dialog modal-lg">
         		<div class="modal-content">
         			<div class="modal-header">
@@ -818,7 +780,7 @@ let arrow = document.querySelectorAll(".arrow");
       var userid = $(this).data('id');
 
       $.ajax({
-        url: '../php/editaccount.php',
+        url: '../php/edit_account_systemadmin.php',
         type: 'post',
         data: {userid: userid},
         success: function(response){
@@ -829,7 +791,6 @@ let arrow = document.querySelectorAll(".arrow");
     });
    });
  </script>
-
  <script type="text/javascript">
  	fileimg.onchange = evt => {
  		const [file] = fileimg.files;
@@ -839,6 +800,46 @@ let arrow = document.querySelectorAll(".arrow");
  		}
  	}
  </script>
+ <script>
+  function loadXMLDocs() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("count_wrapper").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "notif_num.php", true);
+  xhttp.send();
+}
+setInterval(function(){
+    loadXMLDocs();
+    // 1sec
+},100);
+
+window.onload = loadXMLDocs;
+
+</script>
+<script >
+    function load() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("wrapper").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "notif_wrapper.php", true);
+  xhttp.send();
+}
+setInterval(function(){
+    load();
+    // 1sec
+},100);
+
+window.onload = load;
+</script>
+ 
 <script type="text/javascript">
  	$('.btn-del').on('click',function(e){
 
@@ -849,7 +850,7 @@ let arrow = document.querySelectorAll(".arrow");
  		Swal.fire({
 
  			title: 'Are you Sure?',
- 			text: 'Record will be deleted',
+ 			text: 'Record will be archive',
  			icon: "warning",
  			type:'Warning',
  			showCancelButton:true,
@@ -976,26 +977,37 @@ let arrow = document.querySelectorAll(".arrow");
 #add accounts
 if (isset($_GET['addsuccess'])) {
 	echo ' <script> swal("Account has been Saved!", " clicked the okay!", "success");
-	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/accounts.php?tab-accounts=students");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/system_admin/accounts.php?tab-accounts=students");
 	</script>';
 }
 elseif (isset($_GET['adderror'])) {
 	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
-	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/accounts.php?tab-accounts=students");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/system_admin/accounts.php?tab-accounts=students");
 	</script>';
 }
 
 #update accounts
 if (isset($_GET['upsuc'])) {
 	echo ' <script> swal("Account has been Changed!", " clicked the okay!", "success");
-	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/accounts.php");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/system_admin/accounts.php?tab-accounts=students");
 	</script>';
 }
 elseif (isset($_GET['upsucer'])) {
 	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
-	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/admin/accounts.php");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/system_admin/accounts.php?tab-accounts=students");
 	</script>';
 }
+elseif (isset($_GET['suc'])) {
+	echo ' <script> swal("Account has been Changed!", " clicked the okay!", "success");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/system_admin/accounts.php?tab-accounts=faculty");
+	</script>';
+}
+elseif (isset($_GET['error'])) {
+	echo ' <script> swal("Account has not saved!", " clicked the okay!", "error");
+	window.history.pushState({}, document.title, "/" + "CCJE_Reviewer/system_admin/accounts.php?tab-accounts=faculty");
+	</script>';
+}
+
  
 ?> 
 </html>

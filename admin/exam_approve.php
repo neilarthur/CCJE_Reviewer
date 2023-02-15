@@ -51,10 +51,10 @@ function send_code($access,$sound) {
 	);
 
 	//Username to use for SMTP authentication - use full email address for gmail
-	$mail->Username = 'ralphvincent.p11@gmail.com';
+	$mail->Username = 'ccje.mock.board.reviewer@gmail.com';
 
 	//Password to use for SMTP authentication
-	$mail->Password = 'phbaqvzqfeuhpztr';
+	$mail->Password = 'hpwjqclgoqieghyy';
 
 	//Set who the message is to be sent from
 	//Note that with gmail you can only use your account address (same as `Username`)
@@ -64,7 +64,7 @@ function send_code($access,$sound) {
 
 	//Set an alternative reply-to address
 	//This is a good place to put user-submitted addresses
-	$mail->addReplyTo('ralphvincent.p11@gmail.com', 'CCJELSPU');
+	$mail->addReplyTo('ccje.mock.board.reviewer@gmail.com', 'CCJELSPU');
 
 
 	$mail->addAddress($sound);

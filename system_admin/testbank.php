@@ -117,12 +117,12 @@ $supps .= "</select>";
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="results.php">
-					<i class="fas fa-poll"></i>
-					<span class="link_name">Results</span>
+				<a href="database.php">
+					<i class='bx bxs-data'></i>
+					<span class="link_name">Database</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="results.php">Results</a></li>
+					<li><a class="link_name" href="database.php">Database</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
@@ -144,9 +144,9 @@ $supps .= "</select>";
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Archived</a></li>
-                    <li><a href="#">Quiz & Longquiz</a></li>
-                    <li><a href="#">Preboard exam</a></li>
-                    <li><a href="#">User Accounts</a></li>
+                    <li><a href="archive_quizzes.php">Quiz & Longquiz</a></li>
+                    <li><a href="archive_exam.php">Preboard exam</a></li>
+                    <li><a href="archive_users.php?tab-accounts=students">User Accounts</a></li>
                 </ul>
             </li>
 			<li class="navigation-list-item">
@@ -320,8 +320,7 @@ $supps .= "</select>";
 									                    unset($_SESSION['message']);
 									                }
 									             ?>
-												<button type="submit"  data-bs-toggle="modal" data-bs-target="#import" class="btn px-3 mx-2 pb-2 text-white btn-primary"><b><i class="fas fa-file-import me-2"></i></b>Import</button>
-												<a href="question-form.php" class="btn px-3 pb-2 text-white mx-2" style="background-color: #8C0000;"><i class="fas fa-plus me-1"></i>ADD</a>
+												
 										   </div>
 										</div>
 										
@@ -339,15 +338,10 @@ $supps .= "</select>";
 
 												<?php
 
-												$xams = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id = '{$_SESSION['acc_id']}' AND role = 'systemadmin'");
 
-												while ($lows = mysqli_fetch_assoc($xams)) {
-													
-													if ($lows['section'] =='4A') {
-														
-														$exam_run = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND (test_question.status='active') AND (accounts.section='4A') ORDER BY RAND()");
+												$exam_run = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND (test_question.status='active') ORDER BY RAND()");
 
-														while ($rows = mysqli_fetch_assoc($exam_run)) { ?>
+												while ($rows = mysqli_fetch_assoc($exam_run)) { ?>
 
 															<tr>
 																<td hidden=""><?php echo $rows['question_id']; ?></td>
@@ -364,70 +358,7 @@ $supps .= "</select>";
 															</tr>
 															<?php
 														}
-													}elseif ($lows['section'] =='4B') {
-
-														$exam_run = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND (test_question.status='active') AND (accounts.section='4B') ORDER BY RAND()");
-
-														while ($rows = mysqli_fetch_assoc($exam_run)) { ?>
-															<tr>
-																<td hidden=""><?php echo $rows['question_id']; ?></td>
-																<td scope="row"><?php echo $rows['subject_name'];  ?></td>
-																<td><?php echo $rows['level_difficulty'];  ?></td>
-																<td><?php echo $rows['questions_title'];  ?></td>
-																<td>
-																	<div class="d-flex flex-row justify-content-center">
-																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-																		<button data-id='<?php echo $rows['question_id'] ?>' class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
-																	</div>
-																</td>
-															</tr>
-														 <?php
-														}
-													}elseif ($lows['section'] =='4C') {
-														
-														$exam_run = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND (test_question.status='active') AND (accounts.section='4C') ORDER BY RAND()");
-
-														while ($rows = mysqli_fetch_assoc($exam_run)) { ?>
-															<tr>
-																<td hidden=""><?php echo $rows['question_id']; ?></td>
-																<td scope="row"><?php echo $rows['subject_name'];  ?></td>
-																<td><?php echo $rows['level_difficulty'];  ?></td>
-																<td><?php echo $rows['questions_title'];  ?></td>
-																<td>
-																	<div class="d-flex flex-row justify-content-center">
-																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-																		<button data-id='<?php echo $rows['question_id'] ?>' class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
-																	</div>
-																</td>
-															</tr>
-														<?php
-													}
-												  }elseif ($lows['section'] =='none') {
-														
-														$exam_run = mysqli_query($sqlcon,"SELECT * FROM  accounts, test_question WHERE (accounts.acc_id =test_question.acc_id) AND (test_question.status='active') AND (accounts.section='none') ORDER BY RAND()");
-
-														while ($rows = mysqli_fetch_assoc($exam_run)) { ?>
-															<tr>
-																<td hidden=""><?php echo $rows['question_id']; ?></td>
-																<td scope="row"><?php echo $rows['subject_name'];  ?></td>
-																<td><?php echo $rows['level_difficulty'];  ?></td>
-																<td><?php echo $rows['questions_title'];  ?></td>
-																<td>
-																	<div class="d-flex flex-row justify-content-center">
-																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-primary  mx-2 viewbtn" data-bs-toggle="modal" type="button"><i class="fas fa-eye"></i></button>
-																		<button data-id='<?php echo $rows['question_id'];  ?>' class="btn btn-warning  mx-2 editbtn" data-bs-toggle="modal" type="button"><i class="fas fa-edit"></i></button>
-																		<button data-id='<?php echo $rows['question_id'] ?>' class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
-																	</div>
-																</td>
-															</tr>
-														<?php
-													}
-												  }
-												}
-												?>
-
+													?>
 										</table>
 									</div>
 								</div>
@@ -522,7 +453,7 @@ $supps .= "</select>";
 	    				<h3 class="modal-title fw-bold" id="exampleModalLabel">Import Question</h3>
 	    				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	    			</div>
-	    			<form action="import_excel.php" method="POST" enctype="multipart/form-data">
+	    			<form action="../faculty/import_excel.php" method="POST" enctype="multipart/form-data">
 	    				<div class="modal-body">
 	    					<input type="file" class="form-control" name="import_file">
 	    					<input type="hidden" name="acc_id" value="<?php echo $_SESSION['acc_id']; ?>">

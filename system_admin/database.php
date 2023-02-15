@@ -107,12 +107,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="results.php">
-					<i class="fas fa-poll"></i>
-					<span class="link_name">Results</span>
+				<a href="database.php">
+					<i class='bx bxs-data'></i>
+					<span class="link_name">Database</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="results.php">Results</a></li>
+					<li><a class="link_name" href="database.php">Database</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
@@ -134,9 +134,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Archived</a></li>
-                    <li><a href="#">Quiz & Longquiz</a></li>
-                    <li><a href="#">Preboard exam</a></li>
-                    <li><a href="#">User Accounts</a></li>
+                    <li><a href="archive_quizzes.php">Quiz & Longquiz</a></li>
+                    <li><a href="archive_exam.php">Preboard exam</a></li>
+                    <li><a href="archive_users.php?tab-accounts=students">User Accounts</a></li>
                 </ul>
             </li>
 			<li class="navigation-list-item">
@@ -277,9 +277,11 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 						<div class="row">
 							<div class="col ">
 								<div class="card">
-									<div class="card-body rounded-3 m-3 table-responsive-lg">
-										
-										<a href="backup.php" target="_blank" class="btn btn-success">Backup Database</a>
+									<div class="card-body rounded-3 m-3 table-responsive-lg d-flex align-items-center  ">
+
+										<div class="d-flex align-items-center">
+											<a href="backup.php" target="_blank" class=" btn btn-success ">Backup Database</a>
+										</div>
 	                                </div>
 	                            </div>
 	                        </div>

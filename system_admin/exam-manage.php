@@ -7,7 +7,7 @@ if (!isset($_SESSION["login"]) || $_SESSION['login'] !=true) {
     header("location: ../php/index.php");
      exit;
 }
-elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='system admin') {
+elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
     header("location: ../php/index.php");
     exit;
 }
@@ -42,99 +42,133 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='system admin') {
     </style> 
 </head>
 <body style="background: rgb(230, 230, 230);">
-		<div class="sidebar close">
-			<div class="logo-details mt-2">
-				<img src="../assets/pics/CCJE.png" alt="" width="50" height="50" class="d-inline-block align-top ms-3 bg-white rounded-circle" ><span class="logo_name ms-2">CCJE Reviewer</span>
-			</div>
-			<hr style="color:rgb(255, 255, 255);">
-			<ul class="nav-links fw-bold">
-				<li class="navigation-list-item">
-					<a href="dashboard.php">
-						<i class="fas fa-tachometer-alt"></i>
-						<span class="link_name">Dashboard</span>
-					</a>
-					<ul class="sub-menu blank">
-						<li><a class="link_name" href="dashboard.php">Dashboard</a></li>
-					</ul>
-				</li>
-				<li class="navigation-list-item">
-					<a href="analytics.php">
-						<i class='bx bx-pie-chart-alt-2 bx-sm' ></i>
-						<span class="link_name">Analytics</span>
-					</a>
-					<ul class="sub-menu blank">
-						<li><a class="link_name" href="analytics.php">Analytics</a></li>
-					</ul>
-				</li>
-				<li>
-	                <li class="navigation-list-item">
-	                <a href="testbank.php">
-	                    <i class="fas fa-list-ol"></i>
-	                    <span class="link_name">Question Bank</span>
-	                </a>
-	                <ul class="sub-menu blank">
-	                    <li><a class="link_name" href="exam-manage.php">Question Bank</a></li>
-	                </ul>
-	            </li>
-				<li class="navigation-list-item">
-					<a href="exam-manage.php">
-						<i class='bx bx-spreadsheet bx-sm'></i>
-						<span class="link_name">Exam Managment</span>
-					</a>
-					<ul class="sub-menu blank">
-						<li><a class="link_name" href="exam-manage.php">Exam Management</a></li>
-					</ul>
-				</li>
-				<li class="navigation-list-item">
-					<a href="results.php">
-						<i class="fas fa-poll"></i>
-						<span class="link_name">Results</span>
-					</a>
-					<ul class="sub-menu blank">
-						<li><a class="link_name" href="results.php">Results</a></li>
-					</ul>
-				</li>
-				<li class="navigation-list-item">
-					<a href="accounts.php?tab-accounts=students">
-						<i class='bx bxs-user-account bx-sm' ></i>
-						<span class="link_name">Accounts</span>
-					</a>
-					<ul class="sub-menu blank">
-						<li><a class="link_name" href="accounts.php?tab-accounts=students">Accounts</a></li>
-					</ul>
-				</li>
-				<li class="navigation-list-item">
-					<a href="login-history.php" >
-						<i class="fas fa-history"></i>
-						<span class="link_name">Log History</span>
-					</a>
-					<ul class="sub-menu blank">
-						<li><a class="link_name" href="login-history.php">Log History</a></li>
-					</ul>
-				</li>
-				<li class="navigation-list">
-	                <div class="profile-details">
-	                    <?php
+	<div class="sidebar close">
+		<div class="logo-details mt-2">
+			<img src="../assets/pics/CCJE.png" alt="" width="50" height="50" class="d-inline-block align-top ms-3 bg-white rounded-circle" ><span class="logo_name ms-2">CCJE Reviewer</span>
+		</div>
+		<hr style="color:rgb(255, 255, 255);">
+		<ul class="nav-links fw-bold">
+			<li class="navigation-list-item">
+				<a href="dashboard.php">
+					<i class="fas fa-tachometer-alt"></i>
+					<span class="link_name">Dashboard</span>
+				</a>
+				<ul class="sub-menu blank">
+					<li><a class="link_name" href="dashboard.php">Dashboard</a></li>
+				</ul>
+			</li>
+			<li class="navigation-list-item">
+				<a href="analytics.php">
+					<i class='bx bx-pie-chart-alt-2 bx-sm' ></i>
+					<span class="link_name">Analytics</span>
+				</a>
+				<ul class="sub-menu blank">
+					<li><a class="link_name" href="analytics.php">Analytics</a></li>
+				</ul>
+			</li>
+			<li>
+                <li class="navigation-list-item">
+                <a href="testbank.php">
+                    <i class="fas fa-list-ol"></i>
+                    <span class="link_name">Question Bank</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="exam-manage.php">Question Bank</a></li>
+                </ul>
+            </li>
+            <li class="navigation-list-item">
+                <a href="testyourself.php">
+                    <i class="fas fa-sticky-note"></i>
+                    <span class="link_name">Manage Test </span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="testyourself.php">Manage Test</a></li>
+                </ul>
+            </li>
+            <li class="navigation-list-item">
+                <a href="preboard.php">
+                    <i class="fas fa-list-alt"></i>
+                    <span class="link_name">Pre-Board Examination</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="preboard.php">Pre-Board Examination</a></li>
+                </ul>
+            </li>
+			<li class="navigation-list-item">
+				<a href="exam-manage.php">
+					<i class='bx bx-spreadsheet bx-sm'></i>
+					<span class="link_name">Exam Managment</span>
+				</a>
+				<ul class="sub-menu blank">
+					<li><a class="link_name" href="exam-manage.php">Exam Management</a></li>
+				</ul>
+			</li>
+			<li class="navigation-list-item">
+				<a href="database.php">
+					<i class='bx bxs-data'></i>
+					<span class="link_name">Database</span>
+				</a>
+				<ul class="sub-menu blank">
+					<li><a class="link_name" href="database.php">Database</a></li>
+				</ul>
+			</li>
+			<li class="navigation-list-item">
+				<a href="accounts.php?tab-accounts=students">
+					<i class='bx bxs-user-account bx-sm' ></i>
+					<span class="link_name">Accounts</span>
+				</a>
+				<ul class="sub-menu blank">
+					<li><a class="link_name" href="accounts.php?tab-accounts=students">Accounts</a></li>
+				</ul>
+			</li>
+            <li class="navigation-list-item">
+                <div class="icon-link">
+                    <a href="#">
+                        <i class="fas fa-archive"></i>
+                        <span class="link_name">Archived</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow drop' ></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Archived</a></li>
+                    <li><a href="archive_quizzes.php">Quiz & Longquiz</a></li>
+                    <li><a href="archive_exam.php">Preboard exam</a></li>
+                    <li><a href="archive_users.php?tab-accounts=students">User Accounts</a></li>
+                </ul>
+            </li>
+			<li class="navigation-list-item">
+				<a href="login-history.php" >
+					<i class="fas fa-history"></i>
+					<span class="link_name">Log History</span>
+				</a>
+				<ul class="sub-menu blank">
+					<li><a class="link_name" href="login-history.php">Log History</a></li>
+				</ul>
+			</li>
+            
+			<li class="navigation-list">
+                <div class="profile-details">
+                    <?php
 
-	                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
-	                     while ($rows = mysqli_fetch_assoc($query_row)) {
-	                        echo '
-	                         <div class="profile-content">
-	                        <img class="rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" alt="profileImg">
-	                    </div>';
-	                        ?>
+                    $query_row = mysqli_query($sqlcon,"SELECT * FROM accounts WHERE acc_id= '{$_SESSION['acc_id']}' ");
+                     while ($rows = mysqli_fetch_assoc($query_row)) {
+                        echo '
+                         <div class="profile-content">
+                        <img class="rounded-circle" src="data:image;base64,'.base64_encode($rows["image_size"]).'" alt="profileImg">
+                    </div>';
+                        ?>
 
-	                    <?php }
+                    <?php }
 
-	                    ?>
-						<div class="name-job">
-							<div class="profile_name"><a class="profile text-warning" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><?php echo $_SESSION["first_name"];?></a></div>
-							<div class="job text-capitalize"><?php echo $_SESSION["role"];  ?></div>
-						</div>
-	                </div>
-	            </li>
-	        </ul>
-	    </div>
+                    ?>
+					<div class="name-job">
+						<div class="profile_name"><a class="profile text-warning" href="profile.php?acc_id=<?php echo $_SESSION["acc_id"] ?>"><?php echo $_SESSION["first_name"];?></a></div>
+						<div class="job text-capitalize"><?php echo $_SESSION["role"];  ?></div>
+					</div>
+                </div>
+            </li>
+        </ul>
+    </div>
 		<section class="home-section " >
 			<div class="home-content d-flex justify-content-between" style="background: white;">
 				<div class="d-flex">
@@ -296,7 +330,7 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='system admin') {
 	                                                	else {
 
 	                                                	echo '<div class="d-flex text-center">
-	                                                		<button class="btn btn-success editbtn ms-3" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
+	                                                		<button class="btn btn-success editbtn ms-3 disabled" data-bs-toggle="modal" type="button"><i class="fas fa-check-circle"></i></button>
 	                                                	</div>'; 
 	                                                		
 	                                                	}

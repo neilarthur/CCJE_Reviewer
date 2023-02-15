@@ -32,7 +32,7 @@ $suppd .= "</select>";
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Test Yourself</title>
+	<title>Archived Quizzes</title>
 	<!-- Boostrap 5.2 -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<!-- CSS -->
@@ -196,7 +196,7 @@ $suppd .= "</select>";
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="dashboard.php" style="text-decoration: none;">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Manage Test</li>
+									<li class="breadcrumb-item active" aria-current="page">Archive Test</li>
 								</ol>
 							</nav>
 						</div>
@@ -204,29 +204,39 @@ $suppd .= "</select>";
 				</div>
 				<form class="d-flex">
 					<div class="dropdown dp mt-3">
-	                    <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg"></i>
-	                            <?php 
-
-	                            $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification  WHERE notif_status='0' ORDER BY notif_id DESC");
-	                            ?>
-	                            <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($comers); ?></span>
-	                    </a>
-	                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
+		                <a class="text-reset dropdown-toggle text-decoration-none" href="#"id="navbarDropdownMenuLink" role="button"data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-lg "></i>
+		                    <?php 
+		                     $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response  WHERE response_stat='0' ORDER BY response_id DESC");
+		                	?>
+		                    <span class=" top-0 start-100 translate-middle badge rounded-pill badge-notification bg-danger"><?php echo mysqli_num_rows($come); ?></span>
+		                </a>
+		                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="border-radius: 10px;">
 	                        <h6 class="dropdown-header text-dark ">Notifications</h6>
-	                            <?php
+	                        	<?php
 
-	                                $comers = mysqli_query($sqlcon,"SELECT * FROM tbl_notification,accounts WHERE (tbl_notification.acc_id = accounts.acc_id) AND (accounts.role='faculty')");
+	                            $come = mysqli_query($sqlcon,"SELECT * FROM tbl_response,choose_question,accounts WHERE (tbl_response.test_id = choose_question.test_id) AND (choose_question.prepared_by ='{$_SESSION['acc_id']}') AND (tbl_response.acc = accounts.acc_id) ORDER BY response_id DESC");
 
-	                                if (mysqli_num_rows($comers)==0) {
-	                                    
-	                                    echo "<h5 class='text-center'>No notification Found</h5>";
-	                                }
+	                            if (mysqli_num_rows($come)==0) {
+	                            	
+	                            	echo "<a class='dropdown-item d-flex align-items-center' >
+                                <div class='me-4'>
+                                     <div class='fa-stack fa-1x'>
+                                      <i class='fa fa-circle fa-stack-2x ms-2'></i>
+                                      <i class='fas fa-bell-slash fa-stack-1x ms-2 text-white'></i>
+                                    </div> 
+                                </div>
+                                <div class=''>
+                                    <div class='fw-bold h5 ms-4'>No notifications  yet</div>
+                                    <p class='small text-gray-500' >When get notifications, they'll show up here</p>
+                                </div>
+                            </a>";
+	                            }
 
-	                                if (mysqli_num_rows($comers) >= 0) {
+	                            if (mysqli_num_rows($come) >= 0) {
 
-	                                    foreach ($comers as $item) {
+	                            	foreach ($come as $item) {
 
-	                                ?>
+	                            ?>
 	                        <a class="dropdown-item d-flex align-items-center" href="notification.php">
 	                            <div class="me-4">
 	                                 <div class="fa-stack fa-1x">
@@ -235,29 +245,18 @@ $suppd .= "</select>";
 	                                </div> 
 	                            </div>
 	                            <div class="fw-bold">
-	                                <div class="small text-gray-500"><?php echo date('F j, Y, g:i a',strtotime($item['date_created'])); ?></div>
-	                                <span class="font-weight-bold"><?php
-
-	                                if ($item['gender'] == 'Male') {
-	                                    
-	                                    echo " Sir ".$item['first_name']." ".$item['last_name']." ".$item['action'].".";
-	                                }
-	                                elseif($item['gender']== 'Female') {
-
-	                                    echo " Ma'am ".$item['first_name']." ".$item['last_name']." ".$item['action'].".";
-	                                }
-	                                ?></span>
+	                                <div class="small text-gray-500"><?php  $life = date('F j, Y, g:i a',strtotime($item['created']));
+	                                 echo $life; ?></div>
+	                                <span class="font-weight-bold"><?php echo $item['first_name']." ".$item['last_name']." has a message for you "; ?></span>
 	                            </div>
-
 	                            <?php
-
-	                                }
-	                            }
+			                        }
+			                    }
 	                            ?>
 	                        </a>
 	                        <a class="dropdown-item text-center small text-gray-500" href="notification.php">Show All Notifications</a>
 	                    </div>
-	                </div>
+		            </div>
 		            <div class="dropdown me-3">
 		                <button class="btn  dropdown-toggle border border-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 		                <?php
@@ -284,7 +283,7 @@ $suppd .= "</select>";
 					<div class="row">
 						<div class="col d-flex justify-content">
 							<div class="w-50">
-								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Test Management</h2>
+								<h2 class="text-dark text-start ps-3 fw-bold mt-4 ms-2">Archived Test</h2>
 							</div>
 						</div>
 						<div class="row">
@@ -306,52 +305,48 @@ $suppd .= "</select>";
 											</thead>
 											<tbody>
 												<?php
+														$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND (choose_question.status='archive')");
 
-												$exams = mysqli_query($sqlcon,"SELECT * FROM accounts,choose_question WHERE (accounts.acc_id = choose_question.prepared_by) AND (choose_question.status='active')");
+														while ($rows = mysqli_fetch_assoc($exams)) {
 
-												while ($rows = mysqli_fetch_assoc($exams)) {
+															$sec = $rows['time_limit'];
 
-													$sec = $rows['time_limit'];
+															$mins = $sec / 60 ; ?>
 
-													$mins = $sec / 60 ; ?>
+															<tr>
+																<td hidden=""><?php echo $rows['test_id']; ?></td>
+																<td><?php echo $rows['quiz_title'];?></td>
+																<td scope="row"><?php echo $rows['subject_name'];?></td>
+																<td class="ps-5"><?php echo $rows['section']; ?></td>
+																<td class="ps-5"><?php echo $rows['total_quest']?></td>
+																<td><?php echo $mins; ?> mins</td>
 
-													<tr>
-														<td hidden=""><?php echo $rows['test_id']; ?></td>
-														<td><?php echo $rows['quiz_title'];?></td>
-														<td scope="row"><?php echo $rows['subject_name'];?></td>
-														<td class="ps-5"><?php echo $rows['section']; ?></td>
-														<td class="ps-5"><?php echo $rows['total_quest']?></td>
-														<td><?php echo $mins; ?> mins</td>
-
-														
-														<?php 
+																
+																<?php 
 
 
-											            #Status 
-											            if ($rows['stat_question']=='No question') {
-											            	echo '<td><span class="badge bg-danger p-2" style="font-size: 15px;">No Question</span></td>';
-											            }
-											            elseif ($rows['stat_question']=='Ready') {
-											            	echo '<td class="ps-4"><span class="badge bg-success p-2" style="font-size: 15px;">Ready</span></td>';
-											            }
+													            #Status 
+													            if ($rows['stat_question']=='No question') {
+													            	echo '<td><span class="badge bg-danger p-2" style="font-size: 15px;">No Question</span></td>';
+													            }
+													            elseif ($rows['stat_question']=='Ready') {
+													            	echo '<td class="ps-4"><span class="badge bg-success p-2" style="font-size: 15px;">Ready</span></td>';
+													            }
 
-											            ?>
-														<td>
-															<div class="d-flex flex-row justify-content-center">
-
-																<a href="view_question.php?id=<?php echo $rows['test_id']?>" class="btn btn-primary mx-2 disabled" ><i class="fas fa-search-plus"></i></a>
-
-																<a href="editing_quiz.php?id=<?php echo $rows['test_id']?>&total=<?php echo $rows['total_quest']; ?>" class="btn btn-warning mx-2" ><i class="fas fa-pen"></i></a>
-
-																<button class="btn btn-secondary mx-2 deletebtn" data-bs-toggle="modal" type="button"><i class="fas fa-trash"></i></button>
-															</div>
-														</td>
-													</tr>
-													<?php
-												}
+													            ?>
+																<td>
+																	<a href="../php/del_quiz_system.php?enabled=<?= $rows['test_id']; ?>" class="btn btn-success mx-3 btn-del ms-5" ><i class="fas fa-trash-restore"></i></a>
+																</td>
+															</tr>
+															<?php
+														}
+											
 												?>
 											</tbody>
 										</table>
+										<?php if (isset($_GET['m'])) : ?>
+											<div class="flash-data" data-flashdata="<?= $_GET['m']; ?>"></div>
+										<?php endif; ?>
 									</div>
 								</div>
 							</div>
@@ -387,7 +382,7 @@ $suppd .= "</select>";
 	    	</div>
 	    </div>
 	     <!--ADD Modal -->
-	    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	    <div class="modal fade" id="exampleModal"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	    	<div class="modal-dialog modal-xl">
 	    		<form action="../php/test_yourself.php" id="form1" method="POST" >
 			    <div class="modal-content">
@@ -555,6 +550,43 @@ let arrow = document.querySelectorAll(".arrow");
     sidebar.classList.toggle("close");
   });
 </script>
+<script type="text/javascript">
+ 	$('.btn-del').on('click',function(e){
+
+ 		e.preventDefault();
+
+ 		const href = $(this).attr('href')
+
+ 		Swal.fire({
+
+ 			title: 'Are you Sure?',
+ 			text: 'Record will be restore',
+ 			icon: "warning",
+ 			type:'Warning',
+ 			showCancelButton:true,
+ 			confirmButtonColor:'#3085d6',
+ 			cancelButtonColor:'#d33',
+ 			confirmButtonColor:'Delete Record',
+ 		}).then((result)=> {
+
+ 			if (result.value) {
+ 				document.location.href = href;
+
+ 			}
+ 		})
+ 	})
+
+ 	const flashdata = $('.flash-data').data('flashdata')
+ 	if (flashdata) {
+
+ 		Swal.fire({
+ 			type: 'success',
+ 			icon: "success",
+ 			title: 'Record Restored',
+ 			text: 'Record has been restored!',
+ 		})
+ 	}
+ </script>
 <script type="text/javascript">
  	$(document).ready(function() {
  		$('.deletebtn').on('click', function() {

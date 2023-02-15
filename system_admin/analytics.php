@@ -107,12 +107,12 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 				</ul>
 			</li>
 			<li class="navigation-list-item">
-				<a href="results.php">
-					<i class="fas fa-poll"></i>
-					<span class="link_name">Results</span>
+				<a href="database.php">
+					<i class='bx bxs-data'></i>
+					<span class="link_name">Database</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="results.php">Results</a></li>
+					<li><a class="link_name" href="database.php">Database</a></li>
 				</ul>
 			</li>
 			<li class="navigation-list-item">
@@ -134,9 +134,9 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Archived</a></li>
-                    <li><a href="#">Quiz & Longquiz</a></li>
-                    <li><a href="#">Preboard exam</a></li>
-                    <li><a href="#">User Accounts</a></li>
+                    <li><a href="archive_quizzes.php">Quiz & Longquiz</a></li>
+                    <li><a href="archive_exam.php">Preboard exam</a></li>
+                    <li><a href="archive_users.php?tab-accounts=students">User Accounts</a></li>
                 </ul>
             </li>
 			<li class="navigation-list-item">
@@ -312,14 +312,14 @@ elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
 	                                                			<button type="button" class="btn btn-primary dropdown-toggle " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-download"></i></button>
 
 	                                                			<div class="dropdown-menu">
-	                                                				<form action="export_file.php" method="POST">
+	                                                				<form action="../admin/export_file.php" method="POST">
 	                                                					<input type="hidden" name="excel_id" value="<?php echo $rows['pre_exam_id']; ?>">
 	                                                					<input type="hidden" name="file_type" value="xlsx">
 	                                                					<button type="submit" class="dropdown-item" name="export_excel_btn"><i class="fas fa-file-download me-2"></i></i>Download Results</button>
 	                                                				</form>
 	                                                				<div class="dropdown-divider"></div>
 	                                                				<li>
-	                                                					<a href="print_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" class="dropdown-item"><i class="fas fa-print me-2"></i>Print Results</a>
+	                                                					<a href="../admin/print_analysis.php?id=<?php echo $rows['pre_exam_id'];?>&total=<?php echo $rows['total_question']; ?>&area=<?php echo $rows['subjects'] ?>" target="_blank" class="dropdown-item"><i class="fas fa-print me-2"></i>Print Results</a>
 	                                                				</li>
 	                                                			</div>
 	                                                		</div>

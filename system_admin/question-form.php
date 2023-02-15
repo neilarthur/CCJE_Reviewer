@@ -7,7 +7,7 @@ if (!isset($_SESSION["login"]) || $_SESSION['login'] !=true) {
     header("location: ../php/index.php");
      exit;
 }
-elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='system admin') {
+elseif (!isset($_SESSION["role"]) || $_SESSION['role'] !='systemadmin') {
     header("location: ../php/index.php");
     exit;
 }
